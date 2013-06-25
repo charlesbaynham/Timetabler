@@ -1,130 +1,152 @@
-//
-//  main.cpp
-//  Timetabler
-//
-//  Created by Charles Baynham on 25/06/2013.
-//  Copyright (c) 2013 Charles Baynham. All rights reserved.
-//
+
+/*
+ *
+ * website: N/A
+ * contact: kataklinger@gmail.com
+ *
+ */
 
 #include <iostream>
-#include <vector>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
 
 #include "GLsource/Initialization.h"
+#include "GLsource/ChromosomeOperations.h"
+#include "GLsource/MultiValueChromosome.h"
+#include "GLsource/Population.h"
+#include "GLsource/StopCriterias.h"
+#include "GLsource/SimpleAlgorithm.h"
 
 using namespace std;
 
+using namespace Algorithm;
+using namespace Algorithm::StopCriterias;
+using namespace Algorithm::SimpleAlgorithms;
 
-class config {
-    float _probMutate = 0.03;
-    float _probMix = 0.2;
-    float _mixMax = 1;
-    
-    float _searchMin = -50;
-    float _searchMax = 50;
+const char pattern[] =
+"        GGGGGGGGGGGGG               AAA               LLLLLLLLLLL             "
+"     GGG::::::::::::G              A:::A              L:::::::::L             "
+"   GG:::::::::::::::G             A:::::A             L:::::::::L             "
+"  G:::::GGGGGGGG::::G            A:::::::A            LL:::::::LL             "
+" G:::::G       GGGGGG           A:::::::::A             L:::::L               "
+"G:::::G                        A:::::A:::::A            L:::::L               "
+"G:::::G                       A:::::A A:::::A           L:::::L               "
+"G:::::G    GGGGGGGGGG        A:::::A   A:::::A          L:::::L               "
+"G:::::G    G::::::::G       A:::::A     A:::::A         L:::::L               "
+"G:::::G    GGGGG::::G      A:::::AAAAAAAAA:::::A        L:::::L               "
+"G:::::G        G::::G     A:::::::::::::::::::::A       L:::::L               "
+" G:::::G       G::::G    A:::::AAAAAAAAAAAAA:::::A      L:::::L         LLLLLL"
+"  G:::::GGGGGGGG::::G   A:::::A             A:::::A   LL:::::::LLLLLLLLL:::::L"
+"   GG:::::::::::::::G  A:::::A               A:::::A  L::::::::::::::::::::::L"
+"     GGG::::::GGG:::G A:::::A                 A:::::A L::::::::::::::::::::::L"
+"        GGGGGG   GGGGAAAAAAA                   AAAAAAALLLLLLLLLLLLLLLLLLLLLLLL";
+
+const int patternSize = sizeof( pattern ) - 1;
+
+class pFitness : public GaFitnessOperation
+{
     
 public:
-    void setProbMutate(float prob) { _probMutate = prob; }
-    void setProbMix(float prob) { _probMix = prob; }
-    void setMixMax(float dist) { _mixMax = dist; }
-    void setSearchMin(float min){ _searchMin = min; }
-    void setSearchMax(float max){ _searchMax = max; }
-    float getProbMutate(){return _probMutate;}
-    float getProbMix(){return _probMix;}
-    float getMixMax(){return _mixMax;}
-    float getSearchMin(){return _searchMin;}
-    float getSearchMax(){return _searchMax;}
     
-    float getSearchMiddle(){ return (_searchMin + _searchMax)/2; }
-    float getSearchRange(){  return (_searchMax - _searchMin); }
-};
-
-class chromosone {
-    float _fitness;
-    float _x;
-    float _y;
-    config* _myconfig;
-    
-    float _fnEval(float x, float y){
-        return ( (x-5.2)*(x-5.2) + (y-6)*(y-6) );
-    }
-    
-    void _doMutate(){
-        float randomX;
-        float randomY;
-        randomX = ( (float)rand() * _myconfig->getSearchRange() * RAND_MAX ) + _myconfig->getSearchMiddle();
-        randomY = ( (float)rand() * _myconfig->getSearchRange() * RAND_MAX ) + _myconfig->getSearchMiddle();
+	virtual float GACALL operator ()(const GaChromosome* chromosome) const
+	{
+		const vector<char>& v = dynamic_cast<const GaMultiValueChromosome<char>*>( chromosome )->GetCode();
         
+		int score = 0;
+		for( int i = 0; i < patternSize; i++ )
+		{
+			if( v[ i ] == pattern[ i ] )
+				score++;
+		}
         
-    }
+		return (float)score / patternSize * 100;
+	}
     
-    chromosone* _doMix(chromosone* c){
-        //
-        return NULL;
-    }
+	virtual GaParameters* GACALL MakeParameters() const { return NULL; }
     
-public:
-    
-    chromosone(float x, float y, config* theconfig):
-    _x(x),
-    _y(y),
-    _myconfig(theconfig)
-    { _fitness = 0; }
-    
-    void mutate(){
-        float random = (float)rand() / RAND_MAX;
-        if (random <= _myconfig->getProbMutate()) {
-            _doMutate();
-        }
-    }
-    
-    chromosone* mix(chromosone* c) {
-        float random = (float)rand() / RAND_MAX;
-        if (random <= _myconfig->getProbMix()) {
-            _doMix(c);
-        }
-        return NULL;
-    }
-    
-    float updateFitness() {
-        _fitness = _fnEval(_x,_y);
-        return _fitness;
-    }
+	virtual bool GACALL CheckParameters(const GaParameters& parameters) const { return true; }
 };
 
-class algorithm {
+volatile bool stop = false;
 
-    vector<chromosone> _population;
-    config mainConfig;
-    
+class pObserver : public GaObserverAdapter
+{
 public:
-
-    void start() {
-        //
-    }
-    void stop() {
-        //
-    }
+    
+	virtual void GACALL NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm)
+	{
+		static int a = 0;
+		a++;
+		//if(a%100==0)
+		{
+			const vector<char>& v = dynamic_cast<const GaMultiValueChromosome<char>&>( newChromosome ).GetCode();
+            
+			cout << "Generation: " << algorithm.GetAlgorithmStatistics().GetCurrentGeneration() << endl;
+			cout << "Fitness: " << newChromosome.GetFitness();
+			cout << "\n-------------------------\n";
+            
+			for( int i = 0; i < (int)v.size(); i++ )
+			{
+				if( i % 78 == 0 )
+					cout << endl;
+                
+				cout << v[ i ];
+			}
+            
+			cout << "\n-------------------------\n";
+		}
+	}
+    
+	virtual void GACALL EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm)
+	{
+		if( newState == GAS_CRITERIA_STOPPED )
+			cout << " end.";
+	}
 };
 
 
-int main() {
+int main()
+{
+	GaInitialize();
     
-    GaInitialize();
+	GaChromosomeParams chromosomeParams( 0.1F, 10, true, 0.8F, 2 );
     
-//    srand(time(NULL));
+	GaMultiValueSet<char> valueSet( false );
+	valueSet.Add( "GAL: ", "     ", 5 );
     
-    cout << "RAND_MAX is " << RAND_MAX << endl;
-    cout << "Some random numbers: " << rand() << "  " << rand() << "  " << rand() << "  " << endl;
+	pFitness fitnessOperation;
+	GaChromosomeDomainBlock<char> configBlock( &valueSet,
+                                              GaCrossoverCatalogue::Instance().GetEntryData( "GaMultiValueCrossover" ),
+                                              GaMutationCatalogue::Instance().GetEntryData( "GaFlipMutation" ),
+                                              &fitnessOperation, GaFitnessComparatorCatalogue::Instance().GetEntryData( "GaMaxFitnessComparator" ),
+                                              &chromosomeParams );
     
-    config theConfig;
+	GaMultiValueChromosome<char> prototype( patternSize, &configBlock );
     
-    chromosone test(1,32.1,&theConfig);
+	GaPopulationConfiguration populationConfig;
+	GaPopulationParameters populationParams( 30, true, true, false, 0, 0 );
     
-    test.mutate();
-    theConfig.setProbMix(0.4);
-    test.mutate();
-
+	populationConfig.SetParameters( populationParams );
+	populationConfig.SetSortComparator( &configBlock.GetFitnessComparator() );
+	populationConfig.Selection().GetParameters().SetSelectionSize( 6 );
+	
+	GaPopulation population( &prototype, &populationConfig );
+    
+	GaSimpleAlgorithmParams algorithmParams( 10, 2 );
+	GaSimpleAlgorithm algorithm( &population, algorithmParams );
+    
+	GaFitnessCriteriaParams criteriaParams( 100, GFC_EQUALS_TO, GSV_BEST_FITNESS );
+	algorithm.SetStopCriteria( GaStopCriteriaCatalogue::Instance().GetEntryData( "GaFitnessCriteria" ), 
+                              &criteriaParams );
+    
+	pObserver observer;
+	algorithm.SubscribeObserver( &observer );
+    
+	algorithm.StartSolving( false );
+    
+	algorithm.WaitForThreads();
+    
+	GaFinalize();
+    
+    printf("Done\n");
+    
+	return 0;
 }
