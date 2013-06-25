@@ -12,6 +12,8 @@
 #include <math.h>
 #include <time.h>
 
+#include "GLsource/Initialization.h"
+
 using namespace std;
 
 
@@ -34,6 +36,9 @@ public:
     float getMixMax(){return _mixMax;}
     float getSearchMin(){return _searchMin;}
     float getSearchMax(){return _searchMax;}
+    
+    float getSearchMiddle(){ return (_searchMin + _searchMax)/2; }
+    float getSearchRange(){  return (_searchMax - _searchMin); }
 };
 
 class chromosone {
@@ -47,7 +52,12 @@ class chromosone {
     }
     
     void _doMutate(){
-        //
+        float randomX;
+        float randomY;
+        randomX = ( (float)rand() * _myconfig->getSearchRange() * RAND_MAX ) + _myconfig->getSearchMiddle();
+        randomY = ( (float)rand() * _myconfig->getSearchRange() * RAND_MAX ) + _myconfig->getSearchMiddle();
+        
+        
     }
     
     chromosone* _doMix(chromosone* c){
@@ -101,6 +111,8 @@ public:
 
 
 int main() {
+    
+    GaInitialize();
     
 //    srand(time(NULL));
     
