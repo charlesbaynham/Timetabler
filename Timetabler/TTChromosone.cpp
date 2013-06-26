@@ -28,3 +28,27 @@ Chromosone::Chromosone(const Chromosone& c, bool setupOnly) :
         _values.resize( SLOTS_IN_DAY * NUM_TUTORS ); //Get RID of num_tutors
     }
 }
+
+void TTMutation::operator ()(GaChromosome* parent) const
+{
+    printf("lol, I did something.\n"); //Again, not finished
+    
+}
+
+float TTFitness::operator()(const GaChromosome* chromosome) const{
+    return 10; // not finished edit.
+}
+
+
+GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2) const
+{
+    const Chromosone* c1 = dynamic_cast<const Chromosone*>( parent1 );
+    const Chromosone* c2 = dynamic_cast<const Chromosone*>( parent2 );
+    
+    Chromosone* n = new Chromosone(*c1, false);
+    
+    return n; //Obviously not finished.  EDIT
+}
+
+
+

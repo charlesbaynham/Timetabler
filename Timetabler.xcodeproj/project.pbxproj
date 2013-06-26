@@ -14,6 +14,7 @@
 		56DF0FFC177B5F6F005F1B6A /* Tutor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF0FFB177B5F6F005F1B6A /* Tutor.cpp */; };
 		56DF0FFF177B6026005F1B6A /* TTChromosone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF0FFE177B6026005F1B6A /* TTChromosone.cpp */; };
 		56DF1002177B6132005F1B6A /* Subject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF1001177B6132005F1B6A /* Subject.cpp */; };
+		56DF1006177B770A005F1B6A /* TimetablerInst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF1004177B770A005F1B6A /* TimetablerInst.cpp */; };
 		56E2E564177A1BF900CB720C /* Algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E512177A1BF900CB720C /* Algorithm.cpp */; };
 		56E2E565177A1BF900CB720C /* BinaryChromosome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E516177A1BF900CB720C /* BinaryChromosome.cpp */; };
 		56E2E566177A1BF900CB720C /* Chromosome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E519177A1BF900CB720C /* Chromosome.cpp */; };
@@ -61,6 +62,8 @@
 		56DF0FFE177B6026005F1B6A /* TTChromosone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTChromosone.cpp; sourceTree = "<group>"; };
 		56DF1000177B612C005F1B6A /* Subject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Subject.h; sourceTree = "<group>"; };
 		56DF1001177B6132005F1B6A /* Subject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Subject.cpp; sourceTree = "<group>"; };
+		56DF1004177B770A005F1B6A /* TimetablerInst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimetablerInst.cpp; sourceTree = "<group>"; };
+		56DF1005177B770A005F1B6A /* TimetablerInst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimetablerInst.h; sourceTree = "<group>"; };
 		56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGeneticLibrary.a; sourceTree = "<group>"; };
 		56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GeneticLibrary.xcodeproj; sourceTree = "<group>"; };
 		56E2E4EC177A1BF900CB720C /* gpl-2_0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "gpl-2_0.txt"; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 				56A9A7641779B4A900C70EE3 /* main.cpp */,
 				56DF0FF7177B5C16005F1B6A /* Student.h */,
 				56DF0FF8177B5DFA005F1B6A /* Student.cpp */,
+				56DF1004177B770A005F1B6A /* TimetablerInst.cpp */,
+				56DF1005177B770A005F1B6A /* TimetablerInst.h */,
 				56DF0FFD177B6020005F1B6A /* TTChromosone.h */,
 				56DF0FFE177B6026005F1B6A /* TTChromosone.cpp */,
 				56DF0FFA177B5F68005F1B6A /* Tutor.h */,
@@ -472,6 +477,7 @@
 				56DF0FFC177B5F6F005F1B6A /* Tutor.cpp in Sources */,
 				56DF0FFF177B6026005F1B6A /* TTChromosone.cpp in Sources */,
 				56DF1002177B6132005F1B6A /* Subject.cpp in Sources */,
+				56DF1006177B770A005F1B6A /* TimetablerInst.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

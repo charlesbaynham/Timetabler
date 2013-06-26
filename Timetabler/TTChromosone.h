@@ -16,12 +16,12 @@ using namespace __gnu_cxx;
 #include "GLSource/Initialization.h"
 
 #include "GLSource/MultiValueChromosome.h"
-//#include "GLSource/ChromosomeOperations.h"
-//
-//#include "GLSource/Population.h"
-//#include "GLSource/SelectionOperations.h"
+#include "GLSource/ChromosomeOperations.h"
+
+#include "GLSource/Population.h"
+#include "GLSource/SelectionOperations.h"
 //#include "GLSource/ReplacementOperations.h"
-//
+
 //#include "GLSource/StopCriterias.h"
 //#include "GLSource/IncrementalAlgorithm.h"
 
@@ -55,6 +55,47 @@ public:
     
 	// Return reference to array of time-space slots
 	inline const vector<list<Student*> >& GetSlots() const { return _values; }
+};
+
+
+class TTFitness : public GaFitnessOperation
+{
+public:
+    
+	virtual float GACALL operator ()(const GaChromosome* chromosome) const;
+    
+	virtual GaParameters* GACALL MakeParameters() const { return NULL; }
+    
+	virtual bool GACALL CheckParameters(const GaParameters& parameters) const { return true; }
+};
+
+
+class TTMutation : public GaMutationOperation
+{
+public:
+    
+	virtual void GACALL operator ()(GaChromosome* parent) const;
+    
+	virtual GaParameters* GACALL MakeParameters() const { return NULL; }
+    
+	virtual bool GACALL CheckParameters(const GaParameters& parameters) const { return true; }
+
+};
+
+
+class TTCrossover : public GaCrossoverOperation
+{
+    
+public:
+    
+	virtual GaChromosomePtr GACALL operator ()(const GaChromosome* parent1,
+                                               const GaChromosome* parent2) const;
+    
+	virtual GaParameters* GACALL MakeParameters() const { return NULL; }
+    
+	virtual bool GACALL CheckParameters(const GaParameters& parameters) const { return true; }
+    
+    
 };
 
 #endif
