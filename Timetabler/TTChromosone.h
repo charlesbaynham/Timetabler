@@ -38,7 +38,7 @@ public:
     
 	Chromosone(const Chromosone& c, bool setupOnly);
     
-	virtual ~Chromosone() { }
+	/*virtual ~Chromosone() { } // These must be added back in later(probably)
     
     virtual GaChromosomePtr MakeCopy(bool setupOnly) const { return new Chromosone( *this, setupOnly ); }
     
@@ -48,7 +48,7 @@ public:
     
 	virtual void AcceptMutation();
     
-	virtual void RejectMutation();
+	virtual void RejectMutation(); */
     
 	// Returns reference to table of classes
 	inline const hash_map<Student*, int>& GetStudentLookup() const { return _lookup; }

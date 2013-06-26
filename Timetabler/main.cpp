@@ -15,11 +15,19 @@ using namespace Algorithm;
 using namespace Algorithm::StopCriterias;
 using namespace Algorithm::SimpleAlgorithms;
 
-
+#include "TTChromosone.h"
 
 int main()
 {
 	GaInitialize();
+
+    Tutor Jenny("Jenny Barnes", NULL, NULL);
+    Tutor Jenny2("Jenny Barnes", NULL, NULL);
+    Tutor MrE("Mr Evans", NULL, NULL);
+    
+    printf("Number of tutors is %i\n", Tutor::totalTutors());
+    cout << MrE.getName();
+    printf("'s ID is %i\n", MrE.getID());
     
 //	GaChromosomeParams chromosomeParams( 0.1F, 10, true, 0.8F, 2 );
 //    

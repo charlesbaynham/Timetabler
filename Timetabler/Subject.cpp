@@ -8,7 +8,10 @@
 
 #include "Subject.h"
 
-Subject::Subject(int ID, const string& name) :
-    _ID(ID),
+int Subject::_totalSubjects = 0;
+
+Subject::Subject(const string& name) :
     _name(name)
-{}
+{
+    _ID = _totalSubjects++;
+}
