@@ -9,28 +9,7 @@
 /* Begin PBXBuildFile section */
 		56A9A7651779B4A900C70EE3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56A9A7641779B4A900C70EE3 /* main.cpp */; };
 		56A9A7671779B4A900C70EE3 /* Timetabler.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56A9A7661779B4A900C70EE3 /* Timetabler.1 */; };
-		56E2E4E1177A1A2E00CB720C /* libGeneticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4DF177A19F300CB720C /* libGeneticLibrary.a */; };
-		56E2E54F177A1BF900CB720C /* libGeneticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */; };
-		56E2E550177A1BF900CB720C /* Algorithm.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4FB177A1BF900CB720C /* Algorithm.o */; };
-		56E2E551177A1BF900CB720C /* BinaryChromosome.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4FC177A1BF900CB720C /* BinaryChromosome.o */; };
-		56E2E552177A1BF900CB720C /* Chromosome.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4FD177A1BF900CB720C /* Chromosome.o */; };
-		56E2E553177A1BF900CB720C /* CouplingOperations.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4FE177A1BF900CB720C /* CouplingOperations.o */; };
-		56E2E554177A1BF900CB720C /* CrossoverOperations.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4FF177A1BF900CB720C /* CrossoverOperations.o */; };
-		56E2E555177A1BF900CB720C /* IncrementalAlgorithm.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E500177A1BF900CB720C /* IncrementalAlgorithm.o */; };
-		56E2E556177A1BF900CB720C /* Initialization.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E501177A1BF900CB720C /* Initialization.o */; };
-		56E2E557177A1BF900CB720C /* MultithreadingAlgorithm.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E502177A1BF900CB720C /* MultithreadingAlgorithm.o */; };
-		56E2E558177A1BF900CB720C /* MutationOperations.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E503177A1BF900CB720C /* MutationOperations.o */; };
-		56E2E559177A1BF900CB720C /* Observing.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E504177A1BF900CB720C /* Observing.o */; };
-		56E2E55A177A1BF900CB720C /* Population.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E505177A1BF900CB720C /* Population.o */; };
-		56E2E55B177A1BF900CB720C /* PopulationOperations.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E506177A1BF900CB720C /* PopulationOperations.o */; };
-		56E2E55C177A1BF900CB720C /* Random.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E507177A1BF900CB720C /* Random.o */; };
-		56E2E55D177A1BF900CB720C /* ReplacementOperations.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E508177A1BF900CB720C /* ReplacementOperations.o */; };
-		56E2E55E177A1BF900CB720C /* ScalingOperations.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E509177A1BF900CB720C /* ScalingOperations.o */; };
-		56E2E55F177A1BF900CB720C /* SelectionOperations.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E50A177A1BF900CB720C /* SelectionOperations.o */; };
-		56E2E560177A1BF900CB720C /* SimpleAlgorithm.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E50B177A1BF900CB720C /* SimpleAlgorithm.o */; };
-		56E2E561177A1BF900CB720C /* Statistics.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E50C177A1BF900CB720C /* Statistics.o */; };
-		56E2E562177A1BF900CB720C /* StopCriterias.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E50D177A1BF900CB720C /* StopCriterias.o */; };
-		56E2E563177A1BF900CB720C /* Threading.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E50E177A1BF900CB720C /* Threading.o */; };
+		56DF0FF6177B43B4005F1B6A /* libGeneticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */; };
 		56E2E564177A1BF900CB720C /* Algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E512177A1BF900CB720C /* Algorithm.cpp */; };
 		56E2E565177A1BF900CB720C /* BinaryChromosome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E516177A1BF900CB720C /* BinaryChromosome.cpp */; };
 		56E2E566177A1BF900CB720C /* Chromosome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E519177A1BF900CB720C /* Chromosome.cpp */; };
@@ -70,7 +49,6 @@
 		56A9A7611779B4A900C70EE3 /* Timetabler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Timetabler; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A9A7641779B4A900C70EE3 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		56A9A7661779B4A900C70EE3 /* Timetabler.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Timetabler.1; sourceTree = "<group>"; };
-		56E2E4DF177A19F300CB720C /* libGeneticLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libGeneticLibrary.a; path = "../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos/libGeneticLibrary.a"; sourceTree = "<group>"; };
 		56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGeneticLibrary.a; sourceTree = "<group>"; };
 		56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GeneticLibrary.xcodeproj; sourceTree = "<group>"; };
 		56E2E4EC177A1BF900CB720C /* gpl-2_0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "gpl-2_0.txt"; sourceTree = "<group>"; };
@@ -175,28 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56E2E4E1177A1A2E00CB720C /* libGeneticLibrary.a in Frameworks */,
-				56E2E54F177A1BF900CB720C /* libGeneticLibrary.a in Frameworks */,
-				56E2E550177A1BF900CB720C /* Algorithm.o in Frameworks */,
-				56E2E551177A1BF900CB720C /* BinaryChromosome.o in Frameworks */,
-				56E2E552177A1BF900CB720C /* Chromosome.o in Frameworks */,
-				56E2E553177A1BF900CB720C /* CouplingOperations.o in Frameworks */,
-				56E2E554177A1BF900CB720C /* CrossoverOperations.o in Frameworks */,
-				56E2E555177A1BF900CB720C /* IncrementalAlgorithm.o in Frameworks */,
-				56E2E556177A1BF900CB720C /* Initialization.o in Frameworks */,
-				56E2E557177A1BF900CB720C /* MultithreadingAlgorithm.o in Frameworks */,
-				56E2E558177A1BF900CB720C /* MutationOperations.o in Frameworks */,
-				56E2E559177A1BF900CB720C /* Observing.o in Frameworks */,
-				56E2E55A177A1BF900CB720C /* Population.o in Frameworks */,
-				56E2E55B177A1BF900CB720C /* PopulationOperations.o in Frameworks */,
-				56E2E55C177A1BF900CB720C /* Random.o in Frameworks */,
-				56E2E55D177A1BF900CB720C /* ReplacementOperations.o in Frameworks */,
-				56E2E55E177A1BF900CB720C /* ScalingOperations.o in Frameworks */,
-				56E2E55F177A1BF900CB720C /* SelectionOperations.o in Frameworks */,
-				56E2E560177A1BF900CB720C /* SimpleAlgorithm.o in Frameworks */,
-				56E2E561177A1BF900CB720C /* Statistics.o in Frameworks */,
-				56E2E562177A1BF900CB720C /* StopCriterias.o in Frameworks */,
-				56E2E563177A1BF900CB720C /* Threading.o in Frameworks */,
+				56DF0FF6177B43B4005F1B6A /* libGeneticLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				56E2E4E2177A1BF900CB720C /* GeneticLibrary */,
-				56E2E4DF177A19F300CB720C /* libGeneticLibrary.a */,
 				56A9A7631779B4A900C70EE3 /* Timetabler */,
 				56A9A7621779B4A900C70EE3 /* Products */,
 			);
@@ -560,7 +516,7 @@
 		56A9A76B1779B4A900C70EE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -573,7 +529,7 @@
 		56A9A76C1779B4A900C70EE3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
