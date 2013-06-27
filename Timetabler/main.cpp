@@ -21,11 +21,10 @@ int main()
 {
 	GaInitialize();
 
-    Tutor Jenny("Jenny Barnes", NULL, NULL);
-    Tutor Jenny2("Jenny Barnes", NULL, NULL);
-    Tutor MrE("Mr Evans", NULL, NULL);
+    Tutor Jenny(1,"Jenny Barnes", NULL, NULL);
+    Tutor Jenny2(3,"Jenny Barnes", NULL, NULL);
+    Tutor MrE(18,"Mr Evans", NULL, NULL);
     
-    printf("Number of tutors is %i\n", Tutor::totalTutors());
     cout << MrE.getName();
     printf("'s ID is %i\n", MrE.getID());
     

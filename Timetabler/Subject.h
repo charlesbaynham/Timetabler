@@ -14,16 +14,14 @@
 using namespace std;
 
 class Subject {
-    int _ID; // Autoassigned
+    int _ID;
     string _name;
-    static int _totalSubjects;
     
 public:
-    Subject(const string& name); // Initialise ID and name
+    Subject(int ID, const string& name); // Initialise ID and name
     
     inline int getID(){ return _ID; }
     inline const string& getName() { return _name; }
-    inline int totalSubjects(){ return _totalSubjects; }
     
 };
 

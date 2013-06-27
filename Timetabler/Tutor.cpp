@@ -8,14 +8,8 @@
 
 #include "Tutor.h"
 
-int Tutor::_totalTutors=0;
-
-Tutor::Tutor(const string& name, list<Subject*> subjects, list<int> notTimes) :
+Tutor::Tutor(int ID, const string& name, list<Subject*> subjects, list<int> notTimes) :
 _name(name),
 _subjects(subjects),
-_notTimes(notTimes)
-{
-    _ID = _totalTutors++;
-}
-
-Tutor::~Tutor() { _totalTutors--; }
+_notTimes(notTimes),
+_ID(ID) {}
