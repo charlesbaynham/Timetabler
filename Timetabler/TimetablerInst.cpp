@@ -14,10 +14,22 @@ using namespace Population::SelectionOperations;
 using namespace Algorithm::SimpleAlgorithms;
 using namespace Algorithm::StopCriterias;
 
-void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {;}
+void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {
+    printf("New best! Has fitness of %f\n", newChromosome.GetFitness());
+}
 
-void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {;}
+void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {
+    cout << "New state is " << newState << endl;
+    if (newState == GAS_CRITERIA_STOPPED) // we found a solution, so get the best chromosome:
+    {
+        GaChromosomePtr result;
+        algorithm.GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
+        cout << "Fitness of final solution is " << result->GetFitness() << endl;
+    }
+}
 // To be written. Edit
+
+TimetablerInst TimetablerInst::_instance;
 
 TimetablerInst::TimetablerInst()
 {
@@ -38,8 +50,7 @@ TimetablerInst::TimetablerInst()
 	// with ScheduleCrossover, ScheduleMutation, ScheduleFitness genetic operations
 	// set fittnes comparator for maximizing fitness value
 	// use previously defined chromosome's parameters
-	_ccb = new GaChromosomeDomainBlock<list<Student*> >( NULL, 0, &_crossoverOperation, &_mutationOperation, &_fitnessOperation,
-                                                            GaFitnessComparatorCatalogue::Instance().GetEntryData( "GaMaxFitnessComparator" ), _chromosomeParams );
+	_ccb = new GaChromosomeDomainBlock<list<Student*> >( NULL, &_crossoverOperation, &_mutationOperation, &_fitnessOperation, GaFitnessComparatorCatalogue::Instance().GetEntryData( "GaMaxFitnessComparator" ), _chromosomeParams );
     
 	// make prototype of chromosome
 	_prototype = new Chromosone( _ccb );
@@ -94,7 +105,7 @@ TimetablerInst::TimetablerInst()
     
 	// make parameters for stop criteria based on fitness value
 	// stop when best chromosome reaches fitness value of 1
-	GaFitnessCriteriaParams criteriaParams( 1, GFC_EQUALS_TO, GSV_BEST_FITNESS );
+	GaFitnessCriteriaParams criteriaParams( 1000, GFC_MORE_THEN_EQUALS_TO, GSV_BEST_FITNESS );
     // This line needs changing
     
 	// sets algorithm's stop criteria (base on fitness value) and its parameters
@@ -103,5 +114,20 @@ TimetablerInst::TimetablerInst()
     
 	// subscribe observer
 	_algorithm->SubscribeObserver( &_observer );
+}
 
+
+TimetablerInst::~TimetablerInst()
+{
+	delete _algorithm;
+    
+	delete _population;
+	delete _populationConfig;
+    
+	delete _prototype;
+	delete _ccb;
+	delete _chromosomeParams;
+    
+	// Free resources used by GAL
+	GaFinalize();
 }

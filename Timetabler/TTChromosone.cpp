@@ -29,7 +29,31 @@ Chromosone::Chromosone(const Chromosone& c, bool setupOnly) :
 
 GaChromosomePtr Chromosone::MakeCopy(bool setupOnly) const { return new Chromosone( *this, setupOnly ); }
 
-GaChromosomePtr Chromosone::MakeNewFromPrototype() const { return new Chromosone( *this, true ); } // edit
+//Create a new, random chromosome using *this as a prototype for the setup
+GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
+    
+    // Make new chromosone copying setup
+    Chromosone* newChromosone = new Chromosone(*this, true);
+    
+    //Get all the students:
+    const list<Student*>& students = Configuration::getInstance().getStudents();
+    
+    //loop all over students
+    for (list<Student*>::const_iterator it = students.begin(); it != students.end(); it++)
+    {
+        //choose random position:
+        int pos;
+        pos = GaGlobalRandomIntegerGenerator->Generate( SLOTS_IN_DAY * Configuration::getInstance().numTutors() - 1 );
+        
+        // Add the current student to the list at the location 'pos' in the _values vector
+        newChromosone->_values.at(pos).push_back(*it);
+        
+        // Add the (student*,position) pair to the hashmap
+        newChromosone->_lookup.insert(pair<Student*, int>(*it,pos));
+    }
+    
+    return newChromosone;
+}
 
 void Chromosone::PreapareForMutation() {
     _backupLookup = _lookup; // Backup hashmap then call method to backup rest
@@ -52,12 +76,15 @@ void Chromosone::RejectMutation() {
 
 void TTMutation::operator ()(GaChromosome* parent) const
 {
-    printf("lol, I did something.\n"); //Again, not finished
+    printf("Fake mutation. Fitness is : %f\n", parent->GetFitness()); //Again, not finished
     
 }
 
 float TTFitness::operator()(const GaChromosome* chromosome) const{
-    return 10; // not finished edit.
+    
+    const Chromosone* chromo = dynamic_cast<const Chromosone*>(chromosome);
+    
+    return chromo->GetFitness() + 1; // not finished edit.
 }
 
 

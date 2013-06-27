@@ -15,7 +15,14 @@
 
 class TTObserver : public GaObserverAdapter {
     
+    SysEventObject _event; // event for callback
+    
 public:
+    TTObserver() { MakeEvent( _event, 0 ); }
+    
+	virtual ~TTObserver() { DeleteEvent( _event ); }
+    
+	void WaitEvent() { WaitForEvent( _event ); }
     
     virtual void NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm);
     
@@ -24,7 +31,14 @@ public:
 };
 
 class TimetablerInst {
-    static TimetablerInst _instance;
+    
+    static TimetablerInst _instance; // Global instance
+    
+public:
+    inline static TimetablerInst& getInstance() { return _instance; } // return global instance
+    
+private:
+    
     
     GaChromosomeParams* _chromosomeParams;
     
@@ -47,21 +61,19 @@ class TimetablerInst {
 	TTObserver _observer;
     
 public:
-    inline static TimetablerInst& getInstance() { return _instance; }
-    
-    inline static TimetablerInst& GetInstance() { return _instance; }
+
     
 	TimetablerInst();
     
 	~TimetablerInst();
     
-//	inline GaAlgorithm* GetAlgorithm() { return _algorithm; }
-//    
-//	inline const GaAlgorithm* GetAlgorithm() const { return _algorithm; }
-//    
-//	inline ScheduleObserver& GetObserver() { return _observer; }
-//    
-//	inline const ScheduleObserver& GetObserver() const { return _observer; }
+	inline GaAlgorithm* getAlgorithm() { return _algorithm; }
+    
+	inline const GaAlgorithm* getAlgorithm() const { return _algorithm; }
+    
+	inline TTObserver& getObserver() { return _observer; }
+    
+	inline const TTObserver& getObserver() const { return _observer; }
 
     
 };

@@ -15,32 +15,34 @@ using namespace Algorithm;
 using namespace Algorithm::StopCriterias;
 using namespace Algorithm::SimpleAlgorithms;
 
-#include "TTChromosone.h"
+#include "TimetablerInst.h"
 
 int main()
 {
-	GaInitialize();
-    
-    Configuration config = Configuration::getInstance();
-    
-    if (!config.parsed()) {
-        printf("Config file is unparsed\nParsing now...\n");
-        config.parseFile("/Users/Charles/config.txt");
-    }
 
-    printf("We have %i tutors, %i students and %i subjects.\n", config.numTutors(), config.numStudents(), config.numSubjects());
+    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
     
-    Tutor * first = config.getTutor(0);
-    cout << "The first tutor: " << first->getName();
-    printf("'s ID is %i\n", first->getID());
+//    GaAlgorithmState state = TimetablerInst::getInstance().getAlgorithm()->GetState();
+//    
+//    cout << state << endl;
     
-    Tutor * second = config.getTutor(1);
-    cout << "The second tutor: " << second->getName();
-    printf("'s ID is %i\n", second->getID());
-    
-    cout << "The first is: " << (first->isProcessed() ? "processed" : "not processed") << endl;
-      
-	GaFinalize();
+    // get the algorithm (set in class as GaAlgorithm), cast to Incremental
+    //      (since this has the WaitForThreads method) and execute
+    dynamic_cast<GaIncrementalAlgorithm*>(TimetablerInst::getInstance().getAlgorithm())->WaitForThreads();
+
+//    state = TimetablerInst::getInstance().getAlgorithm()->GetState();
+//    if (state==GAS_UNINITIALIZED) printf("uninit\n");
+//    /// <summary>algorithm execution is stopped by the user.</summary>
+//    else if (state==GAS_USER_STOPED) printf("Stoped by user\n");
+//    
+//    /// <summary>algorithm reached given criteria and it is stopped.</summary>
+//    else if (state==GAS_CRITERIA_STOPPED) printf("Stopped by criteria\n");
+//    
+//    /// <summary>temporary paused, but it can resume execution at any time.</summary>
+//    else if (state==GAS_PAUSED) printf("paused\n");
+//    
+//    /// <summary>algorithm is running.</summary>
+//    else if (state==GAS_RUNNING) printf("running\n");
     
     printf("Done\n");
     

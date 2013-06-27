@@ -176,14 +176,10 @@ string& Configuration::TrimString(string& str)
 	return str;
 }
 
-
+// Loop over all tutors in config, running processSlots() for each
 void Configuration::processTutorsSlots() {
-    
     for (hash_map<int, Tutor*>::iterator it = _tutors.begin(); it != _tutors.end(); it++) {
         Tutor* tut = (*it).second;
-        int id = it->first;
-        int id2 = tut->getID();
         tut->processSlots();
     }
-    
 }
