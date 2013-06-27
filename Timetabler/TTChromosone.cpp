@@ -73,10 +73,51 @@ void Chromosone::RejectMutation() {
 
 
 
-
+// Randomly move some (mutation size) students to different (random) slots
 void TTMutation::operator ()(GaChromosome* parent) const
 {
-    printf("Fake mutation. Fitness is : %f\n", parent->GetFitness()); //Again, not finished
+    Chromosone* chromo = dynamic_cast<Chromosone*>(parent);
+    
+    int numSlots = (int)chromo->_values.size();
+    int numStudents = (int)chromo->_lookup.size();
+    
+    //for each mutation:
+    for (int i = chromo->GetParameters().GetMutationSize() ; i>0; i--)
+    {
+        // pick a random student
+        int student = GaGlobalRandomIntegerGenerator->Generate(numStudents-1);
+        hash_map<Student*, int>::iterator it;
+        
+        // Iterate through the hashmap _lookup, reducing student and increasing it until student == 0:
+        //   now it points to a randomly chosen student. 
+        for (it = chromo->_lookup.begin();
+             student != 0 && it != chromo->_lookup.end();
+             it++, student--) ;
+
+        Student* theStudent = (*it).first;
+        int oldSlot = (*it).second;
+
+        //pick a random new slot:
+        int newSlot = GaGlobalRandomIntegerGenerator->Generate(numSlots-1);
+        
+        //delete from old:
+        list<Student*>& theOldSlot = chromo->_values[oldSlot];
+        for (list<Student*>::iterator itOld = theOldSlot.begin(); itOld != theOldSlot.end(); itOld++) {
+            if ( *itOld == theStudent )
+            {
+                theOldSlot.erase(itOld);
+                break;
+            }
+        }
+        
+        //add to new:
+        list<Student*>& theNewSlot = chromo->_values[newSlot];
+        theNewSlot.push_back(theStudent);
+        
+        //update hashmap:
+        chromo->_lookup[theStudent] = newSlot;
+    }
+    
     
 }
 
@@ -94,6 +135,8 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
     const Chromosone* c2 = dynamic_cast<const Chromosone*>( parent2 );
     
     Chromosone* n = new Chromosone(*c1, false);
+    
+    
     
     return n; //Obviously not finished.  EDIT
 }
