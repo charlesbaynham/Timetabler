@@ -9,8 +9,15 @@
 #include "TimetablerInst.h"
 
 using namespace Population;
-//using namespace Population::ReplacementOperations;
+using namespace Population::ReplacementOperations;
 using namespace Population::SelectionOperations;
+using namespace Algorithm::SimpleAlgorithms;
+using namespace Algorithm::StopCriterias;
+
+void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {;}
+
+void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {;}
+// To be written. Edit
 
 TimetablerInst::TimetablerInst()
 {
@@ -50,5 +57,51 @@ TimetablerInst::TimetablerInst()
 	// but only 8 best of them will be stored in selection result set
 	// there will be no duplicates of chromosomes in result set
 	GaSelectRandomBestParams selParam( 8, false, 16 );
+    
+    
+	// make parameters for replacement operation
+	// replace 8 chromosomes
+	// but keep 2 best chromosomes in population
+	GaReplaceElitismParams repParam( 8, 2 );
+    
+	// make parameters for coupling operation
+	// coupling operation will produce 8 new chromosomes from selected parents
+	GaCouplingParams coupParam( 8, false );
+    
+	// make population configuration
+	// use defined population parameters
+	// use same comparator for sorting as comparator used by chromosomes
+	// use selection operation which randomly selects chromosomes
+	// use replacement operation which randomly chooses chromosomes from population
+	// which are going to be replaced, but keeps best chromosomes
+	// use simple coupling
+	// disable scaling
+	_populationConfig = new GaPopulationConfiguration ( populationParams, &_ccb->GetFitnessComparator(),
+                                                       GaSelectionCatalogue::Instance().GetEntryData( "GaSelectRandom" ), &selParam,
+                                                       GaReplacementCatalogue::Instance().GetEntryData( "GaReplaceRandom" ), &repParam,
+                                                       GaCouplingCatalogue::Instance().GetEntryData( "GaSimpleCoupling" ), &coupParam,
+                                                       NULL, NULL );
+    
+	// make population
+	// with previously defined prototype of chromosomes and population configuration
+	_population = new GaPopulation( _prototype, _populationConfig );
+    
+	// make parameters for genetic algorithms
+	// algorithm will use two workers
+	GaMultithreadingAlgorithmParams algorithmParams( 2 );
+	// make incremental algorithm with periously defined population and parameters
+	_algorithm = new GaIncrementalAlgorithm( _population, algorithmParams );
+    
+	// make parameters for stop criteria based on fitness value
+	// stop when best chromosome reaches fitness value of 1
+	GaFitnessCriteriaParams criteriaParams( 1, GFC_EQUALS_TO, GSV_BEST_FITNESS );
+    // This line needs changing
+    
+	// sets algorithm's stop criteria (base on fitness value) and its parameters
+	_algorithm->SetStopCriteria( GaStopCriteriaCatalogue::Instance().GetEntryData( "GaFitnessCriteria" ), 
+                                &criteriaParams );
+    
+	// subscribe observer
+	_algorithm->SubscribeObserver( &_observer );
 
 }

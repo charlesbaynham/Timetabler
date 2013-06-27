@@ -20,10 +20,10 @@ using namespace __gnu_cxx;
 
 #include "GLSource/Population.h"
 #include "GLSource/SelectionOperations.h"
-//#include "GLSource/ReplacementOperations.h"
+#include "GLSource/ReplacementOperations.h"
 
-//#include "GLSource/StopCriterias.h"
-//#include "GLSource/IncrementalAlgorithm.h"
+#include "GLSource/StopCriterias.h"
+#include "GLSource/IncrementalAlgorithm.h"
 
 
 
@@ -38,17 +38,17 @@ public:
     
 	Chromosone(const Chromosone& c, bool setupOnly);
     
-	/*virtual ~Chromosone() { } // These must be added back in later(probably)
+	virtual ~Chromosone() { } 
     
-    virtual GaChromosomePtr MakeCopy(bool setupOnly) const { return new Chromosone( *this, setupOnly ); }
+    virtual GaChromosomePtr MakeCopy(bool setupOnly) const;
     
 	virtual GaChromosomePtr MakeNewFromPrototype() const;
     
-	virtual void PreapareForMutation();
+	virtual void PreapareForMutation(); // Spelling mistake in the framework! Might fix later
     
 	virtual void AcceptMutation();
     
-	virtual void RejectMutation(); */
+	virtual void RejectMutation(); 
     
 	// Returns reference to table of classes
 	inline const hash_map<Student*, int>& GetStudentLookup() const { return _lookup; }

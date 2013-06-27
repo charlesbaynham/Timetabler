@@ -13,6 +13,15 @@
 
 #include "TTChromosone.h"
 
+class TTObserver : public GaObserverAdapter {
+    
+public:
+    
+    virtual void NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm);
+    
+	virtual void EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm);
+
+};
 
 class TimetablerInst {
     static TimetablerInst _instance;
@@ -24,18 +33,18 @@ class TimetablerInst {
 	TTMutation _mutationOperation;
 
 	TTFitness _fitnessOperation;
-//
+
 	GaChromosomeDomainBlock<list<Student*> >* _ccb;
     
 	Chromosone* _prototype;
     
-//	GaPopulationConfiguration* _populationConfig;
+	GaPopulationConfiguration* _populationConfig;
     
 	GaPopulation* _population;
     
-//	GaAlgorithm* _algorithm;
-//    
-//	ScheduleObserver _observer;
+	GaAlgorithm* _algorithm;
+    
+	TTObserver _observer;
     
 public:
     inline static TimetablerInst& getInstance() { return _instance; }

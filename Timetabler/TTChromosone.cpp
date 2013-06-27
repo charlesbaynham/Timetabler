@@ -29,6 +29,29 @@ Chromosone::Chromosone(const Chromosone& c, bool setupOnly) :
     }
 }
 
+GaChromosomePtr Chromosone::MakeCopy(bool setupOnly) const { return new Chromosone( *this, setupOnly ); }
+
+GaChromosomePtr Chromosone::MakeNewFromPrototype() const { return new Chromosone( *this, true ); } // edit
+
+void Chromosone::PreapareForMutation() {
+    _backupLookup = _lookup; // Backup hashmap then call method to backup rest
+   	GaMultiValueChromosome<list<Student*> >::PreapareForMutation();
+}
+
+void Chromosone::AcceptMutation() {
+    _backupLookup.clear(); // Clear backup and accept
+   	GaMultiValueChromosome<list<Student*> >::AcceptMutation();
+}
+
+void Chromosone::RejectMutation() {
+    _lookup = _backupLookup; // Restore backup hashmap then call method to reject rest
+    _backupLookup.clear();
+   	GaMultiValueChromosome<list<Student*> >::RejectMutation();
+}
+
+
+
+
 void TTMutation::operator ()(GaChromosome* parent) const
 {
     printf("lol, I did something.\n"); //Again, not finished
