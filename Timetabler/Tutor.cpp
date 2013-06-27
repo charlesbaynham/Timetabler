@@ -7,9 +7,29 @@
 //
 
 #include "Tutor.h"
+#include "TTChromosone.h"
 
-Tutor::Tutor(int ID, const string& name, list<Subject*> subjects, list<int> notTimes) :
+int Tutor::_nextID = 0;
+
+Tutor::Tutor(const string& name, list<Subject*> subjects, list<int> notTimes) :
 _name(name),
 _subjects(subjects),
-_notTimes(notTimes),
-_ID(ID) {}
+_notTimes(notTimes) {
+    _ID = _nextID++;
+    _slotsProcessed = false;
+}
+
+
+void Tutor::processSlots() {
+    
+    _notSlots.empty(); // Empty notslots list in case it's already been done
+    
+    for (list<int>::iterator it = _notTimes.begin(); it != _notTimes.end(); it++){ // Loop through all notTimes...
+        int notslot;
+        notslot = *it + _ID * SLOTS_IN_DAY; //  translating them to notSlots
+
+        _notSlots.push_back(notslot); // Store in list
+    }
+    
+    _slotsProcessed = true;
+}

@@ -87,6 +87,9 @@ private:
     
 	// Removes blank characters from beginning and end of string
 	string& TrimString(string& str);
+    
+    //Processes the slots that tutors can't do for every tutor
+    void processTutorsSlots();
 };
 
 #endif /* defined(__Timetabler__Configuration__) */

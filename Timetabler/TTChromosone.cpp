@@ -7,13 +7,11 @@
 //
 
 #include "TTChromosone.h"
-#define SLOTS_IN_DAY 4
-#define NUM_TUTORS 3 //Get RID of this
 
 Chromosone::Chromosone(GaChromosomeDomainBlock<list<Student*> >* configBlock) :
     GaMultiValueChromosome<list<Student*> >(configBlock)
 {
-    _values.resize( SLOTS_IN_DAY * NUM_TUTORS ); //Get RID of num_tutors
+    _values.resize( SLOTS_IN_DAY * Configuration::getInstance().numTutors() );
 }
 
 Chromosone::Chromosone(const Chromosone& c, bool setupOnly) :
@@ -25,7 +23,7 @@ Chromosone::Chromosone(const Chromosone& c, bool setupOnly) :
         _backupLookup = c._backupLookup;
     }
     else { // Reserve space
-        _values.resize( SLOTS_IN_DAY * NUM_TUTORS ); //Get RID of num_tutors
+        _values.resize( SLOTS_IN_DAY * Configuration::getInstance().numTutors() ); //Get RID of num_tutors
     }
 }
 

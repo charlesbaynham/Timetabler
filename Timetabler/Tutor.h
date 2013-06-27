@@ -17,17 +17,22 @@
 using namespace std;
 
 class Tutor {
-    int _ID; 
+    int _ID; // Autoassigned
     string _name;
     list<Subject*> _subjects;
     list<int> _notTimes; //List of times to avoid, from 0 to SLOTS_IN_DAY-1
     list<int> _notSlots; //List of slots that the above times preclude
+    static int _nextID; // Next ID to assign
+    bool _slotsProcessed;
     
 public:
-    Tutor(int ID, const string& name, list<Subject*> subjects, list<int> notTimes);
+    Tutor(const string& name, list<Subject*> subjects, list<int> notTimes);
     
     inline int getID(){ return _ID; }
     inline const string& getName() { return _name; }
+    
+    void processSlots(); // Calculate the _notSlots list based on _notTimes and number of tutors in global config. 
+    inline bool isProcessed() { return _slotsProcessed; }
 };
 
 #endif
