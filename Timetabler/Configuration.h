@@ -24,7 +24,7 @@ private:
     static Configuration _instance; // Global instance
     
 public:
-    inline static Configuration& instance() { return _instance; } // return global instance
+    inline static Configuration& getInstance() { return _instance; } // return global instance
     
 private:
     
@@ -63,12 +63,12 @@ public:
     inline int numStudents() { return (int)_students.size(); }
     
     // Check to see if has been setup or not
-    bool parsed() { return _isEmpty; }
-    
-private:
+    bool parsed() { return !_isEmpty; }
     
     //Parse a file for inputs
     void parseFile(char* fileName);
+    
+private:
     
 	// Reads tutor's data from config file, makes object and returns pointer to it
 	// Returns NULL if method cannot parse configuration data

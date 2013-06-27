@@ -10,6 +10,7 @@
 #define Timetabler_TTChromosone_h
 
 #include "Student.h"
+#include "Configuration.h"
 #include <ext/hash_map>
 using namespace __gnu_cxx;
 

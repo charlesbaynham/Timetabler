@@ -20,13 +20,19 @@ using namespace Algorithm::SimpleAlgorithms;
 int main()
 {
 	GaInitialize();
-
-    Tutor Jenny(1,"Jenny Barnes", NULL, NULL);
-    Tutor Jenny2(3,"Jenny Barnes", NULL, NULL);
-    Tutor MrE(18,"Mr Evans", NULL, NULL);
     
-    cout << MrE.getName();
-    printf("'s ID is %i\n", MrE.getID());
+    Configuration config = Configuration::getInstance();
+    
+    if (!config.parsed()) {
+        printf("Config file is unparsed\nParsing now...\n");
+        config.parseFile("/Users/Charles/config.txt");
+    }
+
+    printf("We have %i tutors, %i students and %i subjects.\n", config.numTutors(), config.numStudents(), config.numSubjects());
+    
+    Tutor * first = config.getTutor(1);
+    cout << "The first tutor: " << first->getName();
+    printf("'s ID is %i\n", first->getID());
     
 //	GaChromosomeParams chromosomeParams( 0.1F, 10, true, 0.8F, 2 );
 //    
