@@ -57,6 +57,8 @@ void Configuration::parseFile(char* fileName) {
     
     processTutorsSlots(); // Sort out the _notSlots element for each tutor
     
+    cout << "Input: "<<numStudents()<<" students, "<<numTutors()<<" tutors and "<<numSubjects()<<" subjects.\n";
+    
 }
 
 

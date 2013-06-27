@@ -23,7 +23,7 @@ Chromosone::Chromosone(const Chromosone& c, bool setupOnly) :
         _backupLookup = c._backupLookup;
     }
     else { // Reserve space
-        _values.resize( SLOTS_IN_DAY * Configuration::getInstance().numTutors() ); //Get RID of num_tutors
+        _values.resize( SLOTS_IN_DAY * Configuration::getInstance().numTutors() );
     }
 }
 
@@ -134,11 +134,58 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
     const Chromosone* c1 = dynamic_cast<const Chromosone*>( parent1 );
     const Chromosone* c2 = dynamic_cast<const Chromosone*>( parent2 );
     
-    Chromosone* n = new Chromosone(*c1, false);
+    Chromosone* n = new Chromosone(*c1, true);
     
+    // number of students
+	int size = (int)c1->_lookup.size();
     
+	// determine crossover point (randomly)
+	vector<bool> cp( size );
+	for( int i = c1->GetParameters().GetNumberOfCrossoverPoints(); i > 0; i-- )
+	{
+		while( 1 )
+		{
+			int p = GaGlobalRandomIntegerGenerator->Generate( size - 1 );
+			if( !cp[ p ] )
+			{
+				cp[ p ] = true;
+				break;
+			}
+		}
+	}
     
-    return n; //Obviously not finished.  EDIT
+	hash_map<Student*,int>::const_iterator it1 = c1->_lookup.begin();
+	hash_map<Student*,int>::const_iterator it2 = c2->_lookup.begin();
+    
+	// make new code by combining parent codes
+	bool first = GaGlobalRandomBoolGenerator->Generate();
+	for( int i = 0; i < size; i++ )
+	{
+		if( first )
+		{
+			// insert class from first parent into new chromosome's class table
+			n->_lookup.insert( pair<Student*, int>( ( *it1 ).first, ( *it1 ).second ) );
+			// add to corresponding slot
+			n->_values[ ( *it1 ).second ].push_back( ( *it1 ).first );
+		}
+		else
+		{
+			// insert class from second parent into new chromosome's class table
+			n->_lookup.insert( pair<Student*, int>( ( *it2 ).first, ( *it2 ).second ) );
+			// add to corresponding slot
+			n->_values[ ( *it2 ).second ].push_back( ( *it2 ).first );
+		}
+        
+		// crossover point
+		if( cp[ i ] )
+			// change source chromosome if chosen earlier
+			first = !first;
+        
+		it1++;
+		it2++;
+	}
+    
+    return n;
 }
 
 

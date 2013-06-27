@@ -33,6 +33,7 @@ using namespace __gnu_cxx;
 class Chromosone : public GaMultiValueChromosome<list<Student*>> {
     
     friend class TTMutation;
+    friend class TTCrossover;
     
     hash_map<Student*, int> _lookup;
     hash_map<Student*, int> _backupLookup;

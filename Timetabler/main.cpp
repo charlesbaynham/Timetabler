@@ -20,6 +20,8 @@ using namespace Algorithm::SimpleAlgorithms;
 int main()
 {
 
+    Configuration::getInstance().parseFile("/Users/Charles/config.txt");
+    
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
     
 //    GaAlgorithmState state = TimetablerInst::getInstance().getAlgorithm()->GetState();
