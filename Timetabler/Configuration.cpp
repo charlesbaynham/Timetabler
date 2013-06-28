@@ -58,6 +58,8 @@ void Configuration::parseFile(char* fileName) {
     processTutorsSlots(); // Sort out the _notSlots element for each tutor
     
     cout << "Input: "<<numStudents()<<" students, "<<numTutors()<<" tutors and "<<numSubjects()<<" subjects.\n";
+//    Tutor* richard = getTutor(1);
+    //cout << "Richard has " << richard->getNotSlots().size() << " notslots.\n";
     
 }
 
@@ -184,4 +186,27 @@ void Configuration::processTutorsSlots() {
         Tutor* tut = (*it).second;
         tut->processSlots();
     }
+}
+
+void Configuration::dumpTutors(){
+    //Print info about all the tutors
+    hash_map<int, Tutor*> theTutors = _tutors;
+    
+    for (hash_map<int, Tutor*>::iterator it = theTutors.begin(); it != theTutors.end(); it++) {
+        Tutor* tut = (*it).second;
+        
+        cout << "Name: "<<tut->getName()<<" (ID="<<tut->getID() << ")\nSubjects:\n";
+        list<Subject*> subjlist = tut->getSujects();
+        for (list<Subject*>::iterator it2=subjlist.begin(); it2 != subjlist.end(); it2++) {
+            cout << "\t" << (*it2)->getName() << "("<<(*it2)->getID()<<")\n";
+        }
+        cout << "NotSlots:\n";
+        list<int> thelist = tut->getNotSlots();
+        for (list<int>::iterator it2=thelist.begin(); it2 != thelist.end(); it2++) {
+            int notslot = *it2;
+            cout << "\t"<< notslot << "\n";
+        }
+        cout << "\n***\n";
+    }
+    
 }

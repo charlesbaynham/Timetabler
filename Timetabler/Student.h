@@ -32,6 +32,7 @@ public:
     
     inline int getID(){ return _ID; }
     inline const string& getName() { return _name; }
+    inline Subject* getSubject() { return _subject; }
 };
 
 #endif

@@ -34,6 +34,7 @@ class Chromosone : public GaMultiValueChromosome<list<Student*>> {
     
     friend class TTMutation;
     friend class TTCrossover;
+    friend class TTFitness;
     
     hash_map<Student*, int> _lookup;
     hash_map<Student*, int> _backupLookup;

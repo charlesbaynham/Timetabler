@@ -49,7 +49,9 @@ GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
         newChromosone->_values.at(pos).push_back(*it);
         
         // Add the (student*,position) pair to the hashmap
+        printf("pair will be studentid=%i, poss=%i\n", (*it)->getID(), pos);
         newChromosone->_lookup.insert(pair<Student*, int>(*it,pos));
+        
     }
     
     return newChromosone;
@@ -76,10 +78,12 @@ void Chromosone::RejectMutation() {
 // Randomly move some (mutation size) students to different (random) slots
 void TTMutation::operator ()(GaChromosome* parent) const
 {
+    printf("Doing mutation.\n");
     Chromosone* chromo = dynamic_cast<Chromosone*>(parent);
     
     int numSlots = (int)chromo->_values.size();
     int numStudents = (int)chromo->_lookup.size();
+    hash_map<Student*,int> lookup = chromo->GetStudentLookup();
     
     //for each mutation:
     for (int i = chromo->GetParameters().GetMutationSize() ; i>0; i--)
@@ -89,9 +93,9 @@ void TTMutation::operator ()(GaChromosome* parent) const
         hash_map<Student*, int>::iterator it;
         
         // Iterate through the hashmap _lookup, reducing student and increasing it until student == 0:
-        //   now it points to a randomly chosen student. 
-        for (it = chromo->_lookup.begin();
-             student != 0 && it != chromo->_lookup.end();
+        //   now it points to a randomly chosen student.
+        for (it = lookup.begin();
+             student != 0 && it != lookup.end();
              it++, student--) ;
 
         Student* theStudent = (*it).first;
@@ -115,22 +119,70 @@ void TTMutation::operator ()(GaChromosome* parent) const
         theNewSlot.push_back(theStudent);
         
         //update hashmap:
-        chromo->_lookup[theStudent] = newSlot;
+        lookup[theStudent] = newSlot;
+        chromo->_lookup = lookup;
     }
     
     
 }
 
 float TTFitness::operator()(const GaChromosome* chromosome) const{
-    
+    printf("Doing fitness.\n");
     const Chromosone* chromo = dynamic_cast<const Chromosone*>(chromosome);
     
-    return chromo->GetFitness() + 1; // not finished edit.
+    int score = 0;
+    int numStudents = (int)chromo->_lookup.size();
+    int numSlots = SLOTS_IN_DAY * Configuration::getInstance().numTutors();
+    
+    // loop over all students
+        printf("Crash?\n");
+    for (hash_map<Student*,int>::const_iterator it = chromo->_lookup.begin(); it!=chromo->_lookup.end(); it++ ) {
+        
+        //is there overlapping?
+        if ( !(chromo->_values[(*it).second].size()>1) ) score++;
+        
+        //Does the tutor teach the subject?
+        //get tutor:
+        div_t division = div((*it).second, SLOTS_IN_DAY);
+        int tutorID = division.quot;
+        int time = division.rem;
+        
+        Tutor* tutor = Configuration::getInstance().getTutor(tutorID);
+        
+        //check subject:
+        list<Subject*> tutSubj = tutor->getSujects();
+        for (list<Subject*>::iterator itTut = tutSubj.begin(); itTut != tutSubj.end(); itTut++)
+        {
+            if ( (*it).first->getSubject() == *itTut )
+            {
+                score++;
+                break; // Need to adapt to suit proficiency in subject. edit. 
+            }
+        }
+        
+        //can the tutor do the time?
+        bool canDo = true;
+        list<int> tutNotSlots = tutor->getNotSlots();
+        for (list<int>::iterator itTut = tutNotSlots.begin(); itTut != tutNotSlots.end(); itTut++)
+        {
+            if ( *itTut == (*it).second )
+            {
+                canDo = false;
+                break;
+            }
+        }
+        if (canDo) score++;
+    }
+    
+    int maxscore = 3 * numStudents;
+    
+    return (float)score / (float)maxscore;
 }
 
 
 GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2) const
 {
+    printf("Doing crossover.\n");
     const Chromosone* c1 = dynamic_cast<const Chromosone*>( parent1 );
     const Chromosone* c2 = dynamic_cast<const Chromosone*>( parent2 );
     

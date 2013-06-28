@@ -105,7 +105,7 @@ TimetablerInst::TimetablerInst()
     
 	// make parameters for stop criteria based on fitness value
 	// stop when best chromosome reaches fitness value of 1
-	GaFitnessCriteriaParams criteriaParams( 0, GFC_MORE_THEN_EQUALS_TO, GSV_BEST_FITNESS );
+	GaFitnessCriteriaParams criteriaParams( 1, GFC_MORE_THEN_EQUALS_TO, GSV_BEST_FITNESS );
     // This line needs changing
     
 	// sets algorithm's stop criteria (base on fitness value) and its parameters

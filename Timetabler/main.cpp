@@ -22,6 +22,8 @@ int main()
 
     Configuration::getInstance().parseFile("/Users/Charles/config.txt");
     
+    Configuration::getInstance().dumpTutors();
+    
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
     
 //    GaAlgorithmState state = TimetablerInst::getInstance().getAlgorithm()->GetState();

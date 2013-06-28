@@ -41,6 +41,8 @@ public:
     // Init
     Configuration() : _isEmpty(true) {}
     
+    void dumpTutors();
+    
     //free up
     //~Configuration();
     
