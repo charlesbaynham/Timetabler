@@ -208,6 +208,7 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
     const Chromosone* c1 = dynamic_cast<const Chromosone*>( parent1 );
     const Chromosone* c2 = dynamic_cast<const Chromosone*>( parent2 );
     
+    Chromosone* n = new Chromosone(*c1, true);
     
 //    //debug
 //    for (hash_map<Student*,int>::const_iterator it = c1map.begin(); it != c1map.end(); it++) {
@@ -227,7 +228,6 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
 //    
 //    Student* testStud = new Student(id, name, subject, noInterviews, prevTutors);
     
-    Chromosone* n = new Chromosone(*c1, true);
 //    n->_lookup = c1->_lookup;
 //    n->_values = c1->_values;
     
@@ -256,16 +256,50 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
 		}
 	}
     
-	hash_map<Student*,int>::const_iterator it1 = c1->_lookup.begin();
-	hash_map<Student*,int>::const_iterator it2 = c2->_lookup.begin();
+//	hash_map<Student*,int>::const_iterator it1 = c1->_lookup.begin();
+//	hash_map<Student*,int>::const_iterator it2 = c2->_lookup.begin();
+    
+    //copy hashmaps into vector so that we are sure to have both iterating in the same order
+    vector< pair<Student*, int> > vec1;
+    vector< pair<Student*, int> > vec2;
+    
+    for ( hash_map<Student*, int>::const_iterator it = c1->_lookup.begin(); it != c1->_lookup.end(); it++ ) {
+        
+        Student * stud;
+        int id;
+        
+        stud = (*it).first;
+        id = (*it).second;
+        
+        pair<Student*, int> Npair = *new pair<Student*, int>(stud, id);
+        
+        vec1.push_back(Npair);
+    }
+    for ( hash_map<Student*, int>::const_iterator it = c2->_lookup.begin(); it != c2->_lookup.end(); it++ ) {
+        
+        Student * stud;
+        int id;
+        
+        stud = (*it).first;
+        id = (*it).second;
+        
+        pair<Student*, int> Npair = *new pair<Student*, int>(stud, id);
+        
+        vec2.push_back(Npair);
+    }
+    
+    //sort the vectors into same order
+    sort(vec1.begin(), vec1.end());
+    sort(vec2.begin(), vec2.end());
+
     
 	// make new code by combining parent codes
 	bool first = GaGlobalRandomBoolGenerator->Generate();
 	for( int i = 0; i < size; i++ )
 	{
         //debug
-        int id1 = (*it1).first->getID();
-        int id2 = (*it2).first->getID();
+        int id1 = vec1[i].first->getID();
+        int id2 = vec2[i].first->getID();
         
         if (id1 != id2) {
             printf("\nno1 with size %i:\n\n", (int)c1->_lookup.size());
@@ -274,19 +308,20 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
             dumpHash(c2->_lookup);
         }
         //end debug
+        
 		if( first )
 		{
 			// insert class from first parent into new chromosome's class table
-			n->_lookup.insert( pair<Student*, int>( ( *it1 ).first, ( *it1 ).second ) );
+			n->_lookup.insert( pair<Student*, int>( vec1[i].first, vec1[i].second ) );
 			// add to corresponding slot
-			n->_values[ ( *it1 ).second ].push_back( ( *it1 ).first );
+			n->_values[ vec1[i].second ].push_back( vec1[i].first );
 		}
 		else
 		{
 			// insert class from second parent into new chromosome's class table
-			n->_lookup.insert( pair<Student*, int>( ( *it2 ).first, ( *it2 ).second ) ); // here's a crash
+			n->_lookup.insert( pair<Student*, int>( vec2[i].first, vec2[i].second ) ); // here's a crash
 			// add to corresponding slot
-			n->_values[ ( *it2 ).second ].push_back( ( *it2 ).first );
+			n->_values[ vec2[i].second ].push_back( vec2[i].first );
 		}
         
 		// crossover point
@@ -294,8 +329,8 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
 			// change source chromosome if chosen earlier
 			first = !first;
 
-		it2++; // here's another
-		it1++; // but not here...
+//		it2++; // here's another
+//		it1++; // but not here...
 	}
     
     
