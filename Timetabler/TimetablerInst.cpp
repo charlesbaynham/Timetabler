@@ -99,7 +99,8 @@ TimetablerInst::TimetablerInst()
     
 	// make parameters for genetic algorithms
 	// algorithm will use two workers
-	GaMultithreadingAlgorithmParams algorithmParams( 2 );
+	GaMultithreadingAlgorithmParams algorithmParams( 1 );
+    //debug
 	// make incremental algorithm with periously defined population and parameters
 	_algorithm = new GaIncrementalAlgorithm( _population, algorithmParams );
     
