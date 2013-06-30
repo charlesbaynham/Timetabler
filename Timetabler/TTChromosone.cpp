@@ -7,6 +7,7 @@
 //
 
 #include "TTChromosone.h"
+#include <ext/hash_map>
 
 Chromosone::Chromosone(GaChromosomeDomainBlock<list<Student*> >* configBlock) :
     GaMultiValueChromosome<list<Student*> >(configBlock)
@@ -41,18 +42,28 @@ GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
     //loop all over students
     for (list<Student*>::const_iterator it = students.begin(); it != students.end(); it++)
     {
+        Student* currStudent = *it;
         //choose random position:
         int pos;
         pos = GaGlobalRandomIntegerGenerator->Generate( SLOTS_IN_DAY * Configuration::getInstance().numTutors() - 1 );
         
         // Add the current student to the list at the location 'pos' in the _values vector
-        newChromosone->_values.at(pos).push_back(*it);
+        newChromosone->_values.at(pos).push_back(currStudent);
         
         // Add the (student*,position) pair to the hashmap
-        printf("pair will be studentid=%i, poss=%i\n", (*it)->getID(), pos);
-        newChromosone->_lookup.insert(pair<Student*, int>(*it,pos));
+        newChromosone->_lookup.insert(pair<Student*, int>(currStudent,pos));
         
     }
+    
+    //debug
+//    for (hash_map<Student*,int>::const_iterator it = newChromosone->_lookup.begin(); it != newChromosone->_lookup.end(); it++) {
+//        pair<Student*, int> thepair = *it;
+//        string name = thepair.first->getName();
+//        int num = thepair.second;
+//        cout << name << "\t\tis at\t\t" << num << endl;
+//    }
+    printf("After creation, table has %i students\n", (int)newChromosone->_lookup.size());
+    //end debug
     
     return newChromosone;
 }
@@ -78,12 +89,13 @@ void Chromosone::RejectMutation() {
 // Randomly move some (mutation size) students to different (random) slots
 void TTMutation::operator ()(GaChromosome* parent) const
 {
-    printf("Doing mutation.\n");
     Chromosone* chromo = dynamic_cast<Chromosone*>(parent);
     
     int numSlots = (int)chromo->_values.size();
     int numStudents = (int)chromo->_lookup.size();
-    hash_map<Student*,int> lookup = chromo->GetStudentLookup();
+    
+    //debug
+    printf("Mutation: lookup size is %i\n", numStudents);
     
     //for each mutation:
     for (int i = chromo->GetParameters().GetMutationSize() ; i>0; i--)
@@ -94,8 +106,8 @@ void TTMutation::operator ()(GaChromosome* parent) const
         
         // Iterate through the hashmap _lookup, reducing student and increasing it until student == 0:
         //   now it points to a randomly chosen student.
-        for (it = lookup.begin();
-             student != 0 && it != lookup.end();
+        for (it = chromo->_lookup.begin();
+             student != 0 && it != chromo->_lookup.end();
              it++, student--) ;
 
         Student* theStudent = (*it).first;
@@ -119,23 +131,27 @@ void TTMutation::operator ()(GaChromosome* parent) const
         theNewSlot.push_back(theStudent);
         
         //update hashmap:
-        lookup[theStudent] = newSlot;
-        chromo->_lookup = lookup;
+        chromo->_lookup[theStudent] = newSlot;
+        //chromo->_lookup = lookup;
     }
     
-    
+    numStudents = (int)chromo->_lookup.size();
+    printf("Mutation: size = %i\n", numStudents);
 }
 
 float TTFitness::operator()(const GaChromosome* chromosome) const{
-    printf("Doing fitness.\n");
     const Chromosone* chromo = dynamic_cast<const Chromosone*>(chromosome);
     
     int score = 0;
     int numStudents = (int)chromo->_lookup.size();
     int numSlots = SLOTS_IN_DAY * Configuration::getInstance().numTutors();
     
+    
+    //debug
+    printf("Fitness: lookup size is %i\n", numStudents);
+    //end debug
+    
     // loop over all students
-        printf("Crash?\n");
     for (hash_map<Student*,int>::const_iterator it = chromo->_lookup.begin(); it!=chromo->_lookup.end(); it++ ) {
         
         //is there overlapping?
@@ -180,63 +196,89 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
 }
 
 
+
 GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2) const
 {
-    printf("Doing crossover.\n");
     const Chromosone* c1 = dynamic_cast<const Chromosone*>( parent1 );
     const Chromosone* c2 = dynamic_cast<const Chromosone*>( parent2 );
     
-    Chromosone* n = new Chromosone(*c1, true);
+//    hash_map<Student*, int> c1map = c1->_lookup;
+//    hash_map<Student*, int> c2map = c2->_lookup;
+//    
+////    //debug
+////    for (hash_map<Student*,int>::const_iterator it = c1map.begin(); it != c1map.end(); it++) {
+////        pair<Student*, int> thepair = *it;
+////        string name = thepair.first->getName();
+////        int num = thepair.second;
+////        cout << name << "  is at  " << num << endl;
+////    }
+////    //end debug
+//    
+//    Chromosone* n = new Chromosone(*c1, true);
+//    hash_map<Student*, int> nmap = n->_lookup;
+//    
+//    // number of students
+//	int size1 = (int)c1map.size();
+//    int size2 = (int)c2map.size();
+//    
+//    printf("Crossover: sizes are %i and %i\n", size1, size2);
+//    
+//    int size = size1;
+//    
+//	// determine crossover point (randomly)
+//	vector<bool> cp( size );
+//	for( int i = c1->GetParameters().GetNumberOfCrossoverPoints(); i > 0; i-- )
+//	{
+//		while( 1 )
+//		{
+//			int p = GaGlobalRandomIntegerGenerator->Generate( size - 1 );
+//			if( !cp[ p ] )
+//			{
+//				cp[ p ] = true;
+//				break;
+//			}
+//		}
+//	}
+//    
+//	hash_map<Student*,int>::const_iterator it1 = c1map.begin();
+//	hash_map<Student*,int>::const_iterator it2 = c2map.begin();
+//    
+//	// make new code by combining parent codes
+//	bool first = GaGlobalRandomBoolGenerator->Generate();
+//	for( int i = 0; i < size; i++ )
+//	{
+//		if( first )
+//		{
+//			// insert class from first parent into new chromosome's class table
+//			nmap.insert( pair<Student*, int>( ( *it1 ).first, ( *it1 ).second ) );
+//			// add to corresponding slot
+//			n->_values[ ( *it1 ).second ].push_back( ( *it1 ).first );
+//		}
+//		else
+//		{
+//			// insert class from second parent into new chromosome's class table
+//			nmap.insert( pair<Student*, int>( ( *it2 ).first, ( *it2 ).second ) ); // here's a crash
+//			// add to corresponding slot
+//			n->_values[ ( *it2 ).second ].push_back( ( *it2 ).first );
+//		}
+//        
+//		// crossover point
+//		if( cp[ i ] )
+//			// change source chromosome if chosen earlier
+//			first = !first;
+//
+//		it2++; // here's another
+//		it1++; // but not here...
+//	}
+//    
+//    size1 = (int)c1map.size();
+//    size2 = (int)c2map.size();
+//    
+//    printf("Crossover end: sizes are %i and %i\n", size1, size2);
     
-    // number of students
-	int size = (int)c1->_lookup.size();
     
-	// determine crossover point (randomly)
-	vector<bool> cp( size );
-	for( int i = c1->GetParameters().GetNumberOfCrossoverPoints(); i > 0; i-- )
-	{
-		while( 1 )
-		{
-			int p = GaGlobalRandomIntegerGenerator->Generate( size - 1 );
-			if( !cp[ p ] )
-			{
-				cp[ p ] = true;
-				break;
-			}
-		}
-	}
-    
-	hash_map<Student*,int>::const_iterator it1 = c1->_lookup.begin();
-	hash_map<Student*,int>::const_iterator it2 = c2->_lookup.begin();
-    
-	// make new code by combining parent codes
-	bool first = GaGlobalRandomBoolGenerator->Generate();
-	for( int i = 0; i < size; i++ )
-	{
-		if( first )
-		{
-			// insert class from first parent into new chromosome's class table
-			n->_lookup.insert( pair<Student*, int>( ( *it1 ).first, ( *it1 ).second ) );
-			// add to corresponding slot
-			n->_values[ ( *it1 ).second ].push_back( ( *it1 ).first );
-		}
-		else
-		{
-			// insert class from second parent into new chromosome's class table
-			n->_lookup.insert( pair<Student*, int>( ( *it2 ).first, ( *it2 ).second ) );
-			// add to corresponding slot
-			n->_values[ ( *it2 ).second ].push_back( ( *it2 ).first );
-		}
-        
-		// crossover point
-		if( cp[ i ] )
-			// change source chromosome if chosen earlier
-			first = !first;
-        
-		it1++;
-		it2++;
-	}
-    
+    //DEBUG
+    Chromosone* n = new Chromosone(*c1, false);
     return n;
 }
 

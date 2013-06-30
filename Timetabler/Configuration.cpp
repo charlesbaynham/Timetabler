@@ -125,7 +125,7 @@ Student* Configuration::ParseStudent(ifstream& file) {
         else if (key.compare("prevTutor") == 0) prevTutors.push_back(getTutor(atoi(value.c_str())));
     }
     
-    return id == 0 || subject==NULL ? NULL : new Student(id, name, subject, noInterviews, prevTutors);
+    return subject==NULL ? NULL : new Student(id, name, subject, noInterviews, prevTutors);
 }
 
 // Reads one line (key - value pair) from configuration file

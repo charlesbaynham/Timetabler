@@ -26,6 +26,7 @@ private:
     int _noInterviews;  // Number of interviews (2 or 4)
     list<Tutor*> _prevTutors; // Previous tutors to be avoided
 //    list<Tutor*> _tutors;
+    static int _nextID; // Next ID to be autoassigned
     
 public:
     Student(int ID, const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors); // Initiate

@@ -20,11 +20,30 @@ using namespace Algorithm::SimpleAlgorithms;
 int main()
 {
 
-    Configuration::getInstance().parseFile("/Users/Charles/config.txt");
+//    Configuration::getInstance().parseFile("/Users/Charles/config.txt");
+//    
+//    list<Student*> testlist = Configuration::getInstance().getStudents();
+//    
+//    list<Student*>::const_iterator it;
+//    Student* currStudent;
+//    for (it = testlist.begin(); it != testlist.end(); it++) {
+//        currStudent = *it;
+//        cout << "The student's name is " << currStudent->getName() << endl;
+//    }
+//    
+//    cout << "Time for a crash. last student was " << currStudent->getName() << endl;
+//    if(it == testlist.end()) printf("OMG, i was right!\n");
+//    //it++; // should crash
+//    cout << "next is " << currStudent->getName() << endl;
     
+    
+    Configuration::getInstance().parseFile("/Users/Charles/config.txt");
+
     Configuration::getInstance().dumpTutors();
     
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
+    
+    
     
 //    GaAlgorithmState state = TimetablerInst::getInstance().getAlgorithm()->GetState();
 //    
