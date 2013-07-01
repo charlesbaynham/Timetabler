@@ -26,7 +26,8 @@ void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgori
     {
         GaChromosomePtr result;
         algorithm.GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
-        cout << "Fitness of final solution is " << result->GetFitness() << endl;
+        cout << "***\nFitness of final solution is " << result->GetFitness() << ", found in ";
+        cout << algorithm.GetAlgorithmStatistics().GetCurrentGeneration() << " generations." << endl;
     }
 }
 // To be written. Edit
