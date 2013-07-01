@@ -65,11 +65,20 @@ timetableSlot::timetableSlot(int slot, Student* student) :
 string timetableSlot::getTutorSubjects()
 {
     string out;
+    
+    //construct string with list of subjects
     list<Subject*> subjs = _tutor->getSubjects();
     for (list<Subject*>::iterator it=subjs.begin(); it != subjs.end(); it++) {
         out.append( (*it)->getName() );
-        out.append(" ");
+        out.append(", ");
     }
+    //remove final ", "
+    string::iterator strIt = out.end();
+    strIt--;
+    out.erase(strIt);
+    strIt--;
+    out.erase(strIt);
+    
     return out;
 }
 

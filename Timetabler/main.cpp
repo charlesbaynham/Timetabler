@@ -46,10 +46,10 @@ int main()
 //    //end debug
 
     // Seeds for debugging
-    GaGlobalRandomIntegerGenerator = new GaRandomInteger(1622);
-	GaGlobalRandomFloatGenerator = new GaRandomFloat(12513);
-	GaGlobalRandomDoubleGenerator = new GaRandomDouble(13223);
-	GaGlobalRandomBoolGenerator = new GaRandomBool(12372);
+    GaGlobalRandomIntegerGenerator = new GaRandomInteger(7456);
+	GaGlobalRandomFloatGenerator = new GaRandomFloat(345);
+	GaGlobalRandomDoubleGenerator = new GaRandomDouble(3568);
+	GaGlobalRandomBoolGenerator = new GaRandomBool(2354768);
     
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
     
