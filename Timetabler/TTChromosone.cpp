@@ -221,6 +221,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         }
         if (engagements==1) score++; // If we only found them once (ie in the slot we were considering) then score
         
+        //  MINOR:
         //Does this student/tutor pair appear elsewhere in this timetable?
         int pairings=0;
         //loop over all tutor's slots
