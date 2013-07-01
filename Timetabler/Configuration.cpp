@@ -85,7 +85,7 @@ Subject* Configuration::ParseSubject(ifstream& file) {
 
 Tutor* Configuration::ParseTutor(ifstream& file) {
     
-//    int id;
+    int id;
     string name;
     list<Subject*> subjects;
     list<int> notTimes;
@@ -95,12 +95,13 @@ Tutor* Configuration::ParseTutor(ifstream& file) {
         
         if ( !GetConfigBlockLine(file, key, value)) break;
         
-        if (key.compare("name") == 0) name = value;
+        if (key.compare("id") == 0) id = atoi(value.c_str());
+        else if (key.compare("name") == 0) name = value;
         else if (key.compare("subj") == 0) subjects.push_back(getSubject(atoi(value.c_str())));
         else if (key.compare("notTime") == 0) notTimes.push_back(atoi(value.c_str()));
     }
     
-    return name.empty() ? NULL : new Tutor(name, subjects, notTimes);
+    return (id==0) ? NULL : new Tutor(id, name, subjects, notTimes);
 }
 
 // Reads student's data from config file, makes object and returns pointer to it

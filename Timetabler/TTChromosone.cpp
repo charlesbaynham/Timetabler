@@ -166,7 +166,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         //Does the tutor teach the subject?
         //get tutor:
         div_t division = div((*it).second, SLOTS_IN_DAY);
-        int tutorID = division.quot;
+        int tutorID = division.quot + 1;
         int time = division.rem;
         
         Tutor* tutor = Configuration::getInstance().getTutor(tutorID);
@@ -194,9 +194,21 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             }
         }
         if (canDo) score++;
+        
+        //Has the tutor been seen previously?
+        bool seenPrev = false;
+        list<Tutor*> prevTutors = (*it).first->getPrevTutors();
+        for (list<Tutor*>::iterator itPrev = prevTutors.begin(); itPrev != prevTutors.end(); itPrev++)
+        {
+            if ( *itPrev == tutor ) {
+                seenPrev = true;
+                break;
+            }
+        }
+        if (!seenPrev) score++;
     }
     
-    int maxscore = 3 * numStudents;
+    int maxscore = 4 * numStudents;
     
     return (float)score / (float)maxscore;
 }
@@ -210,36 +222,8 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
     
     Chromosone* n = new Chromosone(*c1, true);
     
-//    //debug
-//    for (hash_map<Student*,int>::const_iterator it = c1map.begin(); it != c1map.end(); it++) {
-//        pair<Student*, int> thepair = *it;
-//        string name = thepair.first->getName();
-//        int num = thepair.second;
-//        cout << name << "  is at  " << num << endl;
-//    }
-//    //end debug
-    
-//    //debug
-//    int id = 101;
-//    string name = "foobar";
-//    Subject* subject = new Subject(123,"Foobarese"); // Interview subject
-//    int noInterviews = 1;  // Number of interviews (2 or 4)
-//    list<Tutor*> prevTutors; // Previous tutors to be avoided
-//    
-//    Student* testStud = new Student(id, name, subject, noInterviews, prevTutors);
-    
-//    n->_lookup = c1->_lookup;
-//    n->_values = c1->_values;
-    
-    //end debug
-    
     // number of students
-	int size1 = (int)c1->_lookup.size();
-    int size2 = (int)c2->_lookup.size();
-    
-//    printf("Crossover: sizes are %i and %i\n", size1, size2);
-    
-    int size = size1;
+    int size = (int)c1->_lookup.size();
     
 	// determine crossover point (randomly)
 	vector<bool> cp( size );
@@ -256,8 +240,6 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
 		}
 	}
     
-//	hash_map<Student*,int>::const_iterator it1 = c1->_lookup.begin();
-//	hash_map<Student*,int>::const_iterator it2 = c2->_lookup.begin();
     
     //copy hashmaps into vector so that we are sure to have both iterating in the same order
     vector< pair<Student*, int> > vec1;
@@ -288,7 +270,7 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
         vec2.push_back(Npair);
     }
     
-    //sort the vectors into same order
+    //sort the vectors into same order (ascending by ID)
     sort(vec1.begin(), vec1.end());
     sort(vec2.begin(), vec2.end());
 
@@ -300,25 +282,25 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
         //debug
         int id1 = vec1[i].first->getID();
         int id2 = vec2[i].first->getID();
-        
-        if (id1 != id2) {
-            printf("\nno1 with size %i:\n\n", (int)c1->_lookup.size());
-            dumpHash(c1->_lookup);
-            printf("\nno2 with size %i:\n\n", (int)c1->_lookup.size());
-            dumpHash(c2->_lookup);
-        }
-        //end debug
+//
+//        if (id1 != id2) {
+//            printf("\nno1 with size %i:\n\n", (int)c1->_lookup.size());
+//            dumpHash(c1->_lookup);
+//            printf("\nno2 with size %i:\n\n", (int)c1->_lookup.size());
+//            dumpHash(c2->_lookup);
+//        }
+//        //end debug
         
 		if( first )
 		{
-			// insert class from first parent into new chromosome's class table
+			// insert student from first parent into new chromosome's hashmap
 			n->_lookup.insert( pair<Student*, int>( vec1[i].first, vec1[i].second ) );
 			// add to corresponding slot
 			n->_values[ vec1[i].second ].push_back( vec1[i].first );
 		}
 		else
 		{
-			// insert class from second parent into new chromosome's class table
+			// insert student from second parent into new chromosome's hashmap
 			n->_lookup.insert( pair<Student*, int>( vec2[i].first, vec2[i].second ) ); // here's a crash
 			// add to corresponding slot
 			n->_values[ vec2[i].second ].push_back( vec2[i].first );
@@ -326,27 +308,10 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
         
 		// crossover point
 		if( cp[ i ] )
-			// change source chromosome if chosen earlier
+			// change source chromosome
 			first = !first;
-
-//		it2++; // here's another
-//		it1++; // but not here...
 	}
-    
-    
-    int outsize = (int)n->_lookup.size();
-    
-    if (outsize != 11) {
-        hash_map<Student*, int> out;
-        out = n->_lookup;
-        dumpHash(out);
-    }
-    
-//    printf("%i : Crossover out size\n", outsize);
-    
-    
-    //DEBUG
-//    Chromosone* n = new Chromosone(*c1, false);
+
     return n;
 }
 

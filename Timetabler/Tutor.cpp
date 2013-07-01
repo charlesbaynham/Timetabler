@@ -9,13 +9,13 @@
 #include "Tutor.h"
 #include "TTChromosone.h"
 
-int Tutor::_nextID = 0;
+//int Tutor::_nextID = 0;
 
-Tutor::Tutor(const string& name, list<Subject*> subjects, list<int> notTimes) :
+Tutor::Tutor(int id, const string& name, list<Subject*> subjects, list<int> notTimes) :
+_ID(id),
 _name(name),
 _subjects(subjects),
 _notTimes(notTimes) {
-    _ID = _nextID++;
     _slotsProcessed = false;
 }
 

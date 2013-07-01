@@ -16,34 +16,25 @@ using namespace Algorithm::StopCriterias;
 using namespace Algorithm::SimpleAlgorithms;
 
 #include "TimetablerInst.h"
+#include "output.h"
 
 int main()
 {
 
-//    Configuration::getInstance().parseFile("/Users/Charles/config.txt");
-//    
-//    list<Student*> testlist = Configuration::getInstance().getStudents();
-//    
-//    list<Student*>::const_iterator it;
-//    Student* currStudent;
-//    for (it = testlist.begin(); it != testlist.end(); it++) {
-//        currStudent = *it;
-//        cout << "The student's name is " << currStudent->getName() << endl;
-//    }
-//    
-//    cout << "Time for a crash. last student was " << currStudent->getName() << endl;
-//    if(it == testlist.end()) printf("OMG, i was right!\n");
-//    //it++; // should crash
-//    cout << "next is " << currStudent->getName() << endl;
     
-    
-    Configuration::getInstance().parseFile("/Users/Charles/config.txt");
+    Configuration::getInstance().parseFile("config.txt");
 
     Configuration::getInstance().dumpTutors();
     
+    // Seeds for debugging
+    GaGlobalRandomIntegerGenerator = new GaRandomInteger(123);
+	GaGlobalRandomFloatGenerator = new GaRandomFloat(1253);
+	GaGlobalRandomDoubleGenerator = new GaRandomDouble(1223);
+	GaGlobalRandomBoolGenerator = new GaRandomBool(1233);
+    
+    cout << GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<endl;
+    
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
-    
-    
     
 //    GaAlgorithmState state = TimetablerInst::getInstance().getAlgorithm()->GetState();
 //    

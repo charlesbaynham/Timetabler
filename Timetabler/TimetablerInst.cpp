@@ -7,6 +7,7 @@
 //
 
 #include "TimetablerInst.h"
+#include "output.h"
 
 using namespace Population;
 using namespace Population::ReplacementOperations;
@@ -15,7 +16,8 @@ using namespace Algorithm::SimpleAlgorithms;
 using namespace Algorithm::StopCriterias;
 
 void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {
-    printf("New best! Has fitness of %f\n", newChromosome.GetFitness());
+    printf("New best! Has fitness of %f\nOutputting...\n", newChromosome.GetFitness());
+    ( outputCSV::getInstance() )("test.txt", newChromosome);
 }
 
 void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {
@@ -99,14 +101,14 @@ TimetablerInst::TimetablerInst()
     
 	// make parameters for genetic algorithms
 	// algorithm will use two workers
-	GaMultithreadingAlgorithmParams algorithmParams( 1 );
+	GaMultithreadingAlgorithmParams algorithmParams( 2 );
     //debug
 	// make incremental algorithm with periously defined population and parameters
 	_algorithm = new GaIncrementalAlgorithm( _population, algorithmParams );
     
 	// make parameters for stop criteria based on fitness value
 	// stop when best chromosome reaches fitness value of 1
-	GaFitnessCriteriaParams criteriaParams( 2, GFC_MORE_THEN_EQUALS_TO, GSV_BEST_FITNESS );
+	GaFitnessCriteriaParams criteriaParams( 1, GFC_MORE_THEN_EQUALS_TO, GSV_BEST_FITNESS );
     // This line needs changing
     
 	// sets algorithm's stop criteria (base on fitness value) and its parameters

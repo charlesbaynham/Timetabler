@@ -36,6 +36,7 @@
 		56E2E575177A1BF900CB720C /* Statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E544177A1BF900CB720C /* Statistics.cpp */; };
 		56E2E576177A1BF900CB720C /* StopCriterias.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E546177A1BF900CB720C /* StopCriterias.cpp */; };
 		56E2E577177A1BF900CB720C /* Threading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E548177A1BF900CB720C /* Threading.cpp */; };
+		56F72DFB17817E8300D849AD /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56F72DF917817E8300D849AD /* output.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -164,6 +165,8 @@
 		56E2E54C177A1BF900CB720C /* GeneticLibrary.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GeneticLibrary.vcproj; sourceTree = "<group>"; };
 		56E2E54D177A1BF900CB720C /* GeneticLibrary.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GeneticLibrary.vcxproj; sourceTree = "<group>"; };
 		56E2E54E177A1BF900CB720C /* GeneticLibrary.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GeneticLibrary.vcxproj.filters; sourceTree = "<group>"; };
+		56F72DF917817E8300D849AD /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = output.cpp; sourceTree = "<group>"; };
+		56F72DFA17817E8300D849AD /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = output.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +204,8 @@
 				56A9A7641779B4A900C70EE3 /* main.cpp */,
 				56DF0FF7177B5C16005F1B6A /* Student.h */,
 				56DF0FF8177B5DFA005F1B6A /* Student.cpp */,
+				56F72DF917817E8300D849AD /* output.cpp */,
+				56F72DFA17817E8300D849AD /* output.h */,
 				56DF1004177B770A005F1B6A /* TimetablerInst.cpp */,
 				56DF1005177B770A005F1B6A /* TimetablerInst.h */,
 				56DF0FFD177B6020005F1B6A /* TTChromosone.h */,
@@ -484,6 +489,7 @@
 				56DF1002177B6132005F1B6A /* Subject.cpp in Sources */,
 				56DF1006177B770A005F1B6A /* TimetablerInst.cpp in Sources */,
 				56DF100A177C6AE8005F1B6A /* Configuration.cpp in Sources */,
+				56F72DFB17817E8300D849AD /* output.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

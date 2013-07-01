@@ -34,6 +34,7 @@ public:
     inline int getID(){ return _ID; }
     inline const string& getName() { return _name; }
     inline Subject* getSubject() { return _subject; }
+    inline list<Tutor*> getPrevTutors() { return _prevTutors; }
 };
 
 #endif
