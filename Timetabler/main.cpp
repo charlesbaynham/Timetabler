@@ -28,28 +28,28 @@ int main()
 
     Configuration::getInstance().dumpTutors();
     
+    cout << GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<endl;
+    
+//    // debug
+//    GaChromosomePtr no1;
+//    
+//    no1 = TimetablerInst::getInstance().getPrototype()->MakeNewFromPrototype();
+//    
+////    outputCSV::getInstance().operator()("test1.txt", *no1);
+////    outputCSV::getInstance().operator()("test2.txt", *no2);
+//    
+////    ( outputRaw::getInstance() )("testUnmutated.txt", *no1);
+////    (*no1).Mutation();
+////    ( outputRaw::getInstance() )("testMutated.txt", *no1);
+//    
+////    outputCSV::getInstance().operator()("testCrossed.txt", *crossed);
+//    //end debug
+
     // Seeds for debugging
     GaGlobalRandomIntegerGenerator = new GaRandomInteger(1622);
 	GaGlobalRandomFloatGenerator = new GaRandomFloat(12513);
 	GaGlobalRandomDoubleGenerator = new GaRandomDouble(13223);
 	GaGlobalRandomBoolGenerator = new GaRandomBool(12372);
-    
-    cout << GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<endl;
-    
-    // debug
-    GaChromosomePtr no1;
-    
-    no1 = TimetablerInst::getInstance().getPrototype()->MakeNewFromPrototype();
-    
-//    outputCSV::getInstance().operator()("test1.txt", *no1);
-//    outputCSV::getInstance().operator()("test2.txt", *no2);
-    
-//    ( outputRaw::getInstance() )("testUnmutated.txt", *no1);
-//    (*no1).Mutation();
-//    ( outputRaw::getInstance() )("testMutated.txt", *no1);
-    
-//    outputCSV::getInstance().operator()("testCrossed.txt", *crossed);
-    //end debug
     
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
     

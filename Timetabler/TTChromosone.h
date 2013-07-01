@@ -30,7 +30,7 @@ using namespace __gnu_cxx;
 #define SLOTS_IN_DAY 8
 
 
-class Chromosone : public GaMultiValueChromosome<list<Student*>> {
+class Chromosone : public GaMultiValueChromosome<list<Student*> > {
     
     friend class TTMutation;
     friend class TTCrossover;

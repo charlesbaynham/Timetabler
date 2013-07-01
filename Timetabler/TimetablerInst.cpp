@@ -17,7 +17,7 @@ using namespace Algorithm::StopCriterias;
 
 void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {
     printf("New best at generation %i. Has fitness of %f\n", algorithm.GetAlgorithmStatistics().GetCurrentGeneration(), newChromosome.GetFitness());
-    ( outputCSV::getInstance() )("test.txt", newChromosome);
+    ( outputCSV::getInstance() )("test.txt", newChromosome, true);
 }
 
 void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {

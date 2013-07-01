@@ -172,7 +172,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         Tutor* tutor = Configuration::getInstance().getTutor(tutorID);
         
         //check subject:
-        list<Subject*> tutSubj = tutor->getSujects();
+        list<Subject*> tutSubj = tutor->getSubjects();
         for (list<Subject*>::iterator itTut = tutSubj.begin(); itTut != tutSubj.end(); itTut++)
         {
             if ( (*it).first->getSubject() == *itTut )

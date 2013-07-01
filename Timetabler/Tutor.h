@@ -30,7 +30,7 @@ public:
     
     inline int getID(){ return _ID; }
     inline const string& getName() { return _name; }
-    inline list<Subject*> getSujects() { return _subjects; }
+    inline list<Subject*> getSubjects() { return _subjects; }
     inline list<int> getNotSlots() { return _notSlots; }
     
     void processSlots(); // Calculate the _notSlots list based on _notTimes and number of tutors in global config. 

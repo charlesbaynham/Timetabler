@@ -22,7 +22,7 @@ class outputCSV {
 public:
 
     // output a chromosome
-    void operator ()(char * filename, const GaChromosome& chromo);
+    void operator ()(char * filename, const GaChromosome& chromo, bool detailed);
     
     static inline outputCSV getInstance(){ return _instance; }
 };
@@ -39,6 +39,8 @@ public:
     inline int getTime() { return _time; }
     inline string getTutorName() { return _tutor->getName(); }
     inline string getStudentName() { return _student->getName(); }
+    inline string getStudentSubject() { return _student->getSubject()->getName(); }
+    string getTutorSubjects();
     
     inline bool operator< (const timetableSlot comp) const { return (_time < comp._time); }
     inline bool operator> (const timetableSlot comp) const { return (_time > comp._time); }

@@ -321,11 +321,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/main.cpp"
-         timestampString = "394371111.873357"
+         timestampString = "394386728.660038"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "37"
-         endingLineNumber = "37"
+         startingLineNumber = "30"
+         endingLineNumber = "30"
          landmarkName = "main()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -341,19 +341,6 @@
          endingLineNumber = "318"
          landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Timetabler/main.cpp"
-         timestampString = "394380212.858628"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "54"
-         endingLineNumber = "54"
-         landmarkName = "main()"
-         landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -400,7 +387,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "25"
          endingLineNumber = "25"
-         landmarkName = "outputCSV::operator()(char *filename, const GaChromosome&amp; chromo)"
+         landmarkName = "outputCSV::operator()(char *filename, const GaChromosome&amp; chromo, bool detailed=false)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -408,12 +395,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/output.cpp"
-         timestampString = "394374858.377346"
+         timestampString = "394389349.198578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "46"
-         endingLineNumber = "46"
-         landmarkName = "outputCSV::operator()(char *filename, const GaChromosome&amp; chromo)"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
+         landmarkName = "outputCSV::operator()(char *filename, const GaChromosome&amp; chromo, bool detailed=false)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

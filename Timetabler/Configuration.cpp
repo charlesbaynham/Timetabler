@@ -212,7 +212,7 @@ void Configuration::dumpTutors(){
         Tutor* tut = (*it).second;
         
         cout << "Name: "<<tut->getName()<<" (ID="<<tut->getID() << ")\nSubjects:\n";
-        list<Subject*> subjlist = tut->getSujects();
+        list<Subject*> subjlist = tut->getSubjects();
         for (list<Subject*>::iterator it2=subjlist.begin(); it2 != subjlist.end(); it2++) {
             cout << "\t" << (*it2)->getName() << "("<<(*it2)->getID()<<")\n";
         }
