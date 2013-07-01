@@ -47,7 +47,16 @@ void Configuration::parseFile(char* fileName) {
 		{
 			Student* s = ParseStudent( input );
 			if( s )
-				_students.push_back( s );
+            {
+				// Push student to the list
+                _students.push_back( s );
+                
+                // create duplicates for however many interviews each student will have (though with different IDs)
+                for (int i = 1; i < s->getNoInterviews(); i++) {
+                    Student* next = new Student(s);
+                    _students.push_back( next );
+                }
+            }
 		}
     }
     
@@ -55,7 +64,7 @@ void Configuration::parseFile(char* fileName) {
     
     _isEmpty = false;
     
-    processTutorsSlots(); // Sort out the _notSlots element for each tutor
+    processTutorsSlots(); // Work out the _notSlots element for each tutor
     
     cout << "Input: "<<numStudents()<<" students, "<<numTutors()<<" tutors and "<<numSubjects()<<" subjects.\n";
 //    Tutor* richard = getTutor(1);
@@ -108,7 +117,7 @@ Tutor* Configuration::ParseTutor(ifstream& file) {
 // Returns NULL if method cannot parse configuration data
 Student* Configuration::ParseStudent(ifstream& file) {
     
-    int id;
+    //int id; auto id now. 
     string name;
     Subject* subject; // Interview subject
     int noInterviews;  // Number of interviews (2 or 4)
@@ -119,14 +128,15 @@ Student* Configuration::ParseStudent(ifstream& file) {
         
         if ( !GetConfigBlockLine(file, key, value)) break;
         
-        if (key.compare("id") == 0) id = atoi(value.c_str());
+//        if (key.compare("id") == 0) id = atoi(value.c_str()); Now doing auto ID increment
+        if (key.compare("id") == 0) ;
         else if (key.compare("name") == 0) name = value;
         else if (key.compare("noInterviews") == 0) noInterviews = atoi(value.c_str());
         else if (key.compare("subj") == 0) subject = getSubject(atoi(value.c_str()));
         else if (key.compare("prevTutor") == 0) prevTutors.push_back(getTutor(atoi(value.c_str())));
     }
     
-    return subject==NULL ? NULL : new Student(id, name, subject, noInterviews, prevTutors);
+    return subject==NULL ? NULL : new Student(name, subject, noInterviews, prevTutors);
 }
 
 // Reads one line (key - value pair) from configuration file
@@ -144,6 +154,11 @@ bool Configuration::GetConfigBlockLine(ifstream& file, string& key, string& valu
 		// end of object's data
 		if( line.compare( "#end" ) == 0 )
 			return false;
+        if( line.front() == '%' )
+        {
+            key = "comment";
+            return true;
+        }
         
 		size_t p = line.find( '=' );
 		if( p != string::npos )

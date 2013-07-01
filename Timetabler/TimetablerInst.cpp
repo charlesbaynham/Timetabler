@@ -16,7 +16,7 @@ using namespace Algorithm::SimpleAlgorithms;
 using namespace Algorithm::StopCriterias;
 
 void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {
-    printf("New best! Has fitness of %f\nOutputting...\n", newChromosome.GetFitness());
+    printf("New best at generation %i. Has fitness of %f\n", algorithm.GetAlgorithmStatistics().GetCurrentGeneration(), newChromosome.GetFitness());
     ( outputCSV::getInstance() )("test.txt", newChromosome);
 }
 
@@ -44,13 +44,13 @@ TimetablerInst::TimetablerInst()
 	// crossover points: 2
 	// no "improving only mutations"
 	// mutation probability: 3%
-	// number of moved classes per mutation: 2
+	// number of moved students per mutation: 2
 	_chromosomeParams = new GaChromosomeParams( 0.03F, 2, false, 0.8F, 2 );
     
 	// make CCB with fallowing setup:
 	// there are no value set
 	// with ScheduleCrossover, ScheduleMutation, ScheduleFitness genetic operations
-	// set fittnes comparator for maximizing fitness value
+	// set fitness comparator for maximizing fitness value
 	// use previously defined chromosome's parameters
 	_ccb = new GaChromosomeDomainBlock<list<Student*> >( NULL, &_crossoverOperation, &_mutationOperation, &_fitnessOperation, GaFitnessComparatorCatalogue::Instance().GetEntryData( "GaMaxFitnessComparator" ), _chromosomeParams );
     
@@ -101,7 +101,7 @@ TimetablerInst::TimetablerInst()
     
 	// make parameters for genetic algorithms
 	// algorithm will use two workers
-	GaMultithreadingAlgorithmParams algorithmParams( 2 );
+	GaMultithreadingAlgorithmParams algorithmParams( 1 );
     //debug
 	// make incremental algorithm with periously defined population and parameters
 	_algorithm = new GaIncrementalAlgorithm( _population, algorithmParams );

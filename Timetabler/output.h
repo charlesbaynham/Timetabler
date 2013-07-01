@@ -27,4 +27,33 @@ public:
     static inline outputCSV getInstance(){ return _instance; }
 };
 
+// A class for assembling the completed timetable, ready to be printed
+class timetableSlot {
+
+    int _time;
+    int _slot;
+    Tutor* _tutor;
+    Student* _student;
+    
+public:
+    inline int getTime() { return _time; }
+    inline string getTutorName() { return _tutor->getName(); }
+    inline string getStudentName() { return _student->getName(); }
+    
+    inline bool operator< (const timetableSlot comp) const { return (_time < comp._time); }
+    inline bool operator> (const timetableSlot comp) const { return (_time > comp._time); }
+    inline bool operator>= (const timetableSlot comp) const { return (_time >= comp._time); }
+    inline bool operator<= (const timetableSlot comp) const { return (_time <= comp._time); }
+    
+    // Given slot, work out the tutor and the time
+    timetableSlot(int slot, Student* student);
+};
+
+class outputRaw {
+    static outputRaw _instance;
+public:
+    void operator ()(char * filename, const GaChromosome& chromo);
+    static inline outputRaw getInstance() { return _instance; }
+};
+
 #endif /* defined(__Timetabler__output__) */

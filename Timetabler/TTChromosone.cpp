@@ -206,9 +206,23 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             }
         }
         if (!seenPrev) score++;
+        
+        //is this student already busy at this time?
+        int engagements = 0;
+        //loop over all times (for each tutor)
+        for (int i = time; i < numSlots; i += SLOTS_IN_DAY)
+        {
+            list<Student*> thisSlot= chromo->_values[i];
+            list<Student*>::iterator search;
+            for (search = thisSlot.begin(); search != thisSlot.end(); search++) {
+                 // If we find a student with the same baseID (ie the same person) who has an appointment at this time:
+                if ( (*search)->getBaseID() == (*it).first->getBaseID() ) engagements++;
+            }
+        }
+        if (engagements==1) score++; // If we only found them once (ie in the slot we were considering) then score
     }
     
-    int maxscore = 4 * numStudents;
+    int maxscore = 5 * numStudents;
     
     return (float)score / (float)maxscore;
 }

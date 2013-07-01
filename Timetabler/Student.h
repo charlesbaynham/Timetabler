@@ -27,14 +27,19 @@ private:
     list<Tutor*> _prevTutors; // Previous tutors to be avoided
 //    list<Tutor*> _tutors;
     static int _nextID; // Next ID to be autoassigned
+    int _baseID; // ID of parent
     
 public:
-    Student(int ID, const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors); // Initiate
+    Student(int ID, const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors); // (deprec)
+    Student(const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors); // Initiate wth auto id
+    Student(Student* copy); // Copy constructor
     
     inline int getID(){ return _ID; }
     inline const string& getName() { return _name; }
     inline Subject* getSubject() { return _subject; }
     inline list<Tutor*> getPrevTutors() { return _prevTutors; }
+    inline int getNoInterviews() { return _noInterviews; }
+    inline int getBaseID() { return _baseID; }
 };
 
 #endif

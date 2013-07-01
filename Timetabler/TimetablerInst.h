@@ -74,7 +74,9 @@ public:
 	inline TTObserver& getObserver() { return _observer; }
     
 	inline const TTObserver& getObserver() const { return _observer; }
-
+    
+    //debug edit
+    inline Chromosone* getPrototype() const { return _prototype; }
     
 };
 

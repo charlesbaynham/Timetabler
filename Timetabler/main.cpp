@@ -15,8 +15,10 @@ using namespace Algorithm;
 using namespace Algorithm::StopCriterias;
 using namespace Algorithm::SimpleAlgorithms;
 
+
 #include "TimetablerInst.h"
 #include "output.h"
+
 
 int main()
 {
@@ -27,36 +29,34 @@ int main()
     Configuration::getInstance().dumpTutors();
     
     // Seeds for debugging
-    GaGlobalRandomIntegerGenerator = new GaRandomInteger(123);
-	GaGlobalRandomFloatGenerator = new GaRandomFloat(1253);
-	GaGlobalRandomDoubleGenerator = new GaRandomDouble(1223);
-	GaGlobalRandomBoolGenerator = new GaRandomBool(1233);
+    GaGlobalRandomIntegerGenerator = new GaRandomInteger(1622);
+	GaGlobalRandomFloatGenerator = new GaRandomFloat(12513);
+	GaGlobalRandomDoubleGenerator = new GaRandomDouble(13223);
+	GaGlobalRandomBoolGenerator = new GaRandomBool(12372);
     
     cout << GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<endl;
     
+    // debug
+    GaChromosomePtr no1;
+    
+    no1 = TimetablerInst::getInstance().getPrototype()->MakeNewFromPrototype();
+    
+//    outputCSV::getInstance().operator()("test1.txt", *no1);
+//    outputCSV::getInstance().operator()("test2.txt", *no2);
+    
+//    ( outputRaw::getInstance() )("testUnmutated.txt", *no1);
+//    (*no1).Mutation();
+//    ( outputRaw::getInstance() )("testMutated.txt", *no1);
+    
+//    outputCSV::getInstance().operator()("testCrossed.txt", *crossed);
+    //end debug
+    
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
     
-//    GaAlgorithmState state = TimetablerInst::getInstance().getAlgorithm()->GetState();
-//    
-//    cout << state << endl;
-    
     // get the algorithm (set in class as GaAlgorithm), cast to Incremental
-    //      (since this has the WaitForThreads method) and execute
+    //      (since this has the WaitForThreads method) and then execute
     dynamic_cast<GaIncrementalAlgorithm*>(TimetablerInst::getInstance().getAlgorithm())->WaitForThreads();
 
-//    state = TimetablerInst::getInstance().getAlgorithm()->GetState();
-//    if (state==GAS_UNINITIALIZED) printf("uninit\n");
-//    /// <summary>algorithm execution is stopped by the user.</summary>
-//    else if (state==GAS_USER_STOPED) printf("Stoped by user\n");
-//    
-//    /// <summary>algorithm reached given criteria and it is stopped.</summary>
-//    else if (state==GAS_CRITERIA_STOPPED) printf("Stopped by criteria\n");
-//    
-//    /// <summary>temporary paused, but it can resume execution at any time.</summary>
-//    else if (state==GAS_PAUSED) printf("paused\n");
-//    
-//    /// <summary>algorithm is running.</summary>
-//    else if (state==GAS_RUNNING) printf("running\n");
     
     printf("Done\n");
     
