@@ -19,8 +19,6 @@ using namespace Algorithm::SimpleAlgorithms;
 #include "TimetablerInst.h"
 #include "output.h"
 
-#include <Wt/WApplication>
-
 
 int main()
 {
