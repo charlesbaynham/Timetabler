@@ -20,18 +20,19 @@ using namespace Algorithm::SimpleAlgorithms;
 #include "output.h"
 
 #include <Wt/WApplication>
+#include "GUI.h"
 
+// Launches new application to handle a connection to the web interface
+Wt::WApplication *createApplication(const Wt::WEnvironment& env);
 
-int main()
+int main(int argc, char **argv)
 {
 
     
     Configuration::getInstance().parseFile("config.txt");
 
     Configuration::getInstance().dumpTutors();
-    
-    cout << GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<endl;
-    
+        
 //    // debug
 //    GaChromosomePtr no1;
 //    
@@ -52,15 +53,30 @@ int main()
 	GaGlobalRandomFloatGenerator = new GaRandomFloat(345);
 	GaGlobalRandomDoubleGenerator = new GaRandomDouble(3568);
 	GaGlobalRandomBoolGenerator = new GaRandomBool(2354768);
+
     
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
+    
+    // Print some random numbers to make sure the seeds worked
+    cout << GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<endl;
+    
     
     // get the algorithm (set in class as GaAlgorithm), cast to Incremental
     //      (since this has the WaitForThreads method) and then execute
     dynamic_cast<GaIncrementalAlgorithm*>(TimetablerInst::getInstance().getAlgorithm())->WaitForThreads();
 
     
-    printf("Done\n");
+    printf("Done genetic\n");
     
-	return 0;
+    ////////
+    
+    printf("***\nTry GUI:\n");
+    
+    return Wt::WRun(argc, argv, &createApplication );
+
+}
+
+Wt::WApplication *createApplication(const Wt::WEnvironment& env)
+{
+    return new HelloApplication(env);
 }
