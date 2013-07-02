@@ -129,103 +129,103 @@
 		56DF1005177B770A005F1B6A /* TimetablerInst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimetablerInst.h; sourceTree = "<group>"; };
 		56DF1008177C6AE8005F1B6A /* Configuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Configuration.cpp; sourceTree = "<group>"; };
 		56DF1009177C6AE8005F1B6A /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
-		56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGeneticLibrary.a; sourceTree = "<group>"; };
-		56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GeneticLibrary.xcodeproj; sourceTree = "<group>"; };
-		56E2E4EC177A1BF900CB720C /* gpl-2_0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "gpl-2_0.txt"; sourceTree = "<group>"; };
-		56E2E4EE177A1BF900CB720C /* gcc_bsd_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gcc_bsd_debug; sourceTree = "<group>"; };
-		56E2E4EF177A1BF900CB720C /* gcc_bsd_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gcc_bsd_release; sourceTree = "<group>"; };
-		56E2E4F0177A1BF900CB720C /* gcc_linux_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gcc_linux_debug; sourceTree = "<group>"; };
-		56E2E4F1177A1BF900CB720C /* gcc_linux_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gcc_linux_release; sourceTree = "<group>"; };
-		56E2E4F2177A1BF900CB720C /* gcc_macos_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gcc_macos_debug; sourceTree = "<group>"; };
-		56E2E4F3177A1BF900CB720C /* gcc_macos_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gcc_macos_release; sourceTree = "<group>"; };
-		56E2E4F4177A1BF900CB720C /* gcc_solaris_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gcc_solaris_debug; sourceTree = "<group>"; };
-		56E2E4F5177A1BF900CB720C /* gcc_solaris_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gcc_solaris_release; sourceTree = "<group>"; };
-		56E2E4F6177A1BF900CB720C /* icc_linux_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icc_linux_debug; sourceTree = "<group>"; };
-		56E2E4F7177A1BF900CB720C /* icc_linux_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icc_linux_release; sourceTree = "<group>"; };
-		56E2E4F8177A1BF900CB720C /* icc_macos_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icc_macos_debug; sourceTree = "<group>"; };
-		56E2E4F9177A1BF900CB720C /* icc_macos_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icc_macos_release; sourceTree = "<group>"; };
-		56E2E4FB177A1BF900CB720C /* Algorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Algorithm.o; sourceTree = "<group>"; };
-		56E2E4FC177A1BF900CB720C /* BinaryChromosome.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = BinaryChromosome.o; sourceTree = "<group>"; };
-		56E2E4FD177A1BF900CB720C /* Chromosome.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Chromosome.o; sourceTree = "<group>"; };
-		56E2E4FE177A1BF900CB720C /* CouplingOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = CouplingOperations.o; sourceTree = "<group>"; };
-		56E2E4FF177A1BF900CB720C /* CrossoverOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = CrossoverOperations.o; sourceTree = "<group>"; };
-		56E2E500177A1BF900CB720C /* IncrementalAlgorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = IncrementalAlgorithm.o; sourceTree = "<group>"; };
-		56E2E501177A1BF900CB720C /* Initialization.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Initialization.o; sourceTree = "<group>"; };
-		56E2E502177A1BF900CB720C /* MultithreadingAlgorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = MultithreadingAlgorithm.o; sourceTree = "<group>"; };
-		56E2E503177A1BF900CB720C /* MutationOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = MutationOperations.o; sourceTree = "<group>"; };
-		56E2E504177A1BF900CB720C /* Observing.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Observing.o; sourceTree = "<group>"; };
-		56E2E505177A1BF900CB720C /* Population.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Population.o; sourceTree = "<group>"; };
-		56E2E506177A1BF900CB720C /* PopulationOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = PopulationOperations.o; sourceTree = "<group>"; };
-		56E2E507177A1BF900CB720C /* Random.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Random.o; sourceTree = "<group>"; };
-		56E2E508177A1BF900CB720C /* ReplacementOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = ReplacementOperations.o; sourceTree = "<group>"; };
-		56E2E509177A1BF900CB720C /* ScalingOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = ScalingOperations.o; sourceTree = "<group>"; };
-		56E2E50A177A1BF900CB720C /* SelectionOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = SelectionOperations.o; sourceTree = "<group>"; };
-		56E2E50B177A1BF900CB720C /* SimpleAlgorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = SimpleAlgorithm.o; sourceTree = "<group>"; };
-		56E2E50C177A1BF900CB720C /* Statistics.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Statistics.o; sourceTree = "<group>"; };
-		56E2E50D177A1BF900CB720C /* StopCriterias.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = StopCriterias.o; sourceTree = "<group>"; };
-		56E2E50E177A1BF900CB720C /* Threading.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Threading.o; sourceTree = "<group>"; };
-		56E2E50F177A1BF900CB720C /* scc_solaris_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scc_solaris_debug; sourceTree = "<group>"; };
-		56E2E510177A1BF900CB720C /* scc_solaris_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scc_solaris_release; sourceTree = "<group>"; };
-		56E2E512177A1BF900CB720C /* Algorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Algorithm.cpp; sourceTree = "<group>"; };
-		56E2E513177A1BF900CB720C /* Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algorithm.h; sourceTree = "<group>"; };
-		56E2E514177A1BF900CB720C /* AlgorithmOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlgorithmOperations.h; sourceTree = "<group>"; };
-		56E2E515177A1BF900CB720C /* AlgorithmState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlgorithmState.h; sourceTree = "<group>"; };
-		56E2E516177A1BF900CB720C /* BinaryChromosome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryChromosome.cpp; sourceTree = "<group>"; };
-		56E2E517177A1BF900CB720C /* BinaryChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryChromosome.h; sourceTree = "<group>"; };
-		56E2E518177A1BF900CB720C /* Catalogue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Catalogue.h; sourceTree = "<group>"; };
-		56E2E519177A1BF900CB720C /* Chromosome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chromosome.cpp; sourceTree = "<group>"; };
-		56E2E51A177A1BF900CB720C /* Chromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chromosome.h; sourceTree = "<group>"; };
-		56E2E51B177A1BF900CB720C /* ChromosomeOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChromosomeOperations.h; sourceTree = "<group>"; };
-		56E2E51C177A1BF900CB720C /* CouplingOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CouplingOperations.cpp; sourceTree = "<group>"; };
-		56E2E51D177A1BF900CB720C /* CouplingOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouplingOperations.h; sourceTree = "<group>"; };
-		56E2E51E177A1BF900CB720C /* CrossoverOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CrossoverOperations.cpp; sourceTree = "<group>"; };
-		56E2E51F177A1BF900CB720C /* CrossoverOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossoverOperations.h; sourceTree = "<group>"; };
-		56E2E520177A1BF900CB720C /* DomainChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainChromosome.h; sourceTree = "<group>"; };
-		56E2E521177A1BF900CB720C /* FitnessComparators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FitnessComparators.h; sourceTree = "<group>"; };
-		56E2E522177A1BF900CB720C /* FPEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPEqual.h; sourceTree = "<group>"; };
-		56E2E523177A1BF900CB720C /* GlobalRandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalRandomGenerator.h; sourceTree = "<group>"; };
-		56E2E524177A1BF900CB720C /* IncrementalAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IncrementalAlgorithm.cpp; sourceTree = "<group>"; };
-		56E2E525177A1BF900CB720C /* IncrementalAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncrementalAlgorithm.h; sourceTree = "<group>"; };
-		56E2E526177A1BF900CB720C /* Initialization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Initialization.cpp; sourceTree = "<group>"; };
-		56E2E527177A1BF900CB720C /* Initialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Initialization.h; sourceTree = "<group>"; };
-		56E2E528177A1BF900CB720C /* MultithreadingAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultithreadingAlgorithm.cpp; sourceTree = "<group>"; };
-		56E2E529177A1BF900CB720C /* MultithreadingAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultithreadingAlgorithm.h; sourceTree = "<group>"; };
-		56E2E52A177A1BF900CB720C /* MultiValueChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiValueChromosome.h; sourceTree = "<group>"; };
-		56E2E52B177A1BF900CB720C /* MutationOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MutationOperations.cpp; sourceTree = "<group>"; };
-		56E2E52C177A1BF900CB720C /* MutationOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutationOperations.h; sourceTree = "<group>"; };
-		56E2E52D177A1BF900CB720C /* Observing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Observing.cpp; sourceTree = "<group>"; };
-		56E2E52E177A1BF900CB720C /* Observing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Observing.h; sourceTree = "<group>"; };
-		56E2E52F177A1BF900CB720C /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Operation.h; sourceTree = "<group>"; };
-		56E2E530177A1BF900CB720C /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
-		56E2E531177A1BF900CB720C /* Population.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Population.cpp; sourceTree = "<group>"; };
-		56E2E532177A1BF900CB720C /* Population.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Population.h; sourceTree = "<group>"; };
-		56E2E533177A1BF900CB720C /* PopulationOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopulationOperations.cpp; sourceTree = "<group>"; };
-		56E2E534177A1BF900CB720C /* PopulationOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopulationOperations.h; sourceTree = "<group>"; };
-		56E2E535177A1BF900CB720C /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
-		56E2E536177A1BF900CB720C /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
-		56E2E537177A1BF900CB720C /* ReplacementOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplacementOperations.cpp; sourceTree = "<group>"; };
-		56E2E538177A1BF900CB720C /* ReplacementOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplacementOperations.h; sourceTree = "<group>"; };
-		56E2E539177A1BF900CB720C /* RepresentationInterfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepresentationInterfaces.h; sourceTree = "<group>"; };
-		56E2E53A177A1BF900CB720C /* ScalingOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScalingOperations.cpp; sourceTree = "<group>"; };
-		56E2E53B177A1BF900CB720C /* ScalingOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScalingOperations.h; sourceTree = "<group>"; };
-		56E2E53C177A1BF900CB720C /* SelectionOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SelectionOperations.cpp; sourceTree = "<group>"; };
-		56E2E53D177A1BF900CB720C /* SelectionOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionOperations.h; sourceTree = "<group>"; };
-		56E2E53E177A1BF900CB720C /* SimpleAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAlgorithm.cpp; sourceTree = "<group>"; };
-		56E2E53F177A1BF900CB720C /* SimpleAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAlgorithm.h; sourceTree = "<group>"; };
-		56E2E540177A1BF900CB720C /* SingleValueChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleValueChromosome.h; sourceTree = "<group>"; };
-		56E2E541177A1BF900CB720C /* SmartPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartPtr.h; sourceTree = "<group>"; };
-		56E2E542177A1BF900CB720C /* SortedGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortedGroup.h; sourceTree = "<group>"; };
-		56E2E543177A1BF900CB720C /* SortedGroupType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortedGroupType.h; sourceTree = "<group>"; };
-		56E2E544177A1BF900CB720C /* Statistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Statistics.cpp; sourceTree = "<group>"; };
-		56E2E545177A1BF900CB720C /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = "<group>"; };
-		56E2E546177A1BF900CB720C /* StopCriterias.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StopCriterias.cpp; sourceTree = "<group>"; };
-		56E2E547177A1BF900CB720C /* StopCriterias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopCriterias.h; sourceTree = "<group>"; };
-		56E2E548177A1BF900CB720C /* Threading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Threading.cpp; sourceTree = "<group>"; };
-		56E2E549177A1BF900CB720C /* Threading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Threading.h; sourceTree = "<group>"; };
-		56E2E54A177A1BF900CB720C /* ValueSets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueSets.h; sourceTree = "<group>"; };
-		56E2E54C177A1BF900CB720C /* GeneticLibrary.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GeneticLibrary.vcproj; sourceTree = "<group>"; };
-		56E2E54D177A1BF900CB720C /* GeneticLibrary.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GeneticLibrary.vcxproj; sourceTree = "<group>"; };
-		56E2E54E177A1BF900CB720C /* GeneticLibrary.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GeneticLibrary.vcxproj.filters; sourceTree = "<group>"; };
+		56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGeneticLibrary.a; path = "Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos/libGeneticLibrary.a"; sourceTree = homedir; };
+		56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GeneticLibrary.xcodeproj; path = "Genetic-Algorithms-Library/GeneticLibrary/GeneticLibrary.xcodeproj"; sourceTree = homedir; };
+		56E2E4EC177A1BF900CB720C /* gpl-2_0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "gpl-2_0.txt"; path = "Genetic-Algorithms-Library/GeneticLibrary/gpl-2_0.txt"; sourceTree = homedir; };
+		56E2E4EE177A1BF900CB720C /* gcc_bsd_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_bsd_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_bsd_debug"; sourceTree = homedir; };
+		56E2E4EF177A1BF900CB720C /* gcc_bsd_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_bsd_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_bsd_release"; sourceTree = homedir; };
+		56E2E4F0177A1BF900CB720C /* gcc_linux_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_linux_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_linux_debug"; sourceTree = homedir; };
+		56E2E4F1177A1BF900CB720C /* gcc_linux_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_linux_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_linux_release"; sourceTree = homedir; };
+		56E2E4F2177A1BF900CB720C /* gcc_macos_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_macos_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_macos_debug"; sourceTree = homedir; };
+		56E2E4F3177A1BF900CB720C /* gcc_macos_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_macos_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_macos_release"; sourceTree = homedir; };
+		56E2E4F4177A1BF900CB720C /* gcc_solaris_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_solaris_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_solaris_debug"; sourceTree = homedir; };
+		56E2E4F5177A1BF900CB720C /* gcc_solaris_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_solaris_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_solaris_release"; sourceTree = homedir; };
+		56E2E4F6177A1BF900CB720C /* icc_linux_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = icc_linux_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/icc_linux_debug"; sourceTree = homedir; };
+		56E2E4F7177A1BF900CB720C /* icc_linux_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = icc_linux_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/icc_linux_release"; sourceTree = homedir; };
+		56E2E4F8177A1BF900CB720C /* icc_macos_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = icc_macos_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/icc_macos_debug"; sourceTree = homedir; };
+		56E2E4F9177A1BF900CB720C /* icc_macos_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = icc_macos_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/icc_macos_release"; sourceTree = homedir; };
+		56E2E4FB177A1BF900CB720C /* Algorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Algorithm.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Algorithm.o"; sourceTree = homedir; };
+		56E2E4FC177A1BF900CB720C /* BinaryChromosome.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = BinaryChromosome.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/BinaryChromosome.o"; sourceTree = homedir; };
+		56E2E4FD177A1BF900CB720C /* Chromosome.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Chromosome.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Chromosome.o"; sourceTree = homedir; };
+		56E2E4FE177A1BF900CB720C /* CouplingOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = CouplingOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/CouplingOperations.o"; sourceTree = homedir; };
+		56E2E4FF177A1BF900CB720C /* CrossoverOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = CrossoverOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/CrossoverOperations.o"; sourceTree = homedir; };
+		56E2E500177A1BF900CB720C /* IncrementalAlgorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = IncrementalAlgorithm.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/IncrementalAlgorithm.o"; sourceTree = homedir; };
+		56E2E501177A1BF900CB720C /* Initialization.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Initialization.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Initialization.o"; sourceTree = homedir; };
+		56E2E502177A1BF900CB720C /* MultithreadingAlgorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = MultithreadingAlgorithm.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/MultithreadingAlgorithm.o"; sourceTree = homedir; };
+		56E2E503177A1BF900CB720C /* MutationOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = MutationOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/MutationOperations.o"; sourceTree = homedir; };
+		56E2E504177A1BF900CB720C /* Observing.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Observing.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Observing.o"; sourceTree = homedir; };
+		56E2E505177A1BF900CB720C /* Population.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Population.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Population.o"; sourceTree = homedir; };
+		56E2E506177A1BF900CB720C /* PopulationOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = PopulationOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/PopulationOperations.o"; sourceTree = homedir; };
+		56E2E507177A1BF900CB720C /* Random.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Random.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Random.o"; sourceTree = homedir; };
+		56E2E508177A1BF900CB720C /* ReplacementOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = ReplacementOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/ReplacementOperations.o"; sourceTree = homedir; };
+		56E2E509177A1BF900CB720C /* ScalingOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = ScalingOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/ScalingOperations.o"; sourceTree = homedir; };
+		56E2E50A177A1BF900CB720C /* SelectionOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = SelectionOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/SelectionOperations.o"; sourceTree = homedir; };
+		56E2E50B177A1BF900CB720C /* SimpleAlgorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = SimpleAlgorithm.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/SimpleAlgorithm.o"; sourceTree = homedir; };
+		56E2E50C177A1BF900CB720C /* Statistics.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Statistics.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Statistics.o"; sourceTree = homedir; };
+		56E2E50D177A1BF900CB720C /* StopCriterias.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = StopCriterias.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/StopCriterias.o"; sourceTree = homedir; };
+		56E2E50E177A1BF900CB720C /* Threading.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Threading.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Threading.o"; sourceTree = homedir; };
+		56E2E50F177A1BF900CB720C /* scc_solaris_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = scc_solaris_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/scc_solaris_debug"; sourceTree = homedir; };
+		56E2E510177A1BF900CB720C /* scc_solaris_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = scc_solaris_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/scc_solaris_release"; sourceTree = homedir; };
+		56E2E512177A1BF900CB720C /* Algorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Algorithm.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Algorithm.cpp"; sourceTree = homedir; };
+		56E2E513177A1BF900CB720C /* Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithm.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Algorithm.h"; sourceTree = homedir; };
+		56E2E514177A1BF900CB720C /* AlgorithmOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/AlgorithmOperations.h"; sourceTree = homedir; };
+		56E2E515177A1BF900CB720C /* AlgorithmState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmState.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/AlgorithmState.h"; sourceTree = homedir; };
+		56E2E516177A1BF900CB720C /* BinaryChromosome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryChromosome.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/BinaryChromosome.cpp"; sourceTree = homedir; };
+		56E2E517177A1BF900CB720C /* BinaryChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryChromosome.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/BinaryChromosome.h"; sourceTree = homedir; };
+		56E2E518177A1BF900CB720C /* Catalogue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Catalogue.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Catalogue.h"; sourceTree = homedir; };
+		56E2E519177A1BF900CB720C /* Chromosome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Chromosome.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Chromosome.cpp"; sourceTree = homedir; };
+		56E2E51A177A1BF900CB720C /* Chromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chromosome.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Chromosome.h"; sourceTree = homedir; };
+		56E2E51B177A1BF900CB720C /* ChromosomeOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChromosomeOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ChromosomeOperations.h"; sourceTree = homedir; };
+		56E2E51C177A1BF900CB720C /* CouplingOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CouplingOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/CouplingOperations.cpp"; sourceTree = homedir; };
+		56E2E51D177A1BF900CB720C /* CouplingOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CouplingOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/CouplingOperations.h"; sourceTree = homedir; };
+		56E2E51E177A1BF900CB720C /* CrossoverOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CrossoverOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/CrossoverOperations.cpp"; sourceTree = homedir; };
+		56E2E51F177A1BF900CB720C /* CrossoverOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossoverOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/CrossoverOperations.h"; sourceTree = homedir; };
+		56E2E520177A1BF900CB720C /* DomainChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DomainChromosome.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/DomainChromosome.h"; sourceTree = homedir; };
+		56E2E521177A1BF900CB720C /* FitnessComparators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FitnessComparators.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/FitnessComparators.h"; sourceTree = homedir; };
+		56E2E522177A1BF900CB720C /* FPEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FPEqual.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/FPEqual.h"; sourceTree = homedir; };
+		56E2E523177A1BF900CB720C /* GlobalRandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalRandomGenerator.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/GlobalRandomGenerator.h"; sourceTree = homedir; };
+		56E2E524177A1BF900CB720C /* IncrementalAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IncrementalAlgorithm.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/IncrementalAlgorithm.cpp"; sourceTree = homedir; };
+		56E2E525177A1BF900CB720C /* IncrementalAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IncrementalAlgorithm.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/IncrementalAlgorithm.h"; sourceTree = homedir; };
+		56E2E526177A1BF900CB720C /* Initialization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Initialization.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Initialization.cpp"; sourceTree = homedir; };
+		56E2E527177A1BF900CB720C /* Initialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Initialization.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Initialization.h"; sourceTree = homedir; };
+		56E2E528177A1BF900CB720C /* MultithreadingAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MultithreadingAlgorithm.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/MultithreadingAlgorithm.cpp"; sourceTree = homedir; };
+		56E2E529177A1BF900CB720C /* MultithreadingAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultithreadingAlgorithm.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/MultithreadingAlgorithm.h"; sourceTree = homedir; };
+		56E2E52A177A1BF900CB720C /* MultiValueChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiValueChromosome.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/MultiValueChromosome.h"; sourceTree = homedir; };
+		56E2E52B177A1BF900CB720C /* MutationOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MutationOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/MutationOperations.cpp"; sourceTree = homedir; };
+		56E2E52C177A1BF900CB720C /* MutationOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MutationOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/MutationOperations.h"; sourceTree = homedir; };
+		56E2E52D177A1BF900CB720C /* Observing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Observing.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Observing.cpp"; sourceTree = homedir; };
+		56E2E52E177A1BF900CB720C /* Observing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Observing.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Observing.h"; sourceTree = homedir; };
+		56E2E52F177A1BF900CB720C /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Operation.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Operation.h"; sourceTree = homedir; };
+		56E2E530177A1BF900CB720C /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Platform.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Platform.h"; sourceTree = homedir; };
+		56E2E531177A1BF900CB720C /* Population.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Population.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Population.cpp"; sourceTree = homedir; };
+		56E2E532177A1BF900CB720C /* Population.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Population.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Population.h"; sourceTree = homedir; };
+		56E2E533177A1BF900CB720C /* PopulationOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PopulationOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/PopulationOperations.cpp"; sourceTree = homedir; };
+		56E2E534177A1BF900CB720C /* PopulationOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopulationOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/PopulationOperations.h"; sourceTree = homedir; };
+		56E2E535177A1BF900CB720C /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Random.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Random.cpp"; sourceTree = homedir; };
+		56E2E536177A1BF900CB720C /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Random.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Random.h"; sourceTree = homedir; };
+		56E2E537177A1BF900CB720C /* ReplacementOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ReplacementOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ReplacementOperations.cpp"; sourceTree = homedir; };
+		56E2E538177A1BF900CB720C /* ReplacementOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReplacementOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ReplacementOperations.h"; sourceTree = homedir; };
+		56E2E539177A1BF900CB720C /* RepresentationInterfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepresentationInterfaces.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/RepresentationInterfaces.h"; sourceTree = homedir; };
+		56E2E53A177A1BF900CB720C /* ScalingOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScalingOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ScalingOperations.cpp"; sourceTree = homedir; };
+		56E2E53B177A1BF900CB720C /* ScalingOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScalingOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ScalingOperations.h"; sourceTree = homedir; };
+		56E2E53C177A1BF900CB720C /* SelectionOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectionOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SelectionOperations.cpp"; sourceTree = homedir; };
+		56E2E53D177A1BF900CB720C /* SelectionOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SelectionOperations.h"; sourceTree = homedir; };
+		56E2E53E177A1BF900CB720C /* SimpleAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleAlgorithm.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SimpleAlgorithm.cpp"; sourceTree = homedir; };
+		56E2E53F177A1BF900CB720C /* SimpleAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAlgorithm.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SimpleAlgorithm.h"; sourceTree = homedir; };
+		56E2E540177A1BF900CB720C /* SingleValueChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingleValueChromosome.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SingleValueChromosome.h"; sourceTree = homedir; };
+		56E2E541177A1BF900CB720C /* SmartPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmartPtr.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SmartPtr.h"; sourceTree = homedir; };
+		56E2E542177A1BF900CB720C /* SortedGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SortedGroup.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SortedGroup.h"; sourceTree = homedir; };
+		56E2E543177A1BF900CB720C /* SortedGroupType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SortedGroupType.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SortedGroupType.h"; sourceTree = homedir; };
+		56E2E544177A1BF900CB720C /* Statistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Statistics.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Statistics.cpp"; sourceTree = homedir; };
+		56E2E545177A1BF900CB720C /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Statistics.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Statistics.h"; sourceTree = homedir; };
+		56E2E546177A1BF900CB720C /* StopCriterias.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StopCriterias.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/StopCriterias.cpp"; sourceTree = homedir; };
+		56E2E547177A1BF900CB720C /* StopCriterias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StopCriterias.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/StopCriterias.h"; sourceTree = homedir; };
+		56E2E548177A1BF900CB720C /* Threading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Threading.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Threading.cpp"; sourceTree = homedir; };
+		56E2E549177A1BF900CB720C /* Threading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Threading.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Threading.h"; sourceTree = homedir; };
+		56E2E54A177A1BF900CB720C /* ValueSets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValueSets.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ValueSets.h"; sourceTree = homedir; };
+		56E2E54C177A1BF900CB720C /* GeneticLibrary.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcproj; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcproj"; sourceTree = homedir; };
+		56E2E54D177A1BF900CB720C /* GeneticLibrary.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcxproj; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcxproj"; sourceTree = homedir; };
+		56E2E54E177A1BF900CB720C /* GeneticLibrary.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcxproj.filters; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcxproj.filters"; sourceTree = homedir; };
 		56F72DF917817E8300D849AD /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = output.cpp; sourceTree = "<group>"; };
 		56F72DFA17817E8300D849AD /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = output.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -348,7 +348,8 @@
 				56CE09311783159300D75072 /* libwthttp.3.3.0.dylib */,
 			);
 			name = "Wt Libraries";
-			sourceTree = "<group>";
+			path = /Users/charles/Timetabler;
+			sourceTree = "<absolute>";
 		};
 		56E2E4E2177A1BF900CB720C /* GeneticLibrary */ = {
 			isa = PBXGroup;
@@ -361,8 +362,8 @@
 				56E2E54B177A1BF900CB720C /* vs */,
 			);
 			name = GeneticLibrary;
-			path = "../Genetic-Algorithms-Library/GeneticLibrary";
-			sourceTree = "<group>";
+			path = "Genetic-Algorithms-Library/GeneticLibrary";
+			sourceTree = homedir;
 		};
 		56E2E4E3177A1BF900CB720C /* build */ = {
 			isa = PBXGroup;
@@ -370,46 +371,44 @@
 				56E2E4E4177A1BF900CB720C /* debug */,
 				56E2E4E6177A1BF900CB720C /* release */,
 			);
-			path = build;
-			sourceTree = "<group>";
+			name = build;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/build";
+			sourceTree = homedir;
 		};
 		56E2E4E4177A1BF900CB720C /* debug */ = {
 			isa = PBXGroup;
 			children = (
 				56E2E4E5177A1BF900CB720C /* gcc_macos */,
 			);
-			path = debug;
-			sourceTree = "<group>";
+			name = debug;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/build/debug";
+			sourceTree = homedir;
 		};
 		56E2E4E5177A1BF900CB720C /* gcc_macos */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = gcc_macos;
-			sourceTree = "<group>";
+			name = gcc_macos;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/build/debug/gcc_macos";
+			sourceTree = homedir;
 		};
 		56E2E4E6177A1BF900CB720C /* release */ = {
 			isa = PBXGroup;
 			children = (
 				56E2E4E7177A1BF900CB720C /* gcc_macos */,
 			);
-			path = release;
-			sourceTree = "<group>";
+			name = release;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/build/release";
+			sourceTree = homedir;
 		};
 		56E2E4E7177A1BF900CB720C /* gcc_macos */ = {
 			isa = PBXGroup;
 			children = (
 				56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */,
 			);
-			path = gcc_macos;
-			sourceTree = "<group>";
-		};
-		56E2E4EA177A1BF900CB720C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
+			name = gcc_macos;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos";
+			sourceTree = homedir;
 		};
 		56E2E4ED177A1BF900CB720C /* makefiles */ = {
 			isa = PBXGroup;
@@ -430,8 +429,9 @@
 				56E2E50F177A1BF900CB720C /* scc_solaris_debug */,
 				56E2E510177A1BF900CB720C /* scc_solaris_release */,
 			);
-			path = makefiles;
-			sourceTree = "<group>";
+			name = makefiles;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles";
+			sourceTree = homedir;
 		};
 		56E2E4FA177A1BF900CB720C /* objs */ = {
 			isa = PBXGroup;
@@ -457,8 +457,9 @@
 				56E2E50D177A1BF900CB720C /* StopCriterias.o */,
 				56E2E50E177A1BF900CB720C /* Threading.o */,
 			);
-			path = objs;
-			sourceTree = "<group>";
+			name = objs;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs";
+			sourceTree = homedir;
 		};
 		56E2E511177A1BF900CB720C /* source */ = {
 			isa = PBXGroup;
@@ -521,8 +522,9 @@
 				56E2E549177A1BF900CB720C /* Threading.h */,
 				56E2E54A177A1BF900CB720C /* ValueSets.h */,
 			);
-			path = source;
-			sourceTree = "<group>";
+			name = source;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/source";
+			sourceTree = homedir;
 		};
 		56E2E54B177A1BF900CB720C /* vs */ = {
 			isa = PBXGroup;
@@ -531,8 +533,9 @@
 				56E2E54D177A1BF900CB720C /* GeneticLibrary.vcxproj */,
 				56E2E54E177A1BF900CB720C /* GeneticLibrary.vcxproj.filters */,
 			);
-			path = vs;
-			sourceTree = "<group>";
+			name = vs;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/vs";
+			sourceTree = homedir;
 		};
 /* End PBXGroup section */
 
@@ -573,12 +576,6 @@
 			mainGroup = 56A9A7581779B4A900C70EE3;
 			productRefGroup = 56A9A7621779B4A900C70EE3 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 56E2E4EA177A1BF900CB720C /* Products */;
-					ProjectRef = 56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				56A9A7601779B4A900C70EE3 /* Timetabler */,

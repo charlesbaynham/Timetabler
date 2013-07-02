@@ -27,8 +27,6 @@ Wt::WApplication *createApplication(const Wt::WEnvironment& env);
 
 int main(int argc, char **argv)
 {
-
-    
     Configuration::getInstance().parseFile("config.txt");
 
     Configuration::getInstance().dumpTutors();
