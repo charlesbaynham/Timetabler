@@ -260,11 +260,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/Configuration.cpp"
-         timestampString = "394371992.083961"
+         timestampString = "394499819.165682"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "102"
-         endingLineNumber = "102"
+         startingLineNumber = "105"
+         endingLineNumber = "105"
          landmarkName = "Configuration::ParseTutor(ifstream&amp; file)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -273,11 +273,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/Configuration.cpp"
-         timestampString = "394371992.083961"
+         timestampString = "394499819.165682"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "100"
-         endingLineNumber = "100"
+         startingLineNumber = "103"
+         endingLineNumber = "103"
          landmarkName = "Configuration::ParseTutor(ifstream&amp; file)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -286,22 +286,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/Configuration.cpp"
-         timestampString = "394371992.083961"
+         timestampString = "394499819.165682"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95">
+         startingLineNumber = "98"
+         endingLineNumber = "98">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/Configuration.cpp"
-         timestampString = "394371992.083961"
+         timestampString = "394499819.165682"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "113"
-         endingLineNumber = "113"
+         startingLineNumber = "116"
+         endingLineNumber = "116"
          landmarkName = "Configuration::ParseTutor(ifstream&amp; file)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -321,11 +321,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/main.cpp"
-         timestampString = "394497292.179619"
+         timestampString = "394500296.129134"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
+         startingLineNumber = "35"
+         endingLineNumber = "35"
          landmarkName = "main(int argc, char **argv)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -408,11 +408,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/Configuration.cpp"
-         timestampString = "394371992.083961"
+         timestampString = "394499819.165682"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
          landmarkName = "Configuration::GetConfigBlockLine(ifstream&amp; file, string&amp; key, string&amp; value)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -422,11 +422,11 @@
          condition = "key == &quot;comment&quot;"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/Configuration.cpp"
-         timestampString = "394371992.083961"
+         timestampString = "394499819.165682"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
+         startingLineNumber = "135"
+         endingLineNumber = "135"
          landmarkName = "Configuration::ParseStudent(ifstream&amp; file)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -435,11 +435,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/Configuration.cpp"
-         timestampString = "394372003.730527"
+         timestampString = "394499819.165682"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
+         startingLineNumber = "54"
+         endingLineNumber = "54"
          landmarkName = "Configuration::parseFile(char* fileName)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -448,11 +448,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/Configuration.cpp"
-         timestampString = "394372042.705718"
+         timestampString = "394499819.165682"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
+         startingLineNumber = "59"
+         endingLineNumber = "59"
          landmarkName = "Configuration::parseFile(char* fileName)"
          landmarkType = "5">
       </FileBreakpoint>

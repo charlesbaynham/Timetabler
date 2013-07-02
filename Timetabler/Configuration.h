@@ -68,7 +68,7 @@ public:
     bool parsed() { return !_isEmpty; }
     
     //Parse a file for inputs
-    void parseFile(char* fileName);
+    int parseFile(char* fileName);
     
 private:
     

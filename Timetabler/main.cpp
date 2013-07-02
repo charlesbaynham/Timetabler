@@ -27,7 +27,9 @@ Wt::WApplication *createApplication(const Wt::WEnvironment& env);
 
 int main(int argc, char **argv)
 {
-    Configuration::getInstance().parseFile("config.txt");
+    char* configfile = "config.txt";
+    
+    if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
 
     Configuration::getInstance().dumpTutors();
         

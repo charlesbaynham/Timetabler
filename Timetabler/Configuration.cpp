@@ -14,7 +14,7 @@
 
 Configuration Configuration::_instance;
 
-void Configuration::parseFile(char* fileName) {
+int Configuration::parseFile(char* fileName) {
     
     //clear all
     _tutors.clear();
@@ -23,6 +23,8 @@ void Configuration::parseFile(char* fileName) {
     
     //open file
     ifstream input(fileName);
+    
+    if(input.fail()) return 1; // Error opening file
     
     string line;
     while (input.is_open() && !input.eof()) {
@@ -70,6 +72,7 @@ void Configuration::parseFile(char* fileName) {
 //    Tutor* richard = getTutor(1);
     //cout << "Richard has " << richard->getNotSlots().size() << " notslots.\n";
     
+    return 0;
 }
 
 

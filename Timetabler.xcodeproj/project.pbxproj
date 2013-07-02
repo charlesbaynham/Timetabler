@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5665F23917839336005C55D8 /* libGeneticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */; };
 		56A9A7651779B4A900C70EE3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56A9A7641779B4A900C70EE3 /* main.cpp */; };
 		56A9A7671779B4A900C70EE3 /* Timetabler.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56A9A7661779B4A900C70EE3 /* Timetabler.1 */; };
 		56CE09321783159300D75072 /* libwt.3.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56CE09301783159300D75072 /* libwt.3.3.0.dylib */; };
@@ -39,7 +40,6 @@
 		56CE0969178315A500D75072 /* libboost_wave.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56CE094E178315A500D75072 /* libboost_wave.dylib */; };
 		56CE096A178315A500D75072 /* libboost_wserialization.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56CE094F178315A500D75072 /* libboost_wserialization.dylib */; };
 		56CE097317831E8800D75072 /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE097117831E8800D75072 /* GUI.cpp */; };
-		56DF0FF6177B43B4005F1B6A /* libGeneticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */; };
 		56DF0FF9177B5DFA005F1B6A /* Student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF0FF8177B5DFA005F1B6A /* Student.cpp */; };
 		56DF0FFC177B5F6F005F1B6A /* Tutor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF0FFB177B5F6F005F1B6A /* Tutor.cpp */; };
 		56DF0FFF177B6026005F1B6A /* TTChromosone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF0FFE177B6026005F1B6A /* TTChromosone.cpp */; };
@@ -264,13 +264,20 @@
 				56CE096A178315A500D75072 /* libboost_wserialization.dylib in Frameworks */,
 				56CE09321783159300D75072 /* libwt.3.3.0.dylib in Frameworks */,
 				56CE09331783159300D75072 /* libwthttp.3.3.0.dylib in Frameworks */,
-				56DF0FF6177B43B4005F1B6A /* libGeneticLibrary.a in Frameworks */,
+				5665F23917839336005C55D8 /* libGeneticLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5665F23617838F11005C55D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		56A9A7581779B4A900C70EE3 = {
 			isa = PBXGroup;
 			children = (
@@ -576,6 +583,12 @@
 			mainGroup = 56A9A7581779B4A900C70EE3;
 			productRefGroup = 56A9A7621779B4A900C70EE3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5665F23617838F11005C55D8 /* Products */;
+					ProjectRef = 56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				56A9A7601779B4A900C70EE3 /* Timetabler */,
@@ -689,8 +702,8 @@
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos\"",
 					/usr/local/lib,
+					"\"$(SRCROOT)/../../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos\"",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -709,8 +722,8 @@
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos\"",
 					/usr/local/lib,
+					"\"$(SRCROOT)/../../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos\"",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
