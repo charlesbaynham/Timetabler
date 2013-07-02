@@ -57,6 +57,12 @@
             ReferencedContainer = "container:Timetabler.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "--http-address 0.0.0.0 --http-port 9090 --docroot ."
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

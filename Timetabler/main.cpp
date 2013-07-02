@@ -23,7 +23,7 @@ using namespace Algorithm::SimpleAlgorithms;
 #include "GUI.h"
 
 // Launches new application to handle a connection to the web interface
-Wt::WApplication *createApplication(const Wt::WEnvironment& env);
+//Wt::WApplication *createApplication(const Wt::WEnvironment& env);
 
 int main(int argc, char **argv)
 {
@@ -70,13 +70,18 @@ int main(int argc, char **argv)
     
     ////////
     
-    printf("***\nTry GUI:\n");
+    cout << "***\nTry GUI with args \"";
+    for (int i = 1; i<argc; i++) { cout << " " << argv[i]; }
+    cout << "\"" << endl;
     
-    return Wt::WRun(argc, argv, &createApplication );
+//    return Wt::WRun(argc, argv, &createApplication );
+    
+    printf("Done\n");
+    return 0;
 
 }
 
-Wt::WApplication *createApplication(const Wt::WEnvironment& env)
-{
-    return new HelloApplication(env);
-}
+//Wt::WApplication *createApplication(const Wt::WEnvironment& env)
+//{
+//    return new HelloApplication(env);
+//}
