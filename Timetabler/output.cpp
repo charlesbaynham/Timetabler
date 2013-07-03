@@ -121,8 +121,15 @@ void outputRaw::operator ()(char * filename, const GaChromosome& chromo) {
 }
 
 finishedTT::finishedTT(const GaChromosome* chromo) :
-    _studentTT(NULL),_tutorTT(NULL)
+_tutors(Configuration::getInstance().getTutors())
 {
+    // Store list of students by baseID: (n.b. don't use the ID of the students stored here as it it undefined)
+    const list<Student*> students = Configuration::getInstance().getStudents();
+    for (list<Student*>::const_iterator it = students.begin(); it != students.end(); it++) {
+        _students[ (*it)->getBaseID() ] = (*it);
+    }
+    
+    // Create timetables
     _chromo = dynamic_cast<const Chromosone*>(chromo);
     _studentTT = new studentTT(_chromo);
     _tutorTT = new tutorTT(_chromo);

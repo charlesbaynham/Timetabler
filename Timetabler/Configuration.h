@@ -32,7 +32,7 @@ private:
     hash_map<int, Tutor*> _tutors;
     hash_map<int, Subject*> _subjects;
     
-    // List of students (list since will be dynamically moved
+    // List of students (list since will be dynamically moved)
     list<Student*> _students;
     
     bool _isEmpty; // initialised to true: indicates that the config is unparsed.
@@ -58,6 +58,9 @@ public:
     
     //Return the whole list of student pointers:
     inline list<Student*> getStudents() { return _students; }
+    
+    //Return whole hash_map of tutors
+    inline hash_map<int, Tutor*> getTutors() { return _tutors; }
     
     //count the components
     inline int numTutors() { return (int)_tutors.size(); }

@@ -42,9 +42,10 @@ public:
 typedef list< tutorTT_tutor* > tutorTTList;
 
 class tutorTT {
+    // list of tutor's timetables
     tutorTTList _tutors;
 public:
-//    inline tutorTTList getTT() { return _tutors; }
+    inline tutorTTList getTT() { return _tutors; }
     
     //return which student the tutor has at time
     Student* getTutorApt(int tutorID, int time);
@@ -92,9 +93,14 @@ public:
 
 // Hold the finished timetable, from both points of view
 class finishedTT {
+    // Hold the timetables:
     tutorTT* _tutorTT;
     studentTT* _studentTT;
     const Chromosone* _chromo;
+    
+    // Hold all the students and tutors:
+    hash_map<int, Student*> _students;
+    hash_map<int, Tutor*> _tutors;
     
 public:
     
