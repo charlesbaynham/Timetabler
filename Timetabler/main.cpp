@@ -22,8 +22,6 @@ using namespace Algorithm::SimpleAlgorithms;
 #include <Wt/WApplication>
 #include "GUI.h"
 
-// Launches new application to handle a connection to the web interface
-Wt::WApplication *createApplication(const Wt::WEnvironment& env);
 
 int main(int argc, char **argv)
 {
@@ -54,8 +52,8 @@ int main(int argc, char **argv)
 	GaGlobalRandomDoubleGenerator = new GaRandomDouble(3568);
 	GaGlobalRandomBoolGenerator = new GaRandomBool(2354768);
 
-    
-    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
+    // debug web interface :
+//    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
     
     // Print some random numbers to make sure the seeds worked
     cout << GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<endl;
@@ -76,12 +74,6 @@ int main(int argc, char **argv)
     
     return Wt::WRun(argc, argv, &createApplication );
     
-    printf("Done\n");
-    return 0;
-
 }
 
-Wt::WApplication *createApplication(const Wt::WEnvironment& env)
-{
-    return new HelloApplication(env);
-}
+

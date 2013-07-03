@@ -14,20 +14,32 @@
 #include <Wt/WApplication>
 #include <Wt/WBreak>
 #include <Wt/WContainerWidget>
+#include <Wt/WBorderLayout>
 #include <Wt/WLineEdit>
 #include <Wt/WPushButton>
 #include <Wt/WText>
+#include <Wt/WHBoxLayout>
+#include <Wt/WGridLayout>
 
-class HelloApplication : public Wt::WApplication
+
+using namespace Wt;
+using namespace std;
+
+WApplication *createApplication(const Wt::WEnvironment& env);
+
+class TimetablerWebApplication : public Wt::WApplication
 {
 public:
-    HelloApplication(const Wt::WEnvironment& env);
+    TimetablerWebApplication(const Wt::WEnvironment& env);
     
 private:
-    Wt::WLineEdit *nameEdit_;
-    Wt::WText *greeting_;
+    Wt::WLineEdit *_nameEdit;
+    Wt::WText *_greeting;
     
+    void buildTable(int rows, int columns);
+    void buildOuterTable();
     void greet();
 };
+
 
 #endif /* defined(__Timetabler__GUI__) */
