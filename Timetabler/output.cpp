@@ -171,6 +171,19 @@ tutorTT::tutorTT(const Chromosone* chromo)
     }
 }
 
+Student* tutorTT::getTutorApt(int tutorID, int time)
+{
+    for (tutorTTList::iterator it=_tutors.begin(); it != _tutors.end(); it++)
+    {
+        if ( (*it)->getTutorID() == tutorID ) {
+            Student* student = (*it)->getStudent(time);
+            return student;
+        }
+    }
+    return NULL;
+}
+
+
 studentTT::studentTT(const Chromosone* chromo){
     
 //    vector<list<Student*> > _values = chromo->GetSlots();

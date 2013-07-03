@@ -19,6 +19,10 @@ void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAl
     ( outputCSV::getInstance() )("test.txt", newChromosome, true);
     
     finishedTT* newBest = new finishedTT(&newChromosome);
+    
+    Student* test;
+    if ( (test = newBest->getTutorOrientated()->getTutorApt(1, 0)) ) printf("*** Student is %s\n", test->getName().c_str() );
+
 }
 
 void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {

@@ -310,11 +310,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TimetablerInst.cpp"
-         timestampString = "394555992.710165"
+         timestampString = "394560120.847841"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "36"
-         endingLineNumber = "36">
+         startingLineNumber = "40"
+         endingLineNumber = "40">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -550,7 +550,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TimetablerInst.cpp"
-         timestampString = "394555992.710165"
+         timestampString = "394559418.78446"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "21"
@@ -598,15 +598,15 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TimetablerInst.cpp"
-         timestampString = "394556000.393821"
+         timestampString = "394560120.847841"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "22"
-         endingLineNumber = "22"
+         startingLineNumber = "26"
+         endingLineNumber = "26"
          landmarkName = "TTObserver::NewBestChromosome(const GaChromosome&amp; newChromosome, const GaAlgorithm&amp; algorithm)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -712,6 +712,71 @@
          startingLineNumber = "170"
          endingLineNumber = "170"
          landmarkName = "tutorTT::tutorTT(const Chromosone* chromo)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/TimetablerInst.cpp"
+         timestampString = "394560120.847841"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "24"
+         endingLineNumber = "24"
+         landmarkName = "TTObserver::NewBestChromosome(const GaChromosome&amp; newChromosome, const GaAlgorithm&amp; algorithm)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/output.cpp"
+         timestampString = "394559700.910924"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "176"
+         endingLineNumber = "176"
+         landmarkName = "tutorTT::getTutorApt(int tutorID, int time)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/output.cpp"
+         timestampString = "394559727.738954"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "178"
+         endingLineNumber = "178"
+         landmarkName = "tutorTT::getTutorApt(int tutorID, int time)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/output.cpp"
+         timestampString = "394559791.588303"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "179"
+         endingLineNumber = "179"
+         landmarkName = "tutorTT::getTutorApt(int tutorID, int time)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/output.cpp"
+         timestampString = "394559798.138304"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "180"
+         endingLineNumber = "180"
+         landmarkName = "tutorTT::getTutorApt(int tutorID, int time)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

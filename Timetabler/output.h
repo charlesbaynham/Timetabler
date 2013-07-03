@@ -25,8 +25,13 @@ class tutorTT_tutor {
     hash_map<int, Student*> _students;
     
 public:
+    inline int getTutorID() { return _tutor->getID(); }
     inline string getTutorName() { return _tutor->getName(); }
+    inline Tutor* getTutor() { return _tutor; }
+    
+    inline int getStudentID(int time) { return _students[time]->getID(); }
     inline string getStudentName(int time) { return _students[time]->getName(); }
+    inline Student* getStudent(int time) { return _students[time]; }
     
     inline tutorTT_tutor(Tutor* tutor) : _tutor(tutor){}
     inline void addStudent(int time, Student* student) { _students[time]=student; }
@@ -39,6 +44,11 @@ class tutorTT {
     tutorTTList _tutors;
 public:
     inline tutorTTList getTT() { return _tutors; }
+    
+    //return which student the tutor has at time
+    Student* getTutorApt(int tutorID, int time);
+    inline Student* getTutorApt(Tutor* tutor, int time) { return getTutorApt(tutor->getID(), time); }
+    
     tutorTT(const Chromosone*);
 };
 
