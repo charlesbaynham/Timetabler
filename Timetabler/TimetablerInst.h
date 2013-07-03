@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "TTChromosone.h"
+#include "output.h"
 
 class TTObserver : public GaObserverAdapter {
     

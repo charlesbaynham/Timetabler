@@ -7,7 +7,6 @@
 //
 
 #include "TimetablerInst.h"
-#include "output.h"
 
 using namespace Population;
 using namespace Population::ReplacementOperations;
@@ -18,6 +17,8 @@ using namespace Algorithm::StopCriterias;
 void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {
     printf("New best at generation %i. Has fitness of %f\n", algorithm.GetAlgorithmStatistics().GetCurrentGeneration(), newChromosome.GetFitness());
     ( outputCSV::getInstance() )("test.txt", newChromosome, true);
+    
+    finishedTT* newBest = new finishedTT(&newChromosome);
 }
 
 void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {

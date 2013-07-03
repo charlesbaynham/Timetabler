@@ -120,7 +120,61 @@ void outputRaw::operator ()(char * filename, const GaChromosome& chromo) {
 
 }
 
+finishedTT::finishedTT(const GaChromosome* chromo) :
+    _studentTT(NULL),_tutorTT(NULL)
+{
+    _chromo = dynamic_cast<const Chromosone*>(chromo);
+    _studentTT = new studentTT(_chromo);
+    _tutorTT = new tutorTT(_chromo);
+}
 
 
+tutorTT::tutorTT(const Chromosone* chromo)
+{
+    if ( !(chromo == NULL) ) {
+        
+        printf("Hello world\n");
+        
+        vector<list<Student*> > values = chromo->GetSlots();
+        
+        int numSlots = (int)values.size();
+
+        //for each tutor:
+        for (int tutorBaseSlot=0; tutorBaseSlot < numSlots; tutorBaseSlot+=SLOTS_IN_DAY)
+        {
+            int tutorID = div(tutorBaseSlot, SLOTS_IN_DAY).quot + 1;
+            tutorTT_tutor* newTutor = new tutorTT_tutor( Configuration::getInstance().getTutor(tutorID) );
+            
+            //for each time of this tutor
+            for (int slot=tutorBaseSlot; slot < (tutorBaseSlot+SLOTS_IN_DAY); slot++) {
+                int time = div(slot, SLOTS_IN_DAY).rem;
+                // We assume that by this point there's only one student per slot. If not, we ignore the second. Edit.
+                Student* student = values[slot].front();
+                
+                // Add the student to this tutor's timetable:
+                if ( !values[slot].empty() ) newTutor->addStudent( time, student );
+            }
+            
+            //debug
+            for (hash_map<int, Student*>::iterator it=newTutor->_students.begin(); it!=newTutor->_students.end(); it++) {
+                
+                printf("Student at time %i with %s is %s\n", (*it).first, newTutor->getTutorName().c_str(), (*it).second->getName().c_str());
+                
+            }
+            //debug end
+            
+            // Add the new tutor to the list
+            _tutors.push_back(newTutor);
+
+        }
+        printf("Tutors done\n");
+    }
+}
+
+studentTT::studentTT(const Chromosone* chromo){
+    
+//    vector<list<Student*> > _values = chromo->GetSlots();
+    
+}
 
 
