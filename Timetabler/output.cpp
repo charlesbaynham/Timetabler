@@ -133,12 +133,10 @@ tutorTT::tutorTT(const Chromosone* chromo)
 {
     if ( !(chromo == NULL) ) {
         
-        printf("Hello world\n");
-        
         vector<list<Student*> > values = chromo->GetSlots();
         
         int numSlots = (int)values.size();
-
+        
         //for each tutor:
         for (int tutorBaseSlot=0; tutorBaseSlot < numSlots; tutorBaseSlot+=SLOTS_IN_DAY)
         {
@@ -155,19 +153,50 @@ tutorTT::tutorTT(const Chromosone* chromo)
                 if ( !values[slot].empty() ) newTutor->addStudent( time, student );
             }
             
-            //debug
-            for (hash_map<int, Student*>::iterator it=newTutor->_students.begin(); it!=newTutor->_students.end(); it++) {
-                
-                printf("Student at time %i with %s is %s\n", (*it).first, newTutor->getTutorName().c_str(), (*it).second->getName().c_str());
-                
-            }
-            //debug end
+            //            //debug
+            //            for (hash_map<int, Student*>::iterator it=newTutor->_students.begin(); it!=newTutor->_students.end(); it++) {
+            //
+            //                printf("Student at time %i with %s is %s\n", (*it).first, newTutor->getTutorName().c_str(), (*it).second->getName().c_str());
+            //
+            //            }
+            //            //debug end
             
             // Add the new tutor to the list
             _tutors.push_back(newTutor);
-
+            
         }
-        printf("Tutors done\n");
+    }
+}
+
+studentTT::studentTT(const Chromosone* chromo)
+{
+    if ( !(chromo == NULL) ) {
+        
+        hash_map<Student*, int> lookup = chromo->GetStudentLookup();
+        
+        // map of baseID->timetable for all the students' timetables
+        _students.clear();
+        
+        //For every appointment (not for every student, since most students appear more than once)
+        for (hash_map<Student*, int>::iterator it = lookup.begin(); it != lookup.end(); it++) {
+//            if the baseID of this student is not already present in _students then create it:
+            int baseID = (*it).first->getBaseID();
+            if ( _students.find( baseID ) == _students.end() )
+            {
+                studentTT_student* newStudent = new studentTT_student( (*it).first );
+                _students[ baseID ] = newStudent;
+            }
+            
+            // Then, add the appropriate tutor for this slot to the (possibly newly created) student
+            // First, evaluate the slot
+            div_t division = div((*it).second, SLOTS_IN_DAY);
+            int tutorID = division.quot + 1;
+            int time = division.rem;
+            Tutor* tutor = Configuration::getInstance().getTutor(tutorID);
+            
+            // now, add to the map
+            _students[baseID]->addTutor(time, tutor);
+        }
     }
 }
 
@@ -184,10 +213,11 @@ Student* tutorTT::getTutorApt(int tutorID, int time)
 }
 
 
-studentTT::studentTT(const Chromosone* chromo){
+Tutor* studentTT::getStudentApt(int studentBaseID, int time)
+{
+    studentTT_student* studentTimetable;
+    if ( (studentTimetable = _students[studentBaseID]) )    return studentTimetable->getTutor(time);
     
-//    vector<list<Student*> > _values = chromo->GetSlots();
-    
+    return NULL;
 }
-
 

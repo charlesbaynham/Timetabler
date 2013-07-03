@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <map>
 
 #include "TTChromosone.h"
 
@@ -43,7 +44,7 @@ typedef list< tutorTT_tutor* > tutorTTList;
 class tutorTT {
     tutorTTList _tutors;
 public:
-    inline tutorTTList getTT() { return _tutors; }
+//    inline tutorTTList getTT() { return _tutors; }
     
     //return which student the tutor has at time
     Student* getTutorApt(int tutorID, int time);
@@ -54,31 +55,43 @@ public:
 
 //hold the timetable for a single student
 class studentTT_student {
+    
+    friend class studentTT;
+    
     Student* _student;
     hash_map<int, Tutor*> _tutors;
     
 public:
+    inline int getStudentID() { return _student->getID(); }
     inline string getStudentName() { return _student->getName(); }
-    inline string getTutorName(int time) { return _tutors[time]->getName(); }
+    inline Student* getStudent() { return _student; }
     
-    inline studentTT_student() {}
-    inline void addTutor(int time, Tutor* tutor) { _tutors[time] = tutor; }
+    inline int getTutorID(int time) { return _tutors[time]->getID(); }
+    inline string getTutorName(int time) { return _tutors[time]->getName(); }
+    inline Tutor* getTutor(int time) { return _tutors[time]; }
+    
+    inline studentTT_student(Student* student) : _student(student) {}
+    inline void addTutor(int time, Tutor* tutor) { _tutors[time]=tutor; }
 };
 
 // Hold a complete timetable, formatted for the students' point of view
-typedef list< studentTT_student* > studentTTList;
+typedef map<int, studentTT_student* > studentTTList;
 
 class studentTT {
-    studentTTList* _students;
+    studentTTList _students;
 public:
-    inline studentTTList* getTT() { return _students; }
+//    inline studentTTList getTT() { return _students; }
+    
+    //return which student the tutor has at time
+    Tutor* getStudentApt(int studentBaseID, int time);
+    inline Tutor* getStudentApt(Student* student, int time) { return getStudentApt(student->getBaseID(), time); }
+    
     studentTT(const Chromosone*);
 };
 
 
 // Hold the finished timetable, from both points of view
 class finishedTT {
-    
     tutorTT* _tutorTT;
     studentTT* _studentTT;
     const Chromosone* _chromo;
@@ -89,7 +102,6 @@ public:
     inline studentTT* getStudentOrientated() { return _studentTT; }
     
     finishedTT(const GaChromosome* chromo);
-    
 };
 
 
