@@ -20,15 +20,15 @@ void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAl
     
     finishedTT* newBest = new finishedTT(&newChromosome);
     
-//    //debug
-//    Student* test;
-//    if ( (test = newBest->getTutorOrientated()->getTutorApt(1, 6)) ) printf("*** Student is %s\n", test->getName().c_str() );
-//    else printf("*** Student not found\n");
-//    
-//    Tutor* test2;
-//    if ( (test2 = newBest->getStudentOrientated()->getStudentApt(1, 3)) ) printf("*** Tutor is %s\n", test2->getName().c_str() );
-//    else printf("*** Tutor not found\n");
-//    //end debug
+    //debug
+    Student* test;
+    if ( (test = newBest->getTutorOrientated()->getTutorApt(1, 6)) ) printf("*** Student is %s\n", test->getName().c_str() );
+    else printf("*** Student not found\n");
+    
+    Tutor* test2;
+    if ( (test2 = newBest->getStudentOrientated()->getStudentApt(1, 3)) ) printf("*** Tutor is %s\n", test2->getName().c_str() );
+    else printf("*** Tutor not found\n");
+    //end debug
 }
 
 void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {

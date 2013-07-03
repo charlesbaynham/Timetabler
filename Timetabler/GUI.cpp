@@ -22,14 +22,26 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
     root()->addWidget(title);
     root()->addWidget(new WBreak);
     
-    buildTable( 2, 2 );
+    GaChromosomePtr resultPtr;
+    TimetablerInst::getInstance().getAlgorithm()->GetPopulation(0).GetBestChromosomes(&resultPtr, 0, 1); // store best chromosone in result
+    
+    finishedTT* timetable = new finishedTT(resultPtr.GetRawPtr());
+    buildTable(timetable , false );
 }
 
-void TimetablerWebApplication::buildTable(int times, int entries)
+void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
 {
-    WContainerWidget *container = new WContainerWidget();
+    int entries;
     
-    container->setHeight(700);
+    hash_map<int, Tutor*> tutorMap = timetable->getAllTutors();
+    hash_map<int, Student*> studentMap = timetable->getAllStudents();
+    
+    if (tutors) entries = (int)tutorMap.size();
+    else entries = (int)studentMap.size();
+    
+    WContainerWidget *container = root();
+    
+//    container->setHeight(700);
     container->setStyleClass("yellow-box");
     
     WGridLayout *grid = new WGridLayout();
@@ -39,21 +51,95 @@ void TimetablerWebApplication::buildTable(int times, int entries)
     grid->addWidget(new WBreak, 0, 0);
     
     // (0,1) to (0,i) contain time headers. edit
-    for (int i=1; i<=times; i++) {
+    for (int i=1; i<=SLOTS_IN_DAY; i++) {
         WText *timeWidget = new WText(to_string(i));
-        timeWidget->setHeight(150);
+        timeWidget->setHeight(75);
         timeWidget->setStyleClass("blue-box");
         grid->addWidget(timeWidget, 0, i);
+        grid->setColumnStretch(i, 1);
     }
     
     // (1,0) to (1,j) contain Student / Tutor names
-    for (int j=1; j<=entries; j++) {
-        WText *nameWidget = new WText("Name x");
-        nameWidget->setStyleClass("green-box");
-        grid->addWidget(nameWidget, j, 0);
+    WText *nameWidget;
+    if (tutors) {
+        for (hash_map<int, Tutor*>::iterator it = tutorMap.begin(); it != tutorMap.end(); it++) {
+            
+            static int j=0;
+            //Count which row we're on:
+            j++;
+            
+            nameWidget = new WText( (*it).second->getName() );
+            nameWidget->setStyleClass("green-box");
+            nameWidget->setHeight(50);
+            grid->addWidget(nameWidget, j, 0);
+            grid->setRowStretch(j, 1);
+        }
     }
-
+    else {
+        for (hash_map<int, Student*>::iterator it = studentMap.begin(); it != studentMap.end(); it++) {
+            
+            static int j=0;
+            //Count which row we're on:
+            j++;
+            
+            nameWidget = new WText( (*it).second->getName() );
+            nameWidget->setStyleClass("green-box");
+            grid->addWidget(nameWidget, j, 0);
+            grid->setRowStretch(j, 1);
+            nameWidget->resize(120, 75);
+        }
+    }
     
+    
+    // fill in the actual appointments
+    if (tutors) {
+        for (hash_map<int, Tutor*>::iterator it = tutorMap.begin(); it != tutorMap.end(); it++) {
+            static int j=0;
+            //Count which row we're on:
+            j++;
+            
+            for (int time = 0; time < SLOTS_IN_DAY; time++) {
+                // This slot's student
+                Student* student;
+                // the text for this slot
+                WText* appt;
+                
+                // If we found a student, get their name. Else, the tutor has a free slot
+                if ( (student = timetable->getTutorOrientated()->getTutorApt( (*it).second, time )) )
+                    appt = new WText( student->getName() );
+                else
+                    appt = new WText( "-" );
+                
+                // add to the output grid
+                grid->addWidget(appt, j, time+1);
+            }
+        }
+        
+    }
+    else {
+        for (hash_map<int, Student*>::iterator it = studentMap.begin(); it != studentMap.end(); it++) {
+            static int j=0;
+            //Count which row we're on:
+            j++;
+            
+            for (int time = 0; time < SLOTS_IN_DAY; time++) {
+                // This slot's tutor
+                Tutor* tutor;
+                // the text for this slot
+                WText* appt;
+                
+                // If we found a tutor, get their name. Else, the student has a free slot
+                if ( (tutor = timetable->getStudentOrientated()->getStudentApt( (*it).second, time )) )
+                    appt = new WText( tutor->getName() );
+                else
+                    appt = new WText( "-" );
+                
+                // add to the output grid
+                grid->addWidget(appt, j, time+1);
+            }
+        }
+        
+    }
     
 //    
 //    for (int row = 0; row < 2; ++row) {
@@ -73,7 +159,6 @@ void TimetablerWebApplication::buildTable(int times, int entries)
 //    grid->setRowStretch(1, 1);
 //    grid->setColumnStretch(1, 1);
     
-    root()->addWidget(container);
 }
 
 

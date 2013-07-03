@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 	GaGlobalRandomBoolGenerator = new GaRandomBool(2354768);
 
     // debug web interface :
-//    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
+    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
     
     // Print some random numbers to make sure the seeds worked
     cout << GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<endl;

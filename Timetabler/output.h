@@ -107,6 +107,9 @@ public:
     inline tutorTT* getTutorOrientated() { return _tutorTT; }
     inline studentTT* getStudentOrientated() { return _studentTT; }
     
+    inline hash_map<int, Student*> getAllStudents() { return _students; }
+    inline hash_map<int, Tutor*> getAllTutors() { return _tutors; }
+    
     finishedTT(const GaChromosome* chromo);
 };
 

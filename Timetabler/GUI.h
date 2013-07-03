@@ -21,6 +21,9 @@
 #include <Wt/WHBoxLayout>
 #include <Wt/WGridLayout>
 
+#include "output.h"
+#include "TimetablerInst.h"
+
 
 using namespace Wt;
 using namespace std;
@@ -36,8 +39,9 @@ private:
     Wt::WLineEdit *_nameEdit;
     Wt::WText *_greeting;
     
-    void buildTable(int rows, int columns);
-    void buildOuterTable();
+    // Build the output timetable using <timetable> as the info, from the point of view of tutors or students according to <bool tutors>
+    void buildTable(finishedTT* timetable, bool tutors);
+
     void greet();
 };
 
