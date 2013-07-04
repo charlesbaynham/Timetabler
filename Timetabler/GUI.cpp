@@ -79,10 +79,10 @@ void TimetablerWebApplication::refreshStats() {
     int generation = algorithm->GetAlgorithmStatistics().GetCurrentGeneration();
     printf("Current generation: %i. Best fitness: %f\n", generation, bestFitness);
     
-//    char out[100];
-//    sprintf(out, "Current generation: %i,   Best fitness:: %f", generation, bestFitness);
-//    
-//    _status->setText(out);
+    char out[100];
+    sprintf(out, "Gen %i, fitness %f", generation, bestFitness);
+    
+    _bestFitness->setText(out);
     
     // Build table
     finishedTT* timetable = new finishedTT(result.GetRawPtr());
@@ -130,8 +130,11 @@ void TimetablerWebApplication::refreshStats() {
 
 
 TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
-: Wt::WApplication(env)
+: Wt::WApplication(env), _bestFitness(new WText(""))
 {
+    this->setInternalPathDefaultValid(true);
+    this->enableInternalPaths();
+
     setTitle("Charles' Timetabler");
     
     this->useStyleSheet("style.css");
@@ -169,7 +172,7 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 void TimetablerWebApplication::handlePathChange()
 {
     Wt::WApplication *app = Wt::WApplication::instance();
-    
+        
     if (app->internalPath() == "/navigation/shop")
         ;
     else
@@ -242,6 +245,7 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
         setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
         
+        buttons->addWidget(_bestFitness);
         buttons->addWidget(setTutor);
         buttons->addWidget(setStudent);
         

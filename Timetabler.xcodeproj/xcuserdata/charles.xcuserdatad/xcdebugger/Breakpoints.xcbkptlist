@@ -758,11 +758,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394663906.768273"
+         timestampString = "394666835.793942"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "356"
-         endingLineNumber = "356"
+         startingLineNumber = "360"
+         endingLineNumber = "360"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -771,11 +771,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394663906.768273"
+         timestampString = "394666835.793942"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "357"
-         endingLineNumber = "357"
+         startingLineNumber = "361"
+         endingLineNumber = "361"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -784,11 +784,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394663906.768273"
+         timestampString = "394666835.793942"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "359"
-         endingLineNumber = "359"
+         startingLineNumber = "363"
+         endingLineNumber = "363"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -797,11 +797,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394663906.768273"
+         timestampString = "394666887.872105"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
          landmarkName = "TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment&amp; env)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -810,11 +810,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394663906.768273"
+         timestampString = "394666835.793942"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "314"
-         endingLineNumber = "314"
+         startingLineNumber = "318"
+         endingLineNumber = "318"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -842,6 +842,32 @@
          startingLineNumber = "24"
          endingLineNumber = "24"
          landmarkName = "TimetablerWebApplication::startSolve()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/GUI.cpp"
+         timestampString = "394666901.806912"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "176"
+         endingLineNumber = "176"
+         landmarkName = "TimetablerWebApplication::handlePathChange()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/GUI.cpp"
+         timestampString = "394666954.056781"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "179"
+         endingLineNumber = "179"
+         landmarkName = "TimetablerWebApplication::handlePathChange()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
