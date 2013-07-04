@@ -14,6 +14,16 @@ using namespace Population::SelectionOperations;
 using namespace Algorithm::SimpleAlgorithms;
 using namespace Algorithm::StopCriterias;
 
+
+
+//debug
+//#include <Wt/WApplication>
+#include "GUI.h"
+//end
+
+
+
+
 void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {
     printf("New best at generation %i. Has fitness of %f\n", algorithm.GetAlgorithmStatistics().GetCurrentGeneration(), newChromosome.GetFitness());
     ( outputCSV::getInstance() )("test.txt", newChromosome, true);
@@ -31,6 +41,7 @@ void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAl
 //    //end debug
 }
 
+
 void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {
     
     if (newState == GAS_CRITERIA_STOPPED) // we found a solution, so get the best chromosome:
@@ -39,6 +50,8 @@ void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgori
         algorithm.GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
         
         if (_funcComplete != NULL) _funcComplete(result);
+        
+        
 
 //        cout << "***\nFitness of final solution is " << result->GetFitness() << ", found in ";
 //        cout << algorithm.GetAlgorithmStatistics().GetCurrentGeneration() << " generations." << endl;

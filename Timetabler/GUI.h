@@ -19,6 +19,8 @@
 #include <Wt/WPushButton>
 #include <Wt/WText>
 #include <Wt/WHBoxLayout>
+#include <Wt/WVBoxLayout>
+#include <Wt/WTimer>
 #include <Wt/WGridLayout>
 
 #include "output.h"
@@ -44,12 +46,15 @@ public:
     
     // Build the output timetable using <timetable> as the info, from the point of view of tutors or students according to <bool tutors>
     void buildTable(finishedTT* timetable, bool tutors);
-    
+    void refreshStats();
     void completed();
     
 private:
-    WLineEdit *_nameEdit;
+    WPushButton *_button;
     WText* _greeting;
+    WTimer* _timer;
+    WText* _status;
+
     
     void greet();
 };

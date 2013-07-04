@@ -14,17 +14,41 @@ using namespace std;
 
 void TimetablerWebApplication::completed() {
     
-    ////  Output the finished timetable:
+    _greeting->setText("Solving...");
+    _button->setHidden(true);
+    _timer->start();
     
-    printf("Algorithm execution completed in %i generations\n", TimetablerInst::getInstance().getAlgorithm()->GetAlgorithmStatistics().GetCurrentGeneration() );
+    ////  Start the algorithm:
     
-    _greeting->setText("Solved.");
+    char* configfile = "config.txt";
     
-    GaChromosomePtr result;
-    TimetablerInst::getInstance().getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
+    // Read in configuration
+    if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
+    
+    // Solve!
+    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
+    
+    WApplication *app = WApplication::instance();
+    app->processEvents();
+    
+    // get the algorithm (set in class as GaAlgorithm), cast to Incremental
+    //      (since this has the WaitForThreads method) and then wait for it to finish
+    //dynamic_cast<GaIncrementalAlgorithm*>(TimetablerInst::getInstance().getAlgorithm())->WaitForThreads();
 
-    finishedTT* final = new finishedTT(result.GetRawPtr());
-    buildTable(final, false);
+    
+//    ////  Output the finished timetable:
+//    
+//    printf("Algorithm execution completed in %i generations\n", TimetablerInst::getInstance().getAlgorithm()->GetAlgorithmStatistics().GetCurrentGeneration() );
+//    
+//    _greeting->setText("Solved.");
+//    
+//    root()->clear();
+//    
+//    GaChromosomePtr result;
+//    TimetablerInst::getInstance().getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
+//
+//    finishedTT* final = new finishedTT(result.GetRawPtr());
+//    buildTable(final, false);
     
 //    WText *greeting = webApp->getGreeting();
 ////    greeting = new WText("Complete!");
@@ -39,6 +63,38 @@ void TimetablerWebApplication::completed() {
     
 }
 
+void TimetablerWebApplication::refreshStats() {
+    
+    GaChromosomePtr result;
+    GaAlgorithm* algorithm = TimetablerInst::getInstance().getAlgorithm();
+    algorithm->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
+    
+    float bestFitness = (*result).GetFitness();
+    int generation = algorithm->GetAlgorithmStatistics().GetCurrentGeneration();
+    printf("Current generation: %i. Best fitness: %f\n", generation, bestFitness);
+    
+    char out[100];
+    sprintf(out, "Current generation: %i,   Best fitness:: %f", generation, bestFitness);
+    
+    _status->setText(out);
+    
+    if (bestFitness > 0.999999)
+    {
+        _timer->stop();
+        sprintf(out, "Current generation: %i,   Best fitness:: %f\n\tSolved! Outputting timetable now...", generation, bestFitness);
+        
+        // Process this text update before building table
+        _status->setText(out);
+        WApplication *app = WApplication::instance();
+        app->processEvents();
+        
+        
+        // Build table
+        finishedTT* timetable = new finishedTT(result.GetRawPtr());
+        buildTable(timetable , false );
+    }
+}
+
 
 TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 : Wt::WApplication(env)
@@ -47,34 +103,31 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
     
     this->useStyleSheet("style.css");
     
-    _greeting = new WText("Solving...");
+    _greeting = new WText("Ready");
     _greeting->setStyleClass("titleText");
 
     root()->addWidget(_greeting);
     root()->addWidget(new WBreak);
     
-    Wt::WPushButton *button = new Wt::WPushButton("Refresh", root());
+    _button = new Wt::WPushButton("Go", root());
     root()->addWidget(new Wt::WBreak());
+    
+    _status = new WText("");
+    root()->addWidget(_status);
 
-    button->clicked().connect(this, &TimetablerWebApplication::completed );
+    _button->clicked().connect(this, &TimetablerWebApplication::completed );
+
+    // setup a timer which calls MyClass::timeout() every 2 seconds, until timer->stop() is called.
+    _timer = new WTimer();
+    _timer->setInterval(200);
+    _timer->timeout().connect(this, &TimetablerWebApplication::refreshStats );
+    
+//    TimetablerInst::getInstance().registerObserverFunc( &TimetablerWebApplication::completed ));
     
 //    TimetablerWebApplication* webApp = this;
 //    
 //    TimetablerInst::getInstance().registerObserverFunc( std::bind(&completed, placeholders::_1, webApp ));
     
-////  Start the algorithm:
-    
-    char* configfile = "config.txt";
-    
-    // Read in configuration
-    if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
-    
-    // Solve!
-    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
-    
-    // get the algorithm (set in class as GaAlgorithm), cast to Incremental
-    //      (since this has the WaitForThreads method) and then wait for it to finish
-//    dynamic_cast<GaIncrementalAlgorithm*>(TimetablerInst::getInstance().getAlgorithm())->WaitForThreads();
     
     
 //////  Output the finished timetable:
@@ -109,14 +162,29 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
     WGridLayout *grid = new WGridLayout();
     container->setLayout(grid);
     
-    // (0,0) is blank
-    grid->addWidget(new WBreak, 0, 0);
+    // (0,0) is blank. edit
+    WContainerWidget* toggleButtons = new WContainerWidget;
+
+    WVBoxLayout* buttons = new WVBoxLayout;
+    toggleButtons->setLayout(buttons);
+
+    WPushButton *setTutor=new WPushButton("Tutor mode", root());
+    WPushButton *setStudent=new WPushButton("Student mode", root());
+    
+    setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
+    setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
+    
+    buttons->addWidget(setTutor);
+    buttons->addWidget(setStudent);
+    
+    grid->addWidget(toggleButtons, 0, 0);
     
     // (0,1) to (0,i) contain time headers. edit
     for (int i=1; i<=SLOTS_IN_DAY; i++) {
         WText *timeWidget = new WText(to_string(i));
         timeWidget->setHeight(75);
         timeWidget->setStyleClass("blue-box");
+        timeWidget->addStyleClass("centerme");
         grid->addWidget(timeWidget, 0, i);
         grid->setColumnStretch(i, 1);
     }
@@ -173,6 +241,7 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
                     appt = new WText( "-" );
                 
                 // add to the output grid
+                appt->setStyleClass("appt");
                 grid->addWidget(appt, j, time+1);
             }
         }
@@ -197,6 +266,7 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
                     appt = new WText( "-" );
                 
                 // add to the output grid
+                appt->setStyleClass("appt");
                 grid->addWidget(appt, j, time+1);
             }
         }
@@ -223,11 +293,6 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
     
 }
 
-
-void TimetablerWebApplication::greet()
-{
-    _greeting->setText("Hello there, " + _nameEdit->text());
-}
 
 Wt::WApplication *createApplication(const Wt::WEnvironment& env)
 {
