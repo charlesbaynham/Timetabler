@@ -758,11 +758,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394637733.989445"
+         timestampString = "394663906.768273"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "293"
-         endingLineNumber = "293"
+         startingLineNumber = "356"
+         endingLineNumber = "356"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -771,11 +771,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394637733.989445"
+         timestampString = "394663906.768273"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "294"
-         endingLineNumber = "294"
+         startingLineNumber = "357"
+         endingLineNumber = "357"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -784,11 +784,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394637733.989445"
+         timestampString = "394663906.768273"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "296"
-         endingLineNumber = "296"
+         startingLineNumber = "359"
+         endingLineNumber = "359"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -797,11 +797,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394637733.989445"
+         timestampString = "394663906.768273"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "156"
-         endingLineNumber = "156"
+         startingLineNumber = "159"
+         endingLineNumber = "159"
          landmarkName = "TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment&amp; env)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -810,12 +810,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394637733.989445"
+         timestampString = "394663906.768273"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "251"
-         endingLineNumber = "251"
+         startingLineNumber = "314"
+         endingLineNumber = "314"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/GUI.cpp"
+         timestampString = "394663906.768273"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "23"
+         endingLineNumber = "23"
+         landmarkName = "TimetablerWebApplication::startSolve()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/GUI.cpp"
+         timestampString = "394663906.768273"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "24"
+         endingLineNumber = "24"
+         landmarkName = "TimetablerWebApplication::startSolve()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

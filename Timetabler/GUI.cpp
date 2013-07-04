@@ -12,7 +12,13 @@
 using namespace std;
 
 
-void TimetablerWebApplication::completed() {
+void TimetablerWebApplication::startSolve() {
+    
+    // setup a timer which calls MyClass::timeout() every 2 seconds, until timer->stop() is called.
+    _timer = new WTimer();
+    _timer->setInterval(200);
+    _timer->timeout().connect(this, &TimetablerWebApplication::refreshStats );
+    
     
     _greeting->setText("Solving...");
     _button->setHidden(true);
@@ -129,25 +135,15 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
     setTitle("Charles' Timetabler");
     
     this->useStyleSheet("style.css");
-    
-    _greeting = new WText("Ready");
-    _greeting->setStyleClass("titleText");
 
-    root()->addWidget(_greeting);
-    root()->addWidget(new WBreak);
     
-    _button = new Wt::WPushButton("Go", root());
-    root()->addWidget(new Wt::WBreak());
+    Wt::WApplication *app = Wt::WApplication::instance();
     
-    _status = new WText("");
-    root()->addWidget(_status);
-
-    _button->clicked().connect(this, &TimetablerWebApplication::completed );
-
-    // setup a timer which calls MyClass::timeout() every 2 seconds, until timer->stop() is called.
-    _timer = new WTimer();
-    _timer->setInterval(200);
-    _timer->timeout().connect(this, &TimetablerWebApplication::refreshStats );
+    app->internalPathChanged().connect(std::bind([=] () {
+        handlePathChange();
+    }));
+    
+    handlePathChange();
     
 //    TimetablerInst::getInstance().registerObserverFunc( &TimetablerWebApplication::completed ));
     
@@ -170,6 +166,46 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 //    buildTable(timetable , false );
 }
 
+void TimetablerWebApplication::handlePathChange()
+{
+    Wt::WApplication *app = Wt::WApplication::instance();
+    
+    if (app->internalPath() == "/navigation/shop")
+        ;
+    else
+        _greeting = new WText("Ready");
+        _greeting->setStyleClass("titleText");
+        
+        root()->addWidget(_greeting);
+        root()->addWidget(new WBreak);
+        
+        _button = new Wt::WPushButton("Go", root());
+        root()->addWidget(new Wt::WBreak());
+        
+        _status = new WText("");
+        root()->addWidget(_status);
+        
+        _button->clicked().connect(this, &TimetablerWebApplication::startSolve );
+    
+}
+
+void TimetablerWebApplication::pageOutput() {
+    
+    _greeting = new WText("Ready");
+    _greeting->setStyleClass("titleText");
+    
+    root()->addWidget(_greeting);
+    root()->addWidget(new WBreak);
+    
+    _button = new Wt::WPushButton("Go", root());
+    root()->addWidget(new Wt::WBreak());
+    
+    _status = new WText("");
+    root()->addWidget(_status);
+    
+    _button->clicked().connect(this, &TimetablerWebApplication::startSolve );
+    
+}
 
 void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
 {

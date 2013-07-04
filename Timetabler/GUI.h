@@ -44,10 +44,6 @@ public:
     inline WText *getGreeting() {return _greeting;}
     inline void changeGreeting() { _greeting = new WText("dsfdsfsdldskjfls"); }
     
-    // Build the output timetable using <timetable> as the info, from the point of view of tutors or students according to <bool tutors>
-    void buildTable(finishedTT* timetable, bool tutors);
-    void refreshStats();
-    void completed();
     
 private:
     WPushButton *_button;
@@ -56,7 +52,16 @@ private:
     WText* _status;
     bool _tableBuilt=false;
     bool _tutors=false;
-
+    void handlePathChange();
+    
+    // ready to solve
+    void pageOutput();
+    // Build the output timetable using <timetable> as the info, from the point of view of tutors or students according to <bool tutors>
+    void buildTable(finishedTT* timetable, bool tutors);
+    // Refresh table
+    void refreshStats();
+    
+    void startSolve();
     
     void greet();
 };
