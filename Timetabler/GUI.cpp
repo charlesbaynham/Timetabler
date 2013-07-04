@@ -73,46 +73,51 @@ void TimetablerWebApplication::refreshStats() {
     int generation = algorithm->GetAlgorithmStatistics().GetCurrentGeneration();
     printf("Current generation: %i. Best fitness: %f\n", generation, bestFitness);
     
-    char out[100];
-    sprintf(out, "Current generation: %i,   Best fitness:: %f", generation, bestFitness);
+//    char out[100];
+//    sprintf(out, "Current generation: %i,   Best fitness:: %f", generation, bestFitness);
+//    
+//    _status->setText(out);
     
-    _status->setText(out);
+    // Build table
+    finishedTT* timetable = new finishedTT(result.GetRawPtr());
+    buildTable(timetable , _tutors );
     
     if (bestFitness > 0.999999)
     {
                 
-        sprintf(out, "Current generation: %i,   Best fitness:: %f\n\tSolved! Outputting timetable now...", generation, bestFitness);
-        
-        // Process this text update before building table
-        _status->setText(out);
-        WApplication *app = WApplication::instance();
-        app->processEvents();
+//        sprintf(out, "Current generation: %i,   Best fitness:: %f\n\tSolved! Outputting timetable now...", generation, bestFitness);
+//        
+//        // Process this text update before building table
+//        _status->setText(out);
+//        WApplication *app = WApplication::instance();
+//        app->processEvents();
         
         
         // Build table
         finishedTT* timetable = new finishedTT(result.GetRawPtr());
         buildTable(timetable , _tutors );
+
+        _timer->stop();
+//        //debug
         
-        //debug
-        //        _timer->stop();
-        WContainerWidget *container = root();
-        
-        WGridLayout *grid = dynamic_cast<WGridLayout*>( container->layout() );
-        
-        _timer->setInterval(2000);
-        
-        static int griditem=0;
-        griditem++;
-        
-        WLayoutItem* test = grid->itemAt(griditem);
-        
-        WText* lol = dynamic_cast<WText*>( test->widget() );
-        
-        string text = "(" + to_string(grid->columnCount()) + "," + to_string(grid->rowCount()) + ")";
-        
-        lol->setText( text );
-        
-        //debug end
+//        WContainerWidget *container = root();
+//        
+//        WGridLayout *grid = dynamic_cast<WGridLayout*>( container->layout() );
+//        
+//        _timer->setInterval(2000);
+//        
+//        static int griditem=0;
+//        griditem++;
+//        
+//        WLayoutItem* test = grid->itemAt(griditem);
+//        
+//        WText* lol = dynamic_cast<WText*>( test->widget() );
+//        
+//        string text = "(" + to_string(grid->columnCount()) + "," + to_string(grid->rowCount()) + ")";
+//        
+//        lol->setText( text );
+//        
+//        //debug end
 
     }
 }
