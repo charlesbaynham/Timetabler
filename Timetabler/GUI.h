@@ -24,9 +24,14 @@
 #include "output.h"
 #include "TimetablerInst.h"
 
+using namespace std;
 
 using namespace Wt;
-using namespace std;
+
+using namespace Algorithm;
+using namespace Algorithm::StopCriterias;
+using namespace Algorithm::SimpleAlgorithms;
+
 
 WApplication *createApplication(const Wt::WEnvironment& env);
 
@@ -34,14 +39,18 @@ class TimetablerWebApplication : public Wt::WApplication
 {
 public:
     TimetablerWebApplication(const Wt::WEnvironment& env);
-    
-private:
-    Wt::WLineEdit *_nameEdit;
-    Wt::WText *_greeting;
+    inline WText *getGreeting() {return _greeting;}
+    inline void changeGreeting() { _greeting = new WText("dsfdsfsdldskjfls"); }
     
     // Build the output timetable using <timetable> as the info, from the point of view of tutors or students according to <bool tutors>
     void buildTable(finishedTT* timetable, bool tutors);
-
+    
+    void completed();
+    
+private:
+    WLineEdit *_nameEdit;
+    WText* _greeting;
+    
     void greet();
 };
 

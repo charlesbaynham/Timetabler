@@ -10,6 +10,9 @@
 #define __Timetabler__TimetablerInst__
 
 #include <iostream>
+#include <Wt/WText>
+
+using namespace Wt;
 
 #include "TTChromosone.h"
 #include "output.h"
@@ -18,8 +21,14 @@ class TTObserver : public GaObserverAdapter {
     
     SysEventObject _event; // event for callback
     
+    // function to call on completion
+    function<void(GaChromosomePtr result) > _funcComplete = NULL;
+    
 public:
     TTObserver() { MakeEvent( _event, 0 ); }
+    TTObserver(function<void(GaChromosomePtr result) > funcComplete) : _funcComplete(funcComplete) { TTObserver(); }
+    
+    inline void bindFunction( function<void(GaChromosomePtr result)> funcComplete ) { _funcComplete = funcComplete; }
     
 	virtual ~TTObserver() { DeleteEvent( _event ); }
     
@@ -39,8 +48,6 @@ public:
     inline static TimetablerInst& getInstance() { return _instance; } // return global instance
     
 private:
-    
-    
     GaChromosomeParams* _chromosomeParams;
     
 	TTCrossover _crossoverOperation;
@@ -76,8 +83,11 @@ public:
     
 	inline const TTObserver& getObserver() const { return _observer; }
     
+    // convenience, to register callback function for completion
+    inline void registerObserverFunc(function<void(GaChromosomePtr result)> funcComplete) { _observer.bindFunction(funcComplete); }
+    
     //debug edit
-    inline Chromosone* getPrototype() const { return _prototype; }
+//    inline Chromosone* getPrototype() const { return _prototype; }
     
 };
 

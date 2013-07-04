@@ -6,28 +6,90 @@
 //  Copyright (c) 2013 Charles Baynham. All rights reserved.
 //
 
-
 #include "GUI.h"
+#include <functional>
+
+using namespace std;
+
+
+void TimetablerWebApplication::completed() {
+    
+    ////  Output the finished timetable:
+    
+    printf("Algorithm execution completed in %i generations\n", TimetablerInst::getInstance().getAlgorithm()->GetAlgorithmStatistics().GetCurrentGeneration() );
+    
+    _greeting->setText("Solved.");
+    
+    GaChromosomePtr result;
+    TimetablerInst::getInstance().getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
+
+    finishedTT* final = new finishedTT(result.GetRawPtr());
+    buildTable(final, false);
+    
+//    WText *greeting = webApp->getGreeting();
+////    greeting = new WText("Complete!");
+////    greeting->setHidden(true);
+//    
+//    GaChromosomePtr resultPtr;
+//    TimetablerInst::getInstance().getAlgorithm()->GetPopulation(0).GetBestChromosomes(&resultPtr, 0, 1); // store best chromosone in result
+//    
+//    finishedTT* timetable = new finishedTT(resultPtr.GetRawPtr());
+//    webApp->buildTable(timetable , false );
+
+    
+}
+
 
 TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 : Wt::WApplication(env)
 {
-    setTitle("Hello world");
+    setTitle("Charles' Timetabler");
     
     this->useStyleSheet("style.css");
     
-    WText *title = new WText("Hello");
-    title->setStyleClass("titleText");
-    
-    root()->addWidget(title);
+    _greeting = new WText("Solving...");
+    _greeting->setStyleClass("titleText");
+
+    root()->addWidget(_greeting);
     root()->addWidget(new WBreak);
     
-    GaChromosomePtr resultPtr;
-    TimetablerInst::getInstance().getAlgorithm()->GetPopulation(0).GetBestChromosomes(&resultPtr, 0, 1); // store best chromosone in result
+    Wt::WPushButton *button = new Wt::WPushButton("Refresh", root());
+    root()->addWidget(new Wt::WBreak());
+
+    button->clicked().connect(this, &TimetablerWebApplication::completed );
     
-    finishedTT* timetable = new finishedTT(resultPtr.GetRawPtr());
-    buildTable(timetable , false );
+//    TimetablerWebApplication* webApp = this;
+//    
+//    TimetablerInst::getInstance().registerObserverFunc( std::bind(&completed, placeholders::_1, webApp ));
+    
+////  Start the algorithm:
+    
+    char* configfile = "config.txt";
+    
+    // Read in configuration
+    if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
+    
+    // Solve!
+    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
+    
+    // get the algorithm (set in class as GaAlgorithm), cast to Incremental
+    //      (since this has the WaitForThreads method) and then wait for it to finish
+//    dynamic_cast<GaIncrementalAlgorithm*>(TimetablerInst::getInstance().getAlgorithm())->WaitForThreads();
+    
+    
+//////  Output the finished timetable:
+//    
+//    printf("Algorithm execution completed in %i generations\n", TimetablerInst::getInstance().getAlgorithm()->GetAlgorithmStatistics().GetCurrentGeneration() );
+//
+//    title = new WText("Complete!");
+//    
+//    GaChromosomePtr resultPtr;
+//    TimetablerInst::getInstance().getAlgorithm()->GetPopulation(0).GetBestChromosomes(&resultPtr, 0, 1); // store best chromosone in result
+//    
+//    finishedTT* timetable = new finishedTT(resultPtr.GetRawPtr());
+//    buildTable(timetable , false );
 }
+
 
 void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
 {

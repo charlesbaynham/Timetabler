@@ -310,24 +310,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TimetablerInst.cpp"
-         timestampString = "394565437.002758"
+         timestampString = "394583402.728697"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "46"
-         endingLineNumber = "46">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Timetabler/main.cpp"
-         timestampString = "394568499.75665"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
-         landmarkName = "main(int argc, char **argv)"
-         landmarkType = "7">
+         startingLineNumber = "50"
+         endingLineNumber = "50">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -771,11 +758,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394572365.93462"
+         timestampString = "394588982.150417"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "50"
-         endingLineNumber = "50"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -784,11 +771,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394573000.579174"
+         timestampString = "394588982.150417"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "65"
-         endingLineNumber = "65"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -797,33 +784,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394573000.579174"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
-         landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Timetabler/GUI.cpp"
-         timestampString = "394577023.386776"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
-         landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Timetabler/GUI.cpp"
-         timestampString = "394577023.386776"
+         timestampString = "394588982.150417"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "133"
@@ -836,12 +797,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/GUI.cpp"
-         timestampString = "394577023.386776"
+         timestampString = "394588982.150417"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "135"
-         endingLineNumber = "135"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
          landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/GUI.cpp"
+         timestampString = "394588982.150417"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "195"
+         endingLineNumber = "195"
+         landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/GUI.cpp"
+         timestampString = "394588982.150417"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "197"
+         endingLineNumber = "197"
+         landmarkName = "TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/GUI.cpp"
+         timestampString = "394588982.150417"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
+         landmarkName = "TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment&amp; env)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -20,26 +20,30 @@ void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAl
     
     finishedTT* newBest = new finishedTT(&newChromosome);
     
-    //debug
-    Student* test;
-    if ( (test = newBest->getTutorOrientated()->getTutorApt(1, 6)) ) printf("*** Student is %s\n", test->getName().c_str() );
-    else printf("*** Student not found\n");
-    
-    Tutor* test2;
-    if ( (test2 = newBest->getStudentOrientated()->getStudentApt(1, 3)) ) printf("*** Tutor is %s\n", test2->getName().c_str() );
-    else printf("*** Tutor not found\n");
-    //end debug
+//    //debug
+//    Student* test;
+//    if ( (test = newBest->getTutorOrientated()->getTutorApt(1, 6)) ) printf("*** Student is %s\n", test->getName().c_str() );
+//    else printf("*** Student not found\n");
+//    
+//    Tutor* test2;
+//    if ( (test2 = newBest->getStudentOrientated()->getStudentApt(1, 3)) ) printf("*** Tutor is %s\n", test2->getName().c_str() );
+//    else printf("*** Tutor not found\n");
+//    //end debug
 }
 
 void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {
-    cout << "New state is " << newState << endl;
+    
     if (newState == GAS_CRITERIA_STOPPED) // we found a solution, so get the best chromosome:
     {
         GaChromosomePtr result;
         algorithm.GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
-        cout << "***\nFitness of final solution is " << result->GetFitness() << ", found in ";
-        cout << algorithm.GetAlgorithmStatistics().GetCurrentGeneration() << " generations." << endl;
+        
+        if (_funcComplete != NULL) _funcComplete(result);
+
+//        cout << "***\nFitness of final solution is " << result->GetFitness() << ", found in ";
+//        cout << algorithm.GetAlgorithmStatistics().GetCurrentGeneration() << " generations." << endl;
     }
+    
 }
 // To be written. Edit
 
