@@ -54,6 +54,8 @@ private:
     WText* _greeting;
     WTimer* _timer;
     WText* _status;
+    bool _tableBuilt=false;
+    bool _tutors=false;
 
     
     void greet();

@@ -80,7 +80,7 @@ void TimetablerWebApplication::refreshStats() {
     
     if (bestFitness > 0.999999)
     {
-        _timer->stop();
+                
         sprintf(out, "Current generation: %i,   Best fitness:: %f\n\tSolved! Outputting timetable now...", generation, bestFitness);
         
         // Process this text update before building table
@@ -91,7 +91,29 @@ void TimetablerWebApplication::refreshStats() {
         
         // Build table
         finishedTT* timetable = new finishedTT(result.GetRawPtr());
-        buildTable(timetable , false );
+        buildTable(timetable , _tutors );
+        
+        //debug
+        //        _timer->stop();
+        WContainerWidget *container = root();
+        
+        WGridLayout *grid = dynamic_cast<WGridLayout*>( container->layout() );
+        
+        _timer->setInterval(2000);
+        
+        static int griditem=0;
+        griditem++;
+        
+        WLayoutItem* test = grid->itemAt(griditem);
+        
+        WText* lol = dynamic_cast<WText*>( test->widget() );
+        
+        string text = "(" + to_string(grid->columnCount()) + "," + to_string(grid->rowCount()) + ")";
+        
+        lol->setText( text );
+        
+        //debug end
+
     }
 }
 
@@ -146,6 +168,9 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 
 void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
 {
+    // If launched in tutor/student mode, save this for next time
+    _tutors = tutors;
+    
     int entries;
     
     hash_map<int, Tutor*> tutorMap = timetable->getAllTutors();
@@ -155,78 +180,80 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
     else entries = (int)studentMap.size();
     
     WContainerWidget *container = root();
-    
-//    container->setHeight(700);
-    container->setStyleClass("yellow-box");
-    
-    WGridLayout *grid = new WGridLayout();
-    container->setLayout(grid);
-    
-    // (0,0) is blank. edit
-    WContainerWidget* toggleButtons = new WContainerWidget;
+    WGridLayout *grid;
+    if (!_tableBuilt) {
+        
+    //    container->setHeight(700);
+        container->setStyleClass("yellow-box");
+        
+        grid = new WGridLayout();
+        container->setLayout(grid);
+        
+        // (0,0) is blank. edit
+        WContainerWidget* toggleButtons = new WContainerWidget;
 
-    WVBoxLayout* buttons = new WVBoxLayout;
-    toggleButtons->setLayout(buttons);
+        WVBoxLayout* buttons = new WVBoxLayout;
+        toggleButtons->setLayout(buttons);
 
-    WPushButton *setTutor=new WPushButton("Tutor mode", root());
-    WPushButton *setStudent=new WPushButton("Student mode", root());
-    
-    setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
-    setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
-    
-    buttons->addWidget(setTutor);
-    buttons->addWidget(setStudent);
-    
-    grid->addWidget(toggleButtons, 0, 0);
-    
-    // (0,1) to (0,i) contain time headers. edit
-    for (int i=1; i<=SLOTS_IN_DAY; i++) {
-        WText *timeWidget = new WText(to_string(i));
-        timeWidget->setHeight(75);
-        timeWidget->setStyleClass("blue-box");
-        timeWidget->addStyleClass("centerme");
-        grid->addWidget(timeWidget, 0, i);
-        grid->setColumnStretch(i, 1);
-    }
-    
-    // (1,0) to (1,j) contain Student / Tutor names
-    WText *nameWidget;
-    if (tutors) {
-        for (hash_map<int, Tutor*>::iterator it = tutorMap.begin(); it != tutorMap.end(); it++) {
-            
-            static int j=0;
-            //Count which row we're on:
-            j++;
-            
-            nameWidget = new WText( (*it).second->getName() );
-            nameWidget->setStyleClass("green-box");
-            nameWidget->setHeight(50);
-            grid->addWidget(nameWidget, j, 0);
-            grid->setRowStretch(j, 1);
+        WPushButton *setTutor=new WPushButton("Tutor mode", root());
+        WPushButton *setStudent=new WPushButton("Student mode", root());
+        
+        setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
+        setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
+        
+        buttons->addWidget(setTutor);
+        buttons->addWidget(setStudent);
+        
+        grid->addWidget(toggleButtons, 0, 0);
+        
+        // (0,1) to (0,i) contain time headers. edit
+        for (int i=1; i<=SLOTS_IN_DAY; i++) {
+            WText *timeWidget = new WText(to_string(i));
+            timeWidget->setHeight(75);
+            timeWidget->setStyleClass("blue-box");
+            timeWidget->addStyleClass("centerme");
+            grid->addWidget(timeWidget, 0, i);
+            grid->setColumnStretch(i, 1);
         }
-    }
-    else {
-        for (hash_map<int, Student*>::iterator it = studentMap.begin(); it != studentMap.end(); it++) {
-            
-            static int j=0;
-            //Count which row we're on:
-            j++;
-            
-            nameWidget = new WText( (*it).second->getName() );
-            nameWidget->setStyleClass("green-box");
-            grid->addWidget(nameWidget, j, 0);
-            grid->setRowStretch(j, 1);
-            nameWidget->resize(120, 75);
+        
+        // (1,0) to (1,j) contain Student / Tutor names
+        WText *nameWidget;
+        int j=1;
+        if (tutors) {
+            for (hash_map<int, Tutor*>::iterator it = tutorMap.begin(); it != tutorMap.end(); it++, j++) {
+                // j holds the row
+                
+                nameWidget = new WText( (*it).second->getName() );
+                nameWidget->setStyleClass("green-box");
+                nameWidget->setHeight(50);
+                grid->addWidget(nameWidget, j, 0);
+                grid->setRowStretch(j, 1);
+            }
         }
+        else {
+            for (hash_map<int, Student*>::iterator it = studentMap.begin(); it != studentMap.end(); it++, j++) {
+                // j holds the row
+                
+                nameWidget = new WText( (*it).second->getName() );
+                nameWidget->setStyleClass("green-box");
+                grid->addWidget(nameWidget, j, 0);
+                grid->setRowStretch(j, 1);
+                nameWidget->resize(120, 75);
+            }
+        }
+    } else {
+        
+        grid = dynamic_cast<WGridLayout*>( container->layout() );
+        
     }
-    
     
     // fill in the actual appointments
+    int j=1;
     if (tutors) {
-        for (hash_map<int, Tutor*>::iterator it = tutorMap.begin(); it != tutorMap.end(); it++) {
-            static int j=0;
+        for (hash_map<int, Tutor*>::iterator it = tutorMap.begin(); it != tutorMap.end(); it++, j++ ) {
+//            static int j=0;
             //Count which row we're on:
-            j++;
+//            j++;
             
             for (int time = 0; time < SLOTS_IN_DAY; time++) {
                 // This slot's student
@@ -248,10 +275,8 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         
     }
     else {
-        for (hash_map<int, Student*>::iterator it = studentMap.begin(); it != studentMap.end(); it++) {
-            static int j=0;
-            //Count which row we're on:
-            j++;
+        for (hash_map<int, Student*>::iterator it = studentMap.begin(); it != studentMap.end(); it++, j++) {
+            //j holds which row we're on.
             
             for (int time = 0; time < SLOTS_IN_DAY; time++) {
                 // This slot's tutor
