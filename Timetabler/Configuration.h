@@ -73,8 +73,9 @@ public:
     //Parse a file for inputs
     int parseFile(char* fileName);
     
-//    inline void putSubject( Subject* s ) { _subjects.insert( pair<int, Subject*>( s->getID(), s ) ); }
-    
+    inline void addSubject( Subject* s ) { _subjects.insert( pair<int, Subject*>( s->getID(), s ) ); }
+    inline void addTutor( Tutor* t ) { _tutors.insert( pair<int, Tutor*>( t->getID(), t ) ); }
+    inline void addStudent( Student* s ) { _students.push_back( s ); }
 private:
     
 	// Reads tutor's data from config file, makes object and returns pointer to it

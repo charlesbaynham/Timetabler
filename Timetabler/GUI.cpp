@@ -28,6 +28,11 @@ void TimetablerWebApplication::startSolve() {
     
     char* configfile = "config.txt";
     
+    // Stop it if it's already running
+    Algorithm::GaAlgorithmState state = TimetablerInst::getInstance().getAlgorithm()->GetState();
+    if (state == Algorithm::GaAlgorithmState::GAS_RUNNING)
+        TimetablerInst::getInstance().getAlgorithm()->StopSolving();
+    
     // Read in configuration
     if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
     

@@ -42,8 +42,14 @@ class TimetablerWebApplication : public Wt::WApplication
 public:
     TimetablerWebApplication(const Wt::WEnvironment& env);
     inline WText *getGreeting() {return _greeting;}
-    inline void changeGreeting() { _greeting = new WText("dsfdsfsdldskjfls"); }
-    
+
+    // Stop the algorithm if it's already running
+    inline ~TimetablerWebApplication()
+    {
+        cerr << "*** Aborting solution ***\n\n";
+        if (TimetablerInst::getInstance().getAlgorithm()->GetState() == Algorithm::GaAlgorithmState::GAS_RUNNING)
+            TimetablerInst::getInstance().getAlgorithm()->StopSolving();
+    }
     
 private:
     WPushButton *_button;

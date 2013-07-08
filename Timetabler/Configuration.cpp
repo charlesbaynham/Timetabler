@@ -37,13 +37,13 @@ int Configuration::parseFile(char* fileName) {
 		{
 			Subject* s = ParseSubject( input );
 			if( s )
-				_subjects.insert( pair<int, Subject*>( s->getID(), s ) );
+				this->addSubject(s);
 		}
 		else if( line.compare("#tutor") == 0 )
 		{
 			Tutor* t = ParseTutor( input );
 			if( t )
-				_tutors.insert( pair<int, Tutor*>( t->getID(), t ) );
+				this->addTutor(t);
 		}
 		else if( line.compare("#student") == 0 )
 		{
@@ -51,12 +51,12 @@ int Configuration::parseFile(char* fileName) {
 			if( s )
             {
 				// Push student to the list
-                _students.push_back( s );
+                this->addStudent(s);
                 
-                // create duplicates for however many interviews each student will have (though with different IDs)
+                // create duplicates for however many interviews each student will have (with different IDs, but same baseID)
                 for (int i = 1; i < s->getNoInterviews(); i++) {
                     Student* next = new Student(s);
-                    _students.push_back( next );
+                    this->addStudent(next);
                 }
             }
 		}
