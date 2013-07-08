@@ -12,7 +12,30 @@
 using namespace std;
 
 
+void TimetablerWebApplication::handlePathChange()
+{
+    Wt::WApplication *app = Wt::WApplication::instance();
+    
+    // Handle pages (i.e. diffrent URLs).
+    //     functions prefaced with "page" draw pages (e.g. pageOutput() )
+    string path = app->internalPath();
+    if (path == "/output") {
+        root()->clear();
+        if (Configuration::getInstance().isEmpty()) // We haven't yet made the configuration
+            root()->addWidget(new WText("Error: this page is not meant for direct access."));
+        else
+            startSolve();
+    }
+    else if(path == "/") pageReady();
+    else if(path == "/test") pageInput();
+    else app->setInternalPath("/", true); // Redirect to main page if page not found
+    
+    
+}
+
 void TimetablerWebApplication::startSolve() {
+
+    root()->clear();
     
     // setup a timer which calls MyClass::timeout() every 2 seconds, until timer->stop() is called.
     _timer = new WTimer();
@@ -20,8 +43,8 @@ void TimetablerWebApplication::startSolve() {
     _timer->timeout().connect(this, &TimetablerWebApplication::refreshStats );
     
     
-    _greeting->setText("Solving...");
-    _button->setHidden(true);
+//    _greeting->setText("Solving...");
+//    _button->setHidden(true);
     _timer->start();
     
     ////  Start the algorithm:
@@ -36,42 +59,11 @@ void TimetablerWebApplication::startSolve() {
     // Read in configuration
     if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
     
-    
     // Solve!
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
     
     WApplication *app = WApplication::instance();
     app->processEvents();
-    
-    // get the algorithm (set in class as GaAlgorithm), cast to Incremental
-    //      (since this has the WaitForThreads method) and then wait for it to finish
-    //dynamic_cast<GaIncrementalAlgorithm*>(TimetablerInst::getInstance().getAlgorithm())->WaitForThreads();
-
-    
-//    ////  Output the finished timetable:
-//    
-//    printf("Algorithm execution completed in %i generations\n", TimetablerInst::getInstance().getAlgorithm()->GetAlgorithmStatistics().GetCurrentGeneration() );
-//    
-//    _greeting->setText("Solved.");
-//    
-//    root()->clear();
-//    
-//    GaChromosomePtr result;
-//    TimetablerInst::getInstance().getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
-//
-//    finishedTT* final = new finishedTT(result.GetRawPtr());
-//    buildTable(final, false);
-    
-//    WText *greeting = webApp->getGreeting();
-////    greeting = new WText("Complete!");
-////    greeting->setHidden(true);
-//    
-//    GaChromosomePtr resultPtr;
-//    TimetablerInst::getInstance().getAlgorithm()->GetPopulation(0).GetBestChromosomes(&resultPtr, 0, 1); // store best chromosone in result
-//    
-//    finishedTT* timetable = new finishedTT(resultPtr.GetRawPtr());
-//    webApp->buildTable(timetable , false );
-
     
 }
 
@@ -96,40 +88,12 @@ void TimetablerWebApplication::refreshStats() {
     
     if (bestFitness > 0.999999)
     {
-                
-//        sprintf(out, "Current generation: %i,   Best fitness:: %f\n\tSolved! Outputting timetable now...", generation, bestFitness);
-//        
-//        // Process this text update before building table
-//        _status->setText(out);
-//        WApplication *app = WApplication::instance();
-//        app->processEvents();
-        
         
         // Build table
         finishedTT* timetable = new finishedTT(result.GetRawPtr());
         buildTable(timetable , _tutors );
 
         _timer->stop();
-//        //debug
-        
-//        WContainerWidget *container = root();
-//        
-//        WGridLayout *grid = dynamic_cast<WGridLayout*>( container->layout() );
-//        
-//        _timer->setInterval(2000);
-//        
-//        static int griditem=0;
-//        griditem++;
-//        
-//        WLayoutItem* test = grid->itemAt(griditem);
-//        
-//        WText* lol = dynamic_cast<WText*>( test->widget() );
-//        
-//        string text = "(" + to_string(grid->columnCount()) + "," + to_string(grid->rowCount()) + ")";
-//        
-//        lol->setText( text );
-//        
-//        //debug end
 
     }
 }
@@ -138,9 +102,9 @@ void TimetablerWebApplication::refreshStats() {
 TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 : Wt::WApplication(env), _bestFitness(new WText(""))
 {
-    this->setInternalPathDefaultValid(true);
     this->enableInternalPaths();
-
+    this->setInternalPathDefaultValid(false);
+    
     setTitle("Charles' Timetabler");
     
     this->useStyleSheet("style.css");
@@ -154,51 +118,26 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
     
     handlePathChange();
     
-//    TimetablerInst::getInstance().registerObserverFunc( &TimetablerWebApplication::completed ));
-    
-//    TimetablerWebApplication* webApp = this;
-//    
-//    TimetablerInst::getInstance().registerObserverFunc( std::bind(&completed, placeholders::_1, webApp ));
-    
-    
-    
-//////  Output the finished timetable:
-//    
-//    printf("Algorithm execution completed in %i generations\n", TimetablerInst::getInstance().getAlgorithm()->GetAlgorithmStatistics().GetCurrentGeneration() );
-//
-//    title = new WText("Complete!");
-//    
-//    GaChromosomePtr resultPtr;
-//    TimetablerInst::getInstance().getAlgorithm()->GetPopulation(0).GetBestChromosomes(&resultPtr, 0, 1); // store best chromosone in result
-//    
-//    finishedTT* timetable = new finishedTT(resultPtr.GetRawPtr());
-//    buildTable(timetable , false );
 }
 
-void TimetablerWebApplication::handlePathChange()
-{
-    Wt::WApplication *app = Wt::WApplication::instance();
-        
-    if (app->internalPath() == "/navigation/shop")
-        ;
-    else
-        _greeting = new WText("Ready");
-        _greeting->setStyleClass("titleText");
-        
-        root()->addWidget(_greeting);
-        root()->addWidget(new WBreak);
-        
-        _button = new Wt::WPushButton("Go", root());
-        root()->addWidget(new Wt::WBreak());
-        
-        _status = new WText("");
-        root()->addWidget(_status);
-        
-        _button->clicked().connect(this, &TimetablerWebApplication::startSolve );
+void TimetablerWebApplication::pageInput() {
+    
+    // create the stack where the contents will be located
+    WStackedWidget *contents = new WStackedWidget(root());
+    
+    // create a menu
+    WMenu *menu = new WMenu(contents);
+    
+    // add four items using the default lazy loading policy.
+    menu->addItem("Introduction", new WText("intro"));
+    menu->addItem("Download", new WText("Not yet available"));
+//    menu->addItem("Demo", new DemoWidget());
+//    menu->addItem(new WMenuItem("Demo2", new DemoWidget()));
+
     
 }
 
-void TimetablerWebApplication::pageOutput() {
+void TimetablerWebApplication::pageReady() {
     
     _greeting = new WText("Ready");
     _greeting->setStyleClass("titleText");
@@ -233,7 +172,6 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
     WGridLayout *grid;
     if (!_tableBuilt) {
         
-    //    container->setHeight(700);
         container->setStyleClass("yellow-box");
         
         grid = new WGridLayout();
@@ -347,26 +285,7 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
             }
         }
         
-    }
-    
-//    
-//    for (int row = 0; row < 2; ++row) {
-//        for (int column = 0; column < 2; ++column) {
-//            Wt::WString cell = Wt::WString("<div class='centerme'>Item ({1}, {2})</div>").arg(row).arg(column);
-//            
-//            Wt::WText *t = new Wt::WText(cell);
-//            if (row == 1 || column == 2)
-//                t->setStyleClass("blue-box");
-//            else
-//                t->setStyleClass("green-box");
-//            
-//            grid->addWidget(t, row, column);
-//        }
-//    }
-//    
-//    grid->setRowStretch(1, 1);
-//    grid->setColumnStretch(1, 1);
-    
+    }    
 }
 
 

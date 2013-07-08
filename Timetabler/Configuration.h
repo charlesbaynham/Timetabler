@@ -68,7 +68,7 @@ public:
     inline int numStudents() { return (int)_students.size(); }
     
     // Check to see if has been setup or not
-    bool parsed() { return !_isEmpty; }
+    inline bool isEmpty() { return _isEmpty; }
     
     //Parse a file for inputs
     int parseFile(char* fileName);
@@ -81,8 +81,11 @@ public:
     //remove given object from its list
     bool removeSubject( Subject* s );
     inline bool removeSubject( int ID ) { return removeSubject( this->getSubject(ID) ); }
-    bool removeTutor( Tutor* t );
-    bool removeStudent( Student* s );
+    
+    // Commented out because breaks the sequentiality (?) of the tutors
+//    bool removeTutor( int ID );
+//    inline bool removeTutor( Tutor* t ) { return removeTutor(t->getID()); }
+    void removeStudent( Student* s );
 
 private:
     

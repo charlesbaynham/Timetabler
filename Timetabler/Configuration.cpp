@@ -245,19 +245,31 @@ bool Configuration::removeSubject( Subject* s ) {
             (*itTut).second->removeSubject(s);
         }
         
-        //now, loop over all students and remove them if this subject was theirs. Maybe think of a better way to handle this. edit.
+        //now, remove all students if this subject was theirs. Maybe think of a better way to handle this. edit.
         _students.remove_if( [s](Student* thisS){ return thisS->getSubject() == s; } );
-//        for (list<Student*>::iterator itStu=_students.begin(); itStu!=_students.end(); itStu++) {
-//            if ((*itStu)->getSubject() == s) _students.erase(itStu);
-//        }
         
+        return true;
     }
     
     return false;
 }
 
-void removeTutor( Tutor* t );
-void removeStudent( Student* s );
+//bool Configuration::removeTutor( int ID ) {
+//    // remove the tutor. No need to remove from students prevlist as will now just never cause a fitness penalty
+//    
+//    // Look up the tutor by their ID
+//    hash_map<int, Tutor*>::iterator it = _tutors.find( ID );
+//    if ( it != _tutors.end() ) {
+//        _tutors.erase(it);
+//        return true;
+//    }
+//
+//    return false;
+//}
+//void Configuration::removeStudent( Student* s ) {
+//    // Remove ALL instances of this student (i.e. those with the same baseID)
+//    _students.remove_if( [s](Student* thisS){ return thisS->getBaseID() == s->getBaseID(); } );
+//}
 
 
 

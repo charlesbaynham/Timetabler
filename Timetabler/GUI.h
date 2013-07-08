@@ -14,14 +14,17 @@
 #include <Wt/WApplication>
 #include <Wt/WBreak>
 #include <Wt/WContainerWidget>
-#include <Wt/WBorderLayout>
+//#include <Wt/WBorderLayout>
 #include <Wt/WLineEdit>
 #include <Wt/WPushButton>
 #include <Wt/WText>
-#include <Wt/WHBoxLayout>
+//#include <Wt/WHBoxLayout>
 #include <Wt/WVBoxLayout>
 #include <Wt/WTimer>
 #include <Wt/WGridLayout>
+#include <Wt/WMenu>
+#include <Wt/WMenuItem>
+#include <Wt/WStackedWidget>
 
 #include "output.h"
 #include "TimetablerInst.h"
@@ -62,7 +65,10 @@ private:
     void handlePathChange();
     
     // ready to solve
-    void pageOutput();
+    void pageReady();
+    // Set up the configuration
+    void pageInput();
+    
     // Build the output timetable using <timetable> as the info, from the point of view of tutors or students according to <bool tutors>
     void buildTable(finishedTT* timetable, bool tutors);
     // Refresh table

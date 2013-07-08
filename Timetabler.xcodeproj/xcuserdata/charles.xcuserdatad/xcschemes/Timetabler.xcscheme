@@ -59,7 +59,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--http-address 0.0.0.0 --http-port 8080 --docroot ."
+            argument = "--http-address 0.0.0.0 --http-port 8080 --docroot=&quot;.;.,/style.css&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
