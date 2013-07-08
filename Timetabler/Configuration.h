@@ -73,6 +73,8 @@ public:
     //Parse a file for inputs
     int parseFile(char* fileName);
     
+//    inline void putSubject( Subject* s ) { _subjects.insert( pair<int, Subject*>( s->getID(), s ) ); }
+    
 private:
     
 	// Reads tutor's data from config file, makes object and returns pointer to it
