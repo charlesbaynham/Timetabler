@@ -28,6 +28,7 @@
 
 #include "output.h"
 #include "TimetablerInst.h"
+#include "inputGUI.h"
 
 using namespace std;
 

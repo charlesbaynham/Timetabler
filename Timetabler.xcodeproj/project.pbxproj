@@ -66,6 +66,7 @@
 		56E2E575177A1BF900CB720C /* Statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E544177A1BF900CB720C /* Statistics.cpp */; };
 		56E2E576177A1BF900CB720C /* StopCriterias.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E546177A1BF900CB720C /* StopCriterias.cpp */; };
 		56E2E577177A1BF900CB720C /* Threading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E548177A1BF900CB720C /* Threading.cpp */; };
+		56EA4023178B6337004078E6 /* inputGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56EA4021178B6337004078E6 /* inputGUI.cpp */; };
 		56F72DFB17817E8300D849AD /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56F72DF917817E8300D849AD /* output.cpp */; };
 /* End PBXBuildFile section */
 
@@ -226,6 +227,8 @@
 		56E2E54C177A1BF900CB720C /* GeneticLibrary.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcproj; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcproj"; sourceTree = homedir; };
 		56E2E54D177A1BF900CB720C /* GeneticLibrary.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcxproj; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcxproj"; sourceTree = homedir; };
 		56E2E54E177A1BF900CB720C /* GeneticLibrary.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcxproj.filters; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcxproj.filters"; sourceTree = homedir; };
+		56EA4021178B6337004078E6 /* inputGUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = inputGUI.cpp; path = ../inputGUI.cpp; sourceTree = "<group>"; };
+		56EA4022178B6337004078E6 /* inputGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inputGUI.h; path = ../inputGUI.h; sourceTree = "<group>"; };
 		56F72DF917817E8300D849AD /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = output.cpp; sourceTree = "<group>"; };
 		56F72DFA17817E8300D849AD /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = output.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -299,6 +302,8 @@
 		56A9A7631779B4A900C70EE3 /* Timetabler */ = {
 			isa = PBXGroup;
 			children = (
+				56EA4021178B6337004078E6 /* inputGUI.cpp */,
+				56EA4022178B6337004078E6 /* inputGUI.h */,
 				56A9A7641779B4A900C70EE3 /* main.cpp */,
 				56CE097117831E8800D75072 /* GUI.cpp */,
 				56CE097217831E8800D75072 /* GUI.h */,
@@ -630,6 +635,7 @@
 				56DF100A177C6AE8005F1B6A /* Configuration.cpp in Sources */,
 				56F72DFB17817E8300D849AD /* output.cpp in Sources */,
 				56CE097317831E8800D75072 /* GUI.cpp in Sources */,
+				56EA4023178B6337004078E6 /* inputGUI.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

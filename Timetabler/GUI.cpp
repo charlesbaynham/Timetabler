@@ -120,6 +120,7 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
     
 }
 
+
 void TimetablerWebApplication::pageInput() {
     
         // create a menu
@@ -128,11 +129,12 @@ void TimetablerWebApplication::pageInput() {
     // add four items using the default lazy loading policy.
     menu->addTab( new WText("intro"), "Introduction");
     menu->addTab( new WText("Not yet available"), "Download", WTabWidget::LoadPolicy::PreLoading);
-//    menu->addTab( startSolve(), "Start solving");
-//    menu->addItem(new WMenuItem("Demo2", new DemoWidget()));
-
     
+    GUITutor* test = new GUITutor();
+    
+    menu->addTab((*test)(), "GUITutor");
 }
+
 
 void TimetablerWebApplication::pageReady() {
     
