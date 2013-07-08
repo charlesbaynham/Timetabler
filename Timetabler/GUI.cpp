@@ -122,16 +122,13 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 
 void TimetablerWebApplication::pageInput() {
     
-    // create the stack where the contents will be located
-    WStackedWidget *contents = new WStackedWidget(root());
-    
-    // create a menu
-    WMenu *menu = new WMenu(contents);
+        // create a menu
+    WTabWidget *menu = new WTabWidget(root());
     
     // add four items using the default lazy loading policy.
-    menu->addItem("Introduction", new WText("intro"));
-    menu->addItem("Download", new WText("Not yet available"));
-//    menu->addItem("Demo", new DemoWidget());
+    menu->addTab( new WText("intro"), "Introduction");
+    menu->addTab( new WText("Not yet available"), "Download", WTabWidget::LoadPolicy::PreLoading);
+//    menu->addTab( startSolve(), "Start solving");
 //    menu->addItem(new WMenuItem("Demo2", new DemoWidget()));
 
     

@@ -24,7 +24,7 @@
 #include <Wt/WGridLayout>
 #include <Wt/WMenu>
 #include <Wt/WMenuItem>
-#include <Wt/WStackedWidget>
+#include <Wt/WTabWidget>
 
 #include "output.h"
 #include "TimetablerInst.h"
