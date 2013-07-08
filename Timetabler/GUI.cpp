@@ -36,6 +36,7 @@ void TimetablerWebApplication::startSolve() {
     // Read in configuration
     if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
     
+    
     // Solve!
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
     

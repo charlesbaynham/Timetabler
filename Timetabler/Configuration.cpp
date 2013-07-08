@@ -229,3 +229,35 @@ void Configuration::dumpTutors(){
     }
     
 }
+
+// remove given objects from their container. Return false on failure
+
+bool Configuration::removeSubject( Subject* s ) {
+    
+    // Look up the subject by its ID
+    hash_map<int, Subject*>::iterator it = _subjects.find( s->getID() );
+    if ( it != _subjects.end() ) {
+        // We've found the subject! Erase it...
+        _subjects.erase(it);
+
+        //now loop over all the tutors and remove this subject from their list if present
+        for (hash_map<int, Tutor*>::iterator itTut=_tutors.begin(); itTut!=_tutors.end(); itTut++) {
+            (*itTut).second->removeSubject(s);
+        }
+        
+        //now, loop over all students and remove them if this subject was theirs. Maybe think of a better way to handle this. edit.
+        _students.remove_if( [s](Student* thisS){ return thisS->getSubject() == s; } );
+//        for (list<Student*>::iterator itStu=_students.begin(); itStu!=_students.end(); itStu++) {
+//            if ((*itStu)->getSubject() == s) _students.erase(itStu);
+//        }
+        
+    }
+    
+    return false;
+}
+
+void removeTutor( Tutor* t );
+void removeStudent( Student* s );
+
+
+

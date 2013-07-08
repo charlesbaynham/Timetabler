@@ -33,3 +33,4 @@ void Tutor::processSlots() {
     
     _slotsProcessed = true;
 }
+

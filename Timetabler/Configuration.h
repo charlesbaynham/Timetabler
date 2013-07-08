@@ -73,9 +73,17 @@ public:
     //Parse a file for inputs
     int parseFile(char* fileName);
     
+    // Given an object, add it to the relevant list
     inline void addSubject( Subject* s ) { _subjects.insert( pair<int, Subject*>( s->getID(), s ) ); }
     inline void addTutor( Tutor* t ) { _tutors.insert( pair<int, Tutor*>( t->getID(), t ) ); }
     inline void addStudent( Student* s ) { _students.push_back( s ); }
+    
+    //remove given object from its list
+    bool removeSubject( Subject* s );
+    inline bool removeSubject( int ID ) { return removeSubject( this->getSubject(ID) ); }
+    bool removeTutor( Tutor* t );
+    bool removeStudent( Student* s );
+
 private:
     
 	// Reads tutor's data from config file, makes object and returns pointer to it

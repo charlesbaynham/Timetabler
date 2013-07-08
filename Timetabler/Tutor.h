@@ -33,6 +33,9 @@ public:
     inline list<Subject*> getSubjects() { return _subjects; }
     inline list<int> getNotSlots() { return _notSlots; }
     
+    inline void removeSubject(Subject* s) { _subjects.remove(s); }
+    inline void addSubject(Subject* s) { removeSubject(s); _subjects.push_back(s); }
+    
     void processSlots(); // Calculate the _notSlots list based on _notTimes and number of tutors in global config. 
     inline bool isProcessed() { return _slotsProcessed; }
 };
