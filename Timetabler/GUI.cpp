@@ -130,11 +130,7 @@ void TimetablerWebApplication::pageInput() {
     if (!_inputGUI) {
         
         _inputGUI = new inputGUI(root());
-        
-        _inputGUI->addBlankTutor();
-        _inputGUI->addBlankTutor();
-        _inputGUI->addBlankTutor();
-        
+                
         WApplication *app = WApplication::instance();
         app->processEvents();
         

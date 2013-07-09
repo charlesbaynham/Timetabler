@@ -89,12 +89,16 @@ public:
 
 // parent class for GUI elements
 class GUIelement {
-
 protected:
+    inputGUI* _parent;
+    
     WContainerWidget* _visOutput;
     
+    WPushButton* _deleteMe;
+    
+    virtual void addDeleteButton();
 public:
-    inline GUIelement() { _visOutput = new WContainerWidget(); }
+    inline GUIelement(inputGUI* parent) : _parent(parent) { _visOutput = new WContainerWidget(); }
     
     // The overloaded () function returns the Container Widget that is displayed and contains the other widgets
     WContainerWidget* operator() () { return _visOutput; }
@@ -115,7 +119,8 @@ class GUITutor : public GUIelement {
     
     
 public:
-    GUITutor();
+    GUITutor(inputGUI* parent);
+    void addDeleteButton();
     
 };
 
@@ -134,7 +139,8 @@ class GUIStudent : public GUIelement {
     WText* _prevLabel;
     
 public:
-    GUIStudent();
+    GUIStudent(inputGUI* parent);
+    void addDeleteButton();
 };
 
 
@@ -148,7 +154,8 @@ class GUISubject : public GUIelement {
     WText* _nameLabel;
     
 public:
-    GUISubject();
+    GUISubject(inputGUI* parent);
+    void addDeleteButton();
 };
 
 #endif /* defined(__Timetabler__inputGUI__) */

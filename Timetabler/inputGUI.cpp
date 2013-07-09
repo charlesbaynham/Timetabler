@@ -8,7 +8,12 @@
 
 #include "inputGUI.h"
 
-GUITutor::GUITutor()
+void GUIelement::addDeleteButton() {
+    _deleteMe = new WPushButton("Delete", _visOutput);
+//    _deleteMe->clicked().connect(parent, inputGUI::removeGUIStudent(this) );
+}
+GUITutor::GUITutor(inputGUI* parent) :
+    GUIelement(parent)
 {
     _IDLabel = new WText("ID:", _visOutput);
     _ID = new WLineEdit(_visOutput);
@@ -18,15 +23,21 @@ GUITutor::GUITutor()
     _subjects = new WSelectionBox(_visOutput);
     _notLabel = new WText("Unavailable times:",_visOutput);
     _notSlots = new WSelectionBox(_visOutput);
+    
+    addDeleteButton();
 }
-GUISubject::GUISubject()
+GUISubject::GUISubject(inputGUI* parent) :
+    GUIelement(parent)
 {
     _IDLabel = new WText("ID:", _visOutput);
     _ID = new WLineEdit(_visOutput);
     _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
+    
+    addDeleteButton();
 }
-GUIStudent::GUIStudent()
+GUIStudent::GUIStudent(inputGUI* parent) :
+    GUIelement(parent)
 {
     _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
@@ -36,20 +47,24 @@ GUIStudent::GUIStudent()
     _subject = new WComboBox(_visOutput);
     _prevLabel = new WText("Previous tutors:", _visOutput);
     _prevTutors = new WSelectionBox(_visOutput);
+    
+    
+    // Add the delete button nherited from GUIelement
+    addDeleteButton();
 }
 
 void inputGUI::addBlankTutor () {
-    GUITutor* newTut = new GUITutor;
+    GUITutor* newTut = new GUITutor(this);
     _tutors.push_back(newTut); // Add new GUI element to list...
     _tutorTab->addWidget( (*newTut)() ); // and to the display
 }
 void inputGUI::addBlankSubject () {
-    GUISubject* newSubj = new GUISubject;
+    GUISubject* newSubj = new GUISubject(this);
     _subjects.push_back(newSubj); // Add new GUI element to list...
     _subjectTab->addWidget( (*newSubj)() ); // and to the display
 }
 void inputGUI::addBlankStudent () {
-    GUIStudent* newStud = new GUIStudent;
+    GUIStudent* newStud = new GUIStudent(this);
     _students.push_back(newStud); // Add new GUI element to list...
     _studentTab->addWidget( (*newStud)() ); // and to the display
 }
@@ -68,6 +83,29 @@ void inputGUI::removeGUISubject(GUISubject* s)
 {
     _subjectTab->removeWidget( (*s)() );
     _subjects.remove(s);
+}
+
+// Specialisations for adding delete buttons
+void GUITutor::addDeleteButton()
+{
+    _deleteMe = new WPushButton("Delete", _visOutput);
+    
+    // Bind the button to the removeGUItutor function of _parent, passing this object as the argument to be deleted
+    _deleteMe->clicked().connect( boost::bind( &inputGUI::removeGUITutor, _parent, this ) );
+}
+void GUISubject::addDeleteButton()
+{
+    _deleteMe = new WPushButton("Delete", _visOutput);
+    
+    // Bind the button to the removeGUItutor function of _parent, passing this object as the argument to be deleted
+    _deleteMe->clicked().connect( boost::bind( &inputGUI::removeGUISubject, _parent, this ) );
+}
+void GUIStudent::addDeleteButton()
+{
+    _deleteMe = new WPushButton("Delete", _visOutput);
+    
+    // Bind the button to the removeGUItutor function of _parent, passing this object as the argument to be deleted
+    _deleteMe->clicked().connect( boost::bind( &inputGUI::removeGUIStudent, _parent, this ) );
 }
 
 // Initialise the display elements and store pointers to them in the inputGUI class
