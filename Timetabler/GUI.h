@@ -65,6 +65,8 @@ private:
     bool _tutors=false;
     void handlePathChange();
     
+    inputGUI* _inputGUI;
+    
     // ready to solve
     void pageReady();
     // Set up the configuration

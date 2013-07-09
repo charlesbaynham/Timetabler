@@ -9,8 +9,11 @@
 #include "GUI.h"
 #include <functional>
 
+#include <regex>
+
 using namespace std;
 
+#include <boost/algorithm/string/predicate.hpp>
 
 void TimetablerWebApplication::handlePathChange()
 {
@@ -27,7 +30,8 @@ void TimetablerWebApplication::handlePathChange()
             startSolve();
     }
     else if(path == "/") pageReady();
-    else if(path == "/test") pageInput();
+    else if( path == "/input" ) pageInput();
+    else if( boost::starts_with(path, "/input") ) ;
     else app->setInternalPath("/", true); // Redirect to main page if page not found
     
     
@@ -123,16 +127,27 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 
 void TimetablerWebApplication::pageInput() {
     
-        // create a menu
-    WTabWidget *menu = new WTabWidget(root());
-    
-    // add four items using the default lazy loading policy.
-    menu->addTab( new WText("intro"), "Introduction");
-    menu->addTab( new WText("Not yet available"), "Download", WTabWidget::LoadPolicy::PreLoading);
-    
-    GUITutor* test = new GUITutor();
-    
-    menu->addTab((*test)(), "GUITutor");
+    if (!_inputGUI) {
+        
+        _inputGUI = new inputGUI(root());
+        
+        _inputGUI->addBlankTutor();
+        _inputGUI->addBlankTutor();
+        _inputGUI->addBlankTutor();
+        
+        WApplication *app = WApplication::instance();
+        app->processEvents();
+        
+        
+//        test->addBlankTutor();
+//            test->addBlankTutor();
+//        inputMenu->addTab(test->renderTutor(), "Tutors");
+    }
+    else {
+        root()->clear();
+        _inputGUI->redraw(root());
+    }
+
 }
 
 
