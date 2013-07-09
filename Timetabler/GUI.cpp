@@ -31,7 +31,7 @@ void TimetablerWebApplication::handlePathChange()
     }
     else if(path == "/") pageReady();
     else if( path == "/input" ) pageInput();
-    else if( boost::starts_with(path, "/input") ) ;
+    else if( boost::starts_with(path, "/input") ) app->setInternalPath("/input", true); // redirect to input page if using derivative path
     else app->setInternalPath("/", true); // Redirect to main page if page not found
     
     
@@ -138,10 +138,6 @@ void TimetablerWebApplication::pageInput() {
         WApplication *app = WApplication::instance();
         app->processEvents();
         
-        
-//        test->addBlankTutor();
-//            test->addBlankTutor();
-//        inputMenu->addTab(test->renderTutor(), "Tutors");
     }
     else {
         root()->clear();

@@ -10,9 +10,32 @@
 
 GUITutor::GUITutor()
 {
-    _visOutput = new WContainerWidget();
+    _IDLabel = new WText("ID:", _visOutput);
     _ID = new WLineEdit(_visOutput);
+    _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
+    _subjectsLabel = new WText("Subjects:",_visOutput);
+    _subjects = new WSelectionBox(_visOutput);
+    _notLabel = new WText("Unavailable times:",_visOutput);
+    _notSlots = new WSelectionBox(_visOutput);
+}
+GUISubject::GUISubject()
+{
+    _IDLabel = new WText("ID:", _visOutput);
+    _ID = new WLineEdit(_visOutput);
+    _nameLabel = new WText("Name:", _visOutput);
+    _name = new WLineEdit(_visOutput);
+}
+GUIStudent::GUIStudent()
+{
+    _nameLabel = new WText("Name:", _visOutput);
+    _name = new WLineEdit(_visOutput);
+    _interviewsLabel = new WText("Number of interviews:", _visOutput);
+    _numInterviews = new WComboBox(_visOutput);
+    _subjectLabel = new WText("Subject:", _visOutput);
+    _subject = new WComboBox(_visOutput);
+    _prevLabel = new WText("Previous tutors:", _visOutput);
+    _prevTutors = new WSelectionBox(_visOutput);
 }
 
 void inputGUI::addBlankTutor () {
@@ -20,76 +43,79 @@ void inputGUI::addBlankTutor () {
     _tutors.push_back(newTut); // Add new GUI element to list...
     _tutorTab->addWidget( (*newTut)() ); // and to the display
 }
-
-//WContainerWidget* inputGUI::renderTutor() {
-//    WContainerWidget* out = new WContainerWidget();
-//    
-//    // Loop over all the GUITutor objects and add each to the output
-//    for (list<GUITutor*>::iterator it=_tutors.begin(); it!=_tutors.end(); it++) {
-//        out->addWidget( (**it)() ); // Nasty looking, I know. *it is a GUITutor* pointer => **it is the GUITutor object itself.
-//                                    //   (**it) () is calling the overloaded operator() which returns a WContainer for that GUI element
-//        cerr << "\n\n***\nAdding GUItutor\n***\n\n"<<endl;
-//    }
-//    
-//    return out;
-//}
-
-//void inputGUI::setMenu(Wt::WTabWidget& menu) {
-//    
-//    _menu = &menu;
-//    
-//    _tutorTab = renderTutor();
-////    _studentTab = renderStudent();
-////    _subjectTab = renderSubject();
-//    
-//    //debug
-//    _tutorTab->addWidget(new WText("This is a test"));
-//    //end debug
-//    
-//    _menu->addTab(_tutorTab, "Tutors");
-////    _menu->addTab(renderSubject(), "Subjects");
-////    _menu->addTab(renderStudent(), "Students");
-//}
-
-//void inputGUI::refresh() {
-//    _menu->removeTab(_tutorTab);
-//    _tutorTab = renderTutor();
-//    _menu->addTab(_tutorTab, "Tutors");
-////    _studentTab = renderStudent();
-////    _subjectTab = renderSubject();
-//}
+void inputGUI::addBlankSubject () {
+    GUISubject* newSubj = new GUISubject;
+    _subjects.push_back(newSubj); // Add new GUI element to list...
+    _subjectTab->addWidget( (*newSubj)() ); // and to the display
+}
+void inputGUI::addBlankStudent () {
+    GUIStudent* newStud = new GUIStudent;
+    _students.push_back(newStud); // Add new GUI element to list...
+    _studentTab->addWidget( (*newStud)() ); // and to the display
+}
 
 void inputGUI::removeGUITutor(GUITutor* t)
 {
     _tutorTab->removeWidget( (*t)() );
     _tutors.remove(t);
 }
-
+void inputGUI::removeGUIStudent(GUIStudent* s)
+{
+    _studentTab->removeWidget( (*s)() );
+    _students.remove(s);
+}
+void inputGUI::removeGUISubject(GUISubject* s)
+{
+    _subjectTab->removeWidget( (*s)() );
+    _subjects.remove(s);
+}
 
 // Initialise the display elements and store pointers to them in the inputGUI class
 inputGUI::inputGUI(WContainerWidget* parent) :
-    _tutorTab(new WContainerWidget())
+    _tutorTab(new WContainerWidget()),
+    _subjectTab(new WContainerWidget()),
+    _studentTab(new WContainerWidget()),
+    _submitTab(new WContainerWidget())
 {
     // create a menu
     _menu = new WTabWidget(parent);
     
-    _menu->setInternalPathEnabled();
-    _menu->setInternalBasePath("/input");
+//    _menu->setInternalPathEnabled();
+//    _menu->setInternalBasePath("/input");
     
-    //Add tabs:
-    _menu->addTab( new WText("intro"), "Introduction");
-    _menu->addTab( new WText("Not yet available"), "Download", WTabWidget::LoadPolicy::PreLoading);
+//    //Add tabs:
+//    _menu->addTab( new WText("intro"), "Introduction");
+//    _menu->addTab( new WText("Not yet available"), "Download", WTabWidget::LoadPolicy::PreLoading);
     
-    // Add the menu to the display
+    // Add the tabs to the menu
+    _menu->addTab(_subjectTab, "Subjects");
     _menu->addTab(_tutorTab, "Tutors");
+    _menu->addTab(_studentTab, "Students");
+
+
+    _menu->addTab(_submitTab, "Submit");
+    WPushButton* submit = new WPushButton("Submit");
+    _submitTab->addWidget(submit);
+    submit->clicked().connect( this, &inputGUI::submit );
     
-    //debug
-    WPushButton* removeButton = new WPushButton("Remove first");
-    removeButton->clicked().connect( this, &inputGUI::removeFirstTutor );
-    _tutorTab->addWidget(removeButton);
+    //Add "new" buttons
+    WPushButton* newTut = new WPushButton("Add new");
+    WPushButton* newStud = new WPushButton("Add new");
+    WPushButton* newSubj = new WPushButton("Add new");
     
-    //end debug
+    newTut->clicked().connect( this, &inputGUI::addBlankTutor );
+    newStud->clicked().connect( this, &inputGUI::addBlankStudent );
+    newSubj->clicked().connect( this, &inputGUI::addBlankSubject );
     
+    _tutorTab->addWidget(newTut);
+    _studentTab->addWidget(newStud);
+    _subjectTab->addWidget(newSubj);
+    
+}
+
+void inputGUI::submit() {
+    
+    ;
 }
 
 
