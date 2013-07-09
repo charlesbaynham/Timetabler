@@ -7,15 +7,17 @@
 //
 
 #include "inputGUI.h"
+#include <boost/lexical_cast.hpp>
 
+int GUITutor::_nextID = 1;
 
 GUITutor::GUITutor(inputGUI* parent) :
     GUIelement(parent)
 {
-    _tutor = new Tutor(0, "", NULL, NULL);
-    
-    _IDLabel = new WText("ID:", _visOutput);
-    _ID = new WLineEdit(_visOutput);
+    _ID = _nextID++;
+    printf("Creating new tutor with ID %i\n", _ID);
+    _tutor = new Tutor(_ID, "", NULL, NULL);
+
     _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
     _subjectsLabel = new WText("Subjects:",_visOutput);
@@ -24,6 +26,9 @@ GUITutor::GUITutor(inputGUI* parent) :
     _notSlots = new WSelectionBox(_visOutput);
     
     addDeleteButton();
+    
+    //register update handler
+    _name->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
 }
 GUISubject::GUISubject(inputGUI* parent) :
     GUIelement(parent)
@@ -54,10 +59,11 @@ GUIStudent::GUIStudent(inputGUI* parent) :
     _prevLabel = new WText("Previous tutors:", _visOutput);
     _prevTutors = new WSelectionBox(_visOutput);
     //loop over the index and populate the new selection box
-    for (vector<Tutor*>::iterator it = _parent->getTutorIndex().begin(); it != _parent->getTutorIndex().end(); it++)
+    vector<Tutor*> tutorIndex = _parent->getTutorIndex();
+    for (vector<Tutor*>::iterator it = tutorIndex.begin(); it != tutorIndex.end(); it++)
         _prevTutors->addItem( (*it)->getName() );
     
-    // Add the delete button nherited from GUIelement
+    // Add the delete button inherited from GUIelement
     addDeleteButton();
 }
 
@@ -68,7 +74,8 @@ void inputGUI::addBlankTutor () {
     
     // Add to the index list, then
     // loop over all GUI elements in the student tab, adding this new tutor to the options
-    _tutorIndex.push_back(newTut->getTutor());
+    Tutor* tutObj = newTut->getTutor();
+    _tutorIndex.push_back(tutObj);
     for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
         (*it)->addTutorOption(newTut->getTutor());
     }
@@ -85,17 +92,47 @@ void inputGUI::addBlankStudent () {
     _studentTab->addWidget( (*newStud)() ); // and to the display
 }
 
+void inputGUI::changeTutorOptions(Tutor* newtut, Tutor* oldtut) {
+    // get the index of the tutor
+    vector<Tutor*>::iterator search = find(_tutorIndex.begin(), _tutorIndex.end(), oldtut );
+    int index = (int)(search - _tutorIndex.begin());
+    
+    // update the index with the new tutor
+    _tutorIndex[index] = newtut;
+    
+    // loop over all GUI elements in the student tab, changing the tutor to reflect the changes
+    for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
+        (*it)->removeTutorOption(index);
+        (*it)->addTutorOption(newtut, index);
+        
+        // edit: handle pre-existing selections
+    }
+
+}
+
 void inputGUI::removeGUITutor(GUITutor* t)
 {
     // get the index of the tutor, then remove from the index
     vector<Tutor*>::iterator search = find(_tutorIndex.begin(), _tutorIndex.end(), t->getTutor());
-    int currIndex = search - _tutorIndex.begin();
+    int currIndex = (int)(search - _tutorIndex.begin());
     _tutorIndex.erase(search);
+    
+    if (currIndex != t->getTutor()->getID() - 1) {printf("\nSeems that you were wrong.\n"); exit(1); }
     
     // loop over all GUI elements in the student tab, removing this new tutor from the options
     for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
         (*it)->removeTutorOption(currIndex);
     }
+    
+    //loop over the rest of the tutors, decrementing their IDs to ensure that we still have sequential IDs
+    for ( list<GUITutor*>::iterator it = _tutors.begin(); it != _tutors.end(); it++) {
+        int loopID = (*it)->getTutor()->getID();
+        if ( loopID > t->getTutor()->getID() )
+            (*it)->decrementID();
+    }
+    
+    //reduce the next id
+    GUITutor::decrementGlobalID();
     
     _tutorTab->removeWidget( (*t)() );
     _tutors.remove(t);
@@ -182,4 +219,19 @@ void inputGUI::submit() {
     ;
 }
 
+void GUITutor::callUpdate() {
+    
+    Tutor* newtut = new Tutor(*_tutor);
+    
+    newtut->setID( _ID );
+    newtut->setName( _name->valueText().narrow() );
+    
+    // edit add the rest of the params
+    
+    // Update the other elements that use this tutor
+    _parent->changeTutorOptions(newtut, _tutor);
+    
+    // update the _tutor object in this element
+    _tutor = newtut;
+}
 

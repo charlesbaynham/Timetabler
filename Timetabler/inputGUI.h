@@ -71,12 +71,14 @@ public:
     void removeGUITutor(GUITutor* t);
     void removeGUIStudent(GUIStudent* s);
     void removeGUISubject(GUISubject* s);
+    
+    //modify the options when a tutor / subject is changed
+    void changeTutorOptions( Tutor* newtut, Tutor* oldtut);
+    void changeSubjectOptions( Subject* newsub, Subject* oldsub);
 
     // return the indexes
     vector<Tutor*> getTutorIndex() { return _tutorIndex; }
     vector<Subject*> getSubjectIndex() { return _subjectIndex; }
-    
-
     
     // process all the input data and use it to fill out Configuration and start the solution
     void submit();
@@ -114,8 +116,8 @@ class GUITutor : public GUIelement {
     
     Tutor* _tutor;
     
-    WLineEdit* _ID;
-    WText* _IDLabel;
+    int _ID;
+    static int _nextID;
     WLineEdit* _name;
     WText* _nameLabel;
     WSelectionBox* _subjects;
@@ -128,6 +130,12 @@ public:
     GUITutor(inputGUI* parent);
     void addDeleteButton();
     inline Tutor* getTutor() { return _tutor; }
+
+    // call the method in inputGUI to update for a changed tuto entry
+    void callUpdate();
+    
+    inline void decrementID() { _ID--; callUpdate(); }
+    inline static void decrementGlobalID() { _nextID--; }
     
 };
 
@@ -150,9 +158,8 @@ public:
     void addDeleteButton();
     inline Student* getStudent() {return _student;}
     
-    void addTutorOption(Tutor* n) {
-        _prevTutors->addItem(n->getName());
-    }
+    void addTutorOption(Tutor* n) { _prevTutors->addItem(n->getName()); }
+    void addTutorOption(Tutor* n, int position) { _prevTutors->insertItem(position, n->getName()); }
     
     void removeTutorOption(int index) {
         _prevTutors->removeItem(index);
@@ -174,6 +181,9 @@ public:
     GUISubject(inputGUI* parent);
     void addDeleteButton();
     inline Subject* getSubject() { return _subject; }
+
+    // call the methods in inputGUI to update for a changed subject entry
+    void callSubjectUpdate();
 };
 
 #endif /* defined(__Timetabler__inputGUI__) */
