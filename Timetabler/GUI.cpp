@@ -137,7 +137,7 @@ void TimetablerWebApplication::pageInput() {
     }
     else {
         root()->clear();
-        _inputGUI->redraw(root());
+//        _inputGUI->redraw(root());
     }
 
 }

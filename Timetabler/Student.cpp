@@ -12,13 +12,13 @@ using namespace std;
 
 int Student::_nextID = 1;
 
-Student::Student(int ID, const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors) :
-    _ID(ID),
-    _baseID(ID),
-    _name(name),
-    _subject(subj),
-    _noInterviews(noInterviews),
-    _prevTutors(prevTutors) { }
+//Student::Student(int ID, const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors) :
+//    _ID(ID),
+//    _baseID(ID),
+//    _name(name),
+//    _subject(subj),
+//    _noInterviews(noInterviews),
+//    _prevTutors(prevTutors) { }
 
 Student::Student(const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors) :
     _name(name),

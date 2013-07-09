@@ -8,13 +8,12 @@
 
 #include "inputGUI.h"
 
-void GUIelement::addDeleteButton() {
-    _deleteMe = new WPushButton("Delete", _visOutput);
-//    _deleteMe->clicked().connect(parent, inputGUI::removeGUIStudent(this) );
-}
+
 GUITutor::GUITutor(inputGUI* parent) :
     GUIelement(parent)
 {
+    _tutor = new Tutor(0, "", NULL, NULL);
+    
     _IDLabel = new WText("ID:", _visOutput);
     _ID = new WLineEdit(_visOutput);
     _nameLabel = new WText("Name:", _visOutput);
@@ -29,6 +28,8 @@ GUITutor::GUITutor(inputGUI* parent) :
 GUISubject::GUISubject(inputGUI* parent) :
     GUIelement(parent)
 {
+    _subject = new Subject(0, "");
+    
     _IDLabel = new WText("ID:", _visOutput);
     _ID = new WLineEdit(_visOutput);
     _nameLabel = new WText("Name:", _visOutput);
@@ -39,15 +40,22 @@ GUISubject::GUISubject(inputGUI* parent) :
 GUIStudent::GUIStudent(inputGUI* parent) :
     GUIelement(parent)
 {
+    _student = new Student("", NULL, 2, NULL);
+    
     _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
     _interviewsLabel = new WText("Number of interviews:", _visOutput);
     _numInterviews = new WComboBox(_visOutput);
+        _numInterviews->addItem("2");
+        _numInterviews->addItem("4");
+        _numInterviews->setCurrentIndex(0);
     _subjectLabel = new WText("Subject:", _visOutput);
     _subject = new WComboBox(_visOutput);
     _prevLabel = new WText("Previous tutors:", _visOutput);
     _prevTutors = new WSelectionBox(_visOutput);
-    
+    //loop over the index and populate the new selection box
+    for (vector<Tutor*>::iterator it = _parent->getTutorIndex().begin(); it != _parent->getTutorIndex().end(); it++)
+        _prevTutors->addItem( (*it)->getName() );
     
     // Add the delete button nherited from GUIelement
     addDeleteButton();
@@ -57,11 +65,19 @@ void inputGUI::addBlankTutor () {
     GUITutor* newTut = new GUITutor(this);
     _tutors.push_back(newTut); // Add new GUI element to list...
     _tutorTab->addWidget( (*newTut)() ); // and to the display
+    
+    // Add to the index list, then
+    // loop over all GUI elements in the student tab, adding this new tutor to the options
+    _tutorIndex.push_back(newTut->getTutor());
+    for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
+        (*it)->addTutorOption(newTut->getTutor());
+    }
 }
 void inputGUI::addBlankSubject () {
     GUISubject* newSubj = new GUISubject(this);
     _subjects.push_back(newSubj); // Add new GUI element to list...
     _subjectTab->addWidget( (*newSubj)() ); // and to the display
+    _subjectIndex.push_back( newSubj->getSubject() );  // And to the other relevant elements
 }
 void inputGUI::addBlankStudent () {
     GUIStudent* newStud = new GUIStudent(this);
@@ -71,6 +87,16 @@ void inputGUI::addBlankStudent () {
 
 void inputGUI::removeGUITutor(GUITutor* t)
 {
+    // get the index of the tutor, then remove from the index
+    vector<Tutor*>::iterator search = find(_tutorIndex.begin(), _tutorIndex.end(), t->getTutor());
+    int currIndex = search - _tutorIndex.begin();
+    _tutorIndex.erase(search);
+    
+    // loop over all GUI elements in the student tab, removing this new tutor from the options
+    for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
+        (*it)->removeTutorOption(currIndex);
+    }
+    
     _tutorTab->removeWidget( (*t)() );
     _tutors.remove(t);
 }

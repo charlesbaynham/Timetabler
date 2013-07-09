@@ -29,9 +29,15 @@ class GUISubject;
 
 class inputGUI : public WObject {
     
+//    Lists to hold all the GUI elements for the three tabs
     list<GUITutor*> _tutors;
     list<GUIStudent*> _students;
     list<GUISubject*> _subjects;
+    
+//    2 indices to hold the poisition of tutors / subjects in the WSelectionBox/WComboBox elements.
+//      I.e. _tutorIndex[2] == tutorX  implies that the item at index 2 in a selection box refers to tutorX
+    vector<Tutor*> _tutorIndex;
+    vector<Subject*> _subjectIndex;
     
     WTabWidget* _menu;
     
@@ -54,7 +60,7 @@ public:
     // Initialise this object: create a menu in parent
     inputGUI(WContainerWidget* parent);
     
-    inline void redraw(WContainerWidget* parent) { ;/*parent->addWidget(_menu);*/ }
+//    inline void redraw(WContainerWidget* parent) { ;/*parent->addWidget(_menu);*/ }
     
     // Add GUI elements for data entry
     void addBlankStudent();
@@ -65,15 +71,15 @@ public:
     void removeGUITutor(GUITutor* t);
     void removeGUIStudent(GUIStudent* s);
     void removeGUISubject(GUISubject* s);
+
+    // return the indexes
+    vector<Tutor*> getTutorIndex() { return _tutorIndex; }
+    vector<Subject*> getSubjectIndex() { return _subjectIndex; }
+    
+
     
     // process all the input data and use it to fill out Configuration and start the solution
     void submit();
-    
-    //debug
-    void removeFirstTutor() {
-        removeGUITutor(_tutors.front());
-    }
-    //end debug
     
     
 //    // Set the menu to the arg and add the rendered Tutor, Student and Subject tabs
@@ -96,7 +102,7 @@ protected:
     
     WPushButton* _deleteMe;
     
-    virtual void addDeleteButton();
+    virtual void addDeleteButton()=0;
 public:
     inline GUIelement(inputGUI* parent) : _parent(parent) { _visOutput = new WContainerWidget(); }
     
@@ -121,6 +127,7 @@ class GUITutor : public GUIelement {
 public:
     GUITutor(inputGUI* parent);
     void addDeleteButton();
+    inline Tutor* getTutor() { return _tutor; }
     
 };
 
@@ -141,6 +148,16 @@ class GUIStudent : public GUIelement {
 public:
     GUIStudent(inputGUI* parent);
     void addDeleteButton();
+    inline Student* getStudent() {return _student;}
+    
+    void addTutorOption(Tutor* n) {
+        _prevTutors->addItem(n->getName());
+    }
+    
+    void removeTutorOption(int index) {
+        _prevTutors->removeItem(index);
+    }
+    
 };
 
 
@@ -156,6 +173,7 @@ class GUISubject : public GUIelement {
 public:
     GUISubject(inputGUI* parent);
     void addDeleteButton();
+    inline Subject* getSubject() { return _subject; }
 };
 
 #endif /* defined(__Timetabler__inputGUI__) */
