@@ -41,7 +41,7 @@ void TimetablerWebApplication::startSolve() {
 
     root()->clear();
     
-    // setup a timer which calls MyClass::timeout() every 2 seconds, until timer->stop() is called.
+    // setup a timer which refreshes the timetable (edit: if it's changed) every 2 seconds, until timer->stop() is called.
     _timer = new WTimer();
     _timer->setInterval(200);
     _timer->timeout().connect(this, &TimetablerWebApplication::refreshStats );
@@ -87,19 +87,19 @@ void TimetablerWebApplication::refreshStats() {
     _bestFitness->setText(out);
     
     // Build table
+    static finishedTT* lastTT;
     finishedTT* timetable = new finishedTT(result.GetRawPtr());
-    buildTable(timetable , _tutors );
+    
+    // If it has changed:
+    if (lastTT != timetable) {
+        buildTable(timetable , _tutors );
+        lastTT = timetable;
+    }
+
     
     if (bestFitness > 0.999999)
-    {
-        
-        // Build table
-        finishedTT* timetable = new finishedTT(result.GetRawPtr());
-        buildTable(timetable , _tutors );
-
         _timer->stop();
 
-    }
 }
 
 
@@ -191,21 +191,25 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         grid = new WGridLayout();
         container->setLayout(grid);
         
-        // (0,0) is blank. edit
+        // (0,0) contains the status and the controls
         WContainerWidget* toggleButtons = new WContainerWidget;
 
         WVBoxLayout* buttons = new WVBoxLayout;
         toggleButtons->setLayout(buttons);
 
-        WPushButton *setTutor=new WPushButton("Tutor mode", root());
-        WPushButton *setStudent=new WPushButton("Student mode", root());
+        WPushButton *setTutor=new WPushButton("Tutor mode");
+        WPushButton *setStudent=new WPushButton("Student mode");
+        WPushButton *stop = new WPushButton("Stop");
         
         setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
         setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
+        stop->clicked().connect( boost::bind( &GaAlgorithm::StopSolving, TimetablerInst::getInstance().getAlgorithm() ) );
+        stop->clicked().connect( _timer, &WTimer::stop );
         
         buttons->addWidget(_bestFitness);
         buttons->addWidget(setTutor);
         buttons->addWidget(setStudent);
+        buttons->addWidget(stop);
         
         grid->addWidget(toggleButtons, 0, 0);
         
