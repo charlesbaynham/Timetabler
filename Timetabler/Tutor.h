@@ -39,6 +39,7 @@ public:
     
     inline void removeSubject(Subject* s) { _subjects.remove(s); }
     inline void addSubject(Subject* s) { removeSubject(s); _subjects.push_back(s); }
+    inline void clearSubjects() { _subjects.clear(); }
     
     inline void addNotTime(int time) { _notTimes.push_back(time); }
     inline void removeNotTime(int time) { _notTimes.remove(time); }

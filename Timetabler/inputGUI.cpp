@@ -27,6 +27,8 @@ GUITutor::GUITutor(inputGUI* parent) :
         vector<Subject*> subjectIndex = _parent->getSubjectIndex();
         for (vector<Subject*>::iterator it = subjectIndex.begin(); it != subjectIndex.end(); it++)
             _subjects->addItem( (*it)->getName() );
+        //set the selection box to allow multiple selections
+        _subjects->setSelectionMode(SelectionMode::ExtendedSelection);
     _notLabel = new WText("Unavailable times:",_visOutput);
     _notSlots = new WSelectionBox(_visOutput);
         // Add the slot options
@@ -295,9 +297,24 @@ void GUITutor::callUpdate() {
     n->setID( _ID );
     n->setName( _name->valueText().narrow() );
     
-    // edit: should allow multiple subjects
+    
     if (!_parent->getSubjectIndex().empty())
-        n->addSubject(_parent->getSubjectIndex()[_subjects->currentIndex()] );
+    {
+        // get the set of indexes that are selected
+        set<int> subjects = _subjects->selectedIndexes();
+        
+        //clear this tutor's subjects
+        n->clearSubjects();
+        
+        //lookup each index in the reference and add the resulting subject to this tutor
+        for ( set<int>::iterator it=subjects.begin(); it!=subjects.end(); it++)
+        {
+            // debug
+            cerr << "Adding subject " << _parent->getSubjectIndex()[ *it ]->getName() << " to tutor " << n->getName() << ".\n";
+            
+            n->addSubject( _parent->getSubjectIndex()[ *it ] );
+        }
+    }
     
     // edit add not times
     
@@ -404,6 +421,9 @@ void inputGUI::submit() {
         }
         
         Configuration::getInstance().setup( tutors, subjects, students );
+        
+        //debug
+        Configuration::getInstance().dumpTutors();
         
         // Redirect to the output page
         TimetablerWebApplication* app = dynamic_cast<TimetablerWebApplication*>( WApplication::instance() );

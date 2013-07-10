@@ -214,18 +214,18 @@ void Configuration::dumpTutors(){
     for (hash_map<int, Tutor*>::iterator it = theTutors.begin(); it != theTutors.end(); it++) {
         Tutor* tut = (*it).second;
         
-        cout << "Name: "<<tut->getName()<<" (ID="<<tut->getID() << ")\nSubjects:\n";
+        cerr << "Name: "<<tut->getName()<<" (ID="<<tut->getID() << ")\nSubjects:\n";
         list<Subject*> subjlist = tut->getSubjects();
         for (list<Subject*>::iterator it2=subjlist.begin(); it2 != subjlist.end(); it2++) {
-            cout << "\t" << (*it2)->getName() << "("<<(*it2)->getID()<<")\n";
+            cerr << "\t" << (*it2)->getName() << "("<<(*it2)->getID()<<")\n";
         }
-        cout << "NotSlots:\n";
+        cerr << "NotSlots:\n";
         list<int> thelist = tut->getNotSlots();
         for (list<int>::iterator it2=thelist.begin(); it2 != thelist.end(); it2++) {
             int notslot = *it2;
-            cout << "\t"<< notslot << "\n";
+            cerr << "\t"<< notslot << "\n";
         }
-        cout << "\n***\n";
+        cerr << "\n***\n";
     }
     
 }

@@ -210,38 +210,38 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         }
         if (engagements==1) score++; // If we only found them once (ie in the slot we were considering) then score
         
-//        //  MINOR:
-//        //   Does this student/tutor pair appear elsewhere in this timetable?
-//        int pairings=0;
-//        //loop over all tutor's slots
-//        for (int i = SLOTS_IN_DAY*(tutorID-1); i < SLOTS_IN_DAY*tutorID; i++) {
-//            list<Student*> thisSlot= chromo->_values[i];
-//            list<Student*>::iterator search;
-//            for (search = thisSlot.begin(); search != thisSlot.end(); search++) {
-//                // If we find a student with the same baseID (ie the same person) paired with the same tutor:
-//                if ( (*search)->getBaseID() == (*it).first->getBaseID() ) pairings++;
-//            }
-//        }
-//        // This is a minor requirement, therefore, if the student is only paired with this tutor
-//        //   once then score a small prize, so other req. take precidence
-//        if (pairings==1) score+=0.2;
-//        
-//        //  MINOR:
-//        //   Has the tutor been seen previously in another session?
-//        bool seenPrev = false;
-//        list<Tutor*> prevTutors = (*it).first->getPrevTutors();
-//        for (list<Tutor*>::iterator itPrev = prevTutors.begin(); itPrev != prevTutors.end(); itPrev++)
-//        {
-//            if ( *itPrev == tutor ) {
-//                seenPrev = true;
-//                break;
-//            }
-//        }
-//        if (!seenPrev) score+=0.1;
+        //  MINOR:
+        //   Does this student/tutor pair appear elsewhere in this timetable?
+        int pairings=0;
+        //loop over all tutor's slots
+        for (int i = SLOTS_IN_DAY*(tutorID-1); i < SLOTS_IN_DAY*tutorID; i++) {
+            list<Student*> thisSlot= chromo->_values[i];
+            list<Student*>::iterator search;
+            for (search = thisSlot.begin(); search != thisSlot.end(); search++) {
+                // If we find a student with the same baseID (ie the same person) paired with the same tutor:
+                if ( (*search)->getBaseID() == (*it).first->getBaseID() ) pairings++;
+            }
+        }
+        // This is a minor requirement, therefore, if the student is only paired with this tutor
+        //   once then score a small prize, so other req. take precidence
+        if (pairings==1) score+=0.2;
+        
+        //  MINOR:
+        //   Has the tutor been seen previously in another session?
+        bool seenPrev = false;
+        list<Tutor*> prevTutors = (*it).first->getPrevTutors();
+        for (list<Tutor*>::iterator itPrev = prevTutors.begin(); itPrev != prevTutors.end(); itPrev++)
+        {
+            if ( *itPrev == tutor ) {
+                seenPrev = true;
+                break;
+            }
+        }
+        if (!seenPrev) score+=0.1;
     }
     
-//    float maxscore = 4.3 * numStudents;
-    float maxscore = 4 * numStudents;
+    float maxscore = 4.3 * numStudents;
+//    float maxscore = 4 * numStudents;
     
     return (float)score / (float)maxscore;
 }
