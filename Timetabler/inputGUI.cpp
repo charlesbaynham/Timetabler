@@ -10,6 +10,7 @@
 #include <boost/lexical_cast.hpp>
 
 int GUITutor::_nextID = 1;
+int GUISubject::_nextID = 1;
 
 GUITutor::GUITutor(inputGUI* parent) :
     GUIelement(parent)
@@ -22,6 +23,10 @@ GUITutor::GUITutor(inputGUI* parent) :
     _name = new WLineEdit(_visOutput);
     _subjectsLabel = new WText("Subjects:",_visOutput);
     _subjects = new WSelectionBox(_visOutput);
+        //loop over the index and populate the new selection box
+        vector<Subject*> subjectIndex = _parent->getSubjectIndex();
+        for (vector<Subject*>::iterator it = subjectIndex.begin(); it != subjectIndex.end(); it++)
+            _subjects->addItem( (*it)->getName() );
     _notLabel = new WText("Unavailable times:",_visOutput);
     _notSlots = new WSelectionBox(_visOutput);
     
@@ -33,14 +38,16 @@ GUITutor::GUITutor(inputGUI* parent) :
 GUISubject::GUISubject(inputGUI* parent) :
     GUIelement(parent)
 {
-    _subject = new Subject(0, "");
+    _ID = _nextID++;
+    _subject = new Subject(_ID, "");
     
-    _IDLabel = new WText("ID:", _visOutput);
-    _ID = new WLineEdit(_visOutput);
     _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
     
     addDeleteButton();
+    
+    //register update handler
+    _name->changed().connect( boost::bind( &GUISubject::callUpdate, this ) );
 }
 GUIStudent::GUIStudent(inputGUI* parent) :
     GUIelement(parent)
@@ -56,6 +63,10 @@ GUIStudent::GUIStudent(inputGUI* parent) :
         _numInterviews->setCurrentIndex(0);
     _subjectLabel = new WText("Subject:", _visOutput);
     _subject = new WComboBox(_visOutput);
+    //loop over the index and populate the new selection box
+        vector<Subject*> subjectIndex = _parent->getSubjectIndex();
+        for (vector<Subject*>::iterator it = subjectIndex.begin(); it != subjectIndex.end(); it++)
+            _subject->addItem( (*it)->getName() );
     _prevLabel = new WText("Previous tutors:", _visOutput);
     _prevTutors = new WSelectionBox(_visOutput);
     //loop over the index and populate the new selection box
@@ -65,6 +76,9 @@ GUIStudent::GUIStudent(inputGUI* parent) :
     
     // Add the delete button inherited from GUIelement
     addDeleteButton();
+    
+    //register update handler
+    _name->changed().connect( boost::bind( &GUIStudent::callUpdate, this ) );
 }
 
 void inputGUI::addBlankTutor () {
@@ -84,7 +98,18 @@ void inputGUI::addBlankSubject () {
     GUISubject* newSubj = new GUISubject(this);
     _subjects.push_back(newSubj); // Add new GUI element to list...
     _subjectTab->addWidget( (*newSubj)() ); // and to the display
-    _subjectIndex.push_back( newSubj->getSubject() );  // And to the other relevant elements
+    
+    // Add to the index list, then
+    _subjectIndex.push_back(newSubj->getSubject());
+    // loop over all GUI elements in the student tab, adding this new tutor to the options
+    for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
+        (*it)->addSubjectOption(newSubj->getSubject() );
+    }
+    // now over all GUI elements in the tutor tab:
+    for ( list<GUITutor*>::iterator it = _tutors.begin(); it != _tutors.end(); it++) {
+        (*it)->addSubjectOption(newSubj->getSubject() );
+    }
+    
 }
 void inputGUI::addBlankStudent () {
     GUIStudent* newStud = new GUIStudent(this);
@@ -107,7 +132,31 @@ void inputGUI::changeTutorOptions(Tutor* newtut, Tutor* oldtut) {
         
         // edit: handle pre-existing selections
     }
+}
 
+void inputGUI::changeSubjectOptions( Subject* newsub, Subject* oldsub) {
+    // get the index of the subject
+    vector<Subject*>::iterator search = find(_subjectIndex.begin(), _subjectIndex.end(), oldsub );
+    int index = (int)(search - _subjectIndex.begin());
+    
+    // update the index with the new tutor
+    _subjectIndex[index] = newsub;
+    
+    // loop over all GUI elements in the student tab, changing the subject to reflect the changes
+    for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
+        (*it)->removeSubjectOption(index);
+        (*it)->addSubjectOption(newsub, index);
+        
+        // edit: handle pre-existing selections
+    }
+    // now loop over all GUI elements in the tutor tab
+    for ( list<GUITutor*>::iterator it = _tutors.begin(); it != _tutors.end(); it++) {
+        (*it)->removeSubjectOption(index);
+        (*it)->addSubjectOption(newsub, index);
+        
+        // edit: handle pre-existing selections
+    }
+    
 }
 
 void inputGUI::removeGUITutor(GUITutor* t)
@@ -144,6 +193,21 @@ void inputGUI::removeGUIStudent(GUIStudent* s)
 }
 void inputGUI::removeGUISubject(GUISubject* s)
 {
+    // get the index of the subject, then remove from the index
+    vector<Subject  *>::iterator search = find(_subjectIndex.begin(), _subjectIndex.end(), s->getSubject());
+    int currIndex = (int)(search - _subjectIndex.begin());
+    _subjectIndex.erase(search);
+    
+    // loop over all GUI elements in the student tab, removing this subject from the options
+    for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
+        (*it)->removeSubjectOption(currIndex);
+    }
+    
+    // loop over all GUI elements in the tutor tab, removing this subject from the options
+    for ( list<GUITutor*>::iterator it = _tutors.begin(); it != _tutors.end(); it++) {
+        (*it)->removeSubjectOption(currIndex);
+    }
+    
     _subjectTab->removeWidget( (*s)() );
     _subjects.remove(s);
 }
@@ -235,3 +299,30 @@ void GUITutor::callUpdate() {
     _tutor = newtut;
 }
 
+void GUISubject::callUpdate() {
+    
+    Subject* n = new Subject(*_subject);
+    
+    n->setID( _ID );
+    n->setName( _name->valueText().narrow() );
+    
+    // edit add the rest of the params
+    
+    // Update the other elements that use this tutor
+    _parent->changeSubjectOptions(n, _subject);
+    
+    // update the object in this element
+    _subject = n;
+}
+
+void GUIStudent::callUpdate() {
+    
+    Student* n = new Student(*_student);
+    
+    n->setName( _name->valueText().narrow() );
+    
+    // edit add the rest of the params
+    
+    // update the object in this element
+    _student = n;
+}

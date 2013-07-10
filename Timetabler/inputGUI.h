@@ -137,6 +137,11 @@ public:
     inline void decrementID() { _ID--; callUpdate(); }
     inline static void decrementGlobalID() { _nextID--; }
     
+    void addSubjectOption(Subject* n) { _subjects->addItem(n->getName()); }
+    void addSubjectOption(Subject* n, int position) { _subjects->insertItem(position, n->getName()); }
+    
+    void removeSubjectOption(int index) { _subjects->removeItem(index); }
+    
 };
 
 
@@ -161,10 +166,18 @@ public:
     void addTutorOption(Tutor* n) { _prevTutors->addItem(n->getName()); }
     void addTutorOption(Tutor* n, int position) { _prevTutors->insertItem(position, n->getName()); }
     
-    void removeTutorOption(int index) {
-        _prevTutors->removeItem(index);
-    }
+    void removeTutorOption(int index) { _prevTutors->removeItem(index); }
     
+    ////
+    
+    void addSubjectOption(Subject* n) { _subject->addItem(n->getName()); }
+    void addSubjectOption(Subject* n, int position) { _subject->insertItem(position, n->getName()); }
+    
+    void removeSubjectOption(int index) { _subject->removeItem(index); }
+    
+    // call the methods in inputGUI to update for a changed subject entry
+    void callUpdate();
+
 };
 
 
@@ -172,8 +185,8 @@ class GUISubject : public GUIelement {
     
     Subject* _subject;
     
-    WLineEdit* _ID;
-    WText* _IDLabel;
+    int _ID;
+    static int _nextID;
     WLineEdit* _name;
     WText* _nameLabel;
     
@@ -183,7 +196,8 @@ public:
     inline Subject* getSubject() { return _subject; }
 
     // call the methods in inputGUI to update for a changed subject entry
-    void callSubjectUpdate();
+    void callUpdate();
+
 };
 
 #endif /* defined(__Timetabler__inputGUI__) */
