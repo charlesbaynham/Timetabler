@@ -405,6 +405,10 @@ void inputGUI::submit() {
         
         Configuration::getInstance().setup( tutors, subjects, students );
         
+        // Redirect to the output page
+        TimetablerWebApplication* app = dynamic_cast<TimetablerWebApplication*>( WApplication::instance() );
+        app->pageReady();
+        
     } else {
         _submitLabel->setText("You must have at least one tutor and subject!");
     }

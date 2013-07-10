@@ -28,7 +28,6 @@
 
 #include "output.h"
 #include "TimetablerInst.h"
-#include "inputGUI.h"
 
 using namespace std;
 
@@ -38,16 +37,18 @@ using namespace Algorithm;
 using namespace Algorithm::StopCriterias;
 using namespace Algorithm::SimpleAlgorithms;
 
+// This is declared here since inputGUI depends on the following definitions: therefore I #include it's head files at the end of this one, after the GUI.h declarations
+class inputGUI;
 
-WApplication *createApplication(const Wt::WEnvironment& env);
+WApplication *createApplication(const WEnvironment& env);
 
-class TimetablerWebApplication : public Wt::WApplication
+class TimetablerWebApplication : public WApplication
 {
 public:
-    TimetablerWebApplication(const Wt::WEnvironment& env);
+    TimetablerWebApplication(const WEnvironment& env);
     inline WText *getGreeting() {return _greeting;}
 
-    // Stop the algorithm if it's already running
+    // Stop the algorithm if it's already running on web session removal
     inline ~TimetablerWebApplication()
     {
         cerr << "*** Aborting solution ***\n\n";
@@ -66,7 +67,8 @@ private:
     void handlePathChange();
     
     inputGUI* _inputGUI;
-    
+
+public:
     // ready to solve
     void pageReady();
     // Set up the configuration
@@ -79,8 +81,8 @@ private:
     
     void startSolve();
     
-    void greet();
 };
 
+#include "inputGUI.h"
 
 #endif /* defined(__Timetabler__GUI__) */

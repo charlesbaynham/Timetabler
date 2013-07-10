@@ -60,14 +60,12 @@ void TimetablerWebApplication::startSolve() {
     if (state == Algorithm::GaAlgorithmState::GAS_RUNNING)
         TimetablerInst::getInstance().getAlgorithm()->StopSolving();
     
-    // Read in configuration
-    if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
+    // Read in configuration iif not already configured
+    if ( Configuration::getInstance().isEmpty() )
+        if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
     
     // Solve!
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
-    
-    WApplication *app = WApplication::instance();
-    app->processEvents();
     
 }
 
@@ -127,7 +125,6 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 
 void TimetablerWebApplication::pageInput() {
     
-    inputGUI* debug = _inputGUI;
 //    if (!_inputGUI) {
         
         _inputGUI = new inputGUI(root());
@@ -145,6 +142,9 @@ void TimetablerWebApplication::pageInput() {
 
 
 void TimetablerWebApplication::pageReady() {
+    
+    // set to the correct path in case called from another function and the path is currently wrong
+    this->setInternalPath("/");
     
     _greeting = new WText("Ready");
     _greeting->setStyleClass("titleText");

@@ -12,7 +12,9 @@
 #include <iostream>
 
 #include "TimetablerInst.h"
+#include "GUI.h"
 
+#include <Wt/WApplication>
 #include <Wt/WTabWidget>
 #include <Wt/WLineEdit>
 #include <Wt/WContainerWidget>
@@ -26,6 +28,7 @@ using namespace Wt;
 class GUITutor;
 class GUIStudent;
 class GUISubject;
+
 
 class inputGUI : public WObject {
     
