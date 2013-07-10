@@ -142,6 +142,14 @@ public:
     
     void removeSubjectOption(int index) { _subjects->removeItem(index); }
     
+    // changes the subject at index to the new one
+    void changeSubjectOption(Subject* n, int index) {
+        bool selected = ( _subjects->currentIndex() == index );
+        removeSubjectOption(index);
+        addSubjectOption(n, index);
+        if (selected) _subjects->setCurrentIndex(index);
+    }
+
 };
 
 
@@ -168,13 +176,30 @@ public:
     
     void removeTutorOption(int index) { _prevTutors->removeItem(index); }
     
+    // changes the tutor at index to the new one
+    void changeTutorOption(Tutor* n, int index) {
+        bool selected = ( _prevTutors->currentIndex() == index );
+        removeTutorOption(index);
+        addTutorOption(n, index);
+        if (selected) _prevTutors->setCurrentIndex(index);
+    }
+    
     ////
     
-    void addSubjectOption(Subject* n) { _subject->addItem(n->getName()); }
-    void addSubjectOption(Subject* n, int position) { _subject->insertItem(position, n->getName()); }
+    inline void addSubjectOption(Subject* n) { _subject->addItem(n->getName()); }
+    inline void addSubjectOption(Subject* n, int position) { _subject->insertItem(position, n->getName()); }
     
-    void removeSubjectOption(int index) { _subject->removeItem(index); }
-    
+    // Removes the subject at index from the selection box
+    inline void removeSubjectOption(int index) { _subject->removeItem(index); }
+
+    // changes the subject at index to the new one
+    void changeSubjectOption(Subject* n, int index) {
+        bool selected = ( _subject->currentIndex() == index );
+        removeSubjectOption(index);
+        addSubjectOption(n, index);
+        if (selected) _subject->setCurrentIndex(index);
+    }
+
     // call the methods in inputGUI to update for a changed subject entry
     void callUpdate();
 

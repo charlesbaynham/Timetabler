@@ -127,10 +127,9 @@ void inputGUI::changeTutorOptions(Tutor* newtut, Tutor* oldtut) {
     
     // loop over all GUI elements in the student tab, changing the tutor to reflect the changes
     for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
-        (*it)->removeTutorOption(index);
-        (*it)->addTutorOption(newtut, index);
-        
-        // edit: handle pre-existing selections
+        (*it)->changeTutorOption(newtut, index);
+//        (*it)->removeTutorOption(index);
+//        (*it)->addTutorOption(newtut, index);
     }
 }
 
@@ -144,17 +143,16 @@ void inputGUI::changeSubjectOptions( Subject* newsub, Subject* oldsub) {
     
     // loop over all GUI elements in the student tab, changing the subject to reflect the changes
     for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
-        (*it)->removeSubjectOption(index);
-        (*it)->addSubjectOption(newsub, index);
+        (*it)->changeSubjectOption(newsub, index);
+//        (*it)->removeSubjectOption(index);
+//        (*it)->addSubjectOption(newsub, index);
         
-        // edit: handle pre-existing selections
     }
     // now loop over all GUI elements in the tutor tab
     for ( list<GUITutor*>::iterator it = _tutors.begin(); it != _tutors.end(); it++) {
-        (*it)->removeSubjectOption(index);
-        (*it)->addSubjectOption(newsub, index);
-        
-        // edit: handle pre-existing selections
+        (*it)->changeSubjectOption(newsub, index);
+//        (*it)->removeSubjectOption(index);
+//        (*it)->addSubjectOption(newsub, index);
     }
     
 }
