@@ -29,6 +29,8 @@ GUITutor::GUITutor(inputGUI* parent) :
             _subjects->addItem( (*it)->getName() );
     _notLabel = new WText("Unavailable times:",_visOutput);
     _notSlots = new WSelectionBox(_visOutput);
+        // Add the slot options
+        for (int i=0; i<SLOTS_IN_DAY; i++) { _notSlots->addItem( to_string(i) ); }
     
     _name->setValidator(new WValidator(true));
     
@@ -36,6 +38,8 @@ GUITutor::GUITutor(inputGUI* parent) :
     
     //register update handler
     _name->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
+    _notSlots->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
+    _subjects->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
 }
 GUISubject::GUISubject(inputGUI* parent) :
     GUIelement(parent)
@@ -81,6 +85,9 @@ GUIStudent::GUIStudent(inputGUI* parent) :
     
     //register update handler
     _name->changed().connect( boost::bind( &GUIStudent::callUpdate, this ) );
+    _numInterviews->changed().connect( boost::bind( &GUIStudent::callUpdate, this ) );
+    _subject->changed().connect( boost::bind( &GUIStudent::callUpdate, this ) );
+    _prevTutors->changed().connect( boost::bind( &GUIStudent::callUpdate, this ) );
 }
 
 void inputGUI::addBlankTutor () {
@@ -262,6 +269,8 @@ inputGUI::inputGUI(WContainerWidget* parent) :
     WPushButton* submit = new WPushButton("Submit");
     _submitTab->addWidget(submit);
     submit->clicked().connect( this, &inputGUI::submit );
+    _submitLabel = new WText("");
+    _submitTab->addWidget(_submitLabel);
     
     //Add "new" buttons
     WPushButton* newTut = new WPushButton("Add new");
@@ -320,11 +329,14 @@ void GUIStudent::callUpdate() {
     n->setName( _name->valueText().narrow() );
     n->setNumInterviews( boost::lexical_cast<int>( _numInterviews->valueText().narrow() ));
     
+    // If we have any subjects, update the subject
     if (!_parent->getSubjectIndex().empty())
         n->setSubject( _parent->getSubjectIndex()[_subject->currentIndex()] );
 
-    //  edit deal with prevtutors
-    
+    // if we have any tutors, update the prevtutor
+    if (!_parent->getTutorIndex().empty())
+        ; // do something. edit
+
     // update the object in this element
     _student = n;
 }
@@ -332,5 +344,70 @@ void GUIStudent::callUpdate() {
 
 void inputGUI::submit() {
     
-    printf("\n\n\nThis is conneted\n\n\n");
+    // If we have at least one tutor and at least one subject
+    if ( !_subjectIndex.empty() && !_tutorIndex.empty() ) {
+        _submitLabel->setText("Submitting...");
+        
+        // declare containers
+        hash_map<int, Tutor*> tutors; hash_map<int, Subject*> subjects; list<Student*> students;
+        
+        // loop over all the subjects
+        for (list<GUISubject*>::iterator it=_subjects.begin(); it!=_subjects.end(); it++) {
+            int id = (*it)->getSubject()->getID();
+            Subject* subject = (*it)->getSubject();
+            
+            subjects[id] = subject;
+            
+            //debug edit
+            static hash_map<int, bool> test;
+            if (it==_subjects.begin())
+                test.clear();
+
+            if (test[id]==true) { printf("Subject fail\n\n\n\n"); exit(-1); }
+            else test[id]=true;
+        }
+        
+        // loop over all the tutors
+        for (list<GUITutor*>::iterator it=_tutors.begin(); it!=_tutors.end(); it++) {
+            int id = (*it)->getTutor()->getID();
+            Tutor* tutor = (*it)->getTutor();
+            
+            tutors[id] = tutor;
+            
+            //debug edit
+            static hash_map<int, bool> test;
+            if (it==_tutors.begin()) test.clear();
+            if (test[id]==true) {
+                printf("Tutor fail\n\n\n\n");
+                exit(-1);
+            }
+            else test[id]=true;
+        }
+        
+        // loop over all the students
+        for (list<GUIStudent*>::iterator it=_students.begin(); it!=_students.end(); it++) {
+            int id = (*it)->getStudent()->getID();
+            Student* student = (*it)->getStudent();
+            
+            students.push_back(student);
+            
+            // Create duplicates for each interview required over 1
+            for (int i=1; i < student->getNoInterviews(); i++) {
+                students.push_back( new Student(student) );
+            }
+            
+            //debug edit
+            static hash_map<int, bool> test;
+            if (it==_students.begin()) test.clear();
+            if (test[id]==true) { printf("Student fail\n\n\n\n"); exit(-1); }
+            else test[id]=true;
+        }
+        
+        Configuration::getInstance().setup( tutors, subjects, students );
+        
+    } else {
+        _submitLabel->setText("You must have at least one tutor and subject!");
+    }
+        
+        
 }

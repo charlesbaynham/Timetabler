@@ -46,6 +46,7 @@ class inputGUI : public WObject {
     WContainerWidget* _subjectTab;
     
     WContainerWidget* _submitTab;
+    WText* _submitLabel;
     
     //    void addTutor();
     //    void removeTutor(int ID);
@@ -133,7 +134,7 @@ public:
     void addDeleteButton();
     inline Tutor* getTutor() { return _tutor; }
 
-    // call the method in inputGUI to update for a changed tuto entry
+    // call the method in inputGUI to update for a changed tutor entry
     void callUpdate();
     
     inline void decrementID() { _ID--; callUpdate(); }
