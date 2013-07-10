@@ -61,8 +61,10 @@ void TimetablerWebApplication::startSolve() {
         TimetablerInst::getInstance().getAlgorithm()->StopSolving();
     
     // Read in configuration iif not already configured
-    if ( Configuration::getInstance().isEmpty() )
+    if ( Configuration::getInstance().isEmpty() ) {
+        cerr << "***\nReading Config from file\n";
         if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
+    } else cerr << "***\nUsing current config\n";
     
     // Solve!
     TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
@@ -124,6 +126,10 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 
 
 void TimetablerWebApplication::pageInput() {
+    
+    // wipe any existing configuration and stop any existing algorithms
+    Configuration::getInstance().clear();
+    TimetablerInst::getInstance().getAlgorithm()->StopSolving();
     
 //    if (!_inputGUI) {
         

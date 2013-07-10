@@ -68,11 +68,25 @@ int Configuration::parseFile(char* fileName) {
     
     processTutorsSlots(); // Work out the _notSlots element for each tutor
     
-    cout << "Input: "<<numStudents()<<" students, "<<numTutors()<<" tutors and "<<numSubjects()<<" subjects.\n";
-//    Tutor* richard = getTutor(1);
-    //cout << "Richard has " << richard->getNotSlots().size() << " notslots.\n";
-    
+    cout << "Input from file: "<<numStudents()<<" students, "<<numTutors()<<" tutors and "<<numSubjects()<<" subjects.\n";
+
     return 0;
+}
+
+// Get configuration directly from a function call (called by the GUI)
+void Configuration::setup( hash_map<int, Tutor*> tutors, hash_map<int, Subject*> subjects, list<Student*> students )
+{
+    _tutors = tutors; _subjects=subjects; _students=students;
+    
+    processTutorsSlots(); // Work out the _notSlots element for each tutor
+
+    //debug
+    tutors = _tutors;
+    //end debug
+    
+    _isEmpty = false;
+    
+    cout << "Input from GUI: "<<numStudents()<<" students, "<<numTutors()<<" tutors and "<<numSubjects()<<" subjects.\n";
 }
 
 

@@ -14,7 +14,7 @@ int GUISubject::_nextID = 1;
 
 GUITutor::GUITutor(inputGUI* parent) :
     GUIelement(parent)
-{
+{    
     _ID = _nextID++;
     printf("Creating new tutor with ID %i\n", _ID);
     _tutor = new Tutor(_ID, "", NULL, NULL);
@@ -33,6 +33,8 @@ GUITutor::GUITutor(inputGUI* parent) :
     _notSlots = new WSelectionBox(_visOutput);
         // Add the slot options
         for (int i=0; i<SLOTS_IN_DAY; i++) { _notSlots->addItem( to_string(i) ); }
+        //set the selection box to allow multiple selections
+        _notSlots->setSelectionMode(SelectionMode::ExtendedSelection);
     
     _name->setValidator(new WValidator(true));
     
@@ -77,10 +79,12 @@ GUIStudent::GUIStudent(inputGUI* parent) :
             _subject->addItem( (*it)->getName() );
     _prevLabel = new WText("Previous tutors:", _visOutput);
     _prevTutors = new WSelectionBox(_visOutput);
-    //loop over the index and populate the new selection box
-    vector<Tutor*> tutorIndex = _parent->getTutorIndex();
-    for (vector<Tutor*>::iterator it = tutorIndex.begin(); it != tutorIndex.end(); it++)
-        _prevTutors->addItem( (*it)->getName() );
+        // Make into multi select box
+        _prevTutors->setSelectionMode(SelectionMode::ExtendedSelection);
+        //loop over the index and populate the new selection box
+        vector<Tutor*> tutorIndex = _parent->getTutorIndex();
+        for (vector<Tutor*>::iterator it = tutorIndex.begin(); it != tutorIndex.end(); it++)
+            _prevTutors->addItem( (*it)->getName() );
     
     // Add the delete button inherited from GUIelement
     addDeleteButton();
@@ -316,7 +320,15 @@ void GUITutor::callUpdate() {
         }
     }
     
-    // edit add not times
+    // clear the tutor's notTimes, then...
+    n->clearNotTimes();
+    // Loop over all the selected notTimes and add them to the tutor
+    set<int> selection = _notSlots->selectedIndexes();
+    for (set<int>::iterator it=selection.begin(); it!=selection.end(); it++) {
+        n->addNotTime(*it);
+    }
+    //debug
+    list<int> nottimes = n->getNotTimes();
     
     // Update the other elements that use this tutor
     _parent->changeTutorOptions(n, _tutor);
@@ -351,8 +363,14 @@ void GUIStudent::callUpdate() {
         n->setSubject( _parent->getSubjectIndex()[_subject->currentIndex()] );
 
     // if we have any tutors, update the prevtutor
-    if (!_parent->getTutorIndex().empty())
-        ; // do something. edit
+    if (!_parent->getTutorIndex().empty()) {
+        // Clear tutors and then re add from the index
+        set<int> selection = _prevTutors->selectedIndexes();
+        n->clearPrevTutors();
+        for (set<int>::iterator it = selection.begin(); it!=selection.end(); it++) {
+            n->addPrevTutor( _parent->getTutorIndex()[ *it ] );
+        }
+    }
 
     // update the object in this element
     _student = n;
@@ -392,6 +410,8 @@ void inputGUI::submit() {
             tutors[id] = tutor;
             
             //debug edit
+            Tutor* debugtest = tutors[id];
+            
             static hash_map<int, bool> test;
             if (it==_tutors.begin()) test.clear();
             if (test[id]==true) {

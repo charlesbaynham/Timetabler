@@ -41,6 +41,9 @@ public:
     // Init
     Configuration() : _isEmpty(true) {}
     
+    //wipe the config
+    inline void clear() { _isEmpty=true; _tutors.clear(); _subjects.clear(); _students.clear(); }
+    
     void dumpTutors();
     
     //free up
@@ -74,8 +77,7 @@ public:
     int parseFile(char* fileName);
     
     //set up Configuration using arguments
-    void setup( hash_map<int, Tutor*> tutors, hash_map<int, Subject*> subjects, list<Student*> students )
-    { _tutors = tutors; _subjects=subjects; _students=students; _isEmpty=false; }
+    void setup( hash_map<int, Tutor*> tutors, hash_map<int, Subject*> subjects, list<Student*> students );
 
     // Given an object, add it to the relevant list
     inline void addSubject( Subject* s ) { _subjects.insert( pair<int, Subject*>( s->getID(), s ) ); }
