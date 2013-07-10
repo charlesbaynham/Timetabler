@@ -127,18 +127,19 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 
 void TimetablerWebApplication::pageInput() {
     
-    if (!_inputGUI) {
+    inputGUI* debug = _inputGUI;
+//    if (!_inputGUI) {
         
         _inputGUI = new inputGUI(root());
                 
         WApplication *app = WApplication::instance();
         app->processEvents();
-        
-    }
-    else {
-        root()->clear();
+    
+//    }
+//    else {
+//        root()->clear();
 //        _inputGUI->redraw(root());
-    }
+//    }
 
 }
 

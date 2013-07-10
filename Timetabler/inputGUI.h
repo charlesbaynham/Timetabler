@@ -60,7 +60,9 @@ public:
     // Initialise this object: create a menu in parent
     inputGUI(WContainerWidget* parent);
     
-//    inline void redraw(WContainerWidget* parent) { ;/*parent->addWidget(_menu);*/ }
+//    inline void redraw(WContainerWidget* parent) {
+//        WTabWidget* debug = _menu;
+//        parent->addWidget(_menu); }
     
     // Add GUI elements for data entry
     void addBlankStudent();

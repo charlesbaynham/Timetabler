@@ -39,6 +39,8 @@ public:
     
 //    inline void setID(int ID){ _ID = ID; }
     inline void setName(string name) { _name = name; }
+    inline void setNumInterviews(int num) { _noInterviews = num; }
+    inline void setSubject(Subject* subject) { _subject = subject; }
     
     inline Subject* getSubject() { return _subject; }
     inline list<Tutor*> getPrevTutors() { return _prevTutors; }

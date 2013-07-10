@@ -30,6 +30,8 @@ GUITutor::GUITutor(inputGUI* parent) :
     _notLabel = new WText("Unavailable times:",_visOutput);
     _notSlots = new WSelectionBox(_visOutput);
     
+    _name->setValidator(new WValidator(true));
+    
     addDeleteButton();
     
     //register update handler
@@ -276,25 +278,25 @@ inputGUI::inputGUI(WContainerWidget* parent) :
     
 }
 
-void inputGUI::submit() {
-    
-    ;
-}
 
 void GUITutor::callUpdate() {
     
-    Tutor* newtut = new Tutor(*_tutor);
+    Tutor* n = new Tutor(*_tutor);
     
-    newtut->setID( _ID );
-    newtut->setName( _name->valueText().narrow() );
+    n->setID( _ID );
+    n->setName( _name->valueText().narrow() );
     
-    // edit add the rest of the params
+    // edit: should allow multiple subjects
+    if (!_parent->getSubjectIndex().empty())
+        n->addSubject(_parent->getSubjectIndex()[_subjects->currentIndex()] );
+    
+    // edit add not times
     
     // Update the other elements that use this tutor
-    _parent->changeTutorOptions(newtut, _tutor);
+    _parent->changeTutorOptions(n, _tutor);
     
     // update the _tutor object in this element
-    _tutor = newtut;
+    _tutor = n;
 }
 
 void GUISubject::callUpdate() {
@@ -303,8 +305,6 @@ void GUISubject::callUpdate() {
     
     n->setID( _ID );
     n->setName( _name->valueText().narrow() );
-    
-    // edit add the rest of the params
     
     // Update the other elements that use this tutor
     _parent->changeSubjectOptions(n, _subject);
@@ -316,11 +316,21 @@ void GUISubject::callUpdate() {
 void GUIStudent::callUpdate() {
     
     Student* n = new Student(*_student);
-    
+
     n->setName( _name->valueText().narrow() );
+    n->setNumInterviews( boost::lexical_cast<int>( _numInterviews->valueText().narrow() ));
     
-    // edit add the rest of the params
+    if (!_parent->getSubjectIndex().empty())
+        n->setSubject( _parent->getSubjectIndex()[_subject->currentIndex()] );
+
+    //  edit deal with prevtutors
     
     // update the object in this element
     _student = n;
+}
+
+
+void inputGUI::submit() {
+    
+    printf("\n\n\nThis is conneted\n\n\n");
 }

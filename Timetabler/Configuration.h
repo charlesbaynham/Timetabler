@@ -73,6 +73,10 @@ public:
     //Parse a file for inputs
     int parseFile(char* fileName);
     
+    //set up Configuration using arguments
+    void setup( hash_map<int, Tutor*> tutors, hash_map<int, Subject*> subjects, list<Student*> students )
+    { _tutors = tutors; _subjects=subjects; _students=students; _isEmpty=false; }
+
     // Given an object, add it to the relevant list
     inline void addSubject( Subject* s ) { _subjects.insert( pair<int, Subject*>( s->getID(), s ) ); }
     inline void addTutor( Tutor* t ) { _tutors.insert( pair<int, Tutor*>( t->getID(), t ) ); }

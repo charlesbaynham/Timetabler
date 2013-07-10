@@ -35,7 +35,6 @@ public:
     
     
     inline void setID(int ID) { _ID = ID; }
-    
     inline void setName(string name) { _name = name; }
     
     inline void removeSubject(Subject* s) { _subjects.remove(s); }
