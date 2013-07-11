@@ -64,6 +64,9 @@ public:
     // Initialise this object: create a menu in parent
     inputGUI(WContainerWidget* parent);
     
+    // Reset the ID counters
+    static void resetIDs();
+    
 //    inline void redraw(WContainerWidget* parent) {
 //        WTabWidget* debug = _menu;
 //        parent->addWidget(_menu); }
@@ -111,6 +114,7 @@ protected:
     WPushButton* _deleteMe;
     
     virtual void addDeleteButton()=0;
+    
 public:
     inline GUIelement(inputGUI* parent) : _parent(parent) { _visOutput = new WContainerWidget(); }
     
@@ -134,6 +138,7 @@ class GUITutor : public GUIelement {
     
 public:
     GUITutor(inputGUI* parent);
+    
     void addDeleteButton();
     inline Tutor* getTutor() { return _tutor; }
 
@@ -142,6 +147,7 @@ public:
     
     inline void decrementID() { _ID--; callUpdate(); }
     inline static void decrementGlobalID() { _nextID--; }
+    inline static void resetID() { _nextID = 1; }
     
     void addSubjectOption(Subject* n) { _subjects->addItem(n->getName()); }
     void addSubjectOption(Subject* n, int position) { _subjects->insertItem(position, n->getName()); }
@@ -225,6 +231,8 @@ public:
     GUISubject(inputGUI* parent);
     void addDeleteButton();
     inline Subject* getSubject() { return _subject; }
+    
+    inline static void resetID() { _nextID = 1; }
 
     // call the methods in inputGUI to update for a changed subject entry
     void callUpdate();

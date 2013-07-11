@@ -378,6 +378,11 @@ void GUIStudent::callUpdate() {
     _student = n;
 }
 
+void inputGUI::resetIDs() {
+    GUITutor::resetID();
+    GUISubject::resetID();
+}
+
 
 void inputGUI::submit() {
     

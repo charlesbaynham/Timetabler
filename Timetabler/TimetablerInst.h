@@ -42,11 +42,23 @@ public:
 
 class TimetablerInst {
     
-    static TimetablerInst _instance; // Global instance
+    static TimetablerInst* _instance; // Global instance
     
 public:
-    inline static TimetablerInst& getInstance() { return _instance; } // return global instance
-    inline static void reset() { delete[] _instance2; TimetablerInst(); }
+    inline static TimetablerInst* getInstance() { return _instance; } // return global instance
+    inline static void reset() {
+        if(_instance)  {
+            //debug
+            TimetablerInst* test = _instance;
+            
+//            _instance->~TimetablerInst();
+            _instance->~TimetablerInst();
+            _instance = new TimetablerInst();
+            
+            //debug
+            test = _instance;
+        }
+    }
     
 private:
     GaChromosomeParams* _chromosomeParams;
@@ -75,6 +87,10 @@ public:
 	TimetablerInst();
     
 	~TimetablerInst();
+    
+#ifdef DEBUG
+    inline Chromosone* getPrototype() { return _prototype; }
+#endif
     
 	inline GaAlgorithm* getAlgorithm() { return _algorithm; }
     

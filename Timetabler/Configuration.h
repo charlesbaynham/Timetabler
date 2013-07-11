@@ -62,8 +62,9 @@ public:
     //Return the whole list of student pointers:
     inline list<Student*> getStudents() { return _students; }
     
-    //Return whole hash_map of tutors
+    //Return whole hash_map of tutors/subjects
     inline hash_map<int, Tutor*> getTutors() { return _tutors; }
+    inline hash_map<int, Subject*> getSubjects() { return _subjects; }
     
     //count the components
     inline int numTutors() { return (int)_tutors.size(); }

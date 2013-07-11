@@ -57,25 +57,33 @@ void TimetablerWebApplication::startSolve() {
     char* configfile = "config.txt";
     
     // Stop it if it's already running
-    Algorithm::GaAlgorithmState state = TimetablerInst::getInstance().getAlgorithm()->GetState();
+    Algorithm::GaAlgorithmState state = TimetablerInst::getInstance()->getAlgorithm()->GetState();
     if (state == Algorithm::GaAlgorithmState::GAS_RUNNING)
-        TimetablerInst::getInstance().getAlgorithm()->StopSolving();
+        TimetablerInst::getInstance()->getAlgorithm()->StopSolving();
     
-    // Read in configuration iif not already configured
+    // Read in configuration if not already configured
     if ( Configuration::getInstance().isEmpty() ) {
         cerr << "***\nReading Config from file\n";
         if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
     } else cerr << "***\nUsing current config\n";
     
+    
+#ifdef DEBUG
+    cerr << "About to solve:" << endl;
+    Configuration::getInstance().dumpTutors();
+    
+
+#endif
+    
     // Solve!
-    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
+    TimetablerInst::getInstance()->getAlgorithm()->StartSolving(false);
     
 }
 
 void TimetablerWebApplication::refreshStats() {
     
     GaChromosomePtr result;
-    GaAlgorithm* algorithm = TimetablerInst::getInstance().getAlgorithm();
+    GaAlgorithm* algorithm = TimetablerInst::getInstance()->getAlgorithm();
     algorithm->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
     
     float bestFitness = (*result).GetFitness();
@@ -101,7 +109,7 @@ void TimetablerWebApplication::refreshStats() {
     }
 
     //if finished, stop checking
-    GaAlgorithmState state = TimetablerInst::getInstance().getAlgorithm()->GetState();
+    GaAlgorithmState state = TimetablerInst::getInstance()->getAlgorithm()->GetState();
 #if DEBUG
     cerr << "The state is " << state << endl;
 #endif
@@ -148,7 +156,14 @@ void TimetablerWebApplication::pageInput() {
     
     // wipe any existing configuration and stop any existing algorithms
     Configuration::getInstance().clear();
-    TimetablerInst::getInstance().getAlgorithm()->StopSolving();
+    TimetablerInst::getInstance()->getAlgorithm()->StopSolving();
+    
+    //reset the inputGUI id counters
+    inputGUI::resetIDs();
+    
+    //reset the instance if present
+    TimetablerInst::getInstance()->reset();
+    
     
 //    if (!_inputGUI) {
     
@@ -225,7 +240,7 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         
         setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
         setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
-        stop->clicked().connect( boost::bind( &GaAlgorithm::StopSolving, TimetablerInst::getInstance().getAlgorithm() ) );
+        stop->clicked().connect( boost::bind( &GaAlgorithm::StopSolving, TimetablerInst::getInstance()->getAlgorithm() ) );
         stop->clicked().connect( _timer, &WTimer::stop );
         
         buttons->addWidget(_bestFitness);

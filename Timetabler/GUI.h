@@ -52,8 +52,8 @@ public:
     inline ~TimetablerWebApplication()
     {
         cerr << "*** Aborting solution ***\n\n";
-        if (TimetablerInst::getInstance().getAlgorithm()->GetState() == Algorithm::GaAlgorithmState::GAS_RUNNING)
-            TimetablerInst::getInstance().getAlgorithm()->StopSolving();
+        if (TimetablerInst::getInstance()->getAlgorithm()->GetState() == Algorithm::GaAlgorithmState::GAS_RUNNING)
+            TimetablerInst::getInstance()->getAlgorithm()->StopSolving();
     }
     
 private:

@@ -14,15 +14,7 @@ using namespace Population::SelectionOperations;
 using namespace Algorithm::SimpleAlgorithms;
 using namespace Algorithm::StopCriterias;
 
-
-
-//debug
-//#include <Wt/WApplication>
-#include "GUI.h"
-//end
-
-
-
+TimetablerInst* TimetablerInst::_instance = new TimetablerInst();
 
 void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {
     printf("New best at generation %i. Has fitness of %f\n", algorithm.GetAlgorithmStatistics().GetCurrentGeneration(), newChromosome.GetFitness());
@@ -30,15 +22,6 @@ void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAl
     
     finishedTT* newBest = new finishedTT(&newChromosome);
     
-//    //debug
-//    Student* test;
-//    if ( (test = newBest->getTutorOrientated()->getTutorApt(1, 6)) ) printf("*** Student is %s\n", test->getName().c_str() );
-//    else printf("*** Student not found\n");
-//    
-//    Tutor* test2;
-//    if ( (test2 = newBest->getStudentOrientated()->getStudentApt(1, 3)) ) printf("*** Tutor is %s\n", test2->getName().c_str() );
-//    else printf("*** Tutor not found\n");
-//    //end debug
 }
 
 
@@ -52,19 +35,17 @@ void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgori
         if (_funcComplete != NULL) _funcComplete(result);
         
         
-
-//        cout << "***\nFitness of final solution is " << result->GetFitness() << ", found in ";
-//        cout << algorithm.GetAlgorithmStatistics().GetCurrentGeneration() << " generations." << endl;
+#ifdef DEBUG
+        cout << "***\nFitness of final solution is " << result->GetFitness() << ", found in ";
+        cout << algorithm.GetAlgorithmStatistics().GetCurrentGeneration() << " generations." << endl;
+#endif
     }
     
 }
-// To be written. Edit
-
-TimetablerInst TimetablerInst::_instance;
 
 TimetablerInst::TimetablerInst()
 {
-
+    
     // initialize GAL internal structures
 	GaInitialize();
 	
@@ -160,6 +141,8 @@ TimetablerInst::TimetablerInst()
 
 TimetablerInst::~TimetablerInst()
 {
+    //debug edit
+    TimetablerInst* test = _instance;
 	delete _algorithm;
     
 	delete _population;
@@ -170,5 +153,5 @@ TimetablerInst::~TimetablerInst()
 	delete _chromosomeParams;
     
 	// Free resources used by GAL
-	GaFinalize();
+//	GaFinalize();
 }
