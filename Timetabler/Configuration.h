@@ -32,7 +32,7 @@ private:
     hash_map<int, Tutor*> _tutors;
     hash_map<int, Subject*> _subjects;
     
-    // List of students (list since will be dynamically moved
+    // List of students (list since will be dynamically moved)
     list<Student*> _students;
     
     bool _isEmpty; // initialised to true: indicates that the config is unparsed.
@@ -40,6 +40,9 @@ private:
 public:
     // Init
     Configuration() : _isEmpty(true) {}
+    
+    //wipe the config
+    inline void clear() { _isEmpty=true; _tutors.clear(); _subjects.clear(); _students.clear(); }
     
     void dumpTutors();
     
@@ -59,17 +62,37 @@ public:
     //Return the whole list of student pointers:
     inline list<Student*> getStudents() { return _students; }
     
+    //Return whole hash_map of tutors
+    inline hash_map<int, Tutor*> getTutors() { return _tutors; }
+    
     //count the components
     inline int numTutors() { return (int)_tutors.size(); }
     inline int numSubjects() { return (int)_subjects.size(); }
     inline int numStudents() { return (int)_students.size(); }
     
     // Check to see if has been setup or not
-    bool parsed() { return !_isEmpty; }
+    inline bool isEmpty() { return _isEmpty; }
     
     //Parse a file for inputs
-    void parseFile(char* fileName);
+    int parseFile(char* fileName);
     
+    //set up Configuration using arguments
+    void setup( hash_map<int, Tutor*> tutors, hash_map<int, Subject*> subjects, list<Student*> students );
+
+    // Given an object, add it to the relevant list
+    inline void addSubject( Subject* s ) { _subjects.insert( pair<int, Subject*>( s->getID(), s ) ); }
+    inline void addTutor( Tutor* t ) { _tutors.insert( pair<int, Tutor*>( t->getID(), t ) ); }
+    inline void addStudent( Student* s ) { _students.push_back( s ); }
+    
+    //remove given object from its list
+    bool removeSubject( Subject* s );
+    inline bool removeSubject( int ID ) { return removeSubject( this->getSubject(ID) ); }
+    
+    // Commented out because breaks the sequentiality (?) of the tutors
+//    bool removeTutor( int ID );
+//    inline bool removeTutor( Tutor* t ) { return removeTutor(t->getID()); }
+    void removeStudent( Student* s );
+
 private:
     
 	// Reads tutor's data from config file, makes object and returns pointer to it

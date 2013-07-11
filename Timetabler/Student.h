@@ -36,6 +36,17 @@ public:
     
     inline int getID(){ return _ID; }
     inline const string& getName() { return _name; }
+    
+    inline void addPrevTutor(Tutor* t) { _prevTutors.push_back(t); }
+    inline void removePrevTutor(Tutor* t) { _prevTutors.remove(t); }
+    inline void clearPrevTutors() { _prevTutors.clear(); }
+
+    
+//    inline void setID(int ID){ _ID = ID; }
+    inline void setName(string name) { _name = name; }
+    inline void setNumInterviews(int num) { _noInterviews = num; }
+    inline void setSubject(Subject* subject) { _subject = subject; }
+    
     inline Subject* getSubject() { return _subject; }
     inline list<Tutor*> getPrevTutors() { return _prevTutors; }
     inline int getNoInterviews() { return _noInterviews; }

@@ -153,15 +153,12 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
     int numSlots = SLOTS_IN_DAY * Configuration::getInstance().numTutors();
     
     
-    //debug
-//    printf("Fitness: lookup size is %i\n", numStudents);
-    //end debug
-    
     // loop over all students
     for (hash_map<Student*,int>::const_iterator it = chromo->_lookup.begin(); it!=chromo->_lookup.end(); it++ ) {
         
         //is there overlapping?
-        if ( !(chromo->_values[(*it).second].size()>1) ) score++;
+        if ( !(chromo->_values[(*it).second].size()>1) ) score+=1.5;
+            // Overlapping is particularly bad, so should merit a higher penalty than other lacking major requirements, eg not teaching the subject
         
         //Does the tutor teach the subject?
         //get tutor:
@@ -172,13 +169,14 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         Tutor* tutor = Configuration::getInstance().getTutor(tutorID);
         
         //check subject:
-        list<Subject*> tutSubj = tutor->getSubjects();
-        for (list<Subject*>::iterator itTut = tutSubj.begin(); itTut != tutSubj.end(); itTut++)
+        list<Subject*> tutSubjs = tutor->getSubjects();
+        for (list<Subject*>::iterator itTut = tutSubjs.begin(); itTut != tutSubjs.end(); itTut++)
         {
-            if ( (*it).first->getSubject() == *itTut )
+            Subject* studentSubject = (*it).first->getSubject();
+            if ( studentSubject == *itTut )
             {
                 score++;
-                break; // Need to adapt to suit proficiency in subject. edit. 
+                break; // Need to adapt to suit proficiency in subject. edit.
             }
         }
         
@@ -195,18 +193,6 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         }
         if (canDo) score++;
         
-        //Has the tutor been seen previously in another session?
-        bool seenPrev = false;
-        list<Tutor*> prevTutors = (*it).first->getPrevTutors();
-        for (list<Tutor*>::iterator itPrev = prevTutors.begin(); itPrev != prevTutors.end(); itPrev++)
-        {
-            if ( *itPrev == tutor ) {
-                seenPrev = true;
-                break;
-            }
-        }
-        if (!seenPrev) score++;
-        
         //is this student already busy at this time?
         int engagements = 0;
         //loop over all times (for one tutor)
@@ -222,7 +208,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         if (engagements==1) score++; // If we only found them once (ie in the slot we were considering) then score
         
         //  MINOR:
-        //Does this student/tutor pair appear elsewhere in this timetable?
+        //   Does this student/tutor pair appear elsewhere in this timetable?
         int pairings=0;
         //loop over all tutor's slots
         for (int i = SLOTS_IN_DAY*(tutorID-1); i < SLOTS_IN_DAY*tutorID; i++) {
@@ -235,10 +221,24 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         }
         // This is a minor requirement, therefore, if the student is only paired with this tutor
         //   once then score a small prize, so other req. take precidence
-        if (pairings==1) score+=0.1;
+        if (pairings==1) score+=0.2;
+        
+        //  MINOR:
+        //   Has the tutor been seen previously in another session?
+        bool seenPrev = false;
+        list<Tutor*> prevTutors = (*it).first->getPrevTutors();
+        for (list<Tutor*>::iterator itPrev = prevTutors.begin(); itPrev != prevTutors.end(); itPrev++)
+        {
+            if ( *itPrev == tutor ) {
+                seenPrev = true;
+                break;
+            }
+        }
+        if (!seenPrev) score+=0.1;
     }
     
-    float maxscore = 5.1 * numStudents;
+    float maxscore = 4.8 * numStudents;
+//    float maxscore = 4.5 * numStudents;
     
     return (float)score / (float)maxscore;
 }

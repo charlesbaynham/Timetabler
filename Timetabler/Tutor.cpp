@@ -26,10 +26,11 @@ void Tutor::processSlots() {
     
     for (list<int>::iterator it = _notTimes.begin(); it != _notTimes.end(); it++){ // Loop through all notTimes...
         int notslot;
-        notslot = *it + _ID * SLOTS_IN_DAY; //  translating them to notSlots
+        notslot = *it + (_ID-1) * SLOTS_IN_DAY; //  translating them to notSlots
 
         _notSlots.push_back(notslot); // Store in list
     }
     
     _slotsProcessed = true;
 }
+

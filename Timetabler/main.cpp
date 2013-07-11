@@ -19,46 +19,55 @@ using namespace Algorithm::SimpleAlgorithms;
 #include "TimetablerInst.h"
 #include "output.h"
 
+<<<<<<< HEAD
+=======
+#include <Wt/WApplication>
+#include "GUI.h"
 
-int main()
+>>>>>>> input
+
+int main(int argc, char **argv)
 {
+    
+#ifdef DEBUG
+    cerr << "Program is running in DEBUG mode" << endl;
+#endif
+    
+//    // Seeds for debugging
+//    GaGlobalRandomIntegerGenerator = new GaRandomInteger(7456);
+//	GaGlobalRandomFloatGenerator = new GaRandomFloat(345);
+//	GaGlobalRandomDoubleGenerator = new GaRandomDouble(3568);
+//	GaGlobalRandomBoolGenerator = new GaRandomBool(2354768);
 
-    
-    Configuration::getInstance().parseFile("config.txt");
-
-    Configuration::getInstance().dumpTutors();
-    
-    cout << GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<GaGlobalRandomIntegerGenerator->Generate(9) <<endl;
-    
-//    // debug
-//    GaChromosomePtr no1;
+//    char* configfile = "config.txt";
 //    
-//    no1 = TimetablerInst::getInstance().getPrototype()->MakeNewFromPrototype();
+//    // Read in configuration
+//    if ( Configuration::getInstance().parseFile( configfile ) ) { cerr << "Error when opening config file \"" << configfile << "\". Does it exist?\n"; exit(EXIT_FAILURE); }
 //    
-////    outputCSV::getInstance().operator()("test1.txt", *no1);
-////    outputCSV::getInstance().operator()("test2.txt", *no2);
+//    // Solve!
+//    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
 //    
-////    ( outputRaw::getInstance() )("testUnmutated.txt", *no1);
-////    (*no1).Mutation();
-////    ( outputRaw::getInstance() )("testMutated.txt", *no1);
+//    // get the algorithm (set in class as GaAlgorithm), cast to Incremental
+//    //      (since this has the WaitForThreads method) and then wait for it to finish
+//    dynamic_cast<GaIncrementalAlgorithm*>(TimetablerInst::getInstance().getAlgorithm())->WaitForThreads();
 //    
-////    outputCSV::getInstance().operator()("testCrossed.txt", *crossed);
-//    //end debug
-
-    // Seeds for debugging
-    GaGlobalRandomIntegerGenerator = new GaRandomInteger(7456);
-	GaGlobalRandomFloatGenerator = new GaRandomFloat(345);
-	GaGlobalRandomDoubleGenerator = new GaRandomDouble(3568);
-	GaGlobalRandomBoolGenerator = new GaRandomBool(2354768);
+//    printf("Algorithm execution completed in %i generations\n", TimetablerInst::getInstance().getAlgorithm()->GetAlgorithmStatistics().GetCurrentGeneration() );
+//    
     
-    TimetablerInst::getInstance().getAlgorithm()->StartSolving(false);
+    // To hold the command line arguemnts that would normally be passed to the server
+    char *params[6];
+    params[0] = argv[0];
     
-    // get the algorithm (set in class as GaAlgorithm), cast to Incremental
-    //      (since this has the WaitForThreads method) and then execute
-    dynamic_cast<GaIncrementalAlgorithm*>(TimetablerInst::getInstance().getAlgorithm())->WaitForThreads();
-
+    params[1] = (char*)"--http-address";
+    params[2] = (char*)"0.0.0.0";
+    params[3] = (char*)"--http-port";
+    params[4] = (char*)"8080";
+    params[5] = (char*)"--docroot=.;.,/style.css,/resources";
     
-    printf("Done\n");
+    int num = 6;
     
-	return 0;
+    return Wt::WRun(num, params, &createApplication );
+    
 }
+
+

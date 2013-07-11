@@ -14,7 +14,7 @@
 
 Configuration Configuration::_instance;
 
-void Configuration::parseFile(char* fileName) {
+int Configuration::parseFile(char* fileName) {
     
     //clear all
     _tutors.clear();
@@ -23,6 +23,8 @@ void Configuration::parseFile(char* fileName) {
     
     //open file
     ifstream input(fileName);
+    
+    if(input.fail()) return 1; // Error opening file
     
     string line;
     while (input.is_open() && !input.eof()) {
@@ -35,13 +37,13 @@ void Configuration::parseFile(char* fileName) {
 		{
 			Subject* s = ParseSubject( input );
 			if( s )
-				_subjects.insert( pair<int, Subject*>( s->getID(), s ) );
+				this->addSubject(s);
 		}
 		else if( line.compare("#tutor") == 0 )
 		{
 			Tutor* t = ParseTutor( input );
 			if( t )
-				_tutors.insert( pair<int, Tutor*>( t->getID(), t ) );
+				this->addTutor(t);
 		}
 		else if( line.compare("#student") == 0 )
 		{
@@ -49,12 +51,12 @@ void Configuration::parseFile(char* fileName) {
 			if( s )
             {
 				// Push student to the list
-                _students.push_back( s );
+                this->addStudent(s);
                 
-                // create duplicates for however many interviews each student will have (though with different IDs)
+                // create duplicates for however many interviews each student will have (with different IDs, but same baseID)
                 for (int i = 1; i < s->getNoInterviews(); i++) {
                     Student* next = new Student(s);
-                    _students.push_back( next );
+                    this->addStudent(next);
                 }
             }
 		}
@@ -66,10 +68,25 @@ void Configuration::parseFile(char* fileName) {
     
     processTutorsSlots(); // Work out the _notSlots element for each tutor
     
-    cout << "Input: "<<numStudents()<<" students, "<<numTutors()<<" tutors and "<<numSubjects()<<" subjects.\n";
-//    Tutor* richard = getTutor(1);
-    //cout << "Richard has " << richard->getNotSlots().size() << " notslots.\n";
+    cout << "Input from file: "<<numStudents()<<" students, "<<numTutors()<<" tutors and "<<numSubjects()<<" subjects.\n";
+
+    return 0;
+}
+
+// Get configuration directly from a function call (called by the GUI)
+void Configuration::setup( hash_map<int, Tutor*> tutors, hash_map<int, Subject*> subjects, list<Student*> students )
+{
+    _tutors = tutors; _subjects=subjects; _students=students;
     
+    processTutorsSlots(); // Work out the _notSlots element for each tutor
+
+    //debug
+    tutors = _tutors;
+    //end debug
+    
+    _isEmpty = false;
+    
+    cout << "Input from GUI: "<<numStudents()<<" students, "<<numTutors()<<" tutors and "<<numSubjects()<<" subjects.\n";
 }
 
 
@@ -211,18 +228,62 @@ void Configuration::dumpTutors(){
     for (hash_map<int, Tutor*>::iterator it = theTutors.begin(); it != theTutors.end(); it++) {
         Tutor* tut = (*it).second;
         
-        cout << "Name: "<<tut->getName()<<" (ID="<<tut->getID() << ")\nSubjects:\n";
+        cerr << "Name: "<<tut->getName()<<" (ID="<<tut->getID() << ")\nSubjects:\n";
         list<Subject*> subjlist = tut->getSubjects();
         for (list<Subject*>::iterator it2=subjlist.begin(); it2 != subjlist.end(); it2++) {
-            cout << "\t" << (*it2)->getName() << "("<<(*it2)->getID()<<")\n";
+            cerr << "\t" << (*it2)->getName() << "("<<(*it2)->getID()<<")\n";
         }
-        cout << "NotSlots:\n";
+        cerr << "NotSlots:\n";
         list<int> thelist = tut->getNotSlots();
         for (list<int>::iterator it2=thelist.begin(); it2 != thelist.end(); it2++) {
             int notslot = *it2;
-            cout << "\t"<< notslot << "\n";
+            cerr << "\t"<< notslot << "\n";
         }
-        cout << "\n***\n";
+        cerr << "\n***\n";
     }
     
 }
+
+// remove given objects from their container. Return false on failure
+
+bool Configuration::removeSubject( Subject* s ) {
+    
+    // Look up the subject by its ID
+    hash_map<int, Subject*>::iterator it = _subjects.find( s->getID() );
+    if ( it != _subjects.end() ) {
+        // We've found the subject! Erase it...
+        _subjects.erase(it);
+
+        //now loop over all the tutors and remove this subject from their list if present
+        for (hash_map<int, Tutor*>::iterator itTut=_tutors.begin(); itTut!=_tutors.end(); itTut++) {
+            (*itTut).second->removeSubject(s);
+        }
+        
+        //now, remove all students if this subject was theirs. Maybe think of a better way to handle this. edit.
+        _students.remove_if( [s](Student* thisS){ return thisS->getSubject() == s; } );
+        
+        return true;
+    }
+    
+    return false;
+}
+
+//bool Configuration::removeTutor( int ID ) {
+//    // remove the tutor. No need to remove from students prevlist as will now just never cause a fitness penalty
+//    
+//    // Look up the tutor by their ID
+//    hash_map<int, Tutor*>::iterator it = _tutors.find( ID );
+//    if ( it != _tutors.end() ) {
+//        _tutors.erase(it);
+//        return true;
+//    }
+//
+//    return false;
+//}
+//void Configuration::removeStudent( Student* s ) {
+//    // Remove ALL instances of this student (i.e. those with the same baseID)
+//    _students.remove_if( [s](Student* thisS){ return thisS->getBaseID() == s->getBaseID(); } );
+//}
+
+
+

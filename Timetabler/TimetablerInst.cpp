@@ -7,7 +7,6 @@
 //
 
 #include "TimetablerInst.h"
-#include "output.h"
 
 using namespace Population;
 using namespace Population::ReplacementOperations;
@@ -15,20 +14,49 @@ using namespace Population::SelectionOperations;
 using namespace Algorithm::SimpleAlgorithms;
 using namespace Algorithm::StopCriterias;
 
+
+
+//debug
+//#include <Wt/WApplication>
+#include "GUI.h"
+//end
+
+
+
+
 void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {
     printf("New best at generation %i. Has fitness of %f\n", algorithm.GetAlgorithmStatistics().GetCurrentGeneration(), newChromosome.GetFitness());
     ( outputCSV::getInstance() )("test.txt", newChromosome, true);
+    
+    finishedTT* newBest = new finishedTT(&newChromosome);
+    
+//    //debug
+//    Student* test;
+//    if ( (test = newBest->getTutorOrientated()->getTutorApt(1, 6)) ) printf("*** Student is %s\n", test->getName().c_str() );
+//    else printf("*** Student not found\n");
+//    
+//    Tutor* test2;
+//    if ( (test2 = newBest->getStudentOrientated()->getStudentApt(1, 3)) ) printf("*** Tutor is %s\n", test2->getName().c_str() );
+//    else printf("*** Tutor not found\n");
+//    //end debug
 }
 
+
 void TTObserver::EvolutionStateChanged(GaAlgorithmState newState, const GaAlgorithm& algorithm) {
-    cout << "New state is " << newState << endl;
+    
     if (newState == GAS_CRITERIA_STOPPED) // we found a solution, so get the best chromosome:
     {
         GaChromosomePtr result;
         algorithm.GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
-        cout << "***\nFitness of final solution is " << result->GetFitness() << ", found in ";
-        cout << algorithm.GetAlgorithmStatistics().GetCurrentGeneration() << " generations." << endl;
+        
+        if (_funcComplete != NULL) _funcComplete(result);
+        
+        
+
+//        cout << "***\nFitness of final solution is " << result->GetFitness() << ", found in ";
+//        cout << algorithm.GetAlgorithmStatistics().GetCurrentGeneration() << " generations." << endl;
     }
+    
 }
 // To be written. Edit
 
@@ -102,19 +130,28 @@ TimetablerInst::TimetablerInst()
     
 	// make parameters for genetic algorithms
 	// algorithm will use two workers
-	GaMultithreadingAlgorithmParams algorithmParams( 1 );
-    //debug
+#ifdef DEBUG
+    GaMultithreadingAlgorithmParams algorithmParams( 1 );
+    //debug: set back to two
+#else
+    GaMultithreadingAlgorithmParams algorithmParams( 2 );
+#endif
+    
 	// make incremental algorithm with periously defined population and parameters
 	_algorithm = new GaIncrementalAlgorithm( _population, algorithmParams );
     
 	// make parameters for stop criteria based on fitness value
 	// stop when best chromosome reaches fitness value of 1
-	GaFitnessCriteriaParams criteriaParams( 1, GFC_MORE_THEN_EQUALS_TO, GSV_BEST_FITNESS );
-    // This line needs changing
+	
+//    Fitness of 1: deprec
+    GaFitnessCriteriaParams criteriaParams( 1, GFC_MORE_THEN_EQUALS_TO, GSV_BEST_FITNESS );
+
+//    Keep trying until the fitness doesn't improve for 10000 generations (~10s)
+    GaFitnessProgressCriteriaParams fitnessParams(0.00001, true, GFC_LESS_THEN_EQUALS_TO, GaStatValueType::GSV_BEST_FITNESS, 10000);
     
-	// sets algorithm's stop criteria (base on fitness value) and its parameters
-	_algorithm->SetStopCriteria( GaStopCriteriaCatalogue::Instance().GetEntryData( "GaFitnessCriteria" ), 
-                                &criteriaParams );
+	// sets algorithm's stop criteria (based on fitness improvement) and its parameters
+//	_algorithm->SetStopCriteria( GaStopCriteriaCatalogue::Instance().GetEntryData( "GaFitnessCriteria" ), &criteriaParams );
+    _algorithm->SetStopCriteria( GaStopCriteriaCatalogue::Instance().GetEntryData( "GaFitnessProgressCriteria" ), &fitnessParams );
     
 	// subscribe observer
 	_algorithm->SubscribeObserver( &_observer );

@@ -23,6 +23,9 @@ public:
     inline int getID(){ return _ID; }
     inline const string& getName() { return _name; }
     
+    inline void setID(int ID){ _ID = ID; }
+    inline void setName(string name) { _name = name; }
+    
 };
 
 #endif

@@ -120,7 +120,111 @@ void outputRaw::operator ()(char * filename, const GaChromosome& chromo) {
 
 }
 
+finishedTT::finishedTT(const GaChromosome* chromo) :
+_tutors(Configuration::getInstance().getTutors())
+{
+    // Store list of students by baseID: (n.b. don't use the ID of the students stored here as it it undefined)
+    const list<Student*> students = Configuration::getInstance().getStudents();
+    for (list<Student*>::const_iterator it = students.begin(); it != students.end(); it++) {
+        _students[ (*it)->getBaseID() ] = (*it);
+    }
+    
+    // Create timetables
+    _chromo = dynamic_cast<const Chromosone*>(chromo);
+    _studentTT = new studentTT(_chromo);
+    _tutorTT = new tutorTT(_chromo);
+}
 
 
+tutorTT::tutorTT(const Chromosone* chromo)
+{
+    if ( !(chromo == NULL) ) {
+        
+        vector<list<Student*> > values = chromo->GetSlots();
+        
+        int numSlots = (int)values.size();
+        
+        //for each tutor:
+        for (int tutorBaseSlot=0; tutorBaseSlot < numSlots; tutorBaseSlot+=SLOTS_IN_DAY)
+        {
+            int tutorID = div(tutorBaseSlot, SLOTS_IN_DAY).quot + 1;
+            tutorTT_tutor* newTutor = new tutorTT_tutor( Configuration::getInstance().getTutor(tutorID) );
+            
+            //for each time of this tutor
+            for (int slot=tutorBaseSlot; slot < (tutorBaseSlot+SLOTS_IN_DAY); slot++) {
+                int time = div(slot, SLOTS_IN_DAY).rem;
+                // We assume that by this point there's only one student per slot. If not, we ignore the second. Edit.
+                Student* student = values[slot].front();
+                
+                // Add the student to this tutor's timetable:
+                if ( !values[slot].empty() ) newTutor->addStudent( time, student );
+            }
+            
+            //            //debug
+            //            for (hash_map<int, Student*>::iterator it=newTutor->_students.begin(); it!=newTutor->_students.end(); it++) {
+            //
+            //                printf("Student at time %i with %s is %s\n", (*it).first, newTutor->getTutorName().c_str(), (*it).second->getName().c_str());
+            //
+            //            }
+            //            //debug end
+            
+            // Add the new tutor to the list
+            _tutors.push_back(newTutor);
+            
+        }
+    }
+}
 
+studentTT::studentTT(const Chromosone* chromo)
+{
+    if ( !(chromo == NULL) ) {
+        
+        hash_map<Student*, int> lookup = chromo->GetStudentLookup();
+        
+        // map of baseID->timetable for all the students' timetables
+        _students.clear();
+        
+        //For every appointment (not for every student, since most students appear more than once)
+        for (hash_map<Student*, int>::iterator it = lookup.begin(); it != lookup.end(); it++) {
+//            if the baseID of this student is not already present in _students then create it:
+            int baseID = (*it).first->getBaseID();
+            if ( _students.find( baseID ) == _students.end() )
+            {
+                studentTT_student* newStudent = new studentTT_student( (*it).first );
+                _students[ baseID ] = newStudent;
+            }
+            
+            // Then, add the appropriate tutor for this slot to the (possibly newly created) student
+            // First, evaluate the slot
+            div_t division = div((*it).second, SLOTS_IN_DAY);
+            int tutorID = division.quot + 1;
+            int time = division.rem;
+            Tutor* tutor = Configuration::getInstance().getTutor(tutorID);
+            
+            // now, add to the map
+            _students[baseID]->addTutor(time, tutor);
+        }
+    }
+}
+
+Student* tutorTT::getTutorApt(int tutorID, int time)
+{
+    for (tutorTTList::iterator it=_tutors.begin(); it != _tutors.end(); it++)
+    {
+        if ( (*it)->getTutorID() == tutorID ) {
+            Student* student = (*it)->getStudent(time);
+            return student;
+        }
+    }
+    return NULL;
+}
+
+
+Tutor* studentTT::getStudentApt(int studentBaseID, int time)
+{
+    studentTT_student* studentTimetable;
+    if ( (studentTimetable = _students[studentBaseID]) )    return studentTimetable->getTutor(time);
+    
+    return NULL;
+}
 

@@ -31,7 +31,20 @@ public:
     inline int getID(){ return _ID; }
     inline const string& getName() { return _name; }
     inline list<Subject*> getSubjects() { return _subjects; }
+    inline list<int> getNotTimes() { return _notTimes; }
     inline list<int> getNotSlots() { return _notSlots; }
+
+    
+    inline void addNotTime(int time) { _notTimes.push_back(time); _slotsProcessed=false; }
+    inline void removeNotTime(int time) { _notTimes.remove(time); _slotsProcessed=false; }
+    inline void clearNotTimes() { _notTimes.clear(); _slotsProcessed=false; }
+    
+    inline void setID(int ID) { _ID = ID; }
+    inline void setName(string name) { _name = name; }
+    
+    inline void removeSubject(Subject* s) { _subjects.remove(s); }
+    inline void addSubject(Subject* s) { removeSubject(s); _subjects.push_back(s); }
+    inline void clearSubjects() { _subjects.clear(); }
     
     void processSlots(); // Calculate the _notSlots list based on _notTimes and number of tutors in global config. 
     inline bool isProcessed() { return _slotsProcessed; }
