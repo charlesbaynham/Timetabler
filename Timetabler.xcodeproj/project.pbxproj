@@ -10,7 +10,6 @@
 		56551F3C178C43CE005D5348 /* inputGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56551F3A178C43CE005D5348 /* inputGUI.cpp */; };
 		5665F23917839336005C55D8 /* libGeneticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */; };
 		56A9A7651779B4A900C70EE3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56A9A7641779B4A900C70EE3 /* main.cpp */; };
-		56A9A7671779B4A900C70EE3 /* Timetabler.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56A9A7661779B4A900C70EE3 /* Timetabler.1 */; };
 		56CE097317831E8800D75072 /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE097117831E8800D75072 /* GUI.cpp */; };
 		56DF0FF9177B5DFA005F1B6A /* Student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF0FF8177B5DFA005F1B6A /* Student.cpp */; };
 		56DF0FFC177B5F6F005F1B6A /* Tutor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF0FFB177B5F6F005F1B6A /* Tutor.cpp */; };
@@ -67,21 +66,24 @@
 		56E93972178ED3200059B93A /* libboost_unit_test_framework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93955178ED3200059B93A /* libboost_unit_test_framework.a */; };
 		56E93973178ED3200059B93A /* libboost_wave.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93956178ED3200059B93A /* libboost_wave.a */; };
 		56E93974178ED3200059B93A /* libboost_wserialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93957178ED3200059B93A /* libboost_wserialization.a */; };
-		56E93977178ED3880059B93A /* libwt.3.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93975178ED3880059B93A /* libwt.3.3.0.dylib */; };
-		56E93978178ED3880059B93A /* libwthttp.3.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93976178ED3880059B93A /* libwthttp.3.3.0.dylib */; };
+		56E93993178F06600059B93A /* libwt.35.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93991178F06600059B93A /* libwt.35.dylib */; };
+		56E93994178F06600059B93A /* libwthttp.35.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93992178F06600059B93A /* libwthttp.35.dylib */; };
+		56E93995178F06AC0059B93A /* libwt.35.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56E93991178F06600059B93A /* libwt.35.dylib */; };
+		56E93996178F06AC0059B93A /* libwthttp.35.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56E93992178F06600059B93A /* libwthttp.35.dylib */; };
 		56F72DFB17817E8300D849AD /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56F72DF917817E8300D849AD /* output.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		56A9A75F1779B4A900C70EE3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
-				56A9A7671779B4A900C70EE3 /* Timetabler.1 in CopyFiles */,
+				56E93995178F06AC0059B93A /* libwt.35.dylib in CopyFiles */,
+				56E93996178F06AC0059B93A /* libwthttp.35.dylib in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -231,8 +233,8 @@
 		56E93955178ED3200059B93A /* libboost_unit_test_framework.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_unit_test_framework.a; path = /usr/local/lib/libboost_unit_test_framework.a; sourceTree = "<absolute>"; };
 		56E93956178ED3200059B93A /* libboost_wave.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_wave.a; path = /usr/local/lib/libboost_wave.a; sourceTree = "<absolute>"; };
 		56E93957178ED3200059B93A /* libboost_wserialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_wserialization.a; path = /usr/local/lib/libboost_wserialization.a; sourceTree = "<absolute>"; };
-		56E93975178ED3880059B93A /* libwt.3.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwt.3.3.0.dylib; path = ../../../../usr/local/lib/libwt.3.3.0.dylib; sourceTree = "<group>"; };
-		56E93976178ED3880059B93A /* libwthttp.3.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwthttp.3.3.0.dylib; path = ../../../../usr/local/lib/libwthttp.3.3.0.dylib; sourceTree = "<group>"; };
+		56E93991178F06600059B93A /* libwt.35.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwt.35.dylib; path = /usr/local/lib/libwt.35.dylib; sourceTree = "<absolute>"; };
+		56E93992178F06600059B93A /* libwthttp.35.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwthttp.35.dylib; path = /usr/local/lib/libwthttp.35.dylib; sourceTree = "<absolute>"; };
 		56F72DF917817E8300D849AD /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = output.cpp; sourceTree = "<group>"; };
 		56F72DFA17817E8300D849AD /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = output.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -259,8 +261,6 @@
 				56E93965178ED3200059B93A /* libboost_math_tr1f.a in Frameworks */,
 				56E93966178ED3200059B93A /* libboost_math_tr1l.a in Frameworks */,
 				56E93967178ED3200059B93A /* libboost_prg_exec_monitor.a in Frameworks */,
-				56E93977178ED3880059B93A /* libwt.3.3.0.dylib in Frameworks */,
-				56E93978178ED3880059B93A /* libwthttp.3.3.0.dylib in Frameworks */,
 				56E93968178ED3200059B93A /* libboost_program_options.a in Frameworks */,
 				56E93969178ED3200059B93A /* libboost_python.a in Frameworks */,
 				56E9396A178ED3200059B93A /* libboost_random.a in Frameworks */,
@@ -274,6 +274,8 @@
 				56E93972178ED3200059B93A /* libboost_unit_test_framework.a in Frameworks */,
 				56E93973178ED3200059B93A /* libboost_wave.a in Frameworks */,
 				56E93974178ED3200059B93A /* libboost_wserialization.a in Frameworks */,
+				56E93993178F06600059B93A /* libwt.35.dylib in Frameworks */,
+				56E93994178F06600059B93A /* libwthttp.35.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,8 +292,6 @@
 		56A9A7581779B4A900C70EE3 = {
 			isa = PBXGroup;
 			children = (
-				56E93975178ED3880059B93A /* libwt.3.3.0.dylib */,
-				56E93976178ED3880059B93A /* libwthttp.3.3.0.dylib */,
 				56CE096F17831E7200D75072 /* Wt Libraries */,
 				56E2E4E2177A1BF900CB720C /* GeneticLibrary */,
 				56A9A7631779B4A900C70EE3 /* Timetabler */,
@@ -337,6 +337,8 @@
 		56CE096F17831E7200D75072 /* Wt Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				56E93991178F06600059B93A /* libwt.35.dylib */,
+				56E93992178F06600059B93A /* libwthttp.35.dylib */,
 				56E9393B178ED3200059B93A /* libboost_atomic.a */,
 				56E9393C178ED3200059B93A /* libboost_chrono.a */,
 				56E9393D178ED3200059B93A /* libboost_context.a */,
@@ -718,6 +720,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = /usr/local/include;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/lib,
@@ -738,6 +741,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = /usr/local/include;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/lib,
@@ -787,6 +791,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = /usr/local/include;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/lib,

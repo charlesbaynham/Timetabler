@@ -1263,9 +1263,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "66"
-         endingLineNumber = "66"
-         landmarkName = "main(int argc, char **argv)"
-         landmarkType = "7">
+         endingLineNumber = "66">
       </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>
