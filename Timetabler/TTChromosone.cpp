@@ -153,15 +153,12 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
     int numSlots = SLOTS_IN_DAY * Configuration::getInstance().numTutors();
     
     
-    //debug
-//    printf("Fitness: lookup size is %i\n", numStudents);
-    //end debug
-    
     // loop over all students
     for (hash_map<Student*,int>::const_iterator it = chromo->_lookup.begin(); it!=chromo->_lookup.end(); it++ ) {
         
         //is there overlapping?
-        if ( !(chromo->_values[(*it).second].size()>1) ) score++;
+        if ( !(chromo->_values[(*it).second].size()>1) ) score+=1.5;
+            // Overlapping is particularly bad, so should merit a higher penalty than other lacking major requirements, eg not teaching the subject
         
         //Does the tutor teach the subject?
         //get tutor:
@@ -240,8 +237,8 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         if (!seenPrev) score+=0.1;
     }
     
-    float maxscore = 4.3 * numStudents;
-//    float maxscore = 4 * numStudents;
+    float maxscore = 4.8 * numStudents;
+//    float maxscore = 4.5 * numStudents;
     
     return (float)score / (float)maxscore;
 }

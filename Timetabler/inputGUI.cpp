@@ -409,7 +409,7 @@ void inputGUI::submit() {
             
             tutors[id] = tutor;
             
-            //debug edit
+#ifdef DEBUG
             Tutor* debugtest = tutors[id];
             
             static hash_map<int, bool> test;
@@ -419,6 +419,7 @@ void inputGUI::submit() {
                 exit(-1);
             }
             else test[id]=true;
+#endif
         }
         
         // loop over all the students
@@ -433,17 +434,19 @@ void inputGUI::submit() {
                 students.push_back( new Student(student) );
             }
             
-            //debug edit
+#ifdef DEBUG
             static hash_map<int, bool> test;
             if (it==_students.begin()) test.clear();
             if (test[id]==true) { printf("Student fail\n\n\n\n"); exit(-1); }
             else test[id]=true;
+#endif
         }
         
         Configuration::getInstance().setup( tutors, subjects, students );
         
-        //debug
+#ifdef DEBUG
         Configuration::getInstance().dumpTutors();
+#endif
         
         // Redirect to the output page
         TimetablerWebApplication* app = dynamic_cast<TimetablerWebApplication*>( WApplication::instance() );

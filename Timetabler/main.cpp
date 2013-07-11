@@ -25,6 +25,7 @@ using namespace Algorithm::SimpleAlgorithms;
 
 int main(int argc, char **argv)
 {
+        
 //    // Seeds for debugging
 //    GaGlobalRandomIntegerGenerator = new GaRandomInteger(7456);
 //	GaGlobalRandomFloatGenerator = new GaRandomFloat(345);
