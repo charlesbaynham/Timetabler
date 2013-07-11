@@ -46,6 +46,7 @@ class TimetablerInst {
     
 public:
     inline static TimetablerInst& getInstance() { return _instance; } // return global instance
+    inline static void reset() { delete[] _instance2; TimetablerInst(); }
     
 private:
     GaChromosomeParams* _chromosomeParams;

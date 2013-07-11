@@ -107,6 +107,7 @@ void TimetablerWebApplication::refreshStats() {
 #endif
     if (state & GaAlgorithmState::GAS_STOPPED ) {
         _timer->stop();
+        _bestFitness->setText( "Best solution found" );
 #if DEBUG
         cerr<<"Stopping timer on algorithm completion" << endl;
 #endif

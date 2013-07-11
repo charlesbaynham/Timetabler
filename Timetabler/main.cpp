@@ -19,12 +19,10 @@ using namespace Algorithm::SimpleAlgorithms;
 #include "TimetablerInst.h"
 #include "output.h"
 
-<<<<<<< HEAD
-=======
 #include <Wt/WApplication>
 #include "GUI.h"
 
->>>>>>> input
+
 
 int main(int argc, char **argv)
 {

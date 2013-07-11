@@ -29,12 +29,14 @@ GUITutor::GUITutor(inputGUI* parent) :
             _subjects->addItem( (*it)->getName() );
         //set the selection box to allow multiple selections
         _subjects->setSelectionMode(SelectionMode::ExtendedSelection);
+
+
     _notLabel = new WText("Unavailable times:",_visOutput);
     _notSlots = new WSelectionBox(_visOutput);
-        // Add the slot options
-        for (int i=0; i<SLOTS_IN_DAY; i++) { _notSlots->addItem( to_string(i) ); }
         //set the selection box to allow multiple selections
         _notSlots->setSelectionMode(SelectionMode::ExtendedSelection);
+        // Add the slot options
+        for (int i=0; i<SLOTS_IN_DAY; i++) { _notSlots->addItem( to_string(i) ); }
     
     _name->setValidator(new WValidator(true));
     
