@@ -25,7 +25,11 @@ using namespace Algorithm::SimpleAlgorithms;
 
 int main(int argc, char **argv)
 {
-        
+    
+#ifdef DEBUG
+    cerr << "Program is running in DEBUG mode" << endl;
+#endif
+    
 //    // Seeds for debugging
 //    GaGlobalRandomIntegerGenerator = new GaRandomInteger(7456);
 //	GaGlobalRandomFloatGenerator = new GaRandomFloat(345);
@@ -47,7 +51,19 @@ int main(int argc, char **argv)
 //    printf("Algorithm execution completed in %i generations\n", TimetablerInst::getInstance().getAlgorithm()->GetAlgorithmStatistics().GetCurrentGeneration() );
 //    
     
-    return Wt::WRun(argc, argv, &createApplication );
+    // To hold the command line arguemnts that would normally be passed to the server
+    char *params[6];
+    params[0] = argv[0];
+    
+    params[1] = (char*)"--http-address";
+    params[2] = (char*)"0.0.0.0";
+    params[3] = (char*)"--http-port";
+    params[4] = (char*)"8080";
+    params[5] = (char*)"--docroot=.;.,/style.css,/resources";
+    
+    int num = 6;
+    
+    return Wt::WRun(num, params, &createApplication );
     
 }
 

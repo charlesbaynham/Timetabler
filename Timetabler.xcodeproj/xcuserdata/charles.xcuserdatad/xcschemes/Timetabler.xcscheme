@@ -60,7 +60,11 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "--http-address 0.0.0.0 --http-port 8080 --docroot=&quot;.;.,/style.css,/resources&quot;"
-            isEnabled = "YES">
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--http-address 0.0.0.0 --http-port 8080 --docroot=&quot;test&quot;"
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

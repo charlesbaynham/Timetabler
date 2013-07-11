@@ -1,0 +1,23 @@
+body { colour: #FFF; }
+
+.titleText {
+	margin: 1in 0 0.5in 2in;
+	text-size: 0.5in;
+}
+.yellow-box {
+	background: #CCC;
+	text-align: center;
+}
+.green-box { background: #E9E9E9; }
+.blue-box { background: #0997A5; }
+
+.appt { colour: while; }
+
+.centerme {
+	position: relative;
+	top: 50%;
+}
+
+.appt, .green-box, .blue-box {
+	padding-top: 40px;
+}

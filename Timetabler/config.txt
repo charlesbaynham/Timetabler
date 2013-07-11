@@ -1,0 +1,56 @@
+
+% Config file.  Will be auto generated eventually
+% Student ids are auto generated
+% the others don't matter, except for Tutors:
+%	these MUST start at 1 and ascend from there, else the 
+%	slot identification will break
+
+#subject
+	id = 1
+	name = Physics
+#end
+#subject
+	id = 2
+	name = Maths
+#end
+#subject
+	id = 3
+	name = Chemistry
+#end
+
+#tutor
+	id=1
+	name = PhysTut
+	subj = 1
+#end
+
+#tutor
+	id=2
+	name = MathTut
+	subj = 2
+#end
+
+#tutor
+	id=3
+	name = ChemTut
+	subj = 3
+#end
+
+
+
+#student
+	name = PhysStud
+	subj = 1
+	noInterviews = 4
+#end
+#student
+	name = MathsStud
+	subj = 2
+	noInterviews = 2
+#end
+#student
+	name = ChemStud
+	subj = 3
+	noInterviews = 4
+#end
+

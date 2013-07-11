@@ -24,14 +24,15 @@ void TimetablerWebApplication::handlePathChange()
     string path = app->internalPath();
     if (path == "/output") {
         root()->clear();
-        if (Configuration::getInstance().isEmpty()) // We haven't yet made the configuration
-            root()->addWidget(new WText("Error: this page is not meant for direct access."));
+        if (Configuration::getInstance().isEmpty()) { // We haven't yet made the configuration
+            root()->addWidget(new WText("Error: this page is not meant for direct access. Redirecting to input..."));
+            app->setInternalPath("/", true);
+        }
         else
             startSolve();
     }
-    else if(path == "/") pageReady();
-    else if( path == "/input" ) pageInput();
-    else if( boost::starts_with(path, "/input") ) app->setInternalPath("/input", true); // redirect to input page if using derivative path
+    else if(path == "/") pageInput();
+    else if( boost::starts_with(path, "/input") ) app->setInternalPath("/", true); // redirect to input page if using old input path
     else app->setInternalPath("/", true); // Redirect to main page if page not found
     
     
@@ -79,7 +80,10 @@ void TimetablerWebApplication::refreshStats() {
     
     float bestFitness = (*result).GetFitness();
     int generation = algorithm->GetAlgorithmStatistics().GetCurrentGeneration();
-    printf("Current generation: %i. Best fitness: %f\n", generation, bestFitness);
+
+#if DEBUG
+    cerr << "Current generation: "<<generation<<". Best fitness: "<<bestFitness<< endl;
+#endif
     
     char out[100];
     sprintf(out, "Gen %i, fitness %f", generation, bestFitness);
@@ -96,9 +100,17 @@ void TimetablerWebApplication::refreshStats() {
         lastTT = timetable;
     }
 
-    
-    if (bestFitness > 0.999999)
+    //if finished, stop checking
+    GaAlgorithmState state = TimetablerInst::getInstance().getAlgorithm()->GetState();
+#if DEBUG
+    cerr << "The state is " << state << endl;
+#endif
+    if (state & GaAlgorithmState::GAS_STOPPED ) {
         _timer->stop();
+#if DEBUG
+        cerr<<"Stopping timer on algorithm completion" << endl;
+#endif
+    }
 
 }
 
@@ -127,16 +139,23 @@ TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
 
 void TimetablerWebApplication::pageInput() {
     
+    // set to the correct path in case called from another function and the path is currently wrong
+    this->setInternalPath("/");
+    
+    //wipe display
+    root()->clear();
+    
     // wipe any existing configuration and stop any existing algorithms
     Configuration::getInstance().clear();
     TimetablerInst::getInstance().getAlgorithm()->StopSolving();
     
 //    if (!_inputGUI) {
-        
+    
         _inputGUI = new inputGUI(root());
                 
-        WApplication *app = WApplication::instance();
-        app->processEvents();
+        this->processEvents();
+    
+
     
 //    }
 //    else {
@@ -149,8 +168,11 @@ void TimetablerWebApplication::pageInput() {
 
 void TimetablerWebApplication::pageReady() {
     
+    //clear page
+    root()->clear();
+    
     // set to the correct path in case called from another function and the path is currently wrong
-    this->setInternalPath("/");
+    this->setInternalPath("/output");
     
     _greeting = new WText("Ready");
     _greeting->setStyleClass("titleText");
