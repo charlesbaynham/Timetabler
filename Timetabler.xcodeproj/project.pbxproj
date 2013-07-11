@@ -1,0 +1,837 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		56551F3C178C43CE005D5348 /* inputGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56551F3A178C43CE005D5348 /* inputGUI.cpp */; };
+		5665F23917839336005C55D8 /* libGeneticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */; };
+		56A9A7651779B4A900C70EE3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56A9A7641779B4A900C70EE3 /* main.cpp */; };
+		56CE097317831E8800D75072 /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56CE097117831E8800D75072 /* GUI.cpp */; };
+		56DF0FF9177B5DFA005F1B6A /* Student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF0FF8177B5DFA005F1B6A /* Student.cpp */; };
+		56DF0FFC177B5F6F005F1B6A /* Tutor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF0FFB177B5F6F005F1B6A /* Tutor.cpp */; };
+		56DF0FFF177B6026005F1B6A /* TTChromosone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF0FFE177B6026005F1B6A /* TTChromosone.cpp */; };
+		56DF1002177B6132005F1B6A /* Subject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF1001177B6132005F1B6A /* Subject.cpp */; };
+		56DF1006177B770A005F1B6A /* TimetablerInst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF1004177B770A005F1B6A /* TimetablerInst.cpp */; };
+		56DF100A177C6AE8005F1B6A /* Configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56DF1008177C6AE8005F1B6A /* Configuration.cpp */; };
+		56E2E564177A1BF900CB720C /* Algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E512177A1BF900CB720C /* Algorithm.cpp */; };
+		56E2E565177A1BF900CB720C /* BinaryChromosome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E516177A1BF900CB720C /* BinaryChromosome.cpp */; };
+		56E2E566177A1BF900CB720C /* Chromosome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E519177A1BF900CB720C /* Chromosome.cpp */; };
+		56E2E567177A1BF900CB720C /* CouplingOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E51C177A1BF900CB720C /* CouplingOperations.cpp */; };
+		56E2E568177A1BF900CB720C /* CrossoverOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E51E177A1BF900CB720C /* CrossoverOperations.cpp */; };
+		56E2E569177A1BF900CB720C /* IncrementalAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E524177A1BF900CB720C /* IncrementalAlgorithm.cpp */; };
+		56E2E56A177A1BF900CB720C /* Initialization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E526177A1BF900CB720C /* Initialization.cpp */; };
+		56E2E56B177A1BF900CB720C /* MultithreadingAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E528177A1BF900CB720C /* MultithreadingAlgorithm.cpp */; };
+		56E2E56C177A1BF900CB720C /* MutationOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E52B177A1BF900CB720C /* MutationOperations.cpp */; };
+		56E2E56D177A1BF900CB720C /* Observing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E52D177A1BF900CB720C /* Observing.cpp */; };
+		56E2E56E177A1BF900CB720C /* Population.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E531177A1BF900CB720C /* Population.cpp */; };
+		56E2E56F177A1BF900CB720C /* PopulationOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E533177A1BF900CB720C /* PopulationOperations.cpp */; };
+		56E2E570177A1BF900CB720C /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E535177A1BF900CB720C /* Random.cpp */; };
+		56E2E571177A1BF900CB720C /* ReplacementOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E537177A1BF900CB720C /* ReplacementOperations.cpp */; };
+		56E2E572177A1BF900CB720C /* ScalingOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E53A177A1BF900CB720C /* ScalingOperations.cpp */; };
+		56E2E573177A1BF900CB720C /* SelectionOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E53C177A1BF900CB720C /* SelectionOperations.cpp */; };
+		56E2E574177A1BF900CB720C /* SimpleAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E53E177A1BF900CB720C /* SimpleAlgorithm.cpp */; };
+		56E2E575177A1BF900CB720C /* Statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E544177A1BF900CB720C /* Statistics.cpp */; };
+		56E2E576177A1BF900CB720C /* StopCriterias.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E546177A1BF900CB720C /* StopCriterias.cpp */; };
+		56E2E577177A1BF900CB720C /* Threading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E548177A1BF900CB720C /* Threading.cpp */; };
+		56E93958178ED3200059B93A /* libboost_atomic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9393B178ED3200059B93A /* libboost_atomic.a */; };
+		56E93959178ED3200059B93A /* libboost_chrono.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9393C178ED3200059B93A /* libboost_chrono.a */; };
+		56E9395A178ED3200059B93A /* libboost_context.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9393D178ED3200059B93A /* libboost_context.a */; };
+		56E9395B178ED3200059B93A /* libboost_date_time.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9393E178ED3200059B93A /* libboost_date_time.a */; };
+		56E9395C178ED3200059B93A /* libboost_exception.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9393F178ED3200059B93A /* libboost_exception.a */; };
+		56E9395D178ED3200059B93A /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93940178ED3200059B93A /* libboost_filesystem.a */; };
+		56E9395E178ED3200059B93A /* libboost_graph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93941178ED3200059B93A /* libboost_graph.a */; };
+		56E9395F178ED3200059B93A /* libboost_iostreams.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93942178ED3200059B93A /* libboost_iostreams.a */; };
+		56E93960178ED3200059B93A /* libboost_locale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93943178ED3200059B93A /* libboost_locale.a */; };
+		56E93961178ED3200059B93A /* libboost_math_c99.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93944178ED3200059B93A /* libboost_math_c99.a */; };
+		56E93962178ED3200059B93A /* libboost_math_c99f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93945178ED3200059B93A /* libboost_math_c99f.a */; };
+		56E93963178ED3200059B93A /* libboost_math_c99l.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93946178ED3200059B93A /* libboost_math_c99l.a */; };
+		56E93964178ED3200059B93A /* libboost_math_tr1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93947178ED3200059B93A /* libboost_math_tr1.a */; };
+		56E93965178ED3200059B93A /* libboost_math_tr1f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93948178ED3200059B93A /* libboost_math_tr1f.a */; };
+		56E93966178ED3200059B93A /* libboost_math_tr1l.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93949178ED3200059B93A /* libboost_math_tr1l.a */; };
+		56E93967178ED3200059B93A /* libboost_prg_exec_monitor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9394A178ED3200059B93A /* libboost_prg_exec_monitor.a */; };
+		56E93968178ED3200059B93A /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9394B178ED3200059B93A /* libboost_program_options.a */; };
+		56E93969178ED3200059B93A /* libboost_python.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9394C178ED3200059B93A /* libboost_python.a */; };
+		56E9396A178ED3200059B93A /* libboost_random.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9394D178ED3200059B93A /* libboost_random.a */; };
+		56E9396B178ED3200059B93A /* libboost_regex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9394E178ED3200059B93A /* libboost_regex.a */; };
+		56E9396C178ED3200059B93A /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9394F178ED3200059B93A /* libboost_serialization.a */; };
+		56E9396D178ED3200059B93A /* libboost_signals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93950178ED3200059B93A /* libboost_signals.a */; };
+		56E9396E178ED3200059B93A /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93951178ED3200059B93A /* libboost_system.a */; };
+		56E9396F178ED3200059B93A /* libboost_test_exec_monitor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93952178ED3200059B93A /* libboost_test_exec_monitor.a */; };
+		56E93970178ED3200059B93A /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93953178ED3200059B93A /* libboost_thread.a */; };
+		56E93971178ED3200059B93A /* libboost_timer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93954178ED3200059B93A /* libboost_timer.a */; };
+		56E93972178ED3200059B93A /* libboost_unit_test_framework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93955178ED3200059B93A /* libboost_unit_test_framework.a */; };
+		56E93973178ED3200059B93A /* libboost_wave.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93956178ED3200059B93A /* libboost_wave.a */; };
+		56E93974178ED3200059B93A /* libboost_wserialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93957178ED3200059B93A /* libboost_wserialization.a */; };
+		56E93993178F06600059B93A /* libwt.35.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93991178F06600059B93A /* libwt.35.dylib */; };
+		56E93994178F06600059B93A /* libwthttp.35.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93992178F06600059B93A /* libwthttp.35.dylib */; };
+		56E93995178F06AC0059B93A /* libwt.35.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56E93991178F06600059B93A /* libwt.35.dylib */; };
+		56E93996178F06AC0059B93A /* libwthttp.35.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56E93992178F06600059B93A /* libwthttp.35.dylib */; };
+		56F72DFB17817E8300D849AD /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56F72DF917817E8300D849AD /* output.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		56A9A75F1779B4A900C70EE3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				56E93995178F06AC0059B93A /* libwt.35.dylib in CopyFiles */,
+				56E93996178F06AC0059B93A /* libwthttp.35.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		56551F3A178C43CE005D5348 /* inputGUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = inputGUI.cpp; sourceTree = "<group>"; };
+		56551F3B178C43CE005D5348 /* inputGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inputGUI.h; sourceTree = "<group>"; };
+		56A9A7611779B4A900C70EE3 /* Timetabler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Timetabler; sourceTree = BUILT_PRODUCTS_DIR; };
+		56A9A7641779B4A900C70EE3 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		56A9A7661779B4A900C70EE3 /* Timetabler.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Timetabler.1; sourceTree = "<group>"; };
+		56CE097117831E8800D75072 /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUI.cpp; sourceTree = "<group>"; };
+		56CE097217831E8800D75072 /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUI.h; sourceTree = "<group>"; };
+		56DF0FF7177B5C16005F1B6A /* Student.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		56DF0FF8177B5DFA005F1B6A /* Student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Student.cpp; sourceTree = "<group>"; };
+		56DF0FFA177B5F68005F1B6A /* Tutor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tutor.h; sourceTree = "<group>"; };
+		56DF0FFB177B5F6F005F1B6A /* Tutor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tutor.cpp; sourceTree = "<group>"; };
+		56DF0FFD177B6020005F1B6A /* TTChromosone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTChromosone.h; sourceTree = "<group>"; };
+		56DF0FFE177B6026005F1B6A /* TTChromosone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTChromosone.cpp; sourceTree = "<group>"; };
+		56DF1000177B612C005F1B6A /* Subject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Subject.h; sourceTree = "<group>"; };
+		56DF1001177B6132005F1B6A /* Subject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Subject.cpp; sourceTree = "<group>"; };
+		56DF1004177B770A005F1B6A /* TimetablerInst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimetablerInst.cpp; sourceTree = "<group>"; };
+		56DF1005177B770A005F1B6A /* TimetablerInst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimetablerInst.h; sourceTree = "<group>"; };
+		56DF1008177C6AE8005F1B6A /* Configuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Configuration.cpp; sourceTree = "<group>"; };
+		56DF1009177C6AE8005F1B6A /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
+		56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGeneticLibrary.a; path = "Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos/libGeneticLibrary.a"; sourceTree = homedir; };
+		56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GeneticLibrary.xcodeproj; path = "Genetic-Algorithms-Library/GeneticLibrary/GeneticLibrary.xcodeproj"; sourceTree = homedir; };
+		56E2E4EC177A1BF900CB720C /* gpl-2_0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "gpl-2_0.txt"; path = "Genetic-Algorithms-Library/GeneticLibrary/gpl-2_0.txt"; sourceTree = homedir; };
+		56E2E4EE177A1BF900CB720C /* gcc_bsd_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_bsd_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_bsd_debug"; sourceTree = homedir; };
+		56E2E4EF177A1BF900CB720C /* gcc_bsd_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_bsd_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_bsd_release"; sourceTree = homedir; };
+		56E2E4F0177A1BF900CB720C /* gcc_linux_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_linux_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_linux_debug"; sourceTree = homedir; };
+		56E2E4F1177A1BF900CB720C /* gcc_linux_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_linux_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_linux_release"; sourceTree = homedir; };
+		56E2E4F2177A1BF900CB720C /* gcc_macos_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_macos_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_macos_debug"; sourceTree = homedir; };
+		56E2E4F3177A1BF900CB720C /* gcc_macos_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_macos_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_macos_release"; sourceTree = homedir; };
+		56E2E4F4177A1BF900CB720C /* gcc_solaris_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_solaris_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_solaris_debug"; sourceTree = homedir; };
+		56E2E4F5177A1BF900CB720C /* gcc_solaris_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gcc_solaris_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/gcc_solaris_release"; sourceTree = homedir; };
+		56E2E4F6177A1BF900CB720C /* icc_linux_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = icc_linux_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/icc_linux_debug"; sourceTree = homedir; };
+		56E2E4F7177A1BF900CB720C /* icc_linux_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = icc_linux_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/icc_linux_release"; sourceTree = homedir; };
+		56E2E4F8177A1BF900CB720C /* icc_macos_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = icc_macos_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/icc_macos_debug"; sourceTree = homedir; };
+		56E2E4F9177A1BF900CB720C /* icc_macos_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = icc_macos_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/icc_macos_release"; sourceTree = homedir; };
+		56E2E4FB177A1BF900CB720C /* Algorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Algorithm.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Algorithm.o"; sourceTree = homedir; };
+		56E2E4FC177A1BF900CB720C /* BinaryChromosome.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = BinaryChromosome.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/BinaryChromosome.o"; sourceTree = homedir; };
+		56E2E4FD177A1BF900CB720C /* Chromosome.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Chromosome.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Chromosome.o"; sourceTree = homedir; };
+		56E2E4FE177A1BF900CB720C /* CouplingOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = CouplingOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/CouplingOperations.o"; sourceTree = homedir; };
+		56E2E4FF177A1BF900CB720C /* CrossoverOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = CrossoverOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/CrossoverOperations.o"; sourceTree = homedir; };
+		56E2E500177A1BF900CB720C /* IncrementalAlgorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = IncrementalAlgorithm.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/IncrementalAlgorithm.o"; sourceTree = homedir; };
+		56E2E501177A1BF900CB720C /* Initialization.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Initialization.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Initialization.o"; sourceTree = homedir; };
+		56E2E502177A1BF900CB720C /* MultithreadingAlgorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = MultithreadingAlgorithm.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/MultithreadingAlgorithm.o"; sourceTree = homedir; };
+		56E2E503177A1BF900CB720C /* MutationOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = MutationOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/MutationOperations.o"; sourceTree = homedir; };
+		56E2E504177A1BF900CB720C /* Observing.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Observing.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Observing.o"; sourceTree = homedir; };
+		56E2E505177A1BF900CB720C /* Population.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Population.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Population.o"; sourceTree = homedir; };
+		56E2E506177A1BF900CB720C /* PopulationOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = PopulationOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/PopulationOperations.o"; sourceTree = homedir; };
+		56E2E507177A1BF900CB720C /* Random.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Random.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Random.o"; sourceTree = homedir; };
+		56E2E508177A1BF900CB720C /* ReplacementOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = ReplacementOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/ReplacementOperations.o"; sourceTree = homedir; };
+		56E2E509177A1BF900CB720C /* ScalingOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = ScalingOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/ScalingOperations.o"; sourceTree = homedir; };
+		56E2E50A177A1BF900CB720C /* SelectionOperations.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = SelectionOperations.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/SelectionOperations.o"; sourceTree = homedir; };
+		56E2E50B177A1BF900CB720C /* SimpleAlgorithm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = SimpleAlgorithm.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/SimpleAlgorithm.o"; sourceTree = homedir; };
+		56E2E50C177A1BF900CB720C /* Statistics.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Statistics.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Statistics.o"; sourceTree = homedir; };
+		56E2E50D177A1BF900CB720C /* StopCriterias.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = StopCriterias.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/StopCriterias.o"; sourceTree = homedir; };
+		56E2E50E177A1BF900CB720C /* Threading.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = Threading.o; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs/Threading.o"; sourceTree = homedir; };
+		56E2E50F177A1BF900CB720C /* scc_solaris_debug */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = scc_solaris_debug; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/scc_solaris_debug"; sourceTree = homedir; };
+		56E2E510177A1BF900CB720C /* scc_solaris_release */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = scc_solaris_release; path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/scc_solaris_release"; sourceTree = homedir; };
+		56E2E512177A1BF900CB720C /* Algorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Algorithm.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Algorithm.cpp"; sourceTree = homedir; };
+		56E2E513177A1BF900CB720C /* Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithm.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Algorithm.h"; sourceTree = homedir; };
+		56E2E514177A1BF900CB720C /* AlgorithmOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/AlgorithmOperations.h"; sourceTree = homedir; };
+		56E2E515177A1BF900CB720C /* AlgorithmState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmState.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/AlgorithmState.h"; sourceTree = homedir; };
+		56E2E516177A1BF900CB720C /* BinaryChromosome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryChromosome.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/BinaryChromosome.cpp"; sourceTree = homedir; };
+		56E2E517177A1BF900CB720C /* BinaryChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryChromosome.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/BinaryChromosome.h"; sourceTree = homedir; };
+		56E2E518177A1BF900CB720C /* Catalogue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Catalogue.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Catalogue.h"; sourceTree = homedir; };
+		56E2E519177A1BF900CB720C /* Chromosome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Chromosome.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Chromosome.cpp"; sourceTree = homedir; };
+		56E2E51A177A1BF900CB720C /* Chromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chromosome.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Chromosome.h"; sourceTree = homedir; };
+		56E2E51B177A1BF900CB720C /* ChromosomeOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChromosomeOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ChromosomeOperations.h"; sourceTree = homedir; };
+		56E2E51C177A1BF900CB720C /* CouplingOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CouplingOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/CouplingOperations.cpp"; sourceTree = homedir; };
+		56E2E51D177A1BF900CB720C /* CouplingOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CouplingOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/CouplingOperations.h"; sourceTree = homedir; };
+		56E2E51E177A1BF900CB720C /* CrossoverOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CrossoverOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/CrossoverOperations.cpp"; sourceTree = homedir; };
+		56E2E51F177A1BF900CB720C /* CrossoverOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossoverOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/CrossoverOperations.h"; sourceTree = homedir; };
+		56E2E520177A1BF900CB720C /* DomainChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DomainChromosome.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/DomainChromosome.h"; sourceTree = homedir; };
+		56E2E521177A1BF900CB720C /* FitnessComparators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FitnessComparators.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/FitnessComparators.h"; sourceTree = homedir; };
+		56E2E522177A1BF900CB720C /* FPEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FPEqual.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/FPEqual.h"; sourceTree = homedir; };
+		56E2E523177A1BF900CB720C /* GlobalRandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalRandomGenerator.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/GlobalRandomGenerator.h"; sourceTree = homedir; };
+		56E2E524177A1BF900CB720C /* IncrementalAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IncrementalAlgorithm.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/IncrementalAlgorithm.cpp"; sourceTree = homedir; };
+		56E2E525177A1BF900CB720C /* IncrementalAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IncrementalAlgorithm.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/IncrementalAlgorithm.h"; sourceTree = homedir; };
+		56E2E526177A1BF900CB720C /* Initialization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Initialization.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Initialization.cpp"; sourceTree = homedir; };
+		56E2E527177A1BF900CB720C /* Initialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Initialization.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Initialization.h"; sourceTree = homedir; };
+		56E2E528177A1BF900CB720C /* MultithreadingAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MultithreadingAlgorithm.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/MultithreadingAlgorithm.cpp"; sourceTree = homedir; };
+		56E2E529177A1BF900CB720C /* MultithreadingAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultithreadingAlgorithm.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/MultithreadingAlgorithm.h"; sourceTree = homedir; };
+		56E2E52A177A1BF900CB720C /* MultiValueChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiValueChromosome.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/MultiValueChromosome.h"; sourceTree = homedir; };
+		56E2E52B177A1BF900CB720C /* MutationOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MutationOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/MutationOperations.cpp"; sourceTree = homedir; };
+		56E2E52C177A1BF900CB720C /* MutationOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MutationOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/MutationOperations.h"; sourceTree = homedir; };
+		56E2E52D177A1BF900CB720C /* Observing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Observing.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Observing.cpp"; sourceTree = homedir; };
+		56E2E52E177A1BF900CB720C /* Observing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Observing.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Observing.h"; sourceTree = homedir; };
+		56E2E52F177A1BF900CB720C /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Operation.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Operation.h"; sourceTree = homedir; };
+		56E2E530177A1BF900CB720C /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Platform.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Platform.h"; sourceTree = homedir; };
+		56E2E531177A1BF900CB720C /* Population.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Population.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Population.cpp"; sourceTree = homedir; };
+		56E2E532177A1BF900CB720C /* Population.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Population.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Population.h"; sourceTree = homedir; };
+		56E2E533177A1BF900CB720C /* PopulationOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PopulationOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/PopulationOperations.cpp"; sourceTree = homedir; };
+		56E2E534177A1BF900CB720C /* PopulationOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopulationOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/PopulationOperations.h"; sourceTree = homedir; };
+		56E2E535177A1BF900CB720C /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Random.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Random.cpp"; sourceTree = homedir; };
+		56E2E536177A1BF900CB720C /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Random.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Random.h"; sourceTree = homedir; };
+		56E2E537177A1BF900CB720C /* ReplacementOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ReplacementOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ReplacementOperations.cpp"; sourceTree = homedir; };
+		56E2E538177A1BF900CB720C /* ReplacementOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReplacementOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ReplacementOperations.h"; sourceTree = homedir; };
+		56E2E539177A1BF900CB720C /* RepresentationInterfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepresentationInterfaces.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/RepresentationInterfaces.h"; sourceTree = homedir; };
+		56E2E53A177A1BF900CB720C /* ScalingOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScalingOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ScalingOperations.cpp"; sourceTree = homedir; };
+		56E2E53B177A1BF900CB720C /* ScalingOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScalingOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ScalingOperations.h"; sourceTree = homedir; };
+		56E2E53C177A1BF900CB720C /* SelectionOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectionOperations.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SelectionOperations.cpp"; sourceTree = homedir; };
+		56E2E53D177A1BF900CB720C /* SelectionOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionOperations.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SelectionOperations.h"; sourceTree = homedir; };
+		56E2E53E177A1BF900CB720C /* SimpleAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleAlgorithm.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SimpleAlgorithm.cpp"; sourceTree = homedir; };
+		56E2E53F177A1BF900CB720C /* SimpleAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAlgorithm.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SimpleAlgorithm.h"; sourceTree = homedir; };
+		56E2E540177A1BF900CB720C /* SingleValueChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingleValueChromosome.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SingleValueChromosome.h"; sourceTree = homedir; };
+		56E2E541177A1BF900CB720C /* SmartPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmartPtr.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SmartPtr.h"; sourceTree = homedir; };
+		56E2E542177A1BF900CB720C /* SortedGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SortedGroup.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SortedGroup.h"; sourceTree = homedir; };
+		56E2E543177A1BF900CB720C /* SortedGroupType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SortedGroupType.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/SortedGroupType.h"; sourceTree = homedir; };
+		56E2E544177A1BF900CB720C /* Statistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Statistics.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Statistics.cpp"; sourceTree = homedir; };
+		56E2E545177A1BF900CB720C /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Statistics.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Statistics.h"; sourceTree = homedir; };
+		56E2E546177A1BF900CB720C /* StopCriterias.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StopCriterias.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/StopCriterias.cpp"; sourceTree = homedir; };
+		56E2E547177A1BF900CB720C /* StopCriterias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StopCriterias.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/StopCriterias.h"; sourceTree = homedir; };
+		56E2E548177A1BF900CB720C /* Threading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Threading.cpp; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Threading.cpp"; sourceTree = homedir; };
+		56E2E549177A1BF900CB720C /* Threading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Threading.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/Threading.h"; sourceTree = homedir; };
+		56E2E54A177A1BF900CB720C /* ValueSets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValueSets.h; path = "Genetic-Algorithms-Library/GeneticLibrary/source/ValueSets.h"; sourceTree = homedir; };
+		56E2E54C177A1BF900CB720C /* GeneticLibrary.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcproj; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcproj"; sourceTree = homedir; };
+		56E2E54D177A1BF900CB720C /* GeneticLibrary.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcxproj; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcxproj"; sourceTree = homedir; };
+		56E2E54E177A1BF900CB720C /* GeneticLibrary.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcxproj.filters; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcxproj.filters"; sourceTree = homedir; };
+		56E9393B178ED3200059B93A /* libboost_atomic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_atomic.a; path = /usr/local/lib/libboost_atomic.a; sourceTree = "<absolute>"; };
+		56E9393C178ED3200059B93A /* libboost_chrono.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_chrono.a; path = /usr/local/lib/libboost_chrono.a; sourceTree = "<absolute>"; };
+		56E9393D178ED3200059B93A /* libboost_context.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_context.a; path = /usr/local/lib/libboost_context.a; sourceTree = "<absolute>"; };
+		56E9393E178ED3200059B93A /* libboost_date_time.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_date_time.a; path = /usr/local/lib/libboost_date_time.a; sourceTree = "<absolute>"; };
+		56E9393F178ED3200059B93A /* libboost_exception.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_exception.a; path = /usr/local/lib/libboost_exception.a; sourceTree = "<absolute>"; };
+		56E93940178ED3200059B93A /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = /usr/local/lib/libboost_filesystem.a; sourceTree = "<absolute>"; };
+		56E93941178ED3200059B93A /* libboost_graph.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_graph.a; path = /usr/local/lib/libboost_graph.a; sourceTree = "<absolute>"; };
+		56E93942178ED3200059B93A /* libboost_iostreams.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_iostreams.a; path = /usr/local/lib/libboost_iostreams.a; sourceTree = "<absolute>"; };
+		56E93943178ED3200059B93A /* libboost_locale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_locale.a; path = /usr/local/lib/libboost_locale.a; sourceTree = "<absolute>"; };
+		56E93944178ED3200059B93A /* libboost_math_c99.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_math_c99.a; path = /usr/local/lib/libboost_math_c99.a; sourceTree = "<absolute>"; };
+		56E93945178ED3200059B93A /* libboost_math_c99f.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_math_c99f.a; path = /usr/local/lib/libboost_math_c99f.a; sourceTree = "<absolute>"; };
+		56E93946178ED3200059B93A /* libboost_math_c99l.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_math_c99l.a; path = /usr/local/lib/libboost_math_c99l.a; sourceTree = "<absolute>"; };
+		56E93947178ED3200059B93A /* libboost_math_tr1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_math_tr1.a; path = /usr/local/lib/libboost_math_tr1.a; sourceTree = "<absolute>"; };
+		56E93948178ED3200059B93A /* libboost_math_tr1f.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_math_tr1f.a; path = /usr/local/lib/libboost_math_tr1f.a; sourceTree = "<absolute>"; };
+		56E93949178ED3200059B93A /* libboost_math_tr1l.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_math_tr1l.a; path = /usr/local/lib/libboost_math_tr1l.a; sourceTree = "<absolute>"; };
+		56E9394A178ED3200059B93A /* libboost_prg_exec_monitor.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_prg_exec_monitor.a; path = /usr/local/lib/libboost_prg_exec_monitor.a; sourceTree = "<absolute>"; };
+		56E9394B178ED3200059B93A /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = /usr/local/lib/libboost_program_options.a; sourceTree = "<absolute>"; };
+		56E9394C178ED3200059B93A /* libboost_python.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_python.a; path = /usr/local/lib/libboost_python.a; sourceTree = "<absolute>"; };
+		56E9394D178ED3200059B93A /* libboost_random.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_random.a; path = /usr/local/lib/libboost_random.a; sourceTree = "<absolute>"; };
+		56E9394E178ED3200059B93A /* libboost_regex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_regex.a; path = /usr/local/lib/libboost_regex.a; sourceTree = "<absolute>"; };
+		56E9394F178ED3200059B93A /* libboost_serialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_serialization.a; path = /usr/local/lib/libboost_serialization.a; sourceTree = "<absolute>"; };
+		56E93950178ED3200059B93A /* libboost_signals.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_signals.a; path = /usr/local/lib/libboost_signals.a; sourceTree = "<absolute>"; };
+		56E93951178ED3200059B93A /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = /usr/local/lib/libboost_system.a; sourceTree = "<absolute>"; };
+		56E93952178ED3200059B93A /* libboost_test_exec_monitor.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_test_exec_monitor.a; path = /usr/local/lib/libboost_test_exec_monitor.a; sourceTree = "<absolute>"; };
+		56E93953178ED3200059B93A /* libboost_thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_thread.a; path = /usr/local/lib/libboost_thread.a; sourceTree = "<absolute>"; };
+		56E93954178ED3200059B93A /* libboost_timer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_timer.a; path = /usr/local/lib/libboost_timer.a; sourceTree = "<absolute>"; };
+		56E93955178ED3200059B93A /* libboost_unit_test_framework.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_unit_test_framework.a; path = /usr/local/lib/libboost_unit_test_framework.a; sourceTree = "<absolute>"; };
+		56E93956178ED3200059B93A /* libboost_wave.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_wave.a; path = /usr/local/lib/libboost_wave.a; sourceTree = "<absolute>"; };
+		56E93957178ED3200059B93A /* libboost_wserialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_wserialization.a; path = /usr/local/lib/libboost_wserialization.a; sourceTree = "<absolute>"; };
+		56E93991178F06600059B93A /* libwt.35.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwt.35.dylib; path = /usr/local/lib/libwt.35.dylib; sourceTree = "<absolute>"; };
+		56E93992178F06600059B93A /* libwthttp.35.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwthttp.35.dylib; path = /usr/local/lib/libwthttp.35.dylib; sourceTree = "<absolute>"; };
+		56F72DF917817E8300D849AD /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = output.cpp; sourceTree = "<group>"; };
+		56F72DFA17817E8300D849AD /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = output.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		56A9A75E1779B4A900C70EE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5665F23917839336005C55D8 /* libGeneticLibrary.a in Frameworks */,
+				56E93958178ED3200059B93A /* libboost_atomic.a in Frameworks */,
+				56E93959178ED3200059B93A /* libboost_chrono.a in Frameworks */,
+				56E9395A178ED3200059B93A /* libboost_context.a in Frameworks */,
+				56E9395B178ED3200059B93A /* libboost_date_time.a in Frameworks */,
+				56E9395C178ED3200059B93A /* libboost_exception.a in Frameworks */,
+				56E9395D178ED3200059B93A /* libboost_filesystem.a in Frameworks */,
+				56E9395E178ED3200059B93A /* libboost_graph.a in Frameworks */,
+				56E9395F178ED3200059B93A /* libboost_iostreams.a in Frameworks */,
+				56E93960178ED3200059B93A /* libboost_locale.a in Frameworks */,
+				56E93961178ED3200059B93A /* libboost_math_c99.a in Frameworks */,
+				56E93962178ED3200059B93A /* libboost_math_c99f.a in Frameworks */,
+				56E93963178ED3200059B93A /* libboost_math_c99l.a in Frameworks */,
+				56E93964178ED3200059B93A /* libboost_math_tr1.a in Frameworks */,
+				56E93965178ED3200059B93A /* libboost_math_tr1f.a in Frameworks */,
+				56E93966178ED3200059B93A /* libboost_math_tr1l.a in Frameworks */,
+				56E93967178ED3200059B93A /* libboost_prg_exec_monitor.a in Frameworks */,
+				56E93968178ED3200059B93A /* libboost_program_options.a in Frameworks */,
+				56E93969178ED3200059B93A /* libboost_python.a in Frameworks */,
+				56E9396A178ED3200059B93A /* libboost_random.a in Frameworks */,
+				56E9396B178ED3200059B93A /* libboost_regex.a in Frameworks */,
+				56E9396C178ED3200059B93A /* libboost_serialization.a in Frameworks */,
+				56E9396D178ED3200059B93A /* libboost_signals.a in Frameworks */,
+				56E9396E178ED3200059B93A /* libboost_system.a in Frameworks */,
+				56E9396F178ED3200059B93A /* libboost_test_exec_monitor.a in Frameworks */,
+				56E93970178ED3200059B93A /* libboost_thread.a in Frameworks */,
+				56E93971178ED3200059B93A /* libboost_timer.a in Frameworks */,
+				56E93972178ED3200059B93A /* libboost_unit_test_framework.a in Frameworks */,
+				56E93973178ED3200059B93A /* libboost_wave.a in Frameworks */,
+				56E93974178ED3200059B93A /* libboost_wserialization.a in Frameworks */,
+				56E93993178F06600059B93A /* libwt.35.dylib in Frameworks */,
+				56E93994178F06600059B93A /* libwthttp.35.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5665F23617838F11005C55D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		56A9A7581779B4A900C70EE3 = {
+			isa = PBXGroup;
+			children = (
+				56CE096F17831E7200D75072 /* Wt Libraries */,
+				56E2E4E2177A1BF900CB720C /* GeneticLibrary */,
+				56A9A7631779B4A900C70EE3 /* Timetabler */,
+				56A9A7621779B4A900C70EE3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		56A9A7621779B4A900C70EE3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				56A9A7611779B4A900C70EE3 /* Timetabler */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		56A9A7631779B4A900C70EE3 /* Timetabler */ = {
+			isa = PBXGroup;
+			children = (
+				56551F3A178C43CE005D5348 /* inputGUI.cpp */,
+				56551F3B178C43CE005D5348 /* inputGUI.h */,
+				56A9A7641779B4A900C70EE3 /* main.cpp */,
+				56CE097117831E8800D75072 /* GUI.cpp */,
+				56CE097217831E8800D75072 /* GUI.h */,
+				56F72DF917817E8300D849AD /* output.cpp */,
+				56F72DFA17817E8300D849AD /* output.h */,
+				56DF1004177B770A005F1B6A /* TimetablerInst.cpp */,
+				56DF1005177B770A005F1B6A /* TimetablerInst.h */,
+				56DF0FFD177B6020005F1B6A /* TTChromosone.h */,
+				56DF0FFE177B6026005F1B6A /* TTChromosone.cpp */,
+				56DF1008177C6AE8005F1B6A /* Configuration.cpp */,
+				56DF1009177C6AE8005F1B6A /* Configuration.h */,
+				56DF0FFA177B5F68005F1B6A /* Tutor.h */,
+				56DF0FFB177B5F6F005F1B6A /* Tutor.cpp */,
+				56DF1000177B612C005F1B6A /* Subject.h */,
+				56DF1001177B6132005F1B6A /* Subject.cpp */,
+				56DF0FF7177B5C16005F1B6A /* Student.h */,
+				56DF0FF8177B5DFA005F1B6A /* Student.cpp */,
+				56A9A7661779B4A900C70EE3 /* Timetabler.1 */,
+			);
+			path = Timetabler;
+			sourceTree = "<group>";
+		};
+		56CE096F17831E7200D75072 /* Wt Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				56E93991178F06600059B93A /* libwt.35.dylib */,
+				56E93992178F06600059B93A /* libwthttp.35.dylib */,
+				56E9393B178ED3200059B93A /* libboost_atomic.a */,
+				56E9393C178ED3200059B93A /* libboost_chrono.a */,
+				56E9393D178ED3200059B93A /* libboost_context.a */,
+				56E9393E178ED3200059B93A /* libboost_date_time.a */,
+				56E9393F178ED3200059B93A /* libboost_exception.a */,
+				56E93940178ED3200059B93A /* libboost_filesystem.a */,
+				56E93941178ED3200059B93A /* libboost_graph.a */,
+				56E93942178ED3200059B93A /* libboost_iostreams.a */,
+				56E93943178ED3200059B93A /* libboost_locale.a */,
+				56E93944178ED3200059B93A /* libboost_math_c99.a */,
+				56E93945178ED3200059B93A /* libboost_math_c99f.a */,
+				56E93946178ED3200059B93A /* libboost_math_c99l.a */,
+				56E93947178ED3200059B93A /* libboost_math_tr1.a */,
+				56E93948178ED3200059B93A /* libboost_math_tr1f.a */,
+				56E93949178ED3200059B93A /* libboost_math_tr1l.a */,
+				56E9394A178ED3200059B93A /* libboost_prg_exec_monitor.a */,
+				56E9394B178ED3200059B93A /* libboost_program_options.a */,
+				56E9394C178ED3200059B93A /* libboost_python.a */,
+				56E9394D178ED3200059B93A /* libboost_random.a */,
+				56E9394E178ED3200059B93A /* libboost_regex.a */,
+				56E9394F178ED3200059B93A /* libboost_serialization.a */,
+				56E93950178ED3200059B93A /* libboost_signals.a */,
+				56E93951178ED3200059B93A /* libboost_system.a */,
+				56E93952178ED3200059B93A /* libboost_test_exec_monitor.a */,
+				56E93953178ED3200059B93A /* libboost_thread.a */,
+				56E93954178ED3200059B93A /* libboost_timer.a */,
+				56E93955178ED3200059B93A /* libboost_unit_test_framework.a */,
+				56E93956178ED3200059B93A /* libboost_wave.a */,
+				56E93957178ED3200059B93A /* libboost_wserialization.a */,
+			);
+			name = "Wt Libraries";
+			path = /Users/charles/Timetabler;
+			sourceTree = "<absolute>";
+		};
+		56E2E4E2177A1BF900CB720C /* GeneticLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				56E2E4E3177A1BF900CB720C /* build */,
+				56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */,
+				56E2E4EC177A1BF900CB720C /* gpl-2_0.txt */,
+				56E2E4ED177A1BF900CB720C /* makefiles */,
+				56E2E511177A1BF900CB720C /* source */,
+				56E2E54B177A1BF900CB720C /* vs */,
+			);
+			name = GeneticLibrary;
+			path = "Genetic-Algorithms-Library/GeneticLibrary";
+			sourceTree = homedir;
+		};
+		56E2E4E3177A1BF900CB720C /* build */ = {
+			isa = PBXGroup;
+			children = (
+				56E2E4E4177A1BF900CB720C /* debug */,
+				56E2E4E6177A1BF900CB720C /* release */,
+			);
+			name = build;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/build";
+			sourceTree = homedir;
+		};
+		56E2E4E4177A1BF900CB720C /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				56E2E4E5177A1BF900CB720C /* gcc_macos */,
+			);
+			name = debug;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/build/debug";
+			sourceTree = homedir;
+		};
+		56E2E4E5177A1BF900CB720C /* gcc_macos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = gcc_macos;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/build/debug/gcc_macos";
+			sourceTree = homedir;
+		};
+		56E2E4E6177A1BF900CB720C /* release */ = {
+			isa = PBXGroup;
+			children = (
+				56E2E4E7177A1BF900CB720C /* gcc_macos */,
+			);
+			name = release;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/build/release";
+			sourceTree = homedir;
+		};
+		56E2E4E7177A1BF900CB720C /* gcc_macos */ = {
+			isa = PBXGroup;
+			children = (
+				56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */,
+			);
+			name = gcc_macos;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos";
+			sourceTree = homedir;
+		};
+		56E2E4ED177A1BF900CB720C /* makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				56E2E4EE177A1BF900CB720C /* gcc_bsd_debug */,
+				56E2E4EF177A1BF900CB720C /* gcc_bsd_release */,
+				56E2E4F0177A1BF900CB720C /* gcc_linux_debug */,
+				56E2E4F1177A1BF900CB720C /* gcc_linux_release */,
+				56E2E4F2177A1BF900CB720C /* gcc_macos_debug */,
+				56E2E4F3177A1BF900CB720C /* gcc_macos_release */,
+				56E2E4F4177A1BF900CB720C /* gcc_solaris_debug */,
+				56E2E4F5177A1BF900CB720C /* gcc_solaris_release */,
+				56E2E4F6177A1BF900CB720C /* icc_linux_debug */,
+				56E2E4F7177A1BF900CB720C /* icc_linux_release */,
+				56E2E4F8177A1BF900CB720C /* icc_macos_debug */,
+				56E2E4F9177A1BF900CB720C /* icc_macos_release */,
+				56E2E4FA177A1BF900CB720C /* objs */,
+				56E2E50F177A1BF900CB720C /* scc_solaris_debug */,
+				56E2E510177A1BF900CB720C /* scc_solaris_release */,
+			);
+			name = makefiles;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles";
+			sourceTree = homedir;
+		};
+		56E2E4FA177A1BF900CB720C /* objs */ = {
+			isa = PBXGroup;
+			children = (
+				56E2E4FB177A1BF900CB720C /* Algorithm.o */,
+				56E2E4FC177A1BF900CB720C /* BinaryChromosome.o */,
+				56E2E4FD177A1BF900CB720C /* Chromosome.o */,
+				56E2E4FE177A1BF900CB720C /* CouplingOperations.o */,
+				56E2E4FF177A1BF900CB720C /* CrossoverOperations.o */,
+				56E2E500177A1BF900CB720C /* IncrementalAlgorithm.o */,
+				56E2E501177A1BF900CB720C /* Initialization.o */,
+				56E2E502177A1BF900CB720C /* MultithreadingAlgorithm.o */,
+				56E2E503177A1BF900CB720C /* MutationOperations.o */,
+				56E2E504177A1BF900CB720C /* Observing.o */,
+				56E2E505177A1BF900CB720C /* Population.o */,
+				56E2E506177A1BF900CB720C /* PopulationOperations.o */,
+				56E2E507177A1BF900CB720C /* Random.o */,
+				56E2E508177A1BF900CB720C /* ReplacementOperations.o */,
+				56E2E509177A1BF900CB720C /* ScalingOperations.o */,
+				56E2E50A177A1BF900CB720C /* SelectionOperations.o */,
+				56E2E50B177A1BF900CB720C /* SimpleAlgorithm.o */,
+				56E2E50C177A1BF900CB720C /* Statistics.o */,
+				56E2E50D177A1BF900CB720C /* StopCriterias.o */,
+				56E2E50E177A1BF900CB720C /* Threading.o */,
+			);
+			name = objs;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/makefiles/objs";
+			sourceTree = homedir;
+		};
+		56E2E511177A1BF900CB720C /* source */ = {
+			isa = PBXGroup;
+			children = (
+				56E2E512177A1BF900CB720C /* Algorithm.cpp */,
+				56E2E513177A1BF900CB720C /* Algorithm.h */,
+				56E2E514177A1BF900CB720C /* AlgorithmOperations.h */,
+				56E2E515177A1BF900CB720C /* AlgorithmState.h */,
+				56E2E516177A1BF900CB720C /* BinaryChromosome.cpp */,
+				56E2E517177A1BF900CB720C /* BinaryChromosome.h */,
+				56E2E518177A1BF900CB720C /* Catalogue.h */,
+				56E2E519177A1BF900CB720C /* Chromosome.cpp */,
+				56E2E51A177A1BF900CB720C /* Chromosome.h */,
+				56E2E51B177A1BF900CB720C /* ChromosomeOperations.h */,
+				56E2E51C177A1BF900CB720C /* CouplingOperations.cpp */,
+				56E2E51D177A1BF900CB720C /* CouplingOperations.h */,
+				56E2E51E177A1BF900CB720C /* CrossoverOperations.cpp */,
+				56E2E51F177A1BF900CB720C /* CrossoverOperations.h */,
+				56E2E520177A1BF900CB720C /* DomainChromosome.h */,
+				56E2E521177A1BF900CB720C /* FitnessComparators.h */,
+				56E2E522177A1BF900CB720C /* FPEqual.h */,
+				56E2E523177A1BF900CB720C /* GlobalRandomGenerator.h */,
+				56E2E524177A1BF900CB720C /* IncrementalAlgorithm.cpp */,
+				56E2E525177A1BF900CB720C /* IncrementalAlgorithm.h */,
+				56E2E526177A1BF900CB720C /* Initialization.cpp */,
+				56E2E527177A1BF900CB720C /* Initialization.h */,
+				56E2E528177A1BF900CB720C /* MultithreadingAlgorithm.cpp */,
+				56E2E529177A1BF900CB720C /* MultithreadingAlgorithm.h */,
+				56E2E52A177A1BF900CB720C /* MultiValueChromosome.h */,
+				56E2E52B177A1BF900CB720C /* MutationOperations.cpp */,
+				56E2E52C177A1BF900CB720C /* MutationOperations.h */,
+				56E2E52D177A1BF900CB720C /* Observing.cpp */,
+				56E2E52E177A1BF900CB720C /* Observing.h */,
+				56E2E52F177A1BF900CB720C /* Operation.h */,
+				56E2E530177A1BF900CB720C /* Platform.h */,
+				56E2E531177A1BF900CB720C /* Population.cpp */,
+				56E2E532177A1BF900CB720C /* Population.h */,
+				56E2E533177A1BF900CB720C /* PopulationOperations.cpp */,
+				56E2E534177A1BF900CB720C /* PopulationOperations.h */,
+				56E2E535177A1BF900CB720C /* Random.cpp */,
+				56E2E536177A1BF900CB720C /* Random.h */,
+				56E2E537177A1BF900CB720C /* ReplacementOperations.cpp */,
+				56E2E538177A1BF900CB720C /* ReplacementOperations.h */,
+				56E2E539177A1BF900CB720C /* RepresentationInterfaces.h */,
+				56E2E53A177A1BF900CB720C /* ScalingOperations.cpp */,
+				56E2E53B177A1BF900CB720C /* ScalingOperations.h */,
+				56E2E53C177A1BF900CB720C /* SelectionOperations.cpp */,
+				56E2E53D177A1BF900CB720C /* SelectionOperations.h */,
+				56E2E53E177A1BF900CB720C /* SimpleAlgorithm.cpp */,
+				56E2E53F177A1BF900CB720C /* SimpleAlgorithm.h */,
+				56E2E540177A1BF900CB720C /* SingleValueChromosome.h */,
+				56E2E541177A1BF900CB720C /* SmartPtr.h */,
+				56E2E542177A1BF900CB720C /* SortedGroup.h */,
+				56E2E543177A1BF900CB720C /* SortedGroupType.h */,
+				56E2E544177A1BF900CB720C /* Statistics.cpp */,
+				56E2E545177A1BF900CB720C /* Statistics.h */,
+				56E2E546177A1BF900CB720C /* StopCriterias.cpp */,
+				56E2E547177A1BF900CB720C /* StopCriterias.h */,
+				56E2E548177A1BF900CB720C /* Threading.cpp */,
+				56E2E549177A1BF900CB720C /* Threading.h */,
+				56E2E54A177A1BF900CB720C /* ValueSets.h */,
+			);
+			name = source;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/source";
+			sourceTree = homedir;
+		};
+		56E2E54B177A1BF900CB720C /* vs */ = {
+			isa = PBXGroup;
+			children = (
+				56E2E54C177A1BF900CB720C /* GeneticLibrary.vcproj */,
+				56E2E54D177A1BF900CB720C /* GeneticLibrary.vcxproj */,
+				56E2E54E177A1BF900CB720C /* GeneticLibrary.vcxproj.filters */,
+			);
+			name = vs;
+			path = "Genetic-Algorithms-Library/GeneticLibrary/vs";
+			sourceTree = homedir;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		56A9A7601779B4A900C70EE3 /* Timetabler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56A9A76A1779B4A900C70EE3 /* Build configuration list for PBXNativeTarget "Timetabler" */;
+			buildPhases = (
+				56A9A75D1779B4A900C70EE3 /* Sources */,
+				56A9A75E1779B4A900C70EE3 /* Frameworks */,
+				56A9A75F1779B4A900C70EE3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Timetabler;
+			productName = Timetabler;
+			productReference = 56A9A7611779B4A900C70EE3 /* Timetabler */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		56A9A7591779B4A900C70EE3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Charles Baynham";
+			};
+			buildConfigurationList = 56A9A75C1779B4A900C70EE3 /* Build configuration list for PBXProject "Timetabler" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 56A9A7581779B4A900C70EE3;
+			productRefGroup = 56A9A7621779B4A900C70EE3 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5665F23617838F11005C55D8 /* Products */;
+					ProjectRef = 56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				56A9A7601779B4A900C70EE3 /* Timetabler */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		56A9A75D1779B4A900C70EE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56A9A7651779B4A900C70EE3 /* main.cpp in Sources */,
+				56E2E564177A1BF900CB720C /* Algorithm.cpp in Sources */,
+				56E2E565177A1BF900CB720C /* BinaryChromosome.cpp in Sources */,
+				56E2E566177A1BF900CB720C /* Chromosome.cpp in Sources */,
+				56E2E567177A1BF900CB720C /* CouplingOperations.cpp in Sources */,
+				56E2E568177A1BF900CB720C /* CrossoverOperations.cpp in Sources */,
+				56E2E569177A1BF900CB720C /* IncrementalAlgorithm.cpp in Sources */,
+				56E2E56A177A1BF900CB720C /* Initialization.cpp in Sources */,
+				56E2E56B177A1BF900CB720C /* MultithreadingAlgorithm.cpp in Sources */,
+				56E2E56C177A1BF900CB720C /* MutationOperations.cpp in Sources */,
+				56E2E56D177A1BF900CB720C /* Observing.cpp in Sources */,
+				56E2E56E177A1BF900CB720C /* Population.cpp in Sources */,
+				56E2E56F177A1BF900CB720C /* PopulationOperations.cpp in Sources */,
+				56E2E570177A1BF900CB720C /* Random.cpp in Sources */,
+				56E2E571177A1BF900CB720C /* ReplacementOperations.cpp in Sources */,
+				56E2E572177A1BF900CB720C /* ScalingOperations.cpp in Sources */,
+				56E2E573177A1BF900CB720C /* SelectionOperations.cpp in Sources */,
+				56E2E574177A1BF900CB720C /* SimpleAlgorithm.cpp in Sources */,
+				56E2E575177A1BF900CB720C /* Statistics.cpp in Sources */,
+				56E2E576177A1BF900CB720C /* StopCriterias.cpp in Sources */,
+				56E2E577177A1BF900CB720C /* Threading.cpp in Sources */,
+				56DF0FF9177B5DFA005F1B6A /* Student.cpp in Sources */,
+				56DF0FFC177B5F6F005F1B6A /* Tutor.cpp in Sources */,
+				56DF0FFF177B6026005F1B6A /* TTChromosone.cpp in Sources */,
+				56DF1002177B6132005F1B6A /* Subject.cpp in Sources */,
+				56DF1006177B770A005F1B6A /* TimetablerInst.cpp in Sources */,
+				56DF100A177C6AE8005F1B6A /* Configuration.cpp in Sources */,
+				56F72DFB17817E8300D849AD /* output.cpp in Sources */,
+				56CE097317831E8800D75072 /* GUI.cpp in Sources */,
+				56551F3C178C43CE005D5348 /* inputGUI.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		56A9A7681779B4A900C70EE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Charles Baynham";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		56A9A7691779B4A900C70EE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Charles Baynham";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		56A9A76B1779B4A900C70EE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib,
+					"\"$(SRCROOT)/../../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos\"",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-L/usr/local/lib",
+					"-I/usr/local/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		56A9A76C1779B4A900C70EE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib,
+					"\"$(SRCROOT)/../../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-L/usr/local/lib",
+					"-I/usr/local/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		56E9397D178EF9C80059B93A /* Distrubution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Charles Baynham";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+			};
+			name = Distrubution;
+		};
+		56E9397E178EF9C80059B93A /* Distrubution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/lib,
+					"\"$(SRCROOT)/../../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-L/usr/local/lib",
+					"-I/usr/local/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Distrubution;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		56A9A75C1779B4A900C70EE3 /* Build configuration list for PBXProject "Timetabler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56A9A7681779B4A900C70EE3 /* Debug */,
+				56A9A7691779B4A900C70EE3 /* Release */,
+				56E9397D178EF9C80059B93A /* Distrubution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Distrubution;
+		};
+		56A9A76A1779B4A900C70EE3 /* Build configuration list for PBXNativeTarget "Timetabler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56A9A76B1779B4A900C70EE3 /* Debug */,
+				56A9A76C1779B4A900C70EE3 /* Release */,
+				56E9397E178EF9C80059B93A /* Distrubution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Distrubution;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 56A9A7591779B4A900C70EE3 /* Project object */;
+}
