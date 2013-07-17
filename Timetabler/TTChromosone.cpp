@@ -214,7 +214,8 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         
         // Are all the other appointments of this student in the same group?
         //    score for every appointment in the same group
-        int samegroup = 0;
+        int samegroup = -1;
+        // n.b. starts on -1 since we will find at least one student in this group: the one that we're currently iterating on!
         
         // Calculate start and end of times to search
         int loopStart, loopEnd;
@@ -239,8 +240,8 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
                 }
             }
         }
-        score += samegroup;
-        maxscore += (*it).first->getNoInterviews() - 1;
+        score += samegroup * 0.25;
+        maxscore += ( (*it).first->getNoInterviews() - 1 ) * 0.25;
         
        
         

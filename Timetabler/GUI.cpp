@@ -42,9 +42,9 @@ void TimetablerWebApplication::startSolve() {
 
     root()->clear();
     
-    // setup a timer which refreshes the timetable (edit: if it's changed) every 2 seconds, until timer->stop() is called.
+    // setup a timer which refreshes the timetable if it's changed every 1 second, until timer->stop() is called.
     _timer = new WTimer();
-    _timer->setInterval(200);
+    _timer->setInterval(1000);
     _timer->timeout().connect(this, &TimetablerWebApplication::refreshStats );
     
     
@@ -122,7 +122,7 @@ void TimetablerWebApplication::refreshStats() {
         _timer->stop();
         _bestFitness->setText( "Non-optimal solution found : Fitness "+to_string(100*bestFitness)+"%" );
         if (optimal)
-            _bestFitness->setText( "Optimal solution found!" );
+            _bestFitness->setText( "Optimal solution found in "+to_string(generation)+" generations!" );
 #if DEBUG
         cerr<<"Stopping timer on algorithm completion" << endl;
 #endif
@@ -197,19 +197,7 @@ void TimetablerWebApplication::pageReady() {
     // set to the correct path in case called from another function and the path is currently wrong
     this->setInternalPath("/output");
     
-    _greeting = new WText("Ready");
-    _greeting->setStyleClass("titleText");
-    
-    root()->addWidget(_greeting);
-    root()->addWidget(new WBreak);
-    
-    _button = new Wt::WPushButton("Go", root());
-    root()->addWidget(new Wt::WBreak());
-    
-    _status = new WText("");
-    root()->addWidget(_status);
-    
-    _button->clicked().connect(this, &TimetablerWebApplication::startSolve );
+    TimetablerWebApplication::startSolve();
     
 }
 
