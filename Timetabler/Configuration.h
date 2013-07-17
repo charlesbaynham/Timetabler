@@ -45,6 +45,7 @@ public:
     inline void clear() { _isEmpty=true; _tutors.clear(); _subjects.clear(); _students.clear(); }
     
     void dumpTutors();
+    void dumpStudents();
     
     //free up
     //~Configuration();
@@ -114,8 +115,8 @@ private:
 	// Removes blank characters from beginning and end of string
 	string& TrimString(string& str);
     
-    //Processes the slots that tutors can't do for every tutor
-    void processTutorsSlots();
+    //Processes the slots that tutors and students can't do for each
+    void processNotSlots();
 };
 
 #endif /* defined(__Timetabler__Configuration__) */

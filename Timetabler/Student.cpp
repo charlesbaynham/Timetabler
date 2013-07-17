@@ -20,11 +20,13 @@ int Student::_nextID = 1;
 //    _noInterviews(noInterviews),
 //    _prevTutors(prevTutors) { }
 
-Student::Student(const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors) :
+Student::Student(const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors, list<int> notTimes) :
     _name(name),
     _subject(subj),
     _noInterviews(noInterviews),
-_prevTutors(prevTutors) { _ID = _nextID++; _baseID = _ID; }
+    _prevTutors(prevTutors),
+    _notTimes(notTimes)
+{ _ID = _nextID++; _baseID = _ID; }
 
 //create new student as copy of previous but with next id
 Student::Student(Student* copy) {
@@ -32,7 +34,11 @@ Student::Student(Student* copy) {
     _subject = copy->_subject;
     _noInterviews = copy->_noInterviews;
     _prevTutors = copy->_prevTutors;
+    _notTimes = copy->getNotTimes();
     
     _baseID = copy->_baseID;
     _ID = _nextID++;
 }
+
+
+

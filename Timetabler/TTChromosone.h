@@ -9,6 +9,8 @@
 #ifndef Timetabler_TTChromosone_h
 #define Timetabler_TTChromosone_h
 
+#define SLOTS_IN_DAY 12
+
 #include "Student.h"
 #include "Configuration.h"
 #include <ext/hash_map>
@@ -25,9 +27,6 @@ using namespace __gnu_cxx;
 
 #include "GLSource/StopCriterias.h"
 #include "GLSource/IncrementalAlgorithm.h"
-
-
-#define SLOTS_IN_DAY 12
 
 
 class Chromosone : public GaMultiValueChromosome<list<Student*> > {

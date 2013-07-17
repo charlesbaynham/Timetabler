@@ -64,7 +64,7 @@ GUISubject::GUISubject(inputGUI* parent) :
 GUIStudent::GUIStudent(inputGUI* parent) :
     GUIelement(parent)
 {
-    _student = new Student("", NULL, 2, NULL);
+    _student = new Student("", NULL, 2, NULL, NULL);
     
     _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
@@ -88,6 +88,13 @@ GUIStudent::GUIStudent(inputGUI* parent) :
         for (vector<Tutor*>::iterator it = tutorIndex.begin(); it != tutorIndex.end(); it++)
             _prevTutors->addItem( (*it)->getName() );
     
+    _notLabel = new WText("Unavailable times:",_visOutput);
+        _notSlots = new WSelectionBox(_visOutput);
+        //set the selection box to allow multiple selections
+        _notSlots->setSelectionMode(SelectionMode::ExtendedSelection);
+        // Add the slot options
+        for (int i=0; i<SLOTS_IN_DAY; i++) { _notSlots->addItem( to_string(i) ); }
+    
     // Add the delete button inherited from GUIelement
     addDeleteButton();
     
@@ -96,6 +103,7 @@ GUIStudent::GUIStudent(inputGUI* parent) :
     _numInterviews->changed().connect( boost::bind( &GUIStudent::callUpdate, this ) );
     _subject->changed().connect( boost::bind( &GUIStudent::callUpdate, this ) );
     _prevTutors->changed().connect( boost::bind( &GUIStudent::callUpdate, this ) );
+    _notSlots->changed().connect( boost::bind( &GUIStudent::callUpdate, this ) );
 }
 
 void inputGUI::addBlankTutor () {
@@ -310,7 +318,7 @@ void GUITutor::callUpdate() {
     n->setID( _ID );
     n->setName( _name->valueText().narrow() );
     
-    
+    // if we have any subjects
     if (!_parent->getSubjectIndex().empty())
     {
         // get the set of indexes that are selected
@@ -336,8 +344,8 @@ void GUITutor::callUpdate() {
     for (set<int>::iterator it=selection.begin(); it!=selection.end(); it++) {
         n->addNotTime(*it);
     }
-    //debug
-    list<int> nottimes = n->getNotTimes();
+//    //debug
+//    list<int> nottimes = n->getNotTimes();
     
     // Update the other elements that use this tutor
     _parent->changeTutorOptions(n, _tutor);
@@ -380,6 +388,14 @@ void GUIStudent::callUpdate() {
             n->addPrevTutor( _parent->getTutorIndex()[ *it ] );
         }
     }
+    
+    // clear the student's notTimes, then...
+    n->clearNotTimes();
+    // Loop over all the selected notTimes and add them to the student
+    set<int> selection = _notSlots->selectedIndexes();
+    for (set<int>::iterator it=selection.begin(); it!=selection.end(); it++) {
+        n->addNotTime(*it);
+    }
 
     // update the object in this element
     _student = n;
@@ -398,7 +414,13 @@ void inputGUI::submit() {
         _submitLabel->setText("Submitting...");
         
         // declare containers
-        hash_map<int, Tutor*> tutors; hash_map<int, Subject*> subjects; list<Student*> students;
+        hash_map<int, Tutor*> tutors;
+        hash_map<int, Subject*> subjects;
+        list<Student*> students;
+        
+#ifdef DEBUG
+        list<GUIStudent*> testlist = _students;
+#endif
         
         // loop over all the subjects
         for (list<GUISubject*>::iterator it=_subjects.begin(); it!=_subjects.end(); it++) {
@@ -407,13 +429,6 @@ void inputGUI::submit() {
             
             subjects[id] = subject;
             
-            //debug edit
-            static hash_map<int, bool> test;
-            if (it==_subjects.begin())
-                test.clear();
-
-            if (test[id]==true) { printf("Subject fail\n\n\n\n"); exit(-1); }
-            else test[id]=true;
         }
         
         // loop over all the tutors
@@ -456,10 +471,18 @@ void inputGUI::submit() {
 #endif
         }
         
+        
+        //debug
+#ifdef DEBUG
+        list<int> passedlist1 = students.front()->getNotTimes();
+#endif
+        
+        
         Configuration::getInstance().setup( tutors, subjects, students );
         
 #ifdef DEBUG
         Configuration::getInstance().dumpTutors();
+        Configuration::getInstance().dumpStudents();
 #endif
         
         // Redirect to the output page

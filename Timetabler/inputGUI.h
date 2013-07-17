@@ -177,6 +177,8 @@ class GUIStudent : public GUIelement {
     WText* _subjectLabel;
     WSelectionBox* _prevTutors;
     WText* _prevLabel;
+    WSelectionBox* _notSlots;
+    WText* _notLabel;
     
 public:
     GUIStudent(inputGUI* parent);

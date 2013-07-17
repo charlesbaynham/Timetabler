@@ -29,13 +29,20 @@ private:
     static int _nextID; // Next ID to be autoassigned
     int _baseID; // ID of parent
     
+    list<int> _notTimes; //List of times to avoid, from 0 to SLOTS_IN_DAY-1
+    
 public:
-    Student(int ID, const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors); // (deprec)
-    Student(const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors); // Initiate wth auto id
+
+    Student(const string& name, Subject* subj, int noInterviews, list<Tutor*> prevTutors, list<int> notTimes); // Initiate wth auto id
     Student(Student* copy); // Copy constructor
     
     inline int getID(){ return _ID; }
     inline const string& getName() { return _name; }
+    inline list<int> getNotTimes() { return _notTimes; }
+
+    inline void addNotTime(int time) { _notTimes.push_back(time); }
+    inline void removeNotTime(int time) { _notTimes.remove(time); }
+    inline void clearNotTimes() { _notTimes.clear(); }
     
     inline void addPrevTutor(Tutor* t) { _prevTutors.push_back(t); }
     inline void removePrevTutor(Tutor* t) { _prevTutors.remove(t); }

@@ -66,7 +66,7 @@ int Configuration::parseFile(char* fileName) {
     
     _isEmpty = false;
     
-    processTutorsSlots(); // Work out the _notSlots element for each tutor
+    processNotSlots(); // Work out the _notSlots element for each tutor
     
     cout << "Input from file: "<<numStudents()<<" students, "<<numTutors()<<" tutors and "<<numSubjects()<<" subjects.\n";
 
@@ -78,11 +78,7 @@ void Configuration::setup( hash_map<int, Tutor*> tutors, hash_map<int, Subject*>
 {
     _tutors = tutors; _subjects=subjects; _students=students;
     
-    processTutorsSlots(); // Work out the _notSlots element for each tutor
-
-    //debug
-    tutors = _tutors;
-    //end debug
+    processNotSlots(); // Work out the _notSlots element for each tutor and student
     
     _isEmpty = false;
     
@@ -153,7 +149,8 @@ Student* Configuration::ParseStudent(ifstream& file) {
         else if (key.compare("prevTutor") == 0) prevTutors.push_back(getTutor(atoi(value.c_str())));
     }
     
-    return subject==NULL ? NULL : new Student(name, subject, noInterviews, prevTutors);
+    //edit debug: does not handle notTimes for students
+    return subject==NULL ? NULL : new Student(name, subject, noInterviews, prevTutors, NULL);
 }
 
 // Reads one line (key - value pair) from configuration file
@@ -213,17 +210,21 @@ string& Configuration::TrimString(string& str)
 	return str;
 }
 
-// Loop over all tutors in config, running processSlots() for each
-void Configuration::processTutorsSlots() {
+// Loop over all tutors running processSlots() for each
+void Configuration::processNotSlots() {
+
     for (hash_map<int, Tutor*>::iterator it = _tutors.begin(); it != _tutors.end(); it++) {
         Tutor* tut = (*it).second;
         tut->processSlots();
     }
+    
 }
 
 void Configuration::dumpTutors(){
     //Print info about all the tutors
     hash_map<int, Tutor*> theTutors = _tutors;
+    
+    cerr << "\nTutors: \n\n";
     
     for (hash_map<int, Tutor*>::iterator it = theTutors.begin(); it != theTutors.end(); it++) {
         Tutor* tut = (*it).second;
@@ -238,6 +239,28 @@ void Configuration::dumpTutors(){
         for (list<int>::iterator it2=thelist.begin(); it2 != thelist.end(); it2++) {
             int notslot = *it2;
             cerr << "\t"<< notslot << "\n";
+        }
+        cerr << "\n***\n";
+    }
+    
+}
+
+
+void Configuration::dumpStudents(){
+    //Print info about all the students
+    list<Student*> theStudents = _students;
+    
+    cerr << "\nStudents\n\n";
+    
+    for (list<Student*>::iterator it = theStudents.begin(); it != theStudents.end(); it++) {
+        Student* s = (*it);
+        
+        cerr << "Name: "<<s->getName()<<" (ID="<<s->getID() << ")\nSubject: " << s->getSubject()->getName();
+        cerr << "\nNotTimes:\n";
+        list<int> thelist = s->getNotTimes();
+        for (list<int>::iterator it2=thelist.begin(); it2 != thelist.end(); it2++) {
+            int nottime = *it2;
+            cerr << "\t"<< nottime << "\n";
         }
         cerr << "\n***\n";
     }
