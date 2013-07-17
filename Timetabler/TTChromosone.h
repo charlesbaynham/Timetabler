@@ -27,7 +27,7 @@ using namespace __gnu_cxx;
 #include "GLSource/IncrementalAlgorithm.h"
 
 
-#define SLOTS_IN_DAY 8
+#define SLOTS_IN_DAY 12
 
 
 class Chromosone : public GaMultiValueChromosome<list<Student*> > {

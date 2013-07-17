@@ -280,6 +280,13 @@ inputGUI::inputGUI(WContainerWidget* parent) :
     _submitLabel = new WText("");
     _submitTab->addWidget(_submitLabel);
     
+    //Add explainatory label
+//    _subjectTab->addWidget(new WText("hello"));
+    _tutorTab->addWidget(new WText("Hold cmd to select / deselect multiple choices"));
+    _tutorTab->addWidget(new WBreak());
+    _studentTab->addWidget(new WText("Hold cmd to select / deselect multiple choices"));
+    _studentTab->addWidget(new WBreak());
+    
     //Add "new" buttons
     WPushButton* newTut = new WPushButton("Add new");
     WPushButton* newStud = new WPushButton("Add new");

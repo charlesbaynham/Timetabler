@@ -113,7 +113,6 @@ TimetablerInst::TimetablerInst()
 	// algorithm will use two workers
 #ifdef DEBUG
     GaMultithreadingAlgorithmParams algorithmParams( 1 );
-    //debug: set back to two
 #else
     GaMultithreadingAlgorithmParams algorithmParams( 2 );
 #endif

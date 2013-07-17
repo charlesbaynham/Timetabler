@@ -149,9 +149,11 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
     const Chromosone* chromo = dynamic_cast<const Chromosone*>(chromosome);
     
     float score = 0;
+    
     int numStudents = (int)chromo->_lookup.size();
     int numSlots = SLOTS_IN_DAY * Configuration::getInstance().numTutors();
     
+    float maxscore = 4.8 * numStudents;
     
     // loop over all students
     for (hash_map<Student*,int>::const_iterator it = chromo->_lookup.begin(); it!=chromo->_lookup.end(); it++ ) {
@@ -161,7 +163,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             // Overlapping is particularly bad, so should merit a higher penalty than other lacking major requirements, eg not teaching the subject
         
         //Does the tutor teach the subject?
-        //get tutor:
+        //get tutor and time:
         div_t division = div((*it).second, SLOTS_IN_DAY);
         int tutorID = division.quot + 1;
         int time = division.rem;
@@ -195,7 +197,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         
         //is this student already busy at this time?
         int engagements = 0;
-        //loop over all times (for one tutor)
+        //loop over all tutors at this time
         for (int i = time; i < numSlots; i += SLOTS_IN_DAY)
         {
             list<Student*> thisSlot= chromo->_values[i];
@@ -206,6 +208,41 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             }
         }
         if (engagements==1) score++; // If we only found them once (ie in the slot we were considering) then score
+        
+        
+        
+        
+        // Are all the other appointments of this student in the same group?
+        //    score for every appointment in the same group
+        int samegroup = 0;
+        
+        // Calculate start and end of times to search
+        int loopStart, loopEnd;
+        
+        if (time < SLOTS_IN_DAY/3) loopStart = 0;
+        else if (time < SLOTS_IN_DAY*2/3) loopStart = SLOTS_IN_DAY/3;
+        else loopStart = SLOTS_IN_DAY*2/3;
+        
+        loopEnd = loopStart+(SLOTS_IN_DAY/3);
+        
+        // loop over all tutors:
+        for (int tutorBase = 0; tutorBase < numSlots; tutorBase += SLOTS_IN_DAY) {
+            // loop over the segment of times
+            for (int loopTime = loopStart; loopTime < loopEnd; loopTime++) {
+                int slot = tutorBase + loopTime;
+                
+                list<Student*> thisSlot = chromo->_values[slot];
+                list<Student*>::iterator search;
+                for (search = thisSlot.begin(); search != thisSlot.end(); search++) {
+                    // If we find a student with the same baseID (ie the same person) in this same group:
+                    if ( (*search)->getBaseID() == (*it).first->getBaseID() ) samegroup++;
+                }
+            }
+        }
+        score += samegroup;
+        maxscore += (*it).first->getNoInterviews() - 1;
+        
+       
         
         //  MINOR:
         //   Does this student/tutor pair appear elsewhere in this timetable?
@@ -236,9 +273,6 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         }
         if (!seenPrev) score+=0.1;
     }
-    
-    float maxscore = 4.8 * numStudents;
-//    float maxscore = 4.5 * numStudents;
     
     return (float)score / (float)maxscore;
 }
