@@ -55,7 +55,11 @@ TimetablerInst::TimetablerInst()
 	// no "improving only mutations"
 	// mutation probability: 3%
 	// number of moved students per mutation: 2
-	_chromosomeParams = new GaChromosomeParams( 0.03F, 2, false, 0.8F, 2 );
+//	_chromosomeParams = new GaChromosomeParams( 0.03F, 2, false, 0.8F, 2 );
+    
+    //debug
+	_chromosomeParams = new GaChromosomeParams( 0.04F, 3, false, 0.8F, 2 );
+    // end debug
     
 	// make CCB with fallowing setup:
 	// there are no value set

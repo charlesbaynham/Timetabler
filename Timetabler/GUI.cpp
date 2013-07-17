@@ -109,7 +109,7 @@ void TimetablerWebApplication::refreshStats() {
     }
 
     // If maximum fitness reached, stop
-    bool optimal = ( abs(1.0f - bestFitness) <= 0.000001 );
+    bool optimal = ( abs(1.0f - bestFitness) <= 0.00001 );
     if (optimal)
         TimetablerInst::getInstance()->getAlgorithm()->StopSolving();
     
@@ -118,7 +118,7 @@ void TimetablerWebApplication::refreshStats() {
 #if DEBUG
     cerr << "The state is " << state << endl;
 #endif
-    if (state & GaAlgorithmState::GAS_CRITERIA_STOPPED ) {
+    if (state & GaAlgorithmState::GAS_STOPPED ) {
         _timer->stop();
         _bestFitness->setText( "Non-optimal solution found : Fitness "+to_string(100*bestFitness)+"%" );
         if (optimal)
