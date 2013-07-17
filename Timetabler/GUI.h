@@ -46,7 +46,9 @@ class TimetablerWebApplication : public WApplication
 {
 public:
     TimetablerWebApplication(const WEnvironment& env);
-    inline WText *getGreeting() {return _greeting;}
+
+    // toggle the state of the algorithm, resuming if stopped
+    void toggleState();
 
     // Stop the algorithm if it's already running on web session removal
     inline ~TimetablerWebApplication()
@@ -58,6 +60,7 @@ public:
     
 private:
     WPushButton *_button;
+    WPushButton *_stopButton;
     WText* _greeting;
     WTimer* _timer;
     WText* _status;

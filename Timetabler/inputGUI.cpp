@@ -472,12 +472,6 @@ void inputGUI::submit() {
         }
         
         
-        //debug
-#ifdef DEBUG
-        list<int> passedlist1 = students.front()->getNotTimes();
-#endif
-        
-        
         Configuration::getInstance().setup( tutors, subjects, students );
         
 #ifdef DEBUG

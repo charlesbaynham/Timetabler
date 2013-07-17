@@ -153,7 +153,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
     int numStudents = (int)chromo->_lookup.size();
     int numSlots = SLOTS_IN_DAY * Configuration::getInstance().numTutors();
     
-    float maxscore = 4.8 * numStudents;
+    float maxscore = 5.8 * numStudents;
     
     // loop over all students
     for (hash_map<Student*,int>::const_iterator it = chromo->_lookup.begin(); it!=chromo->_lookup.end(); it++ ) {
@@ -183,17 +183,31 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         }
         
         //can the tutor do the time?
-        bool canDo = true;
+        bool canDoTut = true;
         list<int> tutNotSlots = tutor->getNotSlots();
         for (list<int>::iterator itTut = tutNotSlots.begin(); itTut != tutNotSlots.end(); itTut++)
         {
             if ( *itTut == (*it).second )
             {
-                canDo = false;
+                canDoTut = false;
                 break;
             }
         }
-        if (canDo) score++;
+        if (canDoTut) score++;
+        
+        //can the student do the time?
+        bool canDoStu = true;
+        list<int> stuNotSlots = (*it).first->getNotTimes();
+        
+        for (list<int>::iterator itStu = stuNotSlots.begin(); itStu != stuNotSlots.end(); itStu++)
+        {
+            if ( *itStu == time )
+            {
+                canDoStu = false;
+                break;
+            }
+        }
+        if (canDoStu) score++;
         
         //is this student already busy at this time?
         int engagements = 0;
@@ -240,8 +254,13 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
                 }
             }
         }
-        score += samegroup * 0.25;
-        maxscore += ( (*it).first->getNoInterviews() - 1 ) * 0.25;
+        score += samegroup * 0.9/6.0;
+//         this score is so small because we must consider what happens when a student's / tutor's notTime conflicts with the grouping:
+//             if we have four students grouped in the slots that the student can't do, we require that moving one student out of the group is profitable
+//             the gain is +1 (since we're no longer breaching a notTime
+//             the loss is x for each other slot in the group (3 in this example) + 3x for the slot being moved (since there were three others in the same group)
+//             hence we require that 6x < 1. I chose 6x = 0.9.
+        maxscore += ( (*it).first->getNoInterviews() - 1 ) * 0.9/6.0;
         
        
         

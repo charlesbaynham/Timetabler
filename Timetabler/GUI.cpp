@@ -42,9 +42,9 @@ void TimetablerWebApplication::startSolve() {
 
     root()->clear();
     
-    // setup a timer which refreshes the timetable if it's changed every 1 second, until timer->stop() is called.
+    // setup a timer which refreshes the timetable if it's changed every 0.5 seconds, until timer->stop() is called.
     _timer = new WTimer();
-    _timer->setInterval(1000);
+    _timer->setInterval(500);
     _timer->timeout().connect(this, &TimetablerWebApplication::refreshStats );
     
     
@@ -118,11 +118,12 @@ void TimetablerWebApplication::refreshStats() {
 #if DEBUG
     cerr << "The state is " << state << endl;
 #endif
-    if (state & GaAlgorithmState::GAS_STOPPED ) {
+    if (state & GaAlgorithmState::GAS_CRITERIA_STOPPED ) {
         _timer->stop();
         _bestFitness->setText( "Non-optimal solution found : Fitness "+to_string(100*bestFitness)+"%" );
         if (optimal)
             _bestFitness->setText( "Optimal solution found in "+to_string(generation)+" generations!" );
+        _stopButton->setText("Resume");
 #if DEBUG
         cerr<<"Stopping timer on algorithm completion" << endl;
 #endif
@@ -231,17 +232,17 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
 
         WPushButton *setTutor=new WPushButton("Tutor mode");
         WPushButton *setStudent=new WPushButton("Student mode");
-        WPushButton *stop = new WPushButton("Stop");
+        _stopButton = new WPushButton("Stop");
         
         setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
         setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
-        stop->clicked().connect( boost::bind( &GaAlgorithm::StopSolving, TimetablerInst::getInstance()->getAlgorithm() ) );
-        stop->clicked().connect( _timer, &WTimer::stop );
+        
+        _stopButton->clicked().connect( this, &TimetablerWebApplication::toggleState );
         
         buttons->addWidget(_bestFitness);
         buttons->addWidget(setTutor);
         buttons->addWidget(setStudent);
-        buttons->addWidget(stop);
+        buttons->addWidget(_stopButton);
         
         grid->addWidget(toggleButtons, 0, 0);
         
@@ -336,6 +337,31 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         }
         
     }    
+}
+
+void TimetablerWebApplication::toggleState() {
+
+    bool started;
+    
+    (TimetablerInst::getInstance()->getAlgorithm()->GetState() & GAS_RUNNING) ? started = true : started = false;
+    
+    if (started) {
+        TimetablerInst::getInstance()->getAlgorithm()->PauseSolving();
+#ifdef DEBUG
+        cerr << "Stopping. State is now " << TimetablerInst::getInstance()->getAlgorithm()->GetState() << endl;
+#endif
+        _timer->stop();
+        _stopButton->setText("Resume");
+    } else {
+        TimetablerInst::getInstance()->getAlgorithm()->StartSolving(true);
+        _timer->start();
+#ifdef DEBUG
+        cerr << "Resuming. State is now " << TimetablerInst::getInstance()->getAlgorithm()->GetState() << endl;
+#endif
+
+        _stopButton->setText("Stop");
+    }
+
 }
 
 
