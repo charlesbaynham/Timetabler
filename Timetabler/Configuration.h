@@ -13,8 +13,10 @@
 #include <string>
 #include <fstream>
 #include <ext/hash_map>
+#include <vector>
 using namespace __gnu_cxx;
 
+#include "TTChromosone.h"
 #include "Student.h"
 #include "Tutor.h"
 #include "Subject.h"
@@ -35,6 +37,11 @@ private:
     // List of students (list since will be dynamically moved)
     list<Student*> _students;
     
+    // model Chromosome that holds a previously found solution if one was loaded
+    vector<list<int> > _prevSolution;
+    // was one loaded?
+    bool _prevSolutionLoaded;
+    
     bool _isEmpty; // initialised to true: indicates that the config is unparsed.
     
 public:
@@ -49,7 +56,8 @@ public:
     
     void dumpTutors();
     void dumpStudents();
-    
+    void dumpSolution();
+
     //free up
     //~Configuration();
     
@@ -62,6 +70,9 @@ public:
         hash_map<int, Subject*>::iterator it = _subjects.find(ID);
         return it != _subjects.end() ? (*it).second : NULL; // If the ID exists in the map, iterate to it and return it
     }
+    
+    inline vector<list<int> > getPrevSolution() { return _prevSolution; }
+    inline bool prevSolutionLoaded() { return _prevSolutionLoaded; }
     
     //Return the whole list of student pointers:
     inline list<Student*> getStudents() { return _students; }
@@ -112,6 +123,10 @@ private:
 	// Reads student's data from config file, makes object and returns pointer to it
 	// Returns NULL if method cannot parse configuration data
 	Student* ParseStudent(ifstream& file);
+    
+    // Read's the previous solution from a file, makes a table of baseIDs in correct slots and returns it
+    // Returns NULL if method cannot parse configuration data
+    vector<list<int> > ParseSolution(ifstream& file);
     
 	// Reads one line (key - value pair) from configuration file
 	bool GetConfigBlockLine(ifstream& file, string& key, string& value);

@@ -21,6 +21,8 @@ int Configuration::parseFile(const char* fileName) {
     _tutors.clear();
     _subjects.clear();
     _students.clear();
+    _prevSolution.clear();
+    _prevSolutionLoaded = false;
     
     //open file
     ifstream input(fileName);
@@ -61,6 +63,12 @@ int Configuration::parseFile(const char* fileName) {
                 }
             }
 		}
+        else if (line.compare("#solution") == 0 )
+        {
+            vector<list<int> > prevSolution = ParseSolution( input );
+            _prevSolution = prevSolution;
+            _prevSolutionLoaded = true;
+        }
     }
     
     input.close();
@@ -152,6 +160,31 @@ Student* Configuration::ParseStudent(ifstream& file) {
     }
     
     return !baseID ? NULL : new Student(baseID, name, subject, noInterviews, prevTutors, notTimes);
+}
+
+// Read's the previous solution from a file, makes the _values table and returns it
+// Returns NULL if method cannot parse configuration data
+vector<list<int> > Configuration::ParseSolution(ifstream& file) {
+    
+    // Builds the table of previously found solutions
+    vector<list<int> > theTable;
+    theTable.resize(SLOTS_IN_DAY * this->numTutors());
+    
+    while (!file.eof()) {
+        
+        string key, value;
+        
+        if ( !GetConfigBlockLine(file, key, value)) break;
+        
+        int slot = atoi(key.c_str());
+        int baseID = atoi(value.c_str());
+        
+        theTable[slot].push_back(baseID);
+        
+    }
+    
+    return theTable;
+    
 }
 
 // Reads one line (key - value pair) from configuration file
@@ -265,7 +298,19 @@ void Configuration::dumpStudents(){
         }
         cerr << "\n***\n";
     }
+}
+
+void Configuration::dumpSolution(){
+    cerr << "\nPrevious Solution:\n\n";
     
+    for (int i=0; i < _prevSolution.size(); i++) {
+        cerr << "\tSlot " << i << " : ";
+        
+        for (list<int>::iterator it=_prevSolution[i].begin(); it!=_prevSolution[i].end(); it++) {
+            cerr << *it << "   ";
+        }
+        cerr << endl;
+    }
 }
 
 // remove given objects from their container. Return false on failure

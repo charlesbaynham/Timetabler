@@ -602,13 +602,13 @@ void inputGUI::submit() {
 
 
 void inputGUI::usePrevious(string filename) {
-    // debug edit write some code here!
     
     Configuration::getInstance().parseFile(filename.c_str());
-
+    
 #ifdef DEBUG
     Configuration::getInstance().dumpTutors();
     Configuration::getInstance().dumpStudents();
+    Configuration::getInstance().dumpSolution();
 #endif
     
     // Update the GUI to match the Configuration

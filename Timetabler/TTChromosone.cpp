@@ -348,6 +348,40 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             }
         }
         if (!seenPrev) score+=0.1;
+        
+    }
+    
+    // MINOR:
+    //  Is this the same solution that we found in the last run (if there was one)?
+    //  Score for this is very low since we want all other requirements to take priority
+    if (Configuration::getInstance().prevSolutionLoaded()) {
+                
+        //loop over all slots
+        for (int i=0; i<numSlots; i++) {
+            list<Student*> thisSlot = chromo->_values[i];
+            list<int> prevSlot = Configuration::getInstance().getPrevSolution()[i];
+            
+            bool matching = true;
+            if (thisSlot.empty()) {
+                if (!prevSlot.empty()) matching = false;
+            }
+            else {
+                
+                // For each student in this slot,
+                //   check if they're in the previous solution
+                for (list<Student*>::iterator it = thisSlot.begin(); it!=thisSlot.end(); it++) {
+                    // If this student is not present, set matching = false and break
+                    if ( find(prevSlot.begin(), prevSlot.end(), (*it)->getBaseID()) == prevSlot.end() ) {
+                        matching = false;
+                        break;
+                    }
+                }
+            }
+            
+            if (matching) score += 0.01;
+
+        }
+        maxscore += 0.01 * numSlots;
     }
     
     return (float)score / (float)maxscore;
