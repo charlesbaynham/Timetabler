@@ -122,8 +122,8 @@ class outputSolution {
     static outputSolution _instance;
 public:
     
-    inline outputSolution getInstance() { return _instance; }
-    void operator() (char * filename, const GaChromosome& chromo, bool append);
+    static inline outputSolution getInstance() { return _instance; }
+    void operator() (char * filename, const GaChromosome& chromo, bool append=false);
     
 };
 

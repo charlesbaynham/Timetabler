@@ -10,19 +10,27 @@
 #include <boost/lexical_cast.hpp>
 
 #include <boost/filesystem.hpp>
+#include <unordered_set>
 
 int GUITutor::_nextID = 1;
 int GUISubject::_nextID = 1;
 
-GUITutor::GUITutor(inputGUI* parent) :
+GUITutor::GUITutor(inputGUI* parent, Tutor* tutor) :
     GUIelement(parent)
 {    
-    _ID = _nextID++;
-    printf("Creating new tutor with ID %i\n", _ID);
-    _tutor = new Tutor(_ID, "", NULL, NULL);
-
+    if (tutor != NULL) {
+        _ID = tutor->getID();
+        _tutor = tutor;
+    }
+    else {
+        _ID = _nextID++;
+        _tutor = new Tutor(_ID, "", NULL, NULL);
+    }
+    
     _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
+    _name->setText(_tutor->getName());
+    
     _subjectsLabel = new WText("Subjects:",_visOutput);
     _subjects = new WSelectionBox(_visOutput);
         //loop over the index and populate the new selection box
@@ -31,7 +39,17 @@ GUITutor::GUITutor(inputGUI* parent) :
             _subjects->addItem( (*it)->getName() );
         //set the selection box to allow multiple selections
         _subjects->setSelectionMode(SelectionMode::ExtendedSelection);
-
+    
+    // select any subjects that are in list<Subject*> subjects
+    set<int> selectedSubj;
+    list<Subject*> subjects = _tutor->getSubjects();
+    for (int i=0; i < subjectIndex.size(); i++) {
+        Subject* searchSubj = subjectIndex[i];
+        
+        if (find(subjects.begin(), subjects.end(), searchSubj ) != subjects.end() )
+            selectedSubj.insert(i);
+    }
+    _subjects->setSelectedIndexes(selectedSubj);
 
     _notLabel = new WText("Unavailable times:",_visOutput);
     _notSlots = new WSelectionBox(_visOutput);
@@ -39,6 +57,16 @@ GUITutor::GUITutor(inputGUI* parent) :
         _notSlots->setSelectionMode(SelectionMode::ExtendedSelection);
         // Add the slot options
         for (int i=0; i<SLOTS_IN_DAY; i++) { _notSlots->addItem( to_string(i) ); }
+    
+    // select any times that are in list<int> notTimes
+    set<int> selectedTimes;
+    for (int i=0; i < SLOTS_IN_DAY; i++) {
+        list<int> notTimes = _tutor->getNotTimes();
+        if (find(notTimes.begin(), notTimes.end(), i) != notTimes.end() )
+            selectedTimes.insert(i);
+    }
+    _notSlots->setSelectedIndexes(selectedTimes);
+
     
     _name->setValidator(new WValidator(true));
     
@@ -49,38 +77,64 @@ GUITutor::GUITutor(inputGUI* parent) :
     _notSlots->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
     _subjects->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
 }
-GUISubject::GUISubject(inputGUI* parent) :
+
+GUISubject::GUISubject(inputGUI* parent, Subject* subject) :
     GUIelement(parent)
 {
-    _ID = _nextID++;
-    _subject = new Subject(_ID, "");
+    if (subject != NULL) {
+        _ID = subject->getID();
+        _subject = subject;
+    }
+    else
+    {
+        _ID = _nextID++;
+        _subject = new Subject(_ID, "");
+    }
     
     _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
+    _name->setText(_subject->getName());
     
     addDeleteButton();
     
     //register update handler
     _name->changed().connect( boost::bind( &GUISubject::callUpdate, this ) );
 }
-GUIStudent::GUIStudent(inputGUI* parent) :
+GUIStudent::GUIStudent(inputGUI* parent, Student* student) :
     GUIelement(parent)
 {
-    _student = new Student(NULL, "", NULL, 2, NULL, NULL);
+    if (student==NULL)
+        _student = new Student( 0 , "", NULL, 2, NULL, NULL);
+    else
+        _student = student;
     
     _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
+    _name->setText(_student->getName());
+    
     _interviewsLabel = new WText("Number of interviews:", _visOutput);
     _numInterviews = new WComboBox(_visOutput);
         _numInterviews->addItem("2");
         _numInterviews->addItem("4");
-        _numInterviews->setCurrentIndex(0);
+        if (_student->getNoInterviews() == 2) _numInterviews->setCurrentIndex(0);
+        else _numInterviews->setCurrentIndex(1);
+    
     _subjectLabel = new WText("Subject:", _visOutput);
     _subject = new WComboBox(_visOutput);
     //loop over the index and populate the new selection box
         vector<Subject*> subjectIndex = _parent->getSubjectIndex();
         for (vector<Subject*>::iterator it = subjectIndex.begin(); it != subjectIndex.end(); it++)
             _subject->addItem( (*it)->getName() );
+    
+    // loop over subject index to find the student's subject then select it
+    for (int i =0; i < subjectIndex.size(); i++) {
+        Subject* searchSubj = _student->getSubject();
+        if (subjectIndex[i] == searchSubj ) {
+            _subject->setCurrentIndex(i);
+            break;
+        }
+    }
+    
     _prevLabel = new WText("Previous tutors:", _visOutput);
     _prevTutors = new WSelectionBox(_visOutput);
         // Make into multi select box
@@ -90,12 +144,34 @@ GUIStudent::GUIStudent(inputGUI* parent) :
         for (vector<Tutor*>::iterator it = tutorIndex.begin(); it != tutorIndex.end(); it++)
             _prevTutors->addItem( (*it)->getName() );
     
+    // select any tutors that are in list<Tutor*> prevTutors
+    set<int> selectedPrev;
+    list<Tutor*> tutors = _student->getPrevTutors();
+    for (int i=0; i < tutorIndex.size(); i++) {
+        Tutor* searchTut = tutorIndex[i];
+        
+        if (find(tutors.begin(), tutors.end(), searchTut ) != tutors.end() )
+            selectedPrev.insert(i);
+    }
+    _prevTutors->setSelectedIndexes(selectedPrev);
+
+    
     _notLabel = new WText("Unavailable times:",_visOutput);
         _notSlots = new WSelectionBox(_visOutput);
         //set the selection box to allow multiple selections
         _notSlots->setSelectionMode(SelectionMode::ExtendedSelection);
         // Add the slot options
         for (int i=0; i<SLOTS_IN_DAY; i++) { _notSlots->addItem( to_string(i) ); }
+    
+    // select any times that are in list<int> notTimes
+    set<int> selectedTimes;
+    for (int i=0; i < SLOTS_IN_DAY; i++) {
+        list<int> notTimes = _student->getNotTimes();
+        if (find(notTimes.begin(), notTimes.end(), i) != notTimes.end() )
+            selectedTimes.insert(i);
+    }
+    _notSlots->setSelectedIndexes(selectedTimes);
+
     
     // Add the delete button inherited from GUIelement
     addDeleteButton();
@@ -109,7 +185,12 @@ GUIStudent::GUIStudent(inputGUI* parent) :
 }
 
 void inputGUI::addBlankTutor () {
-    GUITutor* newTut = new GUITutor(this);
+    
+    addFilledTutor(NULL);
+}
+
+void inputGUI::addFilledTutor (Tutor* tutor) {
+    GUITutor* newTut = new GUITutor(this, tutor);
     _tutors.push_back(newTut); // Add new GUI element to list...
     _tutorTab->addWidget( (*newTut)() ); // and to the display
     
@@ -121,8 +202,15 @@ void inputGUI::addBlankTutor () {
         (*it)->addTutorOption(newTut->getTutor());
     }
 }
+
 void inputGUI::addBlankSubject () {
-    GUISubject* newSubj = new GUISubject(this);
+    
+    addFilledSubject(NULL);
+    
+}
+
+void inputGUI::addFilledSubject (Subject* subject) {
+    GUISubject* newSubj = new GUISubject(this, subject);
     _subjects.push_back(newSubj); // Add new GUI element to list...
     _subjectTab->addWidget( (*newSubj)() ); // and to the display
     
@@ -138,8 +226,16 @@ void inputGUI::addBlankSubject () {
     }
     
 }
+
 void inputGUI::addBlankStudent () {
-    GUIStudent* newStud = new GUIStudent(this);
+    
+    addFilledStudent(NULL);
+}
+
+void inputGUI::addFilledStudent (Student* student) {
+    
+    GUIStudent* newStud = new GUIStudent(this, student);
+    
     _students.push_back(newStud); // Add new GUI element to list...
     _studentTab->addWidget( (*newStud)() ); // and to the display
 }
@@ -515,9 +611,59 @@ void inputGUI::usePrevious(string filename) {
     Configuration::getInstance().dumpStudents();
 #endif
     
-    // Redirect to the output page
-    TimetablerWebApplication* app = dynamic_cast<TimetablerWebApplication*>( WApplication::instance() );
-    app->pageReady();
+    // Update the GUI to match the Configuration
+    this->updateFromConfig();
+}
+
+void inputGUI::updateFromConfig() {
     
+    _students.clear();
+    _subjects.clear();
+    _tutors.clear();
+    _subjectIndex.clear();
+    _tutorIndex.clear();
+    
+    _tutorTab->clear();
+    _subjectTab->clear();
+    _studentTab->clear();
+    
+    ///
+    
+    // input the subjects
+    
+    hash_map<int, Subject*> subjects = Configuration::getInstance().getSubjects();
+    hash_map<int, Tutor*> tutors = Configuration::getInstance().getTutors();
+    list<Student*> students = Configuration::getInstance().getStudents();
+    
+    for (hash_map<int, Subject*>::iterator it = subjects.begin(); it != subjects.end(); it++) {
+        
+        addFilledSubject( (*it).second );
+        
+    }
+    
+    // input the tutors
+    for (hash_map<int, Tutor*>::iterator it = tutors.begin(); it != tutors.end(); it++) {
+        
+        addFilledTutor( (*it).second );
+        
+    }
+    
+    // input the students
+
+    //      build of list of which baseIDs have been done so that we don't duplicate:
+    unordered_set<int> doneIDs;
+
+    for (list<Student*>::iterator it = students.begin(); it != students.end(); it++) {
+
+        int baseID = (*it)->getBaseID();
+        if ( doneIDs.find( baseID ) != doneIDs.end() ) continue;
+        doneIDs.insert(baseID);
+        
+        addFilledStudent( (*it) );
+        
+    }
+    
+    // process slots
+        ////
     
 }

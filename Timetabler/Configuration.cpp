@@ -370,7 +370,7 @@ void Configuration::saveConfig(string filename) {
         
         if ( doneIDs.find( baseID ) != doneIDs.end() ) continue;
         
-        doneIDs.insert( (*it)->getBaseID() );
+        doneIDs.insert( baseID );
         
         output << "#student\n";
         
@@ -396,6 +396,8 @@ void Configuration::saveConfig(string filename) {
         
         output << "#end\n\n";
     }
+    
+    output.close();
 }
 
 

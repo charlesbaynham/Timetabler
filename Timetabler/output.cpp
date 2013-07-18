@@ -13,7 +13,7 @@ outputSolution outputSolution::_instance;
 
 using namespace Chromosome;
 
-void outputSolution::operator() (char * filename, const GaChromosome& chromo, bool append=false) {
+void outputSolution::operator() (char * filename, const GaChromosome& chromo, bool append) {
     
     const Chromosone* c = dynamic_cast<const Chromosone*>(&chromo);
     
@@ -26,7 +26,27 @@ void outputSolution::operator() (char * filename, const GaChromosome& chromo, bo
     out << "% The following is a solution previously found by the timetabler. \n"
     "% It can be used to attempt to alter previous timetables with minimum disruption\n\n";
     
+    vector< list<Student*> > slots = c->GetSlots();
     
+    int numSlots = (int)c->GetSlots().size();
+    
+    // This should match up with the calculated size by the config when it's read back in (numtutors * slots_in_day)
+    out << "#size = " << numSlots << endl << endl;
+    
+    out << "% Slot = baseID\n\n";
+    
+    out << "#solution" << endl;
+    // for each slot
+    for (int i=0; i<numSlots; i++) {
+        //for each student in that slot
+        for (list<Student*>::iterator it = slots[i].begin(); it != slots[i].end(); it++) {
+            // output the slot and baseID
+            out << "\t" << i << " = " << (*it)->getBaseID() << endl;
+        }
+    }
+    out << "#end" << endl;
+    
+    out.close();
 }
 
 void outputCSV::operator()(char *filename, const GaChromosome& chromo, bool detailed=false) {

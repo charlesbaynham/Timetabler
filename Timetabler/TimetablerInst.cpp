@@ -19,6 +19,7 @@ TimetablerInst* TimetablerInst::_instance = new TimetablerInst();
 void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAlgorithm& algorithm) {
     printf("New best at generation %i. Has fitness of %f\n", algorithm.GetAlgorithmStatistics().GetCurrentGeneration(), newChromosome.GetFitness());
     ( outputCSV::getInstance() )("test.txt", newChromosome, true);
+//    ( outputSolution::getInstance() )("outtest.txt", newChromosome);
     
 //    finishedTT* newBest = new finishedTT(&newChromosome);
     

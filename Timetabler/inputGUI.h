@@ -51,6 +51,9 @@ class inputGUI : public WObject {
     WContainerWidget* _submitTab;
     WText* _submitLabel;
     
+//    Update the GUI to match the contents of Configuration
+    void updateFromConfig();
+    
     //    void addTutor();
     //    void removeTutor(int ID);
     //
@@ -66,7 +69,6 @@ public:
     
     // Use the previous configuration saved in filename
     void usePrevious(string filename);
-    void usePrevious();
     
     // Reset the ID counters
     static void resetIDs();
@@ -79,6 +81,12 @@ public:
     void addBlankStudent();
     void addBlankSubject();
     void addBlankTutor();
+    
+    // Add populated GUI elements for data modification
+    void addFilledStudent(Student* student);
+    void addFilledSubject(Subject* subject);
+    void addFilledTutor(Tutor* tutor);
+//    const string& name, list<Subject*> subjects, list<int> notTimes);
     
     //remove t from the visible _tutorTab and from the list
     void removeGUITutor(GUITutor* t);
@@ -141,7 +149,10 @@ class GUITutor : public GUIelement {
     
     
 public:
-    GUITutor(inputGUI* parent);
+    GUITutor(inputGUI* parent, Tutor* tutor);
+//    args for tutor : int id, const string& name, list<Subject*> subjects, list<int> notTimes);
+    GUITutor(inputGUI* parent) : GUITutor(parent, NULL) {}
+
     
     void addDeleteButton();
     inline Tutor* getTutor() { return _tutor; }
@@ -152,6 +163,7 @@ public:
     inline void decrementID() { _ID--; callUpdate(); }
     inline static void decrementGlobalID() { _nextID--; }
     inline static void resetID() { _nextID = 1; }
+    inline static void setGlobalID(int ID) { _nextID = ID; }
     
     void addSubjectOption(Subject* n) { _subjects->addItem(n->getName()); }
     void addSubjectOption(Subject* n, int position) { _subjects->insertItem(position, n->getName()); }
@@ -184,8 +196,12 @@ class GUIStudent : public GUIelement {
     WSelectionBox* _notSlots;
     WText* _notLabel;
     
+    int _baseID=0; // Left at 0 by the interface. Can be set to a value if reading from a file, otherwise ignored
+    
 public:
-    GUIStudent(inputGUI* parent);
+    GUIStudent(inputGUI* parent, Student* student);
+    GUIStudent(inputGUI* parent) : GUIStudent(parent, NULL) {}
+    
     void addDeleteButton();
     inline Student* getStudent() {return _student;}
     
@@ -234,12 +250,16 @@ class GUISubject : public GUIelement {
     WText* _nameLabel;
     
 public:
-    GUISubject(inputGUI* parent);
+    GUISubject(inputGUI* parent, Subject* subject);
+    GUISubject(inputGUI* parent) : GUISubject(parent, NULL) {}
+
+
     void addDeleteButton();
     inline Subject* getSubject() { return _subject; }
     
     inline static void resetID() { _nextID = 1; }
-
+    inline static void setNextID(int ID) { _nextID = ID; }
+    
     // call the methods in inputGUI to update for a changed subject entry
     void callUpdate();
 
