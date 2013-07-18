@@ -11,10 +11,11 @@
 #include <iostream>
 #include <stdlib.h>
 #include <ext/hash_map>
+#include <unordered_set>
 
 Configuration Configuration::_instance;
 
-int Configuration::parseFile(char* fileName) {
+int Configuration::parseFile(const char* fileName) {
     
     //clear all
     _tutors.clear();
@@ -308,5 +309,91 @@ bool Configuration::removeSubject( Subject* s ) {
 //    _students.remove_if( [s](Student* thisS){ return thisS->getBaseID() == s->getBaseID(); } );
 //}
 
+
+void Configuration::saveConfig(string filename) {
+    
+    ofstream output( filename.c_str() );
+    
+    output << "% Config file. \n"
+    "% This file contains the setup for a solution.\n"
+    "% N.B. because of the nature of genetic algorithms, using the same setup will not necessairily result in the same solution!\n"
+    "% You can change the entries but remmeber: IDs don't matter,\n"
+    "% except for Tutors:\n"
+    "%	these MUST start at 1 and ascend from there, else the\n"
+    "%	slot identification will break\n\n";
+    
+    // output the subjects
+    for (hash_map<int, Subject*>::iterator it = _subjects.begin(); it != _subjects.end(); it++) {
+        
+        output << "#subject\n";
+        
+        output << "\tid = " << (*it).second->getID() << endl;
+        
+        output << "\tname = " << (*it).second->getName() << endl;
+        
+        output << "#end\n\n";
+        
+    }
+    
+    //output the tutors
+    for (hash_map<int, Tutor*>::iterator it = _tutors.begin(); it != _tutors.end(); it++) {
+        
+        output << "#tutor\n";
+        
+        output << "\tid = " << (*it).second->getID() << endl;
+        
+        output << "\tname = " << (*it).second->getName() << endl;
+        
+        // subjects
+        list<Subject*> subjects = (*it).second->getSubjects();
+        for (list<Subject*>::iterator itSub = subjects.begin(); itSub!=subjects.end(); itSub++) {
+            output << "\tsubj = " << (*itSub)->getID() << endl;
+        }
+        
+        // nottimes
+        list<int> notTimes = (*it).second->getNotTimes();
+        for (list<int>::iterator itNotT = notTimes.begin(); itNotT!=notTimes.end(); itNotT++) {
+            output << "\tnotTime = " << *itNotT << endl;
+        }
+        
+        output << "#end\n\n";
+    }
+    
+    //output the students
+    //      build of list of which baseIDs have been done so that we don't duplicate:
+    unordered_set<int> doneIDs;
+    
+    for (list<Student*>::iterator it = _students.begin(); it != _students.end(); it++) {
+// If the base ID of the current student has already been processed then break
+
+        int baseID = (*it)->getBaseID();
+        
+        if ( doneIDs.find( baseID ) != doneIDs.end() ) continue;
+        
+        doneIDs.insert( (*it)->getBaseID() );
+        
+        output << "#student\n";
+        
+        output << "\tname = " << (*it)->getName() << endl;
+        
+        output << "\tsubj = " << (*it)->getSubject()->getID() << endl;
+        
+        output << "\tnoInterviews = " << (*it)->getNoInterviews() << endl;
+        
+        // nottimes
+        list<int> notTimes = (*it)->getNotTimes();
+        for (list<int>::iterator itNotT = notTimes.begin(); itNotT!=notTimes.end(); itNotT++) {
+            output << "\tnotTime = " << *itNotT << endl;
+        }
+        
+        // prevtutors
+        list<Tutor*> prevTuts = (*it)->getPrevTutors();
+        for (list<Tutor*>::iterator itPrev = prevTuts.begin(); itPrev!=prevTuts.end(); itPrev++) {
+            output << "\tprevTutor = " << (*itPrev)->getID() << endl;
+        }
+        
+        output << "#end\n\n";
+    }
+}
 
 

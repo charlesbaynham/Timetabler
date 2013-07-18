@@ -232,16 +232,20 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
 
         WPushButton *setTutor=new WPushButton("Tutor mode");
         WPushButton *setStudent=new WPushButton("Student mode");
+        WPushButton *saveConfig=new WPushButton("Save configuration");
         _stopButton = new WPushButton("Stop");
         
         setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
         setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
+        saveConfig->clicked().connect( boost::bind(&Configuration::saveConfig, Configuration::getInstance(), "out.txt" ) );
+        //debug edit allow user to choose filename / download it
         
         _stopButton->clicked().connect( this, &TimetablerWebApplication::toggleState );
         
         buttons->addWidget(_bestFitness);
         buttons->addWidget(setTutor);
         buttons->addWidget(setStudent);
+        buttons->addWidget(saveConfig);
         buttons->addWidget(_stopButton);
         
         grid->addWidget(toggleButtons, 0, 0);

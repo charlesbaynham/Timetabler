@@ -64,6 +64,10 @@ public:
     // Initialise this object: create a menu in parent
     inputGUI(WContainerWidget* parent);
     
+    // Use the previous configuration saved in filename
+    void usePrevious(string filename);
+    void usePrevious();
+    
     // Reset the ID counters
     static void resetIDs();
     

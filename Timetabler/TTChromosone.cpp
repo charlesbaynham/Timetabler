@@ -100,9 +100,6 @@ void TTMutation::operator ()(GaChromosome* parent) const
     int numSlots = (int)chromo->_values.size();
     int numStudents = (int)chromo->_lookup.size();
     
-    //debug
-//    printf("Mutation: lookup size is %i\n", numStudents);
-    
     //for each mutation:
     for (int i = chromo->GetParameters().GetMutationSize() ; i>0; i--)
     {

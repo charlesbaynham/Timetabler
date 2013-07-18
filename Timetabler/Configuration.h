@@ -44,6 +44,9 @@ public:
     //wipe the config
     inline void clear() { _isEmpty=true; _tutors.clear(); _subjects.clear(); _students.clear(); }
     
+    // Output a config file containing the current configuration
+    void saveConfig(string filename);
+    
     void dumpTutors();
     void dumpStudents();
     
@@ -76,7 +79,8 @@ public:
     inline bool isEmpty() { return _isEmpty; }
     
     //Parse a file for inputs
-    int parseFile(char* fileName);
+    int parseFile(const char* fileName);
+    int parseFile(char* fileName) { return parseFile(fileName); }
     
     //set up Configuration using arguments
     void setup( hash_map<int, Tutor*> tutors, hash_map<int, Subject*> subjects, list<Student*> students );

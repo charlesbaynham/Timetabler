@@ -9,6 +9,8 @@
 #include "inputGUI.h"
 #include <boost/lexical_cast.hpp>
 
+#include <boost/filesystem.hpp>
+
 int GUITutor::_nextID = 1;
 int GUISubject::_nextID = 1;
 
@@ -265,6 +267,21 @@ inputGUI::inputGUI(WContainerWidget* parent) :
     _studentTab(new WContainerWidget()),
     _submitTab(new WContainerWidget())
 {
+    // If previous config file is detected, ask user if they want to use it
+    if (boost::filesystem::exists("out.txt") ) {
+        
+        WContainerWidget* topbox = new WContainerWidget(parent);
+        
+        topbox->addWidget(new WText("Previous config detected. Would you like to load it?"));
+        
+        WPushButton* usePreviousConfig = new WPushButton("Yes", topbox);
+        WPushButton* nusePreviousConfig = new WPushButton("No", topbox);
+        
+        usePreviousConfig->clicked().connect( boost::bind( &inputGUI::usePrevious, this, "out.txt" ));
+        nusePreviousConfig->clicked().connect(boost::bind<void> ( [=](){ parent->removeWidget(topbox);  }));
+    
+    }
+    
     // create a menu
     _menu = new WTabWidget(parent);
     
@@ -280,7 +297,7 @@ inputGUI::inputGUI(WContainerWidget* parent) :
     _menu->addTab(_tutorTab, "Tutors");
     _menu->addTab(_studentTab, "Students");
 
-
+// Submit tab: 
     _menu->addTab(_submitTab, "Submit");
     WPushButton* submit = new WPushButton("Submit");
     _submitTab->addWidget(submit);
@@ -289,7 +306,6 @@ inputGUI::inputGUI(WContainerWidget* parent) :
     _submitTab->addWidget(_submitLabel);
     
     //Add explainatory label
-//    _subjectTab->addWidget(new WText("hello"));
     _tutorTab->addWidget(new WText("Hold cmd to select / deselect multiple choices"));
     _tutorTab->addWidget(new WBreak());
     _studentTab->addWidget(new WText("Hold cmd to select / deselect multiple choices"));
@@ -486,6 +502,22 @@ void inputGUI::submit() {
     } else {
         _submitLabel->setText("You must have at least one tutor and subject!");
     }
-        
-        
+}
+
+
+void inputGUI::usePrevious(string filename) {
+    // debug edit write some code here!
+    
+    Configuration::getInstance().parseFile(filename.c_str());
+
+#ifdef DEBUG
+    Configuration::getInstance().dumpTutors();
+    Configuration::getInstance().dumpStudents();
+#endif
+    
+    // Redirect to the output page
+    TimetablerWebApplication* app = dynamic_cast<TimetablerWebApplication*>( WApplication::instance() );
+    app->pageReady();
+    
+    
 }

@@ -31,8 +31,6 @@ int main(int argc, char **argv)
     cerr << "Program is running in DEBUG mode" << endl;
 #endif
     
-    GaInitialize();    GaInitialize();
-
     
 //    // Seeds for debugging
 //    GaGlobalRandomIntegerGenerator = new GaRandomInteger(7456);

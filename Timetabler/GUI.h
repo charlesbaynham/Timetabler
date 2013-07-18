@@ -51,11 +51,13 @@ public:
     void toggleState();
 
     // Stop the algorithm if it's already running on web session removal
-    inline ~TimetablerWebApplication()
+    ~TimetablerWebApplication()
     {
         cerr << "*** Aborting solution ***\n\n";
         if (TimetablerInst::getInstance()->getAlgorithm()->GetState() == Algorithm::GaAlgorithmState::GAS_RUNNING)
             TimetablerInst::getInstance()->getAlgorithm()->StopSolving();
+        
+        cerr << "*** Saving config ***\n";
     }
     
 private:
