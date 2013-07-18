@@ -116,6 +116,16 @@ public:
 
 ////
 
+// output the final chromosome in a format that can be read back in by Configuration
+class outputSolution {
+    
+    static outputSolution _instance;
+public:
+    
+    inline outputSolution getInstance() { return _instance; }
+    void operator() (char * filename, const GaChromosome& chromo, bool append);
+    
+};
 
 class outputCSV {
     static outputCSV _instance;

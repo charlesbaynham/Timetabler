@@ -20,7 +20,7 @@ void TTObserver::NewBestChromosome(const GaChromosome& newChromosome, const GaAl
     printf("New best at generation %i. Has fitness of %f\n", algorithm.GetAlgorithmStatistics().GetCurrentGeneration(), newChromosome.GetFitness());
     ( outputCSV::getInstance() )("test.txt", newChromosome, true);
     
-    finishedTT* newBest = new finishedTT(&newChromosome);
+//    finishedTT* newBest = new finishedTT(&newChromosome);
     
 }
 

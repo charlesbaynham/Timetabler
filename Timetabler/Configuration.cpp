@@ -131,27 +131,28 @@ Tutor* Configuration::ParseTutor(ifstream& file) {
 // Returns NULL if method cannot parse configuration data
 Student* Configuration::ParseStudent(ifstream& file) {
     
-    //int id; auto id now. 
+    int baseID;
     string name;
     Subject* subject; // Interview subject
     int noInterviews;  // Number of interviews (2 or 4)
     list<Tutor*> prevTutors; // Previous tutors to be avoided
+    list<int> notTimes; // times to be avoided
     
     while (!file.eof()){
         string key, value;
         
         if ( !GetConfigBlockLine(file, key, value)) break;
         
-//        if (key.compare("id") == 0) id = atoi(value.c_str()); Now doing auto ID increment
-        if (key.compare("id") == 0) ;
+        if (key.compare("baseID") == 0) baseID = atoi(value.c_str());
         else if (key.compare("name") == 0) name = value;
         else if (key.compare("noInterviews") == 0) noInterviews = atoi(value.c_str());
         else if (key.compare("subj") == 0) subject = getSubject(atoi(value.c_str()));
         else if (key.compare("prevTutor") == 0) prevTutors.push_back(getTutor(atoi(value.c_str())));
+        else if (key.compare("notTime") == 0) notTimes.push_back(atoi(value.c_str()));
     }
     
     //edit debug: does not handle notTimes for students
-    return subject==NULL ? NULL : new Student(name, subject, noInterviews, prevTutors, NULL);
+    return subject==NULL ? NULL : new Student(name, subject, noInterviews, prevTutors, notTimes);
 }
 
 // Reads one line (key - value pair) from configuration file
@@ -316,8 +317,8 @@ void Configuration::saveConfig(string filename) {
     
     output << "% Config file. \n"
     "% This file contains the setup for a solution.\n"
-    "% N.B. because of the nature of genetic algorithms, using the same setup will not necessairily result in the same solution!\n"
-    "% You can change the entries but remmeber: IDs don't matter,\n"
+    "% N.B. because of the nature of genetic algorithms, using the same setup will not necessarily result in the same solution!\n"
+    "% You can change the entries but remember: IDs don't matter,\n"
     "% except for Tutors:\n"
     "%	these MUST start at 1 and ascend from there, else the\n"
     "%	slot identification will break\n\n";
@@ -373,6 +374,8 @@ void Configuration::saveConfig(string filename) {
         doneIDs.insert( (*it)->getBaseID() );
         
         output << "#student\n";
+        
+        output << "\tbaseID = " << (*it)->getBaseID() << endl;
         
         output << "\tname = " << (*it)->getName() << endl;
         

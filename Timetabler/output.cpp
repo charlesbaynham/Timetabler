@@ -9,8 +9,25 @@
 #include "output.h"
 
 outputCSV outputCSV::_instance;
+outputSolution outputSolution::_instance;
 
 using namespace Chromosome;
+
+void outputSolution::operator() (char * filename, const GaChromosome& chromo, bool append=false) {
+    
+    const Chromosone* c = dynamic_cast<const Chromosone*>(&chromo);
+    
+    ofstream out;
+    if (append)
+        out.open(filename, ios::out | ios::app);
+    else
+        out.open(filename, ios::out);
+    
+    out << "% The following is a solution previously found by the timetabler. \n"
+    "% It can be used to attempt to alter previous timetables with minimum disruption\n\n";
+    
+    
+}
 
 void outputCSV::operator()(char *filename, const GaChromosome& chromo, bool detailed=false) {
     
