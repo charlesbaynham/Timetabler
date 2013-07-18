@@ -53,20 +53,22 @@ TimetablerInst::TimetablerInst()
 	// crossover probability: 80%
 	// crossover points: 2
 	// no "improving only mutations"
-	// mutation probability: 3%
+	// mutation probability: 4%
 	// number of moved students per mutation: 2
+    // prob of doing a swap instead of a mutation: 10%
 //	_chromosomeParams = new GaChromosomeParams( 0.03F, 2, false, 0.8F, 2 );
     
-    //debug
-	_chromosomeParams = new GaChromosomeParams( 0.04F, 2, false, 0.8F, 2 );
-    // end debug
+
+    _chromosomeParams = new TTChromosomeParams( 0.04F, 2, 0.1, false, 0.8F, 2 );
+
     
 	// make CCB with fallowing setup:
 	// there are no value set
 	// with ScheduleCrossover, ScheduleMutation, ScheduleFitness genetic operations
 	// set fitness comparator for maximizing fitness value
 	// use previously defined chromosome's parameters
-	_ccb = new GaChromosomeDomainBlock<list<Student*> >( NULL, &_crossoverOperation, &_mutationOperation, &_fitnessOperation, GaFitnessComparatorCatalogue::Instance().GetEntryData( "GaMaxFitnessComparator" ), _chromosomeParams );
+
+    _ccb = new GaChromosomeDomainBlock<list<Student*> >( NULL, &_crossoverOperation, &_mutationOperation, &_fitnessOperation, GaFitnessComparatorCatalogue::Instance().GetEntryData( "GaMaxFitnessComparator" ), _chromosomeParams );
     
 	// make prototype of chromosome
 	_prototype = new Chromosone( _ccb );

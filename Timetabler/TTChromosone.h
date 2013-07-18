@@ -28,6 +28,26 @@ using namespace __gnu_cxx;
 #include "GLSource/StopCriterias.h"
 #include "GLSource/IncrementalAlgorithm.h"
 
+class TTChromosomeParams : public GaChromosomeParams {
+    
+    // The probability of swapping two students in a mutation instead of randomly moving as normal
+    double _probSwap;
+    
+public:
+    
+    // Initialise TTChromosomeParams with probSwap and the parent's variables
+    TTChromosomeParams(float mutationProbability, int mutationSize, double mutationProbSwap, bool improvingOnlyMutations, float crossoverProbability, int numberOfCrossoverPoints) :
+    _probSwap(mutationProbSwap),
+    GaChromosomeParams(mutationProbability,
+                       mutationSize,
+                       improvingOnlyMutations,
+                       crossoverProbability,
+                       numberOfCrossoverPoints) {}
+    
+    inline double getProbSwap() const { return _probSwap; }
+    
+    
+};
 
 class Chromosone : public GaMultiValueChromosome<list<Student*> > {
     

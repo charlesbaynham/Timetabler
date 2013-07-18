@@ -97,49 +97,108 @@ void TTMutation::operator ()(GaChromosome* parent) const
 {
     Chromosone* chromo = dynamic_cast<Chromosone*>(parent);
     
+    const TTChromosomeParams* params = dynamic_cast<const TTChromosomeParams*>(&chromo->GetParameters());
+    
     int numSlots = (int)chromo->_values.size();
     int numStudents = (int)chromo->_lookup.size();
     
-    //for each mutation:
-    for (int i = chromo->GetParameters().GetMutationSize() ; i>0; i--)
-    {
-        // pick a random student
-        int student = GaGlobalRandomIntegerGenerator->Generate(numStudents-1);
-        hash_map<Student*, int>::iterator it;
+    // Swap two students instead of doing a move with a probability of ProbSwap
+
+    bool swap = GaGlobalRandomBoolGenerator->Generate( params->getProbSwap() );
+    
+    if (!swap) {
+        //for each mutation:
+        for (int i = chromo->GetParameters().GetMutationSize() ; i>0; i--)
+        {
+            // pick a random student
+            int student = GaGlobalRandomIntegerGenerator->Generate(numStudents-1);
+            hash_map<Student*, int>::iterator it;
+            
+            // Iterate through the hashmap _lookup, reducing student and increasing it until student == 0:
+            //   now it points to a randomly chosen student.
+            for (it = chromo->_lookup.begin();
+                 student != 0 && it != chromo->_lookup.end();
+                 it++, student--) ;
+
+            Student* theStudent = (*it).first;
+            int oldSlot = (*it).second;
+
+            //pick a random new slot:
+            int newSlot = GaGlobalRandomIntegerGenerator->Generate(numSlots-1);
+            
+            //delete from old:
+            list<Student*>& theOldSlot = chromo->_values[oldSlot];
+            for (list<Student*>::iterator itOld = theOldSlot.begin(); itOld != theOldSlot.end(); itOld++) {
+                if ( *itOld == theStudent )
+                {
+                    theOldSlot.erase(itOld);
+                    break;
+                }
+            }
+            
+            //add to new:
+            list<Student*>& theNewSlot = chromo->_values[newSlot];
+            theNewSlot.push_back(theStudent);
+            
+            //update hashmap:
+            chromo->_lookup[theStudent] = newSlot;
+            //chromo->_lookup = lookup;
+        }
+    } else {
         
-        // Iterate through the hashmap _lookup, reducing student and increasing it until student == 0:
+        // pick 2 random students
+        int student1 = GaGlobalRandomIntegerGenerator->Generate(numStudents-1);
+        int student2 = GaGlobalRandomIntegerGenerator->Generate(numStudents-1);
+        hash_map<Student*, int>::iterator it1;
+        hash_map<Student*, int>::iterator it2;
+        
+        // Iterate through the hashmap _lookup, reducing student and increasing it1 until student == 0:
         //   now it points to a randomly chosen student.
-        for (it = chromo->_lookup.begin();
-             student != 0 && it != chromo->_lookup.end();
-             it++, student--) ;
-
-        Student* theStudent = (*it).first;
-        int oldSlot = (*it).second;
-
-        //pick a random new slot:
-        int newSlot = GaGlobalRandomIntegerGenerator->Generate(numSlots-1);
+        for (it1 = chromo->_lookup.begin();
+             student1 != 0 && it1 != chromo->_lookup.end();
+             it1++, student1--) ;
         
-        //delete from old:
-        list<Student*>& theOldSlot = chromo->_values[oldSlot];
-        for (list<Student*>::iterator itOld = theOldSlot.begin(); itOld != theOldSlot.end(); itOld++) {
-            if ( *itOld == theStudent )
+        // Same for it2
+        for (it2 = chromo->_lookup.begin();
+             student2 != 0 && it2 != chromo->_lookup.end();
+             it2++, student2--) ;
+        
+        Student* firstStu = (*it1).first;
+        Student* secondStu = (*it2).first;
+        int slot1 = (*it1).second;
+        int slot2 = (*it2).second;
+        
+        
+        //Delete stu1 from first slot and insert stu2
+        list<Student*>& theFirstSlot = chromo->_values[slot1];
+        for (list<Student*>::iterator itFirst = theFirstSlot.begin(); itFirst != theFirstSlot.end(); itFirst++) {
+            if ( *itFirst == firstStu )
             {
-                theOldSlot.erase(itOld);
+                theFirstSlot.erase(itFirst);
+                theFirstSlot.push_back(secondStu);
                 break;
             }
         }
         
-        //add to new:
-        list<Student*>& theNewSlot = chromo->_values[newSlot];
-        theNewSlot.push_back(theStudent);
+        // Vice versa
+        list<Student*>& theSecondSlot = chromo->_values[slot2];
+        for (list<Student*>::iterator itSecond = theSecondSlot.begin(); itSecond != theSecondSlot.end(); itSecond++) {
+            if ( *itSecond == secondStu )
+            {
+                theSecondSlot.erase(itSecond);
+                theSecondSlot.push_back(firstStu);
+                break;
+            }
+        }
         
         //update hashmap:
-        chromo->_lookup[theStudent] = newSlot;
-        //chromo->_lookup = lookup;
+        chromo->_lookup[firstStu] = slot2;
+        chromo->_lookup[secondStu] = slot1;
+        
     }
     
-    numStudents = (int)chromo->_lookup.size();
-//    printf("Mutation: size = %i\n", numStudents);
+
+    
 }
 
 float TTFitness::operator()(const GaChromosome* chromosome) const{

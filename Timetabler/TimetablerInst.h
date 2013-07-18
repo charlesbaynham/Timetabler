@@ -17,6 +17,7 @@ using namespace Wt;
 #include "TTChromosone.h"
 #include "output.h"
 
+
 class TTObserver : public GaObserverAdapter {
     
     SysEventObject _event; // event for callback
@@ -61,7 +62,8 @@ public:
     }
     
 private:
-    GaChromosomeParams* _chromosomeParams;
+
+    TTChromosomeParams* _chromosomeParams;
     
 	TTCrossover _crossoverOperation;
     
@@ -107,5 +109,6 @@ public:
 //    inline Chromosone* getPrototype() const { return _prototype; }
     
 };
+
 
 #endif /* defined(__Timetabler__TimetablerInst__) */
