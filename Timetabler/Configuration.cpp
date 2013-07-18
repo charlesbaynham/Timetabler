@@ -131,7 +131,7 @@ Tutor* Configuration::ParseTutor(ifstream& file) {
 // Returns NULL if method cannot parse configuration data
 Student* Configuration::ParseStudent(ifstream& file) {
     
-    int baseID;
+    int baseID=0;
     string name;
     Subject* subject; // Interview subject
     int noInterviews;  // Number of interviews (2 or 4)
@@ -151,8 +151,7 @@ Student* Configuration::ParseStudent(ifstream& file) {
         else if (key.compare("notTime") == 0) notTimes.push_back(atoi(value.c_str()));
     }
     
-    //edit debug: does not handle notTimes for students
-    return subject==NULL ? NULL : new Student(name, subject, noInterviews, prevTutors, notTimes);
+    return !baseID ? NULL : new Student(baseID, name, subject, noInterviews, prevTutors, notTimes);
 }
 
 // Reads one line (key - value pair) from configuration file

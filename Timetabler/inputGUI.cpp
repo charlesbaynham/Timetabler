@@ -66,7 +66,7 @@ GUISubject::GUISubject(inputGUI* parent) :
 GUIStudent::GUIStudent(inputGUI* parent) :
     GUIelement(parent)
 {
-    _student = new Student("", NULL, 2, NULL, NULL);
+    _student = new Student(NULL, "", NULL, 2, NULL, NULL);
     
     _nameLabel = new WText("Name:", _visOutput);
     _name = new WLineEdit(_visOutput);
