@@ -54,6 +54,9 @@ class inputGUI : public WObject {
 //    Update the GUI to match the contents of Configuration
     void updateFromConfig();
     
+    // create the "Add new" buttons
+    void createAddButtons();
+    
     //    void addTutor();
     //    void removeTutor(int ID);
     //

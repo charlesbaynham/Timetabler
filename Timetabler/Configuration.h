@@ -37,14 +37,12 @@ private:
     // List of students (list since will be dynamically moved)
     list<Student*> _students;
     
+    bool _isEmpty; // initialised to true: indicates that the config is unparsed.
+    
     // model Chromosome that holds a previously found solution if one was loaded
     vector<list<int> > _prevSolution;
     // was one loaded?
     bool _prevSolutionLoaded=false;
-    // if we're using a previous solution, has it been added to the population yet?
-    bool _bestAdded=false;
-    
-    bool _isEmpty; // initialised to true: indicates that the config is unparsed.
     
 public:
     // Init
@@ -60,6 +58,10 @@ public:
     void dumpStudents();
     void dumpSolution();
 
+    
+    inline vector<list<int> > getPrevSolution() { return _prevSolution; }
+    inline bool prevSolutionLoaded() { return _prevSolutionLoaded; }
+    
     //free up
     //~Configuration();
     
@@ -71,18 +73,6 @@ public:
     inline Subject* getSubject(int ID) {
         hash_map<int, Subject*>::iterator it = _subjects.find(ID);
         return it != _subjects.end() ? (*it).second : NULL; // If the ID exists in the map, iterate to it and return it
-    }
-    
-    inline vector<list<int> > getPrevSolution() { return _prevSolution; }
-    inline bool prevSolutionLoaded() { return _prevSolutionLoaded; }
-    
-    // Check if we've added the previous solution in yet
-    // if not, return false and then set _bestAdded = true so that this method returns true henceforth
-    inline bool bestAdded() {
-        if (_bestAdded) return true;
-        // else
-        _bestAdded = true;
-        return false;
     }
     
     //Return the whole list of student pointers:

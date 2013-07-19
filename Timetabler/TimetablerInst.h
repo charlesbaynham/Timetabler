@@ -45,20 +45,27 @@ class TimetablerInst {
     
     static TimetablerInst* _instance; // Global instance
     
+    // if we're using a previous solution, has it been added to the population yet?
+    bool _bestAdded=false;
+    
 public:
     inline static TimetablerInst* getInstance() { return _instance; } // return global instance
     inline static void reset() {
         if(_instance)  {
-            //debug
-            TimetablerInst* test = _instance;
             
-//            _instance->~TimetablerInst();
             _instance->~TimetablerInst();
             _instance = new TimetablerInst();
             
-            //debug
-            test = _instance;
         }
+    }
+    
+    // Check if we've added the previous solution in yet
+    // if not, return false and then set _bestAdded = true so that this method returns true henceforth
+    inline bool bestAdded() {
+        if (_bestAdded) return true;
+        // else
+        _bestAdded = true;
+        return false;
     }
     
 private:

@@ -147,9 +147,10 @@ TimetablerInst::TimetablerInst()
 
 TimetablerInst::~TimetablerInst()
 {
-    //debug edit
-    TimetablerInst* test = _instance;
+
 	delete _algorithm;
+    
+    _bestAdded = false;
     
 	delete _population;
 	delete _populationConfig;

@@ -57,7 +57,8 @@ public:
         if (TimetablerInst::getInstance()->getAlgorithm()->GetState() == Algorithm::GaAlgorithmState::GAS_RUNNING)
             TimetablerInst::getInstance()->getAlgorithm()->StopSolving();
         
-        cerr << "*** Saving config ***\n";
+        cerr << "*** Killing Inst ***\n";
+        TimetablerInst::getInstance()->reset();
     }
     
 private:

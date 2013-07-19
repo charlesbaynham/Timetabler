@@ -401,6 +401,12 @@ inputGUI::inputGUI(WContainerWidget* parent) :
     _submitLabel = new WText("");
     _submitTab->addWidget(_submitLabel);
     
+    this->createAddButtons();
+    
+}
+
+void inputGUI::createAddButtons() {
+    
     //Add explainatory label
     _tutorTab->addWidget(new WText("Hold cmd to select / deselect multiple choices"));
     _tutorTab->addWidget(new WBreak());
@@ -626,6 +632,8 @@ void inputGUI::updateFromConfig() {
     _tutorTab->clear();
     _subjectTab->clear();
     _studentTab->clear();
+    
+    this->createAddButtons();
     
     ///
     
