@@ -165,8 +165,7 @@ public:
     
     inline void decrementID() { _ID--; callUpdate(); }
     inline static void decrementGlobalID() { _nextID--; }
-    inline static void resetID() { _nextID = 1; }
-    inline static void setGlobalID(int ID) { _nextID = ID; }
+    inline static void resetGlobalID(int ID=1) { _nextID = ID; }
     
     void addSubjectOption(Subject* n) { _subjects->addItem(n->getName()); }
     void addSubjectOption(Subject* n, int position) { _subjects->insertItem(position, n->getName()); }
@@ -260,8 +259,7 @@ public:
     void addDeleteButton();
     inline Subject* getSubject() { return _subject; }
     
-    inline static void resetID() { _nextID = 1; }
-    inline static void setNextID(int ID) { _nextID = ID; }
+    inline static void resetGlobalID(int ID=1) { _nextID = ID; }
     
     // call the methods in inputGUI to update for a changed subject entry
     void callUpdate();

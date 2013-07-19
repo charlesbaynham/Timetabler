@@ -520,8 +520,8 @@ void GUIStudent::callUpdate() {
 }
 
 void inputGUI::resetIDs() {
-    GUITutor::resetID();
-    GUISubject::resetID();
+    GUITutor::resetGlobalID();
+    GUISubject::resetGlobalID();
 }
 
 
