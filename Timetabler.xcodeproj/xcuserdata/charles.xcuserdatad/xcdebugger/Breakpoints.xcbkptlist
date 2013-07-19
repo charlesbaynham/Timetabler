@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
+         startingLineNumber = "130"
+         endingLineNumber = "130"
          landmarkName = "Chromosone::MakeNewFromPrototype()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -36,11 +36,11 @@
          condition = "outsize != 11"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "538"
-         endingLineNumber = "538">
+         startingLineNumber = "558"
+         endingLineNumber = "558">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -48,7 +48,46 @@
          condition = "id1 != id2"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "537"
+         endingLineNumber = "537"
+         landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/TTChromosone.cpp"
+         timestampString = "395930614.027183"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "511"
+         endingLineNumber = "511"
+         landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/TTChromosone.cpp"
+         timestampString = "395930614.027183"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "513"
+         endingLineNumber = "513"
+         landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/TTChromosone.cpp"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "517"
@@ -61,11 +100,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "491"
-         endingLineNumber = "491"
+         startingLineNumber = "522"
+         endingLineNumber = "522"
          landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -74,11 +113,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "493"
-         endingLineNumber = "493"
+         startingLineNumber = "540"
+         endingLineNumber = "540"
          landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -87,12 +126,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "497"
-         endingLineNumber = "497"
-         landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
+         startingLineNumber = "313"
+         endingLineNumber = "313"
+         landmarkName = "TTFitness::operator()(const GaChromosome* chromosome)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -100,12 +139,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "502"
-         endingLineNumber = "502"
-         landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
+         startingLineNumber = "300"
+         endingLineNumber = "300"
+         landmarkName = "TTFitness::operator()(const GaChromosome* chromosome)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -113,20 +152,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "520"
-         endingLineNumber = "520"
-         landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "293"
@@ -139,11 +165,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "280"
-         endingLineNumber = "280"
+         startingLineNumber = "288"
+         endingLineNumber = "288"
          landmarkName = "TTFitness::operator()(const GaChromosome* chromosome)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -152,11 +178,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "273"
-         endingLineNumber = "273"
+         startingLineNumber = "312"
+         endingLineNumber = "312"
          landmarkName = "TTFitness::operator()(const GaChromosome* chromosome)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -165,37 +191,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "268"
-         endingLineNumber = "268"
-         landmarkName = "TTFitness::operator()(const GaChromosome* chromosome)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "292"
-         endingLineNumber = "292"
-         landmarkName = "TTFitness::operator()(const GaChromosome* chromosome)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "433"
-         endingLineNumber = "433">
+         startingLineNumber = "453"
+         endingLineNumber = "453">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -267,11 +267,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "527"
-         endingLineNumber = "527"
+         startingLineNumber = "547"
+         endingLineNumber = "547"
          landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -280,11 +280,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "257"
-         endingLineNumber = "257"
+         startingLineNumber = "277"
+         endingLineNumber = "277"
          landmarkName = "TTFitness::operator()(const GaChromosome* chromosome)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -394,11 +394,11 @@
          ignoreCount = "600"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "286"
-         endingLineNumber = "286"
+         startingLineNumber = "306"
+         endingLineNumber = "306"
          landmarkName = "TTFitness::operator()(const GaChromosome* chromosome)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -418,11 +418,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "93"
-         endingLineNumber = "93"
+         startingLineNumber = "113"
+         endingLineNumber = "113"
          landmarkName = "Chromosone::MakeNewFromPrototype()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -431,11 +431,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "443"
-         endingLineNumber = "443"
+         startingLineNumber = "463"
+         endingLineNumber = "463"
          landmarkName = "TTCrossover::operator ()(const GaChromosome* parent1, const GaChromosome* parent2)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -444,11 +444,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "319"
-         endingLineNumber = "319"
+         startingLineNumber = "339"
+         endingLineNumber = "339"
          landmarkName = "TTFitness::operator()(const GaChromosome* chromosome)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1307,11 +1307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "277"
-         endingLineNumber = "277"
+         startingLineNumber = "297"
+         endingLineNumber = "297"
          landmarkName = "TTFitness::operator()(const GaChromosome* chromosome)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1513,11 +1513,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
          landmarkName = "TTMutation::operator ()(GaChromosome* parent)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1717,11 +1717,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
          landmarkName = "Chromosone::MakeNewFromPrototype()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1730,11 +1730,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
+         startingLineNumber = "105"
+         endingLineNumber = "105"
          landmarkName = "Chromosone::MakeNewFromPrototype()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1769,11 +1769,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "Chromosone::MakeNewFromPrototype()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1782,11 +1782,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "80"
-         endingLineNumber = "80"
+         startingLineNumber = "84"
+         endingLineNumber = "84"
          landmarkName = "Chromosone::MakeNewFromPrototype()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1795,11 +1795,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
          landmarkName = "Chromosone::MakeNewFromPrototype()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1821,11 +1821,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
-         timestampString = "395885708.546782"
+         timestampString = "395930614.027183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "83"
-         endingLineNumber = "83"
+         startingLineNumber = "103"
+         endingLineNumber = "103"
          landmarkName = "Chromosone::MakeNewFromPrototype()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1852,6 +1852,19 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "48"
          endingLineNumber = "48"
+         landmarkName = "Chromosone::MakeNewFromPrototype()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/TTChromosone.cpp"
+         timestampString = "395927709.928534"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
          landmarkName = "Chromosone::MakeNewFromPrototype()"
          landmarkType = "5">
       </FileBreakpoint>

@@ -68,16 +68,36 @@ GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
             // for each student in the previous solution
             printf("i = %i\n",i);
             for (list<int>::iterator it=prevSolution[i].begin(); it!=prevSolution[i].end(); it++) {
-                // add the first student with this baseID to the table
+                // add the first student with this baseID to the table:
+                
+                // get the student
                 Student* student = studentsById[*it].front();
                 
+                // store in the chromosome
                 newChromosone->_values[i].push_back( student );
-                newChromosone->_lookup[ student ] = student->getID();
+                newChromosone->_lookup[ student ] = i;
+                
                 // remove this first student from the list, so that it is not added again
                 studentsById[*it].erase(studentsById[*it].begin());
                 
             }
         }
+        
+        //debug edit
+        
+        map<int, Student*> debug;
+        
+        cerr << "***\n\nHashmap dump after first student added\n\n";
+        for (hash_map<Student*, int>::iterator it=newChromosone->_lookup.begin(); it!=newChromosone->_lookup.end(); it++) {
+            
+            debug[(*it).second] = (*it).first;
+        }
+        
+        for (map<int, Student*>::iterator it=debug.begin(); it!=debug.end(); it++) {
+            cerr << "\t" << (*it).first << " : " << (*it).second->getName() << " (";
+            cerr << (*it).second->getBaseID() << ")" << endl;
+        }
+        //end debug
         
         // return the optimal chromosome
         return newChromosone;
