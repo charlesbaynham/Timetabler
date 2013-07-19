@@ -40,7 +40,9 @@ private:
     // model Chromosome that holds a previously found solution if one was loaded
     vector<list<int> > _prevSolution;
     // was one loaded?
-    bool _prevSolutionLoaded;
+    bool _prevSolutionLoaded=false;
+    // if we're using a previous solution, has it been added to the population yet?
+    bool _bestAdded=false;
     
     bool _isEmpty; // initialised to true: indicates that the config is unparsed.
     
@@ -74,8 +76,19 @@ public:
     inline vector<list<int> > getPrevSolution() { return _prevSolution; }
     inline bool prevSolutionLoaded() { return _prevSolutionLoaded; }
     
+    // Check if we've added the previous solution in yet
+    // if not, return false and then set _bestAdded = true so that this method returns true henceforth
+    inline bool bestAdded() {
+        if (_bestAdded) return true;
+        // else
+        _bestAdded = true;
+        return false;
+    }
+    
     //Return the whole list of student pointers:
     inline list<Student*> getStudents() { return _students; }
+    
+    list<Student*> getStudentsByBaseID(int baseID);
     
     //Return whole hash_map of tutors/subjects
     inline hash_map<int, Tutor*> getTutors() { return _tutors; }

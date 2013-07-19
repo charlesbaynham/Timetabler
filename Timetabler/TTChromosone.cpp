@@ -7,6 +7,7 @@
 //
 
 #include "TTChromosone.h"
+#include "TimetablerInst.h"
 #include <ext/hash_map>
 
 void dumpHash (hash_map<Student*, int> in){
@@ -37,10 +38,52 @@ Chromosone::Chromosone(const Chromosone& c, bool setupOnly) :
 GaChromosomePtr Chromosone::MakeCopy(bool setupOnly) const { return new Chromosone( *this, setupOnly ); }
 
 //Create a new, random chromosome using *this as a prototype for the setup
+// Also, if we're using a previously found solution, add this solution in as the first chromosome
 GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
     
     // Make new chromosone copying setup
     Chromosone* newChromosone = new Chromosone(*this, true);
+    
+    bool addbest = !Configuration::getInstance().bestAdded() && Configuration::getInstance().prevSolutionLoaded();
+    if ( addbest ) {
+        
+        // hashmap that links baseID -> list of the students with this baseID
+        hash_map<int, list<Student*> > studentsById;
+        // for each baseID in the prev solution
+        vector<list<int> > prevSolution = Configuration::getInstance().getPrevSolution();
+        
+        // for each slot in the prev solution
+        for (int i=0; i < prevSolution.size(); i++) {
+            // for each student in this slot
+            for (list<int>::iterator it = prevSolution[i].begin(); it!= prevSolution[i].end(); it++) {
+                if ( studentsById[*it].empty() )
+                    studentsById[*it] = Configuration::getInstance().getStudentsByBaseID(*it);
+            }
+        }
+        
+        // hashmap now contains all the students by baseID
+        
+        // for each slot in new chromosome
+        for (int i=0; i < newChromosone->_values.size(); i++) {
+            // for each student in the previous solution
+            printf("i = %i\n",i);
+            for (list<int>::iterator it=prevSolution[i].begin(); it!=prevSolution[i].end(); it++) {
+                // add the first student with this baseID to the table
+                Student* student = studentsById[*it].front();
+                
+                newChromosone->_values[i].push_back( student );
+                newChromosone->_lookup[ student ] = student->getID();
+                // remove this first student from the list, so that it is not added again
+                studentsById[*it].erase(studentsById[*it].begin());
+                
+            }
+        }
+        
+        // return the optimal chromosome
+        return newChromosone;
+    }
+
+//   Else, if this isn't the first chromosome or we're not using a previous solution, randomise like normal
     
     //Get all the students:
     const list<Student*>& students = Configuration::getInstance().getStudents();
@@ -351,38 +394,38 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         
     }
     
-    // MINOR:
-    //  Is this the same solution that we found in the last run (if there was one)?
-    //  Score for this is very low since we want all other requirements to take priority
-    if (Configuration::getInstance().prevSolutionLoaded()) {
-                
-        //loop over all slots
-        for (int i=0; i<numSlots; i++) {
-            list<Student*> thisSlot = chromo->_values[i];
-            list<int> prevSlot = Configuration::getInstance().getPrevSolution()[i];
-            
-            bool matching = true;
-            if (thisSlot.empty()) {
-                if (!prevSlot.empty()) matching = false;
-            }
-            else {
-                
-                // For each student in this slot,
-                //   check if they're in the previous solution
-                for (list<Student*>::iterator it = thisSlot.begin(); it!=thisSlot.end(); it++) {
-                    // If this student is not present, set matching = false and break
-                    if ( find(prevSlot.begin(), prevSlot.end(), (*it)->getBaseID()) == prevSlot.end() ) {
-                        matching = false;
-                        break;
-                    }
-                }
-            }
-            
-            if (matching) score += 0.01;
-
-        }
-        maxscore += 0.01 * numSlots;
-    }
+//    // MINOR:
+//    //  Is this the same solution that we found in the last run (if there was one)?
+//    //  Score for this is very low since we want all other requirements to take priority
+//    if (Configuration::getInstance().prevSolutionLoaded()) {
+//                
+//        //loop over all slots
+//        for (int i=0; i<numSlots; i++) {
+//            list<Student*> thisSlot = chromo->_values[i];
+//            list<int> prevSlot = Configuration::getInstance().getPrevSolution()[i];
+//            
+//            bool matching = true;
+//            if (thisSlot.empty()) {
+//                if (!prevSlot.empty()) matching = false;
+//            }
+//            else {
+//                
+//                // For each student in this slot,
+//                //   check if they're in the previous solution
+//                for (list<Student*>::iterator it = thisSlot.begin(); it!=thisSlot.end(); it++) {
+//                    // If this student is not present, set matching = false and break
+//                    if ( find(prevSlot.begin(), prevSlot.end(), (*it)->getBaseID()) == prevSlot.end() ) {
+//                        matching = false;
+//                        break;
+//                    }
+//                }
+//            }
+//            
+//            if (matching) score += 0.01;
+//
+//        }
+//        maxscore += 0.01 * numSlots;
+//    }
     
     return (float)score / (float)maxscore;
 }

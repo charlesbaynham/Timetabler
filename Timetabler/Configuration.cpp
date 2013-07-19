@@ -445,4 +445,20 @@ void Configuration::saveConfig(string filename) {
     output.close();
 }
 
+list<Student*> Configuration::getStudentsByBaseID(int baseID) {
+    
+    list<Student*> output;
+    
+    // Loop over all students and keep those with a matching baseID
+    for (list<Student*>::iterator it = _students.begin(); it != _students.end(); it++) {
+        if ((*it)->getBaseID() == baseID)
+            output.push_back(*it);
+    }
+    
+    return output;
+}
+
+
+
+
 
