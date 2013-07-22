@@ -47,19 +47,21 @@ GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
     bool addbest = !TimetablerInst::getInstance()->bestAdded() && Configuration::getInstance().prevSolutionLoaded();
     if ( addbest ) {
         
-        // hashmap that links baseID -> list of the students with this baseID
-        hash_map<int, list<Student*> > studentsById;
-        // for each baseID in the prev solution
         vector<list<int> > prevSolution = Configuration::getInstance().getPrevSolution();
         
-        // for each slot in the prev solution
-        for (int i=0; i < prevSolution.size(); i++) {
-            // for each student in this slot
-            for (list<int>::iterator it = prevSolution[i].begin(); it!= prevSolution[i].end(); it++) {
-                if ( studentsById[*it].empty() )
-                    studentsById[*it] = Configuration::getInstance().getStudentsByBaseID(*it);
-            }
+        // hashmap that links baseID -> list of the students with this baseID
+        hash_map<int, list<Student*> > studentsById;
+        
+        //for each student
+        list<Student*> students = Configuration::getInstance().getStudents();
+        
+        for (list<Student*>::iterator it = students.begin(); it!= students.end(); it++) {
+            
+            // add them to the appropriate list
+            studentsById[ (*it)->getBaseID() ].push_back(*it);
+            
         }
+
         
         // hashmap now contains all the students by baseID
         
@@ -71,7 +73,15 @@ GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
                 // add the first student with this baseID to the table:
                 
                 // get the student
-                Student* student = studentsById[*it].front();
+                Student* student;
+                
+                if ( !(student = studentsById[*it].front()) ) { // Failed because the list is empty: we've run out of students with this baseID,
+                                                              //   possibly because the user removed them from the config
+#ifdef DEBUG
+                    cerr << "Previous student not found:  baseID = " << *it << "\n";
+#endif
+                    continue;
+                }
                 
                 // store in the chromosome
                 newChromosone->_values[i].push_back( student );
@@ -85,25 +95,42 @@ GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
         
         //debug edit
         
-        map<int, Student*> debug;
+//        map<int, Student*> debug;
+//        
+//        cerr << "***\n\nHashmap dump after first student added\n\n";
+//        for (hash_map<Student*, int>::iterator it=newChromosone->_lookup.begin(); it!=newChromosone->_lookup.end(); it++) {
+//            
+//            debug[(*it).second] = (*it).first;
+//        }
+//        
+//        for (map<int, Student*>::iterator it=debug.begin(); it!=debug.end(); it++) {
+//            cerr << "\t" << (*it).first << " : " << (*it).second->getName() << " (";
+//            cerr << (*it).second->getBaseID() << ")" << endl;
+//        }
         
-        cerr << "***\n\nHashmap dump after first student added\n\n";
-        for (hash_map<Student*, int>::iterator it=newChromosone->_lookup.begin(); it!=newChromosone->_lookup.end(); it++) {
-            
-            debug[(*it).second] = (*it).first;
+        // Redistribute remaining students randomly
+        for (hash_map<int, list<Student*> >::iterator it=studentsById.begin(); it!=studentsById.end(); it++) {
+            for (list<Student*>::iterator it2=(*it).second.begin(); it2!=(*it).second.end(); it2++) {
+                
+                int pos;
+                pos = GaGlobalRandomIntegerGenerator->Generate( SLOTS_IN_DAY * Configuration::getInstance().numTutors() - 1 );
+                
+                // Add the current student to the list at the location 'pos' in the _values vector
+                newChromosone->_values.at(pos).push_back( (*it2) );
+                
+                // Add the (student*,position) pair to the hashmap
+                newChromosone->_lookup.insert(pair<Student*, int>( (*it2) ,pos));
+
+            }
         }
         
-        for (map<int, Student*>::iterator it=debug.begin(); it!=debug.end(); it++) {
-            cerr << "\t" << (*it).first << " : " << (*it).second->getName() << " (";
-            cerr << (*it).second->getBaseID() << ")" << endl;
-        }
-        //end debug
+        
         
         // return the optimal chromosome
         return newChromosone;
     }
 
-//   Else, if this isn't the first chromosome or we're not using a previous solution, randomise like normal
+//   Else, if this isn't the first chromosome or we're not using a previous solution: randomise like normal
     
     //Get all the students:
     const list<Student*>& students = Configuration::getInstance().getStudents();
