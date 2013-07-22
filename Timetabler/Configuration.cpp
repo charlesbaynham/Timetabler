@@ -13,8 +13,6 @@
 #include <ext/hash_map>
 #include <unordered_set>
 
-#include <limits.h>
-
 Configuration Configuration::_instance;
 
 int Configuration::parseFile(const char* fileName) {
@@ -339,23 +337,6 @@ bool Configuration::removeSubject( Subject* s ) {
     return false;
 }
 
-//bool Configuration::removeTutor( int ID ) {
-//    // remove the tutor. No need to remove from students prevlist as will now just never cause a fitness penalty
-//    
-//    // Look up the tutor by their ID
-//    hash_map<int, Tutor*>::iterator it = _tutors.find( ID );
-//    if ( it != _tutors.end() ) {
-//        _tutors.erase(it);
-//        return true;
-//    }
-//
-//    return false;
-//}
-//void Configuration::removeStudent( Student* s ) {
-//    // Remove ALL instances of this student (i.e. those with the same baseID)
-//    _students.remove_if( [s](Student* thisS){ return thisS->getBaseID() == s->getBaseID(); } );
-//}
-
 
 void Configuration::saveConfig(string filename) {
     
@@ -464,14 +445,14 @@ list<Student*> Configuration::getStudentsByBaseID(int baseID) {
 void Configuration::removeTutorFromPrev(Tutor* t) {
     
     // Loop over the prevsolution and decrement all those slots corresponding to higher ID tutors.
-    // For students that used to have this tutor, set their slot to a stupidly high number (i.e. remove them from the previous solution)
+    // For students that used to have this tutor, remove them from the previous solution
     
     for (int i=0; i < _prevSolution.size(); i++) {
         
         for (list<int>::iterator it=_prevSolution[i].begin(); it!=_prevSolution[i].end(); it++) {
             // for each student in the prev solution, account for the missing tutor if needed
             if ( (*it) == t->getID() )
-                (*it) = INT_MAX;
+                _prevSolution[i].erase(it);
             else if ( (*it) > t->getID() )
                 (*it)--;
         }

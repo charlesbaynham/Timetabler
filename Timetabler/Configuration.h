@@ -44,6 +44,11 @@ private:
     // was one loaded?
     bool _prevSolutionLoaded=false;
     
+    
+    // Number of slots that, if we're using a previous solution, must inevitably be changed in any solution
+    // e.g. if we've added 3 students then 3 previously empty slots will need to be filled
+    // we therefore reduce the maxscore accordingle to compensate for this.
+    int _changedSlots=0;
 public:
     // Init
     Configuration() : _isEmpty(true) {}
@@ -62,6 +67,12 @@ public:
     inline vector<list<int> > getPrevSolution() { return _prevSolution; }
     inline bool prevSolutionLoaded() { return _prevSolutionLoaded; }
 
+    // get number of changed slots
+    inline int getChangedSlots() const { return _changedSlots; }
+    // increment number of changed slots
+    inline int incrementChangedSlots() { return _changedSlots++; }
+    inline void resetChangedSlots() { _changedSlots = 0; }
+    
     // removes tutor t from the previous solution and adjusts all the slot values to compensate
     void removeTutorFromPrev(Tutor* t);
     

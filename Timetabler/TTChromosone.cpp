@@ -44,8 +44,14 @@ GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
     // Make new chromosone copying setup
     Chromosone* newChromosone = new Chromosone(*this, true);
     
+    
+    // If we haven't already, and we've loaded a prevsious solution, then seed this soluton into the chromosome set.
+    // This solution will likely dominate as it will be nearly optimal and will spread by crossover. 
     bool addbest = !TimetablerInst::getInstance()->bestAdded() && Configuration::getInstance().prevSolutionLoaded();
     if ( addbest ) {
+        
+        // Set changedSlots back to 0 if altered
+        Configuration::getInstance().resetChangedSlots();
         
         vector<list<int> > prevSolution = Configuration::getInstance().getPrevSolution();
         
@@ -67,46 +73,37 @@ GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
         
         // for each slot in new chromosome
         for (int i=0; i < newChromosone->_values.size(); i++) {
-            // for each student in the previous solution
-            printf("i = %i\n",i);
-            for (list<int>::iterator it=prevSolution[i].begin(); it!=prevSolution[i].end(); it++) {
-                // add the first student with this baseID to the table:
-                
-                // get the student
-                Student* student;
-                
-                if ( !(student = studentsById[*it].front()) ) { // Failed because the list is empty: we've run out of students with this baseID,
-                                                              //   possibly because the user removed them from the config
+            // for each student in the previous solution in this slot
+            if (i < prevSolution.size() ) {
+                for (list<int>::iterator it=prevSolution[i].begin(); it!=prevSolution[i].end(); it++) {
+
+                    // add the first student with this baseID to the table:
+                    
+                    // get the student
+                    Student* student;
+
+                    
+                    if ( (studentsById.find(*it) != studentsById.end()) && !(student = studentsById[*it].front()) ) {
+    //                    Assignation failed either because the list is empty: we've run out of students
+    //                    with this baseID, possibly because the user removed them from the config, or because this ID is not in the current config
 #ifdef DEBUG
-                    cerr << "Previous student not found:  baseID = " << *it << "\n";
+                        cerr << "Previous student not found:  baseID = " << *it << "\n";
 #endif
-                    continue;
+                        continue;
+                    }
+                
+                    
+                    // store in the chromosome
+                    newChromosone->_values[i].push_back( student );
+                    newChromosone->_lookup[ student ] = i;
+                    
+                    // remove this first student from the list, so that it is not added again
+                    studentsById[*it].erase(studentsById[*it].begin());
+
                 }
-                
-                // store in the chromosome
-                newChromosone->_values[i].push_back( student );
-                newChromosone->_lookup[ student ] = i;
-                
-                // remove this first student from the list, so that it is not added again
-                studentsById[*it].erase(studentsById[*it].begin());
-                
             }
+
         }
-        
-        //debug edit
-        
-//        map<int, Student*> debug;
-//        
-//        cerr << "***\n\nHashmap dump after first student added\n\n";
-//        for (hash_map<Student*, int>::iterator it=newChromosone->_lookup.begin(); it!=newChromosone->_lookup.end(); it++) {
-//            
-//            debug[(*it).second] = (*it).first;
-//        }
-//        
-//        for (map<int, Student*>::iterator it=debug.begin(); it!=debug.end(); it++) {
-//            cerr << "\t" << (*it).first << " : " << (*it).second->getName() << " (";
-//            cerr << (*it).second->getBaseID() << ")" << endl;
-//        }
         
         // Redistribute remaining students randomly
         for (hash_map<int, list<Student*> >::iterator it=studentsById.begin(); it!=studentsById.end(); it++) {
@@ -120,6 +117,8 @@ GaChromosomePtr Chromosone::MakeNewFromPrototype() const {
                 
                 // Add the (student*,position) pair to the hashmap
                 newChromosone->_lookup.insert(pair<Student*, int>( (*it2) ,pos));
+                
+                Configuration::getInstance().incrementChangedSlots();
 
             }
         }
@@ -445,11 +444,13 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
     //  Is this the same solution that we found in the last run (if there was one)?
     //  Score for this is very low since we want all other requirements to take priority
     if (Configuration::getInstance().prevSolutionLoaded()) {
-                
+        
+        vector<list<int> > prevSolution = Configuration::getInstance().getPrevSolution();
+        
         //loop over all slots
-        for (int i=0; i<numSlots; i++) {
+        for (int i=0; i<numSlots && i < prevSolution.size(); i++) {
             list<Student*> thisSlot = chromo->_values[i];
-            list<int> prevSlot = Configuration::getInstance().getPrevSolution()[i];
+            list<int> prevSlot = prevSolution[i];
             
             bool matching = true;
             if (thisSlot.empty()) {
@@ -471,7 +472,10 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             if (matching) score += 0.01;
 
         }
-        maxscore += 0.01 * numSlots;
+        //debug
+        int changedSlots = Configuration::getInstance().getChangedSlots();
+        //end debug
+        maxscore += 0.01 * ( numSlots - Configuration::getInstance().getChangedSlots() );
     }
     
     return (float)score / (float)maxscore;

@@ -64,7 +64,7 @@ public:
     
 	Chromosone(const Chromosone& c, bool setupOnly);
     
-	virtual ~Chromosone() { } 
+	virtual ~Chromosone() { }
     
     virtual GaChromosomePtr MakeCopy(bool setupOnly) const;
     
@@ -81,6 +81,7 @@ public:
     
 	// Return reference to array of time-space slots
 	inline const vector<list<Student*> >& GetSlots() const { return _values; }
+    
 };
 
 
