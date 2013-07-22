@@ -445,16 +445,30 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
     //  Score for this is very low since we want all other requirements to take priority
     if (Configuration::getInstance().prevSolutionLoaded()) {
         
+#define PREV_SCORE 0.01
+        
         vector<list<int> > prevSolution = Configuration::getInstance().getPrevSolution();
         
         //loop over all slots
-        for (int i=0; i<numSlots && i < prevSolution.size(); i++) {
+        for (int i=0; i<numSlots; i++) {
+            
             list<Student*> thisSlot = chromo->_values[i];
+            
+            // If we're out of range of prevSolution then treat it as an empty slot: i.e. reward if thisSlot is also empty
+            if ( i >= prevSolution.size() ) {
+                if (thisSlot.empty())
+                    score += PREV_SCORE;
+                
+                continue;
+            }
+            
+            
             list<int> prevSlot = prevSolution[i];
             
             bool matching = true;
             if (thisSlot.empty()) {
-                if (!prevSlot.empty()) matching = false;
+                if (!prevSlot.empty())
+                    matching = false;
             }
             else {
                 
@@ -469,13 +483,11 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
                 }
             }
             
-            if (matching) score += 0.01;
+            if (matching) score += PREV_SCORE;
 
         }
-        //debug
-        int changedSlots = Configuration::getInstance().getChangedSlots();
-        //end debug
-        maxscore += 0.01 * ( numSlots - Configuration::getInstance().getChangedSlots() );
+        
+        maxscore += PREV_SCORE * ( numSlots - Configuration::getInstance().getChangedSlots() );
     }
     
     return (float)score / (float)maxscore;
@@ -547,17 +559,6 @@ GaChromosomePtr TTCrossover::operator ()(const GaChromosome* parent1, const GaCh
 	bool first = GaGlobalRandomBoolGenerator->Generate();
 	for( int i = 0; i < size; i++ )
 	{
-        //debug
-        int id1 = vec1[i].first->getID();
-        int id2 = vec2[i].first->getID();
-//
-//        if (id1 != id2) {
-//            printf("\nno1 with size %i:\n\n", (int)c1->_lookup.size());
-//            dumpHash(c1->_lookup);
-//            printf("\nno2 with size %i:\n\n", (int)c1->_lookup.size());
-//            dumpHash(c2->_lookup);
-//        }
-//        //end debug
         
 		if( first )
 		{
