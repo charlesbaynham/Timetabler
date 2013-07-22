@@ -567,7 +567,7 @@ void inputGUI::submit() {
             static hash_map<int, bool> test;
             if (it==_tutors.begin()) test.clear();
             if (test[id]==true) {
-                printf("Tutor fail\n\n\n\n");
+                printf("Tutor repeat ID found\n\n\n\n");
                 exit(-1);
             }
             else test[id]=true;
@@ -623,7 +623,7 @@ void inputGUI::usePrevious(string filename) {
 #endif
     
     // Update the GUI to match the Configuration
-    this->updateFromConfig();
+    updateFromConfig();
 }
 
 void inputGUI::updateFromConfig() {
@@ -640,6 +640,9 @@ void inputGUI::updateFromConfig() {
     
     this->createAddButtons();
     
+    int nextSubjectID=1;
+    int nextTutorID=1;
+    
     ///
     
     // input the subjects
@@ -650,6 +653,10 @@ void inputGUI::updateFromConfig() {
     
     for (hash_map<int, Subject*>::iterator it = subjects.begin(); it != subjects.end(); it++) {
         
+        // Keep the next subject ID 1 ahead of the current highest
+        if ( (*it).second->getID() >= nextSubjectID )
+            nextSubjectID = (*it).second->getID() + 1;
+        
         addFilledSubject( (*it).second );
         
     }
@@ -657,6 +664,8 @@ void inputGUI::updateFromConfig() {
     // input the tutors
     for (hash_map<int, Tutor*>::iterator it = tutors.begin(); it != tutors.end(); it++) {
         
+        // Keep the next Tutor ID 1 ahead of the current highest
+        nextTutorID++;
         addFilledTutor( (*it).second );
         
     }
@@ -676,7 +685,8 @@ void inputGUI::updateFromConfig() {
         
     }
     
-    // process slots
-        ////
+    // update the nextIDs
+    GUITutor::resetGlobalID(nextTutorID);
+    GUISubject::resetGlobalID(nextSubjectID);
     
 }
