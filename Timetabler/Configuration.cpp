@@ -13,6 +13,8 @@
 #include <ext/hash_map>
 #include <unordered_set>
 
+#include <limits.h>
+
 Configuration Configuration::_instance;
 
 int Configuration::parseFile(const char* fileName) {
@@ -459,6 +461,23 @@ list<Student*> Configuration::getStudentsByBaseID(int baseID) {
 }
 
 
-
+void Configuration::removeTutorFromPrev(Tutor* t) {
+    
+    // Loop over the prevsolution and decrement all those slots corresponding to higher ID tutors.
+    // For students that used to have this tutor, set their slot to a stupidly high number (i.e. remove them from the previous solution)
+    
+    for (int i=0; i < _prevSolution.size(); i++) {
+        
+        for (list<int>::iterator it=_prevSolution[i].begin(); it!=_prevSolution[i].end(); it++) {
+            // for each student in the prev solution, account for the missing tutor if needed
+            if ( (*it) == t->getID() )
+                (*it) = INT_MAX;
+            else if ( (*it) > t->getID() )
+                (*it)--;
+        }
+        
+    }
+    
+}
 
 

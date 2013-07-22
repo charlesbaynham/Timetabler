@@ -12,6 +12,7 @@
 #include <boost/filesystem.hpp>
 #include <unordered_set>
 
+
 int GUITutor::_nextID = 1;
 int GUISubject::_nextID = 1;
 
@@ -287,9 +288,8 @@ void inputGUI::removeGUITutor(GUITutor* t)
     int currIndex = (int)(search - _tutorIndex.begin());
     _tutorIndex.erase(search);
     
-    if (currIndex != t->getTutor()->getID() - 1) {printf("\nSeems that you were wrong.\n"); exit(1); }
     
-    // loop over all GUI elements in the student tab, removing this new tutor from the options
+    // loop over all GUI elements in the student tab, removing this tutor from the options
     for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
         (*it)->removeTutorOption(currIndex);
     }
@@ -300,6 +300,11 @@ void inputGUI::removeGUITutor(GUITutor* t)
         if ( loopID > t->getTutor()->getID() )
             (*it)->decrementID();
     }
+    
+    // If we're using a previous solution, remove this tutor from it
+    if (Configuration::getInstance().prevSolutionLoaded())
+        Configuration::getInstance().removeTutorFromPrev(t->getTutor());
+    
     
     //reduce the next id
     GUITutor::decrementGlobalID();

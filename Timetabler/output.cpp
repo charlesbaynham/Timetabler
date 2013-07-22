@@ -111,11 +111,12 @@ string timetableSlot::getTutorSubjects()
     }
     //remove final ", "
     string::iterator strIt = out.end();
-    strIt--;
-    out.erase(strIt);
-    strIt--;
-    out.erase(strIt);
-    
+    if (out.length() >= 2) {
+        strIt--;
+        out.erase(strIt);
+        strIt--;
+        out.erase(strIt);
+    }
     return out;
 }
 

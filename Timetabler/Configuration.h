@@ -61,6 +61,9 @@ public:
     
     inline vector<list<int> > getPrevSolution() { return _prevSolution; }
     inline bool prevSolutionLoaded() { return _prevSolutionLoaded; }
+
+    // removes tutor t from the previous solution and adjusts all the slot values to compensate
+    void removeTutorFromPrev(Tutor* t);
     
     //free up
     //~Configuration();
