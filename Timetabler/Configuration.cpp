@@ -118,7 +118,7 @@ Tutor* Configuration::ParseTutor(ifstream& file) {
     
     int id;
     string name;
-    list<Subject*> subjects;
+    map<Subject*, float> subjects;
     list<int> notTimes;
     
     while (!file.eof()){
@@ -128,7 +128,11 @@ Tutor* Configuration::ParseTutor(ifstream& file) {
         
         if (key.compare("id") == 0) id = atoi(value.c_str());
         else if (key.compare("name") == 0) name = value;
-        else if (key.compare("subj") == 0) subjects.push_back(getSubject(atoi(value.c_str())));
+//        else if (key.compare("subj") == 0) subjects[getSubject(atoi(value.c_str()))] = 1; // edit debug
+        else if (key.compare("subj") == 0) {
+            pair<Subject*, float> subj = ParseTutorSubject(value);
+            subjects[ subj.first ] = subj.second;
+        }
         else if (key.compare("notTime") == 0) notTimes.push_back(atoi(value.c_str()));
     }
     
@@ -185,6 +189,27 @@ vector<list<int> > Configuration::ParseSolution(ifstream& file) {
     
     return theTable;
     
+}
+
+// Returns a totur's subject and proficiency given a string formatted "SUBJ : PROF"
+pair<Subject*, float> Configuration::ParseTutorSubject(const string input) {
+    
+    pair<Subject*, float> output;
+    
+    int subjID;
+    
+    size_t p = input.find( ':' );
+    
+    subjID = atoi( (input.substr(0,p)).c_str() );
+    if ( p != string::npos )
+        output.second = atof( (input.substr( p+1, input.length() )).c_str() );
+    else
+        output.second = 1; // default to 100% proficiency if none given
+    
+    output.first = getSubject(subjID);
+    
+    return output;
+
 }
 
 // Reads one line (key - value pair) from configuration file
@@ -264,9 +289,9 @@ void Configuration::dumpTutors(){
         Tutor* tut = (*it).second;
         
         cerr << "Name: "<<tut->getName()<<" (ID="<<tut->getID() << ")\nSubjects:\n";
-        list<Subject*> subjlist = tut->getSubjects();
-        for (list<Subject*>::iterator it2=subjlist.begin(); it2 != subjlist.end(); it2++) {
-            cerr << "\t" << (*it2)->getName() << "("<<(*it2)->getID()<<")\n";
+        map<Subject*, float> subjlist = tut->getSubjects();
+        for (map<Subject*, float>::iterator it2=subjlist.begin(); it2 != subjlist.end(); it2++) {
+            cerr << "\t" << (*it2).first->getName() << "("<<(*it2).second*100<<"%)\n";
         }
         cerr << "NotSlots:\n";
         list<int> thelist = tut->getNotSlots();
@@ -373,9 +398,9 @@ void Configuration::saveConfig(string filename) {
         output << "\tname = " << (*it).second->getName() << endl;
         
         // subjects
-        list<Subject*> subjects = (*it).second->getSubjects();
-        for (list<Subject*>::iterator itSub = subjects.begin(); itSub!=subjects.end(); itSub++) {
-            output << "\tsubj = " << (*itSub)->getID() << endl;
+        map<Subject*, float> subjects = (*it).second->getSubjects();
+        for (map<Subject*, float>::iterator itSub = subjects.begin(); itSub!=subjects.end(); itSub++) {
+            output << "\tsubj = " << (*itSub).first->getID() << ":" << (*itSub).second << endl;
         }
         
         // nottimes

@@ -104,9 +104,9 @@ string timetableSlot::getTutorSubjects()
     string out;
     
     //construct string with list of subjects
-    list<Subject*> subjs = _tutor->getSubjects();
-    for (list<Subject*>::iterator it=subjs.begin(); it != subjs.end(); it++) {
-        out.append( (*it)->getName() );
+    map<Subject*, float> subjs = _tutor->getSubjects();
+    for (map<Subject*, float>::iterator it=subjs.begin(); it != subjs.end(); it++) {
+        out.append( (*it).first->getName() );
         out.append(", ");
     }
     //remove final ", "

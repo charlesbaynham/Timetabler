@@ -11,7 +11,7 @@
 
 //int Tutor::_nextID = 0;
 
-Tutor::Tutor(int id, const string& name, list<Subject*> subjects, list<int> notTimes) :
+Tutor::Tutor(int id, const string& name, map<Subject*, float> subjects, list<int> notTimes) :
 _ID(id),
 _name(name),
 _subjects(subjects),

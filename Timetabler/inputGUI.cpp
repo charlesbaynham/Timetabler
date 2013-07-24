@@ -25,7 +25,8 @@ GUITutor::GUITutor(inputGUI* parent, Tutor* tutor) :
     }
     else {
         _ID = _nextID++;
-        _tutor = new Tutor(_ID, "", NULL, NULL);
+        map<Subject*, float> emptymap;
+        _tutor = new Tutor(_ID, "", emptymap, NULL);
     }
     
     _nameLabel = new WText("Name:", _visOutput);
@@ -41,13 +42,17 @@ GUITutor::GUITutor(inputGUI* parent, Tutor* tutor) :
         //set the selection box to allow multiple selections
         _subjects->setSelectionMode(SelectionMode::ExtendedSelection);
     
+    //debug
+    
+    //end debug
+    
     // select any subjects that are in list<Subject*> subjects
     set<int> selectedSubj;
-    list<Subject*> subjects = _tutor->getSubjects();
+    map<Subject*, float> subjects = _tutor->getSubjects();
     for (int i=0; i < subjectIndex.size(); i++) {
         Subject* searchSubj = subjectIndex[i];
         
-        if (find(subjects.begin(), subjects.end(), searchSubj ) != subjects.end() )
+        if (subjects.find(searchSubj) != subjects.end() )
             selectedSubj.insert(i);
     }
     _subjects->setSelectedIndexes(selectedSubj);
@@ -456,7 +461,7 @@ void GUITutor::callUpdate() {
             // debug
             cerr << "Adding subject " << _parent->getSubjectIndex()[ *it ]->getName() << " to tutor " << n->getName() << ".\n";
             
-            n->addSubject( _parent->getSubjectIndex()[ *it ] );
+            n->addSubject( _parent->getSubjectIndex()[ *it ], 1.0 ); // edit debug
         }
     }
     
@@ -541,9 +546,6 @@ void inputGUI::submit() {
         hash_map<int, Subject*> subjects;
         list<Student*> students;
         
-#ifdef DEBUG
-        list<GUIStudent*> testlist = _students;
-#endif
         
         // loop over all the subjects
         for (list<GUISubject*>::iterator it=_subjects.begin(); it!=_subjects.end(); it++) {

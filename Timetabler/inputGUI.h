@@ -147,13 +147,21 @@ class GUITutor : public GUIelement {
     WText* _nameLabel;
     WSelectionBox* _subjects;
     WText* _subjectsLabel;
+    // debug
+    WContainerWidget* _subjectsCont;
+    
+    typedef pair< WContainerWidget* , pair<WText*, WSelectionBox> > subjectChoice;
+    
+    list< subjectChoice > _subjectsL;
+    //end debug
+    
     WSelectionBox* _notSlots;
     WText* _notLabel;
     
     
 public:
     GUITutor(inputGUI* parent, Tutor* tutor);
-//    args for tutor : int id, const string& name, list<Subject*> subjects, list<int> notTimes);
+
     GUITutor(inputGUI* parent) : GUITutor(parent, NULL) {}
 
     

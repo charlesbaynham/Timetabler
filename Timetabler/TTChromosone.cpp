@@ -316,11 +316,11 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         Tutor* tutor = Configuration::getInstance().getTutor(tutorID);
         
         //check subject:
-        list<Subject*> tutSubjs = tutor->getSubjects();
-        for (list<Subject*>::iterator itTut = tutSubjs.begin(); itTut != tutSubjs.end(); itTut++)
+        map<Subject*, float> tutSubjs = tutor->getSubjects();
+        for (map<Subject*, float>::iterator itTut = tutSubjs.begin(); itTut != tutSubjs.end(); itTut++)
         {
             Subject* studentSubject = (*it).first->getSubject();
-            if ( studentSubject == *itTut )
+            if ( studentSubject == (*itTut).first )
             {
                 score++;
                 break; // Need to adapt to suit proficiency in subject. edit.

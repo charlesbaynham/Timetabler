@@ -141,6 +141,9 @@ private:
 	// Returns NULL if method cannot parse configuration data
 	Student* ParseStudent(ifstream& file);
     
+    // Returns a totur's subject and proficiency given a string formatted "SUBJ ; PROF"
+    pair<Subject*, float> ParseTutorSubject(const string input);
+    
     // Read's the previous solution from a file, makes a table of baseIDs in correct slots and returns it
     // Returns NULL if method cannot parse configuration data
     vector<list<int> > ParseSolution(ifstream& file);
