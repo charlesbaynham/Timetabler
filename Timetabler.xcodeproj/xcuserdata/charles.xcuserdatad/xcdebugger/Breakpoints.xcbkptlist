@@ -123,7 +123,7 @@
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
-         ignoreCount = "0"
+         ignoreCount = "10000"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/TTChromosone.cpp"
          timestampString = "396367936.718623"
@@ -849,11 +849,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "390"
-         endingLineNumber = "390">
+         startingLineNumber = "389"
+         endingLineNumber = "389">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -884,11 +884,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "489"
-         endingLineNumber = "489"
+         startingLineNumber = "488"
+         endingLineNumber = "488"
          landmarkName = "GUITutor::callUpdate()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -936,11 +936,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "495"
-         endingLineNumber = "495"
+         startingLineNumber = "494"
+         endingLineNumber = "494"
          landmarkName = "GUITutor::callUpdate()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -962,11 +962,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "711"
-         endingLineNumber = "711"
+         startingLineNumber = "713"
+         endingLineNumber = "713"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -975,11 +975,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "672"
-         endingLineNumber = "672"
+         startingLineNumber = "674"
+         endingLineNumber = "674"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1001,11 +1001,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "664"
-         endingLineNumber = "664"
+         startingLineNumber = "666"
+         endingLineNumber = "666"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1014,11 +1014,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "493"
-         endingLineNumber = "493"
+         startingLineNumber = "492"
+         endingLineNumber = "492"
          landmarkName = "GUITutor::callUpdate()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1027,11 +1027,11 @@
          ignoreCount = "4"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "538"
-         endingLineNumber = "538"
+         startingLineNumber = "537"
+         endingLineNumber = "537"
          landmarkName = "GUITutor::callUpdate()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1040,11 +1040,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "665"
-         endingLineNumber = "665"
+         startingLineNumber = "667"
+         endingLineNumber = "667"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1077,11 +1077,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "527"
-         endingLineNumber = "527"
+         startingLineNumber = "526"
+         endingLineNumber = "526"
          landmarkName = "GUITutor::callUpdate()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1090,11 +1090,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "671"
-         endingLineNumber = "671"
+         startingLineNumber = "673"
+         endingLineNumber = "673"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1103,11 +1103,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "701"
-         endingLineNumber = "701"
+         startingLineNumber = "703"
+         endingLineNumber = "703"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1322,22 +1322,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "641"
-         endingLineNumber = "641">
+         startingLineNumber = "643"
+         endingLineNumber = "643">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "626"
-         endingLineNumber = "626"
+         startingLineNumber = "628"
+         endingLineNumber = "628"
          landmarkName = "GUIStudent::callUpdate()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1346,11 +1346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "630"
-         endingLineNumber = "630"
+         startingLineNumber = "632"
+         endingLineNumber = "632"
          landmarkName = "GUIStudent::callUpdate()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1359,11 +1359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "681"
-         endingLineNumber = "681"
+         startingLineNumber = "683"
+         endingLineNumber = "683"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1372,11 +1372,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "682"
-         endingLineNumber = "682"
+         startingLineNumber = "684"
+         endingLineNumber = "684"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1385,11 +1385,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "622"
-         endingLineNumber = "622"
+         startingLineNumber = "624"
+         endingLineNumber = "624"
          landmarkName = "GUIStudent::callUpdate()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1448,11 +1448,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "429"
-         endingLineNumber = "429"
+         startingLineNumber = "428"
+         endingLineNumber = "428"
          landmarkName = "inputGUI::inputGUI(WContainerWidget* parent)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1461,11 +1461,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "723"
-         endingLineNumber = "723"
+         startingLineNumber = "725"
+         endingLineNumber = "725"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1587,22 +1587,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "740"
-         endingLineNumber = "740">
+         startingLineNumber = "742"
+         endingLineNumber = "742">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "766"
-         endingLineNumber = "766"
+         startingLineNumber = "768"
+         endingLineNumber = "768"
          landmarkName = "inputGUI::updateFromConfig()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1650,11 +1650,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "730"
-         endingLineNumber = "730"
+         startingLineNumber = "732"
+         endingLineNumber = "732"
          landmarkName = "inputGUI::usePrevious(string filename)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1988,11 +1988,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "705"
-         endingLineNumber = "705"
+         startingLineNumber = "707"
+         endingLineNumber = "707"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2001,11 +2001,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "704"
-         endingLineNumber = "704"
+         startingLineNumber = "706"
+         endingLineNumber = "706"
          landmarkName = "inputGUI::submit()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2014,11 +2014,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "501"
-         endingLineNumber = "501"
+         startingLineNumber = "500"
+         endingLineNumber = "500"
          landmarkName = "GUITutor::callUpdate()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2027,11 +2027,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "580"
-         endingLineNumber = "580"
+         startingLineNumber = "582"
+         endingLineNumber = "582"
          landmarkName = "GUITutor::changeSubjectOption(Subject* o, Subject* n)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2040,22 +2040,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "573"
-         endingLineNumber = "573">
+         startingLineNumber = "575"
+         endingLineNumber = "575">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "556"
-         endingLineNumber = "556"
+         startingLineNumber = "555"
+         endingLineNumber = "555"
          landmarkName = "GUITutor::addSubjectOption(Subject* n)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2064,7 +2064,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "588"
+         endingLineNumber = "588"
+         landmarkName = "GUITutor::changeSubjectOption(Subject* o, Subject* n)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/inputGUI.cpp"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "586"
@@ -2077,11 +2090,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "584"
-         endingLineNumber = "584"
+         startingLineNumber = "583"
+         endingLineNumber = "583"
          landmarkName = "GUITutor::changeSubjectOption(Subject* o, Subject* n)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2090,24 +2103,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "581"
-         endingLineNumber = "581"
-         landmarkName = "GUITutor::changeSubjectOption(Subject* o, Subject* n)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "566"
-         endingLineNumber = "566"
+         startingLineNumber = "565"
+         endingLineNumber = "565"
          landmarkName = "GUITutor::removeSubjectOption(Subject* subject)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2116,11 +2116,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373419.840809"
+         timestampString = "396374620.977584"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "369"
-         endingLineNumber = "369"
+         startingLineNumber = "366"
+         endingLineNumber = "366"
          landmarkName = "inputGUI::removeGUISubject(GUISubject* s)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2129,11 +2129,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396374620.977584"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "370"
-         endingLineNumber = "370"
+         startingLineNumber = "367"
+         endingLineNumber = "367"
          landmarkName = "inputGUI::removeGUISubject(GUISubject* s)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2142,12 +2142,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Timetabler/inputGUI.cpp"
-         timestampString = "396373821.243624"
+         timestampString = "396376180.975858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "564"
-         endingLineNumber = "564"
+         startingLineNumber = "563"
+         endingLineNumber = "563"
          landmarkName = "GUITutor::removeSubjectOption(Subject* subject)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/Configuration.cpp"
+         timestampString = "396375216.008739"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "30"
+         endingLineNumber = "30"
+         landmarkName = "Configuration::parseFile(const char* fileName)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/Configuration.cpp"
+         timestampString = "396375243.792401"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "39"
+         endingLineNumber = "39"
+         landmarkName = "Configuration::parseFile(const char* fileName)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Timetabler/inputGUI.h"
+         timestampString = "396376180.975858"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "249"
+         endingLineNumber = "249"
+         landmarkName = "removeSubjectOption(int index)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

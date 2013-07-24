@@ -191,7 +191,7 @@ vector<list<int> > Configuration::ParseSolution(ifstream& file) {
     
 }
 
-// Returns a totur's subject and proficiency given a string formatted "SUBJ : PROF"
+// Returns a tutor's subject and proficiency given a string formatted "SUBJ : PROF"
 pair<Subject*, float> Configuration::ParseTutorSubject(const string input) {
     
     pair<Subject*, float> output;

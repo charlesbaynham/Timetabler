@@ -361,9 +361,6 @@ void inputGUI::removeGUIStudent(GUIStudent* s)
 }
 void inputGUI::removeGUISubject(GUISubject* s)
 {
-    //debug
-    vector<Subject*> debug = _subjectIndex;
-    //end debug
     
     // get the index of the subject
     vector<Subject*>::iterator search = find(_subjectIndex.begin(), _subjectIndex.end(), s->getSubject());
@@ -382,8 +379,10 @@ void inputGUI::removeGUISubject(GUISubject* s)
     // remove the subject from the index
     _subjectIndex.erase(search);
     
+    // remove the visible widget
     _subjectTab->removeWidget( (*s)() );
     _subjects.remove(s);
+    
 }
 
 // Specialisations for adding delete buttons
@@ -567,6 +566,9 @@ void GUITutor::removeSubjectOption(Subject* subject){
             _subjectsL.erase(it);
         }
     }
+    
+    // remove this subject from the tutor object
+    _tutor->removeSubject(subject);
 }
 
 // changes the subject o to subject n

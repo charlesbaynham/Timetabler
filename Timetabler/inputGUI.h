@@ -244,8 +244,11 @@ public:
     inline void addSubjectOption(Subject* n) { _subject->addItem(n->getName()); }
     inline void addSubjectOption(Subject* n, int position) { _subject->insertItem(position, n->getName()); }
     
-    // Removes the subject at index from the selection box
-    inline void removeSubjectOption(int index) { _subject->removeItem(index); }
+    // Removes the subject at index from the selection box and the student object
+    inline void removeSubjectOption(int index) {
+        _subject->removeItem(index);
+        callUpdate();
+    }
 
     // changes the subject at index to the new one
     void changeSubjectOption(Subject* n, int index) {
@@ -255,7 +258,7 @@ public:
         if (selected) _subject->setCurrentIndex(index);
     }
 
-    // call the methods in inputGUI to update for a changed subject entry
+    // update from the inputGUI
     void callUpdate();
 
 };
