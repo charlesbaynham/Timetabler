@@ -34,29 +34,79 @@ GUITutor::GUITutor(inputGUI* parent, Tutor* tutor) :
     _name->setText(_tutor->getName());
     
     _subjectsLabel = new WText("Subjects:",_visOutput);
-    _subjects = new WSelectionBox(_visOutput);
-        //loop over the index and populate the new selection box
-        vector<Subject*> subjectIndex = _parent->getSubjectIndex();
-        for (vector<Subject*>::iterator it = subjectIndex.begin(); it != subjectIndex.end(); it++)
-            _subjects->addItem( (*it)->getName() );
-        //set the selection box to allow multiple selections
-        _subjects->setSelectionMode(SelectionMode::ExtendedSelection);
+//    _subjects = new WSelectionBox(_visOutput);
+//        //loop over the index and populate the new selection box
+//        vector<Subject*> subjectIndex = _parent->getSubjectIndex();
+//        for (vector<Subject*>::iterator it = subjectIndex.begin(); it != subjectIndex.end(); it++)
+//            _subjects->addItem( (*it)->getName() );
+//        //set the selection box to allow multiple selections
+//        _subjects->setSelectionMode(SelectionMode::ExtendedSelection);
+//    
+//    
+//    // select any subjects that are in map<Subject*, float> subjects
+//    set<int> selectedSubj;
+//    map<Subject*, float> subjects = _tutor->getSubjects();
+//    for (int i=0; i < subjectIndex.size(); i++) {
+//        Subject* searchSubj = subjectIndex[i];
+//        
+//        if (subjects.find(searchSubj) != subjects.end() )
+//            selectedSubj.insert(i);
+//    }
+//    _subjects->setSelectedIndexes(selectedSubj);
+
     
     //debug
+    _subjectsCont = new WContainerWidget(_visOutput);
+    _subjectsCont->setInline(true);
+    
+    //loop over the index and populate the list
+    vector<Subject*> subjectIndex = _parent->getSubjectIndex();
+    
+    for (vector<Subject*>::iterator it = subjectIndex.begin(); it != subjectIndex.end(); it++) {
+        subjectChoice newSub;
+        newSub.elementContainer = new WContainerWidget(_subjectsCont);
+        newSub.elementContainer->setInline(true);
+        newSub.label = new WText((*it)->getName(), newSub.elementContainer);
+        newSub.dropdown = new WComboBox(newSub.elementContainer);
+        newSub.subject = *it;
+        
+        newSub.dropdown->addItem("None");
+        newSub.dropdown->addItem("Some");
+        newSub.dropdown->addItem("Proficient");
+        newSub.dropdown->addItem("Expert");
+        
+        //update handler:
+        newSub.dropdown->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
+        
+        _subjectsL.push_back(newSub);
+    }
+    
+    
+    // select any subjects that are in map<Subject*, float> subjects
+    
+    map<Subject*, float> subjects = _tutor->getSubjects();
+    
+    // for each subject, check to see if this tutor already has an entry for it
+    for (list<subjectChoice>::iterator it = _subjectsL.begin(); it!= _subjectsL.end(); it++) {
+        
+        map<Subject*, float>::iterator foundSubject = subjects.find((*it).subject);
+        if (foundSubject != subjects.end() ) {
+            float prof = (*foundSubject).second;
+            if (prof <= PROFICIENCY_SOME-0.01)
+                ;
+            else if (prof<= PROFICIENCY_PROFICIENT - 0.01)
+                (*it).dropdown->setCurrentIndex(1);
+            else if (prof<= PROFICIENCY_EXPERT - 0.01)
+                (*it).dropdown->setCurrentIndex(2);
+            else
+                (*it).dropdown->setCurrentIndex(3);
+        }
+            
+    }
+    
     
     //end debug
     
-    // select any subjects that are in list<Subject*> subjects
-    set<int> selectedSubj;
-    map<Subject*, float> subjects = _tutor->getSubjects();
-    for (int i=0; i < subjectIndex.size(); i++) {
-        Subject* searchSubj = subjectIndex[i];
-        
-        if (subjects.find(searchSubj) != subjects.end() )
-            selectedSubj.insert(i);
-    }
-    _subjects->setSelectedIndexes(selectedSubj);
-
     _notLabel = new WText("Unavailable times:",_visOutput);
     _notSlots = new WSelectionBox(_visOutput);
         //set the selection box to allow multiple selections
@@ -81,7 +131,7 @@ GUITutor::GUITutor(inputGUI* parent, Tutor* tutor) :
     //register update handler
     _name->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
     _notSlots->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
-    _subjects->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
+//    _subjects->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
 }
 
 GUISubject::GUISubject(inputGUI* parent, Subject* subject) :
@@ -449,20 +499,33 @@ void GUITutor::callUpdate() {
     // if we have any subjects
     if (!_parent->getSubjectIndex().empty())
     {
-        // get the set of indexes that are selected
-        set<int> subjects = _subjects->selectedIndexes();
-        
         //clear this tutor's subjects
         n->clearSubjects();
-        
-        //lookup each index in the reference and add the resulting subject to this tutor
-        for ( set<int>::iterator it=subjects.begin(); it!=subjects.end(); it++)
-        {
-            // debug
-            cerr << "Adding subject " << _parent->getSubjectIndex()[ *it ]->getName() << " to tutor " << n->getName() << ".\n";
+
+        // loop over all the subject choices
+        for (list<subjectChoice>::iterator it = _subjectsL.begin(); it!=_subjectsL.end(); it++) {
+            // if there's a non-zero proficiency, add it to the tutor
+            int profIndex = (*it).dropdown->currentIndex();
             
-            n->addSubject( _parent->getSubjectIndex()[ *it ], 1.0 ); // edit debug
+            if (profIndex == 0) ;
+            else if (profIndex == 1) n->addSubject((*it).subject, PROFICIENCY_SOME);
+            else if (profIndex == 2) n->addSubject((*it).subject, PROFICIENCY_PROFICIENT);
+            else n->addSubject((*it).subject, PROFICIENCY_EXPERT);
+            
         }
+        
+//        // get the set of indexes that are selected
+//        set<int> subjects = _subjects->selectedIndexes();
+//        
+//                
+//        //lookup each index in the reference and add the resulting subject to this tutor
+//        for ( set<int>::iterator it=subjects.begin(); it!=subjects.end(); it++)
+//        {
+//            // debug
+//            cerr << "Adding subject " << _parent->getSubjectIndex()[ *it ]->getName() << " to tutor " << n->getName() << ".\n";
+//            
+//            n->addSubject( _parent->getSubjectIndex()[ *it ], 1.0 ); // edit debug
+//        }
     }
     
     // clear the tutor's notTimes, then...

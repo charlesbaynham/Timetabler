@@ -22,6 +22,11 @@
 #include <Wt/WComboBox>
 #include <Wt/WSelectionBox>
 
+#define PROFICIENCY_NONE 0
+#define PROFICIENCY_SOME 0.33
+#define PROFICIENCY_PROFICIENT 0.66
+#define PROFICIENCY_EXPERT 1.0
+
 using namespace std;
 using namespace Wt;
 
@@ -150,7 +155,12 @@ class GUITutor : public GUIelement {
     // debug
     WContainerWidget* _subjectsCont;
     
-    typedef pair< WContainerWidget* , pair<WText*, WSelectionBox> > subjectChoice;
+    struct subjectChoice {
+        WContainerWidget* elementContainer;
+        WText* label;
+        WComboBox* dropdown;
+        Subject* subject;
+    };
     
     list< subjectChoice > _subjectsL;
     //end debug
