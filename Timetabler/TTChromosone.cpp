@@ -307,7 +307,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         if ( !(chromo->_values[(*it).second].size()>1) ) score+=1.5;
             // Overlapping is particularly bad, so should merit a higher penalty than other lacking major requirements, eg not teaching the subject
         
-        //Does the tutor teach the subject?
+        //Does the tutor teach the subject? (And how well?)
         //get tutor and time:
         div_t division = div((*it).second, SLOTS_IN_DAY);
         int tutorID = division.quot + 1;
@@ -322,8 +322,9 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             Subject* studentSubject = (*it).first->getSubject();
             if ( studentSubject == (*itTut).first )
             {
-                score++;
-                break; // Need to adapt to suit proficiency in subject. edit.
+                // If the tutor teaches the subject, increment the score by the tutor's proficiency in this subject
+                score += (*itTut).second;
+                break;
             }
         }
         

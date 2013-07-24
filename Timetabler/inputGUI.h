@@ -142,6 +142,18 @@ public:
     WContainerWidget* operator() () { return _visOutput; }
 };
 
+// a class for each appearance of the subjects from which to choose for a tutor
+class subjectChoice {
+public:
+    WContainerWidget* elementContainer;
+    WText* label;
+    WComboBox* dropdown;
+    Subject* subject;
+    
+    subjectChoice(Subject* newSub, WContainerWidget* parent);
+    
+};
+
 class GUITutor : public GUIelement {
     
     Tutor* _tutor;
@@ -155,12 +167,7 @@ class GUITutor : public GUIelement {
     // debug
     WContainerWidget* _subjectsCont;
     
-    struct subjectChoice {
-        WContainerWidget* elementContainer;
-        WText* label;
-        WComboBox* dropdown;
-        Subject* subject;
-    };
+    
     
     list< subjectChoice > _subjectsL;
     //end debug
@@ -185,18 +192,12 @@ public:
     inline static void decrementGlobalID() { _nextID--; }
     inline static void resetGlobalID(int ID=1) { _nextID = ID; }
     
-    void addSubjectOption(Subject* n) { _subjects->addItem(n->getName()); }
-    void addSubjectOption(Subject* n, int position) { _subjects->insertItem(position, n->getName()); }
+    void addSubjectOption(Subject* n);
     
-    void removeSubjectOption(int index) { _subjects->removeItem(index); }
+    void removeSubjectOption(Subject* subject);
     
-    // changes the subject at index to the new one
-    void changeSubjectOption(Subject* n, int index) {
-        bool selected = ( _subjects->currentIndex() == index );
-        removeSubjectOption(index);
-        addSubjectOption(n, index);
-        if (selected) _subjects->setCurrentIndex(index);
-    }
+    // changes the subject o to subject n
+    void changeSubjectOption(Subject* o, Subject* n);
 
 };
 

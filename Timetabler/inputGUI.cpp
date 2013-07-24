@@ -55,7 +55,6 @@ GUITutor::GUITutor(inputGUI* parent, Tutor* tutor) :
 //    _subjects->setSelectedIndexes(selectedSubj);
 
     
-    //debug
     _subjectsCont = new WContainerWidget(_visOutput);
     _subjectsCont->setInline(true);
     
@@ -63,17 +62,7 @@ GUITutor::GUITutor(inputGUI* parent, Tutor* tutor) :
     vector<Subject*> subjectIndex = _parent->getSubjectIndex();
     
     for (vector<Subject*>::iterator it = subjectIndex.begin(); it != subjectIndex.end(); it++) {
-        subjectChoice newSub;
-        newSub.elementContainer = new WContainerWidget(_subjectsCont);
-        newSub.elementContainer->setInline(true);
-        newSub.label = new WText((*it)->getName(), newSub.elementContainer);
-        newSub.dropdown = new WComboBox(newSub.elementContainer);
-        newSub.subject = *it;
-        
-        newSub.dropdown->addItem("None");
-        newSub.dropdown->addItem("Some");
-        newSub.dropdown->addItem("Proficient");
-        newSub.dropdown->addItem("Expert");
+        subjectChoice newSub(*it, _subjectsCont);
         
         //update handler:
         newSub.dropdown->changed().connect( boost::bind( &GUITutor::callUpdate, this ) );
@@ -104,8 +93,6 @@ GUITutor::GUITutor(inputGUI* parent, Tutor* tutor) :
             
     }
     
-    
-    //end debug
     
     _notLabel = new WText("Unavailable times:",_visOutput);
     _notSlots = new WSelectionBox(_visOutput);
@@ -317,7 +304,7 @@ void inputGUI::changeSubjectOptions( Subject* newsub, Subject* oldsub) {
     vector<Subject*>::iterator search = find(_subjectIndex.begin(), _subjectIndex.end(), oldsub );
     int index = (int)(search - _subjectIndex.begin());
     
-    // update the index with the new tutor
+    // update the index with the new subject
     _subjectIndex[index] = newsub;
     
     // loop over all GUI elements in the student tab, changing the subject to reflect the changes
@@ -329,7 +316,7 @@ void inputGUI::changeSubjectOptions( Subject* newsub, Subject* oldsub) {
     }
     // now loop over all GUI elements in the tutor tab
     for ( list<GUITutor*>::iterator it = _tutors.begin(); it != _tutors.end(); it++) {
-        (*it)->changeSubjectOption(newsub, index);
+        (*it)->changeSubjectOption(oldsub, newsub);
 //        (*it)->removeSubjectOption(index);
 //        (*it)->addSubjectOption(newsub, index);
     }
@@ -374,10 +361,13 @@ void inputGUI::removeGUIStudent(GUIStudent* s)
 }
 void inputGUI::removeGUISubject(GUISubject* s)
 {
-    // get the index of the subject, then remove from the index
-    vector<Subject  *>::iterator search = find(_subjectIndex.begin(), _subjectIndex.end(), s->getSubject());
+    //debug
+    vector<Subject*> debug = _subjectIndex;
+    //end debug
+    
+    // get the index of the subject
+    vector<Subject*>::iterator search = find(_subjectIndex.begin(), _subjectIndex.end(), s->getSubject());
     int currIndex = (int)(search - _subjectIndex.begin());
-    _subjectIndex.erase(search);
     
     // loop over all GUI elements in the student tab, removing this subject from the options
     for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
@@ -386,8 +376,11 @@ void inputGUI::removeGUISubject(GUISubject* s)
     
     // loop over all GUI elements in the tutor tab, removing this subject from the options
     for ( list<GUITutor*>::iterator it = _tutors.begin(); it != _tutors.end(); it++) {
-        (*it)->removeSubjectOption(currIndex);
+        (*it)->removeSubjectOption(*search);
     }
+    
+    // remove the subject from the index
+    _subjectIndex.erase(search);
     
     _subjectTab->removeWidget( (*s)() );
     _subjects.remove(s);
@@ -543,6 +536,60 @@ void GUITutor::callUpdate() {
     
     // update the _tutor object in this element
     _tutor = n;
+}
+
+subjectChoice::subjectChoice(Subject* newSub, WContainerWidget* parent) {
+    elementContainer = new WContainerWidget(parent);
+    elementContainer->setInline(true);
+    label = new WText(newSub->getName() + ":", elementContainer);
+    dropdown = new WComboBox(elementContainer);
+    subject = newSub;
+    
+    dropdown->addItem("None");
+    dropdown->addItem("Some");
+    dropdown->addItem("Proficient");
+    dropdown->addItem("Expert");
+}
+
+void GUITutor::addSubjectOption(Subject* n) {
+    
+    subjectChoice newChoice(n, _subjectsCont);
+    _subjectsL.push_back(newChoice);
+    
+}
+
+void GUITutor::removeSubjectOption(Subject* subject){
+    
+    // loop over the SubjectChoices and remove the appropriate one
+    for (list<subjectChoice>::iterator it=_subjectsL.begin(); it!=_subjectsL.end(); it++) {
+        if ((*it).subject == subject) {
+            _subjectsCont->removeWidget( (*it).elementContainer );
+            _subjectsL.erase(it);
+        }
+    }
+}
+
+// changes the subject o to subject n
+void GUITutor::changeSubjectOption(Subject* o, Subject* n) {
+    //        bool selected = ( _subjects->currentIndex() == index );
+    //        removeSubjectOption(index);
+    //        addSubjectOption(n, index);
+    //        if (selected) _subjects->setCurrentIndex(index);
+    
+    // search subjectChoice list for this subject
+    list<subjectChoice>::iterator search = std::find_if( _subjectsL.begin(), _subjectsL.end(), [o](subjectChoice x) {
+        return x.subject == o;
+    });
+    
+    if (search != _subjectsL.end()) {
+        (*search).subject = n;
+        (*search).label->setText(n->getName() + ":");
+    }
+    
+    //        for (list<subjectChoice>::iterator it = _subjectL.begin(); it!=_subjectL.end(); it++) {
+    //
+    //        }
+    
 }
 
 void GUISubject::callUpdate() {
