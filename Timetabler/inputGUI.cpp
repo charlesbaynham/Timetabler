@@ -420,13 +420,14 @@ inputGUI::inputGUI(WContainerWidget* parent) :
         
         WContainerWidget* topbox = new WContainerWidget(parent);
         
-        topbox->addWidget(new WText("Previous config detected. Would you like to load it?"));
+        topbox->addWidget(new WText("Previous config detected. Would you like to load it? The timetabler will attempt to minimise alterations."));
         
         WPushButton* usePreviousConfig = new WPushButton("Yes", topbox);
         WPushButton* nusePreviousConfig = new WPushButton("No", topbox);
         
         usePreviousConfig->clicked().connect( boost::bind( &inputGUI::usePrevious, this, "out.txt" ));
-        nusePreviousConfig->clicked().connect(boost::bind<void> ( [=](){ parent->removeWidget(topbox);  }));
+        usePreviousConfig->clicked().connect(boost::bind<void> ( [=](){ parent->removeWidget(topbox);  }));
+        nusePreviousConfig->clicked().connect(boost::bind<void> ( [=](){ parent->removeWidget(topbox);  }));        
     
     }
     

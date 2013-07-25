@@ -262,7 +262,10 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         
         // (0,1) to (0,i) contain time headers. edit
         for (int i=1; i<=SLOTS_IN_DAY; i++) {
-            WText *timeWidget = new WText(to_string(i));
+            WText *timeWidget;
+            
+            timeWidget = new WText("Slot " + to_string(i));
+            
             timeWidget->setHeight(75);
             timeWidget->setStyleClass("blue-box");
             timeWidget->addStyleClass("centerme");
