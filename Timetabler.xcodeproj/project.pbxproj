@@ -40,10 +40,8 @@
 		56E2E575177A1BF900CB720C /* Statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E544177A1BF900CB720C /* Statistics.cpp */; };
 		56E2E576177A1BF900CB720C /* StopCriterias.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E546177A1BF900CB720C /* StopCriterias.cpp */; };
 		56E2E577177A1BF900CB720C /* Threading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E548177A1BF900CB720C /* Threading.cpp */; };
-		56E93993178F06600059B93A /* libwt.35.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93991178F06600059B93A /* libwt.35.dylib */; };
-		56E93994178F06600059B93A /* libwthttp.35.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E93992178F06600059B93A /* libwthttp.35.dylib */; };
-		56E93995178F06AC0059B93A /* libwt.35.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56E93991178F06600059B93A /* libwt.35.dylib */; };
-		56E93996178F06AC0059B93A /* libwthttp.35.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56E93992178F06600059B93A /* libwthttp.35.dylib */; };
+		56EB66E517A45B1B00AB3ADF /* libwthttp.35.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EB66E417A45B1B00AB3ADF /* libwthttp.35.dylib */; };
+		56EB66E717A45B2A00AB3ADF /* libwt.35.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EB66E617A45B2A00AB3ADF /* libwt.35.dylib */; };
 		56F72DFB17817E8300D849AD /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56F72DF917817E8300D849AD /* output.cpp */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +53,13 @@
 			remoteGlobalIDString = 56E2E4D1177A10A400CB720C;
 			remoteInfo = GeneticLibrary;
 		};
+		56EB66EC17A45B4800AB3ADF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 56EB66E817A45B3800AB3ADF /* Wt-3.3.0.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 560E438117A446890007EEF1;
+			remoteInfo = "Wt-3.3.0";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,8 +69,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				56E93995178F06AC0059B93A /* libwt.35.dylib in CopyFiles */,
-				56E93996178F06AC0059B93A /* libwthttp.35.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,8 +194,9 @@
 		56E2E54C177A1BF900CB720C /* GeneticLibrary.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcproj; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcproj"; sourceTree = homedir; };
 		56E2E54D177A1BF900CB720C /* GeneticLibrary.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcxproj; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcxproj"; sourceTree = homedir; };
 		56E2E54E177A1BF900CB720C /* GeneticLibrary.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = GeneticLibrary.vcxproj.filters; path = "Genetic-Algorithms-Library/GeneticLibrary/vs/GeneticLibrary.vcxproj.filters"; sourceTree = homedir; };
-		56E93991178F06600059B93A /* libwt.35.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwt.35.dylib; path = /usr/local/lib/libwt.35.dylib; sourceTree = "<absolute>"; };
-		56E93992178F06600059B93A /* libwthttp.35.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwthttp.35.dylib; path = /usr/local/lib/libwthttp.35.dylib; sourceTree = "<absolute>"; };
+		56EB66E417A45B1B00AB3ADF /* libwthttp.35.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwthttp.35.dylib; path = "../Wt-3.3.0/build/src/http/libwthttp.35.dylib"; sourceTree = "<group>"; };
+		56EB66E617A45B2A00AB3ADF /* libwt.35.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwt.35.dylib; path = "../Wt-3.3.0/build/src/libwt.35.dylib"; sourceTree = "<group>"; };
+		56EB66E817A45B3800AB3ADF /* Wt-3.3.0.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Wt-3.3.0.xcodeproj"; path = "../../Wt-3.3.0/Wt-3.3.0.xcodeproj"; sourceTree = "<group>"; };
 		56F72DF917817E8300D849AD /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = output.cpp; sourceTree = "<group>"; };
 		56F72DFA17817E8300D849AD /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = output.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -206,8 +210,8 @@
 				567E96D417A3CD8F00CDAD4E /* libboost_signals.a in Frameworks */,
 				567E96D517A3CD8F00CDAD4E /* libboost_system.a in Frameworks */,
 				5665F23917839336005C55D8 /* libGeneticLibrary.a in Frameworks */,
-				56E93993178F06600059B93A /* libwt.35.dylib in Frameworks */,
-				56E93994178F06600059B93A /* libwthttp.35.dylib in Frameworks */,
+				56EB66E517A45B1B00AB3ADF /* libwthttp.35.dylib in Frameworks */,
+				56EB66E717A45B2A00AB3ADF /* libwt.35.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +228,7 @@
 		56A9A7581779B4A900C70EE3 = {
 			isa = PBXGroup;
 			children = (
+				56EB66E817A45B3800AB3ADF /* Wt-3.3.0.xcodeproj */,
 				567E96D017A3CD8F00CDAD4E /* libboost_filesystem.a */,
 				567E96D117A3CD8F00CDAD4E /* libboost_signals.a */,
 				567E96D217A3CD8F00CDAD4E /* libboost_system.a */,
@@ -272,8 +277,8 @@
 		56CE096F17831E7200D75072 /* Wt Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				56E93991178F06600059B93A /* libwt.35.dylib */,
-				56E93992178F06600059B93A /* libwthttp.35.dylib */,
+				56EB66E617A45B2A00AB3ADF /* libwt.35.dylib */,
+				56EB66E417A45B1B00AB3ADF /* libwthttp.35.dylib */,
 			);
 			name = "Wt Libraries";
 			path = /Users/charles/Timetabler;
@@ -465,6 +470,13 @@
 			path = "Genetic-Algorithms-Library/GeneticLibrary/vs";
 			sourceTree = homedir;
 		};
+		56EB66E917A45B3800AB3ADF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -479,6 +491,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				56EB66ED17A45B4800AB3ADF /* PBXTargetDependency */,
 				567E96D717A3CF2200CDAD4E /* PBXTargetDependency */,
 			);
 			name = Timetabler;
@@ -509,6 +522,10 @@
 				{
 					ProductGroup = 5665F23617838F11005C55D8 /* Products */;
 					ProjectRef = 56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */;
+				},
+				{
+					ProductGroup = 56EB66E917A45B3800AB3ADF /* Products */;
+					ProjectRef = 56EB66E817A45B3800AB3ADF /* Wt-3.3.0.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -563,6 +580,11 @@
 			isa = PBXTargetDependency;
 			name = GeneticLibrary;
 			targetProxy = 567E96D617A3CF2200CDAD4E /* PBXContainerItemProxy */;
+		};
+		56EB66ED17A45B4800AB3ADF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Wt-3.3.0";
+			targetProxy = 56EB66EC17A45B4800AB3ADF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -640,6 +662,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos\"",
 					"/usr/local/lib/boost-static",
+					"\"$(SRCROOT)/../../Wt-3.3.0/build/src/http\"",
+					"\"$(SRCROOT)/../../Wt-3.3.0/build/src\"",
 				);
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -657,6 +681,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos\"",
 					"/usr/local/lib/boost-static",
+					"\"$(SRCROOT)/../../Wt-3.3.0/build/src/http\"",
+					"\"$(SRCROOT)/../../Wt-3.3.0/build/src\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
@@ -703,6 +729,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Genetic-Algorithms-Library/GeneticLibrary/build/release/gcc_macos\"",
 					"/usr/local/lib/boost-static",
+					"\"$(SRCROOT)/../../Wt-3.3.0/build/src/http\"",
+					"\"$(SRCROOT)/../../Wt-3.3.0/build/src\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
