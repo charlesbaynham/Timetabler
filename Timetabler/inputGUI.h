@@ -21,6 +21,8 @@
 #include <Wt/WPushButton>
 #include <Wt/WComboBox>
 #include <Wt/WSelectionBox>
+#include <Wt/WProgressBar>
+#include <Wt/WFileUpload>
 
 #define PROFICIENCY_NONE 0
 #define PROFICIENCY_SOME 0.33
@@ -53,14 +55,25 @@ class inputGUI : public WObject {
     WContainerWidget* _studentTab;
     WContainerWidget* _subjectTab;
     
+    WFileUpload* _impStudUp;
+    WPushButton* _impStud;
+    WProgressBar* _impStudProg;
+    WText* _impStudOut;
+    
     WContainerWidget* _submitTab;
     WText* _submitLabel;
     
 //    Update the GUI to match the contents of Configuration
     void updateFromConfig();
     
-    // create the "Add new" buttons
+    // create the "Add new" etc buttons
     void createAddButtons();
+    
+    //upload file for student input
+    void uploadStudents();
+    
+    // import students from CSV list
+    void importStudents(string filename);
     
     //    void addTutor();
     //    void removeTutor(int ID);

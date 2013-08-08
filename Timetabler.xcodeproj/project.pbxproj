@@ -45,23 +45,6 @@
 		56F72DFB17817E8300D849AD /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56F72DF917817E8300D849AD /* output.cpp */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		567E96D617A3CF2200CDAD4E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 56E2E4D1177A10A400CB720C;
-			remoteInfo = GeneticLibrary;
-		};
-		56EB66EC17A45B4800AB3ADF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 56EB66E817A45B3800AB3ADF /* Wt-3.3.0.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 560E438117A446890007EEF1;
-			remoteInfo = "Wt-3.3.0";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		56A9A75F1779B4A900C70EE3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -491,8 +474,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				56EB66ED17A45B4800AB3ADF /* PBXTargetDependency */,
-				567E96D717A3CF2200CDAD4E /* PBXTargetDependency */,
 			);
 			name = Timetabler;
 			productName = Timetabler;
@@ -574,19 +555,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		567E96D717A3CF2200CDAD4E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GeneticLibrary;
-			targetProxy = 567E96D617A3CF2200CDAD4E /* PBXContainerItemProxy */;
-		};
-		56EB66ED17A45B4800AB3ADF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Wt-3.3.0";
-			targetProxy = 56EB66EC17A45B4800AB3ADF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		56A9A7681779B4A900C70EE3 /* Debug */ = {

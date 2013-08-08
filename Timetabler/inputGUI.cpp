@@ -479,8 +479,47 @@ void inputGUI::createAddButtons() {
     _studentTab->addWidget(newStud);
     _subjectTab->addWidget(newSubj);
     
+    // Add "imprt students" button and upload area
+    _impStudUp = new WFileUpload(_studentTab);
+    _impStudUp->hide();
+    
+    _impStudProg = new WProgressBar(_studentTab);
+    _impStudUp->setProgressBar(_impStudProg);
+    _impStudProg->hide();
+    
+    _impStudOut = new WText("", _studentTab);
+    
+    _impStud = new WPushButton("Import from CSV list");
+    _impStud->clicked().connect(this, &inputGUI::uploadStudents );
+    _studentTab->addWidget(_impStud);
+    
 }
 
+void inputGUI::uploadStudents() {
+    
+    _impStud->hide();
+    _impStudUp->show();
+    _impStudProg->show();
+    
+    // Upload automatically when the user entered a file.
+    _impStudUp->changed().connect( _impStudUp, &WFileUpload::upload );
+    
+    // React to a successful upload.
+    _impStudUp->uploaded().connect(std::bind([=] () {
+        _impStudOut->setText("File upload is finished.");
+        _impStudUp->disable();
+    }));
+    
+    // React to a file upload problem.
+    _impStudUp->fileTooLarge().connect(std::bind([=] () {
+        _impStudUp->show();
+        _impStudOut->setText("File is too large.");
+    }));
+}
+
+void inputGUI::importStudents(string filename) {
+    ;
+}
 
 void GUITutor::callUpdate() {
     
