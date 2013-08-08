@@ -126,6 +126,9 @@ public:
 //    bool removeTutor( int ID );
 //    inline bool removeTutor( Tutor* t ) { return removeTutor(t->getID()); }
     void removeStudent( Student* s );
+    
+    // Removes blank characters from beginning and end of string
+	static string& TrimString(string& str);
 
 private:
     
@@ -150,9 +153,6 @@ private:
     
 	// Reads one line (key - value pair) from configuration file
 	bool GetConfigBlockLine(ifstream& file, string& key, string& value);
-    
-	// Removes blank characters from beginning and end of string
-	string& TrimString(string& str);
     
     //Processes the slots that tutors and students can't do for each
     void processNotSlots();

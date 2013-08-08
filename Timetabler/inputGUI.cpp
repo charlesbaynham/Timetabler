@@ -270,17 +270,19 @@ void inputGUI::addFilledSubject (Subject* subject) {
     
 }
 
-void inputGUI::addBlankStudent () {
+GUIStudent* inputGUI::addBlankStudent () {
     
-    addFilledStudent(NULL);
+    return addFilledStudent(NULL);
 }
 
-void inputGUI::addFilledStudent (Student* student) {
+GUIStudent* inputGUI::addFilledStudent (Student* student) {
     
     GUIStudent* newStud = new GUIStudent(this, student);
     
     _students.push_back(newStud); // Add new GUI element to list...
     _studentTab->addWidget( (*newStud)() ); // and to the display
+    
+    return newStud;
 }
 
 void inputGUI::changeTutorOptions(Tutor* newtut, Tutor* oldtut) {
@@ -472,7 +474,7 @@ void inputGUI::createAddButtons() {
     WPushButton* newSubj = new WPushButton("Add new");
     
     newTut->clicked().connect( this, &inputGUI::addBlankTutor );
-    newStud->clicked().connect( this, &inputGUI::addBlankStudent );
+    newStud->clicked().connect(std::bind([=] () { this->addBlankStudent(); }));
     newSubj->clicked().connect( this, &inputGUI::addBlankSubject );
     
     _tutorTab->addWidget(newTut);
@@ -501,6 +503,10 @@ void inputGUI::uploadStudents() {
     _impStudUp->show();
     _impStudProg->show();
     
+    
+    //set max filesize
+    _impStudUp->setFileTextSize(256);
+    
     // Upload automatically when the user entered a file.
     _impStudUp->changed().connect( _impStudUp, &WFileUpload::upload );
     
@@ -508,6 +514,7 @@ void inputGUI::uploadStudents() {
     _impStudUp->uploaded().connect(std::bind([=] () {
         _impStudOut->setText("File upload is finished.");
         _impStudUp->disable();
+        importStudents(_impStudUp->spoolFileName());
     }));
     
     // React to a file upload problem.
@@ -517,8 +524,47 @@ void inputGUI::uploadStudents() {
     }));
 }
 
-void inputGUI::importStudents(string filename) {
-    ;
+int inputGUI::importStudents(string filename) {
+    
+  
+    ifstream in(filename.c_str());
+    if (!in.is_open()) return 1;
+    
+    typedef boost::tokenizer< boost::escaped_list_separator<char> > Tokenizer;
+    
+    // setup the CSV parsing: use '/' for escape, ',' ';' TAB or '\r\n' for seperators and ' or " for quotation marks
+    boost::escaped_list_separator<char> sep("\\", ",;\t\r\n", "\"\'");
+    
+    vector< string > vec;
+    list<string> names;
+    string line;
+    
+    while (getline(in,line))
+    {
+        Tokenizer tok(line, sep);
+        
+        copy(tok.begin(), tok.end(), back_inserter(names) );
+        
+#ifdef DEBUG
+        copy(tok.begin(), tok.end(),
+             ostream_iterator<string>(cout, "|"));
+#endif
+        
+    }
+    
+    
+    // add these new students
+    for (list<string>::iterator it = names.begin(); it!=names.end(); it++) {
+        *it = Configuration::TrimString(*it);
+        if (*it != "") {
+            // add the GUI object
+            GUIStudent* newstud = addFilledStudent(new Student(0, Configuration::TrimString(*it), NULL, 2, NULL, NULL));
+            //update the Student object witht he contents of the text fields just created
+            newstud->callUpdate();
+        }
+    }
+    
+    return 0;
 }
 
 void GUITutor::callUpdate() {
@@ -701,6 +747,9 @@ void inputGUI::submit() {
         
         // loop over all the subjects
         for (list<GUISubject*>::iterator it=_subjects.begin(); it!=_subjects.end(); it++) {
+            // update with contents of text boxes
+            (*it)->callUpdate();
+            
             int id = (*it)->getSubject()->getID();
             Subject* subject = (*it)->getSubject();
             
@@ -710,14 +759,15 @@ void inputGUI::submit() {
         
         // loop over all the tutors
         for (list<GUITutor*>::iterator it=_tutors.begin(); it!=_tutors.end(); it++) {
+            // update with contents of text boxes
+            (*it)->callUpdate();
+            
             int id = (*it)->getTutor()->getID();
             Tutor* tutor = (*it)->getTutor();
             
             tutors[id] = tutor;
             
 #ifdef DEBUG
-            Tutor* debugtest = tutors[id];
-            
             static hash_map<int, bool> test;
             if (it==_tutors.begin()) test.clear();
             if (test[id]==true) {
@@ -730,6 +780,9 @@ void inputGUI::submit() {
         
         // loop over all the students
         for (list<GUIStudent*>::iterator it=_students.begin(); it!=_students.end(); it++) {
+            // update with contents of text boxes
+            (*it)->callUpdate();
+            
             int id = (*it)->getStudent()->getID();
             Student* student = (*it)->getStudent();
             
@@ -747,7 +800,6 @@ void inputGUI::submit() {
             else test[id]=true;
 #endif
         }
-        
         
         Configuration::getInstance().setup( tutors, subjects, students );
         

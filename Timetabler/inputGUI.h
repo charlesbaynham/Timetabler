@@ -24,6 +24,8 @@
 #include <Wt/WProgressBar>
 #include <Wt/WFileUpload>
 
+#include <boost/tokenizer.hpp>
+
 #define PROFICIENCY_NONE 0
 #define PROFICIENCY_SOME 0.33
 #define PROFICIENCY_PROFICIENT 0.66
@@ -73,7 +75,7 @@ class inputGUI : public WObject {
     void uploadStudents();
     
     // import students from CSV list
-    void importStudents(string filename);
+    int importStudents(string filename);
     
     //    void addTutor();
     //    void removeTutor(int ID);
@@ -99,12 +101,12 @@ public:
 //        parent->addWidget(_menu); }
     
     // Add GUI elements for data entry
-    void addBlankStudent();
+    GUIStudent* addBlankStudent();
     void addBlankSubject();
     void addBlankTutor();
     
     // Add populated GUI elements for data modification
-    void addFilledStudent(Student* student);
+    GUIStudent* addFilledStudent(Student* student);
     void addFilledSubject(Subject* subject);
     void addFilledTutor(Tutor* tutor);
 //    const string& name, list<Subject*> subjects, list<int> notTimes);
