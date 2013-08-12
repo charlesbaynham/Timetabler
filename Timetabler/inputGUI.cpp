@@ -9,7 +9,10 @@
 #include "inputGUI.h"
 #include <boost/lexical_cast.hpp>
 
+// cheat to get file_copy to work:
+#define BOOST_NO_CXX11_SCOPED_ENUMS
 #include <boost/filesystem.hpp>
+
 #include <unordered_set>
 
 
@@ -417,20 +420,51 @@ inputGUI::inputGUI(WContainerWidget* parent) :
     _studentTab(new WContainerWidget()),
     _submitTab(new WContainerWidget())
 {
+    string filename = "out.ttcfg";
     // If previous config file is detected, ask user if they want to use it
-    if (boost::filesystem::exists("out.txt") ) {
+    if (boost::filesystem::exists(filename) ) {
         
         WContainerWidget* topbox = new WContainerWidget(parent);
         
-        topbox->addWidget(new WText("Previous config detected. Would you like to load it? The timetabler will attempt to minimise alterations."));
+        topbox->addWidget(new WText("Previous config detected. Would you like to load it? The timetabler will attempt to minimise alterations. "));
         
         WPushButton* usePreviousConfig = new WPushButton("Yes", topbox);
         WPushButton* nusePreviousConfig = new WPushButton("No", topbox);
+        topbox->addWidget(new WText("Upload other:"));
+        WFileUpload* useOther = new WFileUpload(topbox);
+        WPushButton* erase = new WPushButton("Erase previous", topbox);
         
-        usePreviousConfig->clicked().connect( boost::bind( &inputGUI::usePrevious, this, "out.txt" ));
+        useOther->uploaded().connect( boost::bind<void> ( [=](){
+            useOther->disable();
+            this->usePrevious(useOther->spoolFileName());
+            boost::filesystem::copy_file(useOther->spoolFileName(), filename, boost::filesystem::copy_option::overwrite_if_exists);
+            parent->removeWidget(topbox);
+        }));
+        useOther->changed().connect( boost::bind<void> ( [=]() { useOther->upload(); }));
+        
+        usePreviousConfig->clicked().connect( boost::bind( &inputGUI::usePrevious, this, filename ));
         usePreviousConfig->clicked().connect(boost::bind<void> ( [=](){ parent->removeWidget(topbox);  }));
-        nusePreviousConfig->clicked().connect(boost::bind<void> ( [=](){ parent->removeWidget(topbox);  }));        
+        nusePreviousConfig->clicked().connect(boost::bind<void> ( [=](){ parent->removeWidget(topbox);  }));
+        erase->clicked().connect(boost::bind<void> ( [=](){ remove(filename.c_str()); parent->removeWidget(topbox);  }));
     
+    } else {
+        WContainerWidget* topbox = new WContainerWidget(parent);
+        
+        topbox->addWidget(new WText("Would you like to load a previous configuration? The timetabler will attempt to minimise alterations. "));
+        
+        WFileUpload* useOther = new WFileUpload(topbox);
+        WPushButton* nusePreviousConfig = new WPushButton("No", topbox);
+
+        
+        useOther->uploaded().connect( boost::bind<void> ( [=](){
+            useOther->disable();
+            this->usePrevious(useOther->spoolFileName());
+            boost::filesystem::copy_file(useOther->spoolFileName(), filename, boost::filesystem::copy_option::overwrite_if_exists);
+            parent->removeWidget(topbox);
+        }));
+        useOther->changed().connect( boost::bind<void> ( [=]() { useOther->upload(); }));
+        
+        nusePreviousConfig->clicked().connect(boost::bind<void> ( [=](){ parent->removeWidget(topbox);  }));
     }
     
     // create a menu
