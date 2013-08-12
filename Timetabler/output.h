@@ -123,7 +123,7 @@ class outputSolution {
 public:
     
     static inline outputSolution getInstance() { return _instance; }
-    void operator() (char * filename, const GaChromosome& chromo, bool append=false);
+    void operator() (string filename, const GaChromosome& chromo, bool append=false);
     
 };
 

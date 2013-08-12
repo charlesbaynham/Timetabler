@@ -13,7 +13,7 @@ outputSolution outputSolution::_instance;
 
 using namespace Chromosome;
 
-void outputSolution::operator() (char * filename, const GaChromosome& chromo, bool append) {
+void outputSolution::operator() (string filename, const GaChromosome& chromo, bool append) {
     
     const Chromosone* c = dynamic_cast<const Chromosone*>(&chromo);
     

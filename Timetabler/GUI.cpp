@@ -244,16 +244,20 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
         setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
         
-        //debug edit allow user to choose filename / download it
         
-        //append best chromosome to output file
-        saveConfig->clicked().connect( std::bind( [] () {
+        string filename = "out.ttcfg";
+        // save config and best chromosome to the output file
+        saveConfig->clicked().connect( std::bind( [this, filename] () {
             GaChromosomePtr result;
-            char* filename = (char*)"out.txt";
-            Configuration::getInstance().saveConfig(filename);
+            Configuration::getInstance().saveConfig(filename.c_str());
             TimetablerInst::getInstance()->getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
-            ( outputSolution::getInstance() )( filename, *result, true );
+            ( outputSolution::getInstance() )( filename , *result, true );
+            
+//            string path = this->internalPath();
+//            this->setInternalPath("/" + filename);
+//            this->setInternalPath(path);
         }));
+        saveConfig->setLink("/"+filename);
         
         _stopButton->clicked().connect( this, &TimetablerWebApplication::toggleState );
         
