@@ -49,6 +49,7 @@ void outputSolution::operator() (char * filename, const GaChromosome& chromo, bo
     out.close();
 }
 
+// output the solution as a CSV (not the config)
 void outputCSV::operator()(char *filename, const GaChromosome& chromo, bool detailed=false) {
     
     const Chromosone* c = dynamic_cast<const Chromosone*>(&chromo);
@@ -75,12 +76,12 @@ void outputCSV::operator()(char *filename, const GaChromosome& chromo, bool deta
     slotList.sort();
     
     //output into CSV
-    fprintf(f, "Time,\tStudent,\tTutor\n");
+    fprintf(f, "Slot,Student,Tutor\n");
     for (list<timetableSlot>::iterator it = slotList.begin(); it != slotList.end(); it++) {
         if (detailed)
-            fprintf(f, "%i\t\t%s (%s)\t\t%s (%s)\n", (*it).getTime(), (*it).getStudentName().c_str(), (*it).getStudentSubject().c_str(), (*it).getTutorName().c_str(), (*it).getTutorSubjects().c_str() );
+            fprintf(f, "%i,\"%s (%s)\",\"%s (%s)\"\n", (*it).getTime(), (*it).getStudentName().c_str(), (*it).getStudentSubject().c_str(), (*it).getTutorName().c_str(), (*it).getTutorSubjects().c_str() );
         else
-            fprintf(f, "%i,\t%s,\t%s\n", (*it).getTime(), (*it).getStudentName().c_str(), (*it).getTutorName().c_str());
+            fprintf(f, "%i,\"%s\",\"%s\"\n", (*it).getTime(), (*it).getStudentName().c_str(), (*it).getTutorName().c_str());
     }
     
     fclose(f);

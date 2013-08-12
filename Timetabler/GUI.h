@@ -25,6 +25,7 @@
 #include <Wt/WMenu>
 #include <Wt/WMenuItem>
 #include <Wt/WTabWidget>
+#include <Wt/WAnchor>
 
 #include "output.h"
 #include "TimetablerInst.h"
@@ -64,6 +65,7 @@ public:
 private:
     WPushButton *_button;
     WPushButton *_stopButton;
+    WPushButton *_download;
     WText* _greeting;
     WTimer* _timer;
     WText* _status;

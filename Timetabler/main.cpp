@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     params[2] = (char*)"0.0.0.0";
     params[3] = (char*)"--http-port";
     params[4] = (char*)"8080";
-    params[5] = (char*)"--docroot=.;.,/style.css,/resources";
+    params[5] = (char*)"--docroot=.;.,/style.css,/resources,/solution.csv,/favicon.ico";
     
     int num = 6;
     

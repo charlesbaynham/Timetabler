@@ -127,6 +127,8 @@ public:
     
 };
 
+
+// output the timetable as a CSV file
 class outputCSV {
     static outputCSV _instance;
     

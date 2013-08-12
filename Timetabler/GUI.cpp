@@ -24,15 +24,16 @@ void TimetablerWebApplication::handlePathChange()
     string path = app->internalPath();
     if (path == "/output") {
         root()->clear();
-        if (Configuration::getInstance().isEmpty()) { // We haven't yet made the configuration
+//        if (Configuration::getInstance().isEmpty()) { // We haven't yet made the configuration
             root()->addWidget(new WText("Error: this page is not meant for direct access. Redirecting to input..."));
             app->setInternalPath("/", true);
-        }
-        else
-            startSolve();
+//        }
+//        else
+//            startSolve();
     }
     else if(path == "/") pageInput();
     else if( boost::starts_with(path, "/input") ) app->setInternalPath("/", true); // redirect to input page if using old input path
+//    else if( path == "/solution.csv" ) ;
     else app->setInternalPath("/", true); // Redirect to main page if page not found
     
     
@@ -124,6 +125,7 @@ void TimetablerWebApplication::refreshStats() {
         if (optimal)
             _bestFitness->setText( "Optimal solution found in "+to_string(generation)+" generations!" );
         _stopButton->setText("Resume");
+        _download->enable();
 #if DEBUG
         cerr<<"Stopping timer on algorithm completion" << endl;
 #endif
@@ -204,8 +206,11 @@ void TimetablerWebApplication::pageReady() {
 
 void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
 {
-    // If launched in tutor/student mode, save this for next time
-    _tutors = tutors;
+    // If launched in tutor/student mode, save this for next time and rebuild the table
+    if (_tutors != tutors ) {
+        _tutors = tutors;
+        _tableBuilt = false;
+    }
     
     int entries;
     
@@ -234,10 +239,11 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         WPushButton *setStudent=new WPushButton("Student mode");
         WPushButton *saveConfig=new WPushButton("Save configuration");
         _stopButton = new WPushButton("Stop");
+        _download = new WPushButton("Download timetable");
         
         setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
         setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
-//        saveConfig->clicked().connect( boost::bind(&Configuration::saveConfig, Configuration::getInstance(), "out.txt" ) );
+        
         //debug edit allow user to choose filename / download it
         
         //append best chromosome to output file
@@ -248,15 +254,23 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
             TimetablerInst::getInstance()->getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
             ( outputSolution::getInstance() )( filename, *result, true );
         }));
-
         
         _stopButton->clicked().connect( this, &TimetablerWebApplication::toggleState );
+        
+        _download->setLink("/solution.csv");
+        _download->disable();
+        
+        if ( TimetablerInst::getInstance()->getAlgorithm()->GetState() & GAS_STOPPED ) {
+            _download->enable();
+            _stopButton->setText("Resume");
+        }
         
         buttons->addWidget(_bestFitness);
         buttons->addWidget(setTutor);
         buttons->addWidget(setStudent);
         buttons->addWidget(saveConfig);
         buttons->addWidget(_stopButton);
+        buttons->addWidget(_download);
         
         grid->addWidget(toggleButtons, 0, 0);
         
@@ -298,6 +312,8 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
                 nameWidget->resize(120, 75);
             }
         }
+        
+        _tableBuilt = true;
     } else {
         
         grid = dynamic_cast<WGridLayout*>( container->layout() );
@@ -368,6 +384,7 @@ void TimetablerWebApplication::toggleState() {
         cerr << "Stopping. State is now " << TimetablerInst::getInstance()->getAlgorithm()->GetState() << endl;
 #endif
         _timer->stop();
+        _download->enable();
         _stopButton->setText("Resume");
     } else {
         TimetablerInst::getInstance()->getAlgorithm()->StartSolving(true);
@@ -375,7 +392,7 @@ void TimetablerWebApplication::toggleState() {
 #ifdef DEBUG
         cerr << "Resuming. State is now " << TimetablerInst::getInstance()->getAlgorithm()->GetState() << endl;
 #endif
-
+        _download->disable();
         _stopButton->setText("Stop");
     }
 
