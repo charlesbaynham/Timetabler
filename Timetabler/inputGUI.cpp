@@ -37,29 +37,10 @@ GUITutor::GUITutor(inputGUI* parent, Tutor* tutor) :
     _name->setText(_tutor->getName());
     
     _subjectsLabel = new WText("Subjects:",_visOutput);
-//    _subjects = new WSelectionBox(_visOutput);
-//        //loop over the index and populate the new selection box
-//        vector<Subject*> subjectIndex = _parent->getSubjectIndex();
-//        for (vector<Subject*>::iterator it = subjectIndex.begin(); it != subjectIndex.end(); it++)
-//            _subjects->addItem( (*it)->getName() );
-//        //set the selection box to allow multiple selections
-//        _subjects->setSelectionMode(SelectionMode::ExtendedSelection);
-//    
-//    
-//    // select any subjects that are in map<Subject*, float> subjects
-//    set<int> selectedSubj;
-//    map<Subject*, float> subjects = _tutor->getSubjects();
-//    for (int i=0; i < subjectIndex.size(); i++) {
-//        Subject* searchSubj = subjectIndex[i];
-//        
-//        if (subjects.find(searchSubj) != subjects.end() )
-//            selectedSubj.insert(i);
-//    }
-//    _subjects->setSelectedIndexes(selectedSubj);
-
     
     _subjectsCont = new WContainerWidget(_visOutput);
     _subjectsCont->setInline(true);
+    _subjectsCont->setStyleClass("subjectsCont");
     
     //loop over the index and populate the list
     vector<Subject*> subjectIndex = _parent->getSubjectIndex();
@@ -433,7 +414,7 @@ inputGUI::inputGUI(WContainerWidget* parent) :
         
         WPushButton* usePreviousConfig = new WPushButton("Yes", topbox);
         WPushButton* nusePreviousConfig = new WPushButton("No", topbox);
-        topbox->addWidget(new WText("Upload other:"));
+        topbox->addWidget(new WText("  Upload other:"));
         WFileUpload* useOther = new WFileUpload(topbox);
         WPushButton* erase = new WPushButton("Erase previous", topbox);
         
@@ -475,15 +456,13 @@ inputGUI::inputGUI(WContainerWidget* parent) :
     
 //    _menu->setInternalPathEnabled();
 //    _menu->setInternalBasePath("/input");
-    
-//    //Add tabs:
-//    _menu->addTab( new WText("intro"), "Introduction");
-//    _menu->addTab( new WText("Not yet available"), "Download", WTabWidget::LoadPolicy::PreLoading);
-    
+        
     // Add the tabs to the menu
     _menu->addTab(_subjectTab, "Subjects");
     _menu->addTab(_tutorTab, "Tutors");
     _menu->addTab(_studentTab, "Students");
+    
+    _menu->setStyleClass("menu");
 
 // Submit tab: 
     _menu->addTab(_submitTab, "Submit");
@@ -740,6 +719,7 @@ void GUITutor::callUpdate() {
 subjectChoice::subjectChoice(Subject* newSub, WContainerWidget* parent) {
     elementContainer = new WContainerWidget(parent);
     elementContainer->setInline(true);
+    elementContainer->setStyleClass("subjectChoice");
     label = new WText(newSub->getName() + ":", elementContainer);
     dropdown = new WComboBox(elementContainer);
     subject = newSub;

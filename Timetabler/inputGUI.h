@@ -155,7 +155,7 @@ protected:
     virtual void addDeleteButton()=0;
     
 public:
-    inline GUIelement(inputGUI* parent) : _parent(parent) { _visOutput = new WContainerWidget(); }
+    inline GUIelement(inputGUI* parent) : _parent(parent) { _visOutput = new WContainerWidget(); _visOutput->setStyleClass("GUIelement"); }
     
     // The overloaded () function returns the Container Widget that is displayed and contains the other widgets
     WContainerWidget* operator() () { return _visOutput; }
@@ -183,13 +183,10 @@ class GUITutor : public GUIelement {
     WText* _nameLabel;
     WSelectionBox* _subjects;
     WText* _subjectsLabel;
-    // debug
+
     WContainerWidget* _subjectsCont;
     
-    
-    
     list< subjectChoice > _subjectsL;
-    //end debug
     
     WSelectionBox* _notSlots;
     WText* _notLabel;
