@@ -14,6 +14,7 @@
 using namespace std;
 
 class Subject {
+    static int _maxID;
     int _ID;
     string _name;
     

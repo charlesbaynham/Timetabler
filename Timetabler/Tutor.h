@@ -26,7 +26,7 @@ class Tutor {
     
     list<int> _notTimes; //List of times to avoid, from 0 to SLOTS_IN_DAY-1
     list<int> _notSlots; //List of slots that the above times preclude
-    //static int _nextID; // Next ID to assign
+    static int _nextID; // Next ID to assign if one is not given
     bool _slotsProcessed;
     
 public:

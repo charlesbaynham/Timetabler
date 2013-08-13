@@ -38,6 +38,10 @@ class GUITutor;
 class GUIStudent;
 class GUISubject;
 
+#define TYPE_SUBJECT 1
+#define TYPE_TUTOR 2
+#define TYPE_STUDENT 3
+
 
 class inputGUI : public WObject {
     
@@ -56,12 +60,7 @@ class inputGUI : public WObject {
     WContainerWidget* _tutorTab;
     WContainerWidget* _studentTab;
     WContainerWidget* _subjectTab;
-    
-    WFileUpload* _impStudUp;
-    WPushButton* _impStud;
-    WProgressBar* _impStudProg;
-    WText* _impStudOut;
-    
+        
     WContainerWidget* _submitTab;
     WText* _submitLabel;
     
@@ -71,11 +70,16 @@ class inputGUI : public WObject {
     // create the "Add new" etc buttons
     void createAddButtons();
     
-    //upload file for student input
-    void uploadStudents();
+    // Bind correct function to the CSV upload buttons
+    void setupUpload(WPushButton* button, WFileUpload* upload, WProgressBar* prog, WText* out, int type );
     
     // import students from CSV list
     int importStudents(string filename);
+    int importSubjects(string filename);
+    int importTutors(string filename);
+    
+    // parse a CSV for a list of names
+    list<string> parseCSV(string filename);
     
     //    void addTutor();
     //    void removeTutor(int ID);
@@ -107,8 +111,8 @@ public:
     
     // Add populated GUI elements for data modification
     GUIStudent* addFilledStudent(Student* student);
-    void addFilledSubject(Subject* subject);
-    void addFilledTutor(Tutor* tutor);
+    GUISubject* addFilledSubject(Subject* subject);
+    GUITutor* addFilledTutor(Tutor* tutor);
 //    const string& name, list<Subject*> subjects, list<int> notTimes);
     
     //remove t from the visible _tutorTab and from the list

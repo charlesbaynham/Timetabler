@@ -9,7 +9,7 @@
 #include "Tutor.h"
 #include "TTChromosone.h"
 
-//int Tutor::_nextID = 0;
+int Tutor::_nextID = 0;
 
 Tutor::Tutor(int id, const string& name, map<Subject*, float> subjects, list<int> notTimes) :
 _ID(id),
@@ -17,6 +17,8 @@ _name(name),
 _subjects(subjects),
 _notTimes(notTimes) {
     _slotsProcessed = false;
+    if (id==0) _ID = _nextID++;
+    else if (id >= _nextID) _nextID = id+1;
 }
 
 

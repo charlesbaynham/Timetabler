@@ -235,7 +235,7 @@ void inputGUI::addBlankTutor () {
     addFilledTutor(NULL);
 }
 
-void inputGUI::addFilledTutor (Tutor* tutor) {
+GUITutor* inputGUI::addFilledTutor (Tutor* tutor) {
     GUITutor* newTut = new GUITutor(this, tutor);
     _tutors.push_back(newTut); // Add new GUI element to list...
     _tutorTab->addWidget( (*newTut)() ); // and to the display
@@ -247,6 +247,8 @@ void inputGUI::addFilledTutor (Tutor* tutor) {
     for ( list<GUIStudent*>::iterator it = _students.begin(); it != _students.end(); it++) {
         (*it)->addTutorOption(newTut->getTutor());
     }
+    
+    return newTut;
 }
 
 void inputGUI::addBlankSubject () {
@@ -255,7 +257,7 @@ void inputGUI::addBlankSubject () {
     
 }
 
-void inputGUI::addFilledSubject (Subject* subject) {
+GUISubject* inputGUI::addFilledSubject (Subject* subject) {
     GUISubject* newSubj = new GUISubject(this, subject);
     _subjects.push_back(newSubj); // Add new GUI element to list...
     _subjectTab->addWidget( (*newSubj)() ); // and to the display
@@ -271,6 +273,7 @@ void inputGUI::addFilledSubject (Subject* subject) {
         (*it)->addSubjectOption(newSubj->getSubject() );
     }
     
+    return newSubj;
 }
 
 GUIStudent* inputGUI::addBlankStudent () {
@@ -515,54 +518,142 @@ void inputGUI::createAddButtons() {
     _studentTab->addWidget(newStud);
     _subjectTab->addWidget(newSubj);
     
-    // Add "imprt students" button and upload area
-    _impStudUp = new WFileUpload(_studentTab);
-    _impStudUp->hide();
+    // Add "import from CSV" buttons and upload areas :
     
-    _impStudProg = new WProgressBar(_studentTab);
-    _impStudUp->setProgressBar(_impStudProg);
-    _impStudProg->hide();
+    // Students
+    WFileUpload* impStudUp = new WFileUpload(_studentTab);
+    impStudUp->hide();
     
-    _impStudOut = new WText("", _studentTab);
+    WProgressBar* impStudProg = new WProgressBar(_studentTab);
+    impStudUp->setProgressBar(impStudProg);
+    impStudProg->hide();
     
-    _impStud = new WPushButton("Import from CSV list");
-    _impStud->clicked().connect(this, &inputGUI::uploadStudents );
-    _studentTab->addWidget(_impStud);
+    WText* impStudOut = new WText("", _studentTab);
+    
+    WPushButton* impStud = new WPushButton("Import from CSV list");
+    impStud->clicked().connect(boost::bind( &inputGUI::setupUpload, this, impStud, impStudUp, impStudProg, impStudOut, TYPE_STUDENT ) );
+    _studentTab->addWidget(impStud);
+    
+    // Tutors
+    WFileUpload* impTutUp = new WFileUpload(_tutorTab);
+    impTutUp->hide();
+    
+    WProgressBar* impTutProg = new WProgressBar(_tutorTab);
+    impTutUp->setProgressBar(impTutProg);
+    impTutProg->hide();
+    
+    WText* impTutOut = new WText("", _tutorTab);
+    
+    WPushButton* impTut = new WPushButton("Import from CSV list");
+    impTut->clicked().connect(boost::bind( &inputGUI::setupUpload, this, impTut, impTutUp, impTutProg, impTutOut, TYPE_TUTOR ) );
+    _tutorTab->addWidget(impTut);
+    
+    // Subjects
+    WFileUpload* impSubUp = new WFileUpload(_subjectTab);
+    impSubUp->hide();
+    
+    WProgressBar* impSubProg = new WProgressBar(_subjectTab);
+    impSubUp->setProgressBar(impSubProg);
+    impSubProg->hide();
+    
+    WText* impSubOut = new WText("", _subjectTab);
+    
+    WPushButton* impSub = new WPushButton("Import from CSV list");
+    impSub->clicked().connect(boost::bind( &inputGUI::setupUpload, this, impSub, impSubUp, impSubProg, impSubOut, TYPE_SUBJECT ) );
+    _subjectTab->addWidget(impSub);
     
 }
 
-void inputGUI::uploadStudents() {
+void inputGUI::setupUpload(WPushButton* button, WFileUpload* upload, WProgressBar* prog, WText* out, int type ) {
     
-    _impStud->hide();
-    _impStudUp->show();
-    _impStudProg->show();
-    
+    button->hide();
+    upload->show();
+    prog->show();
     
     //set max filesize
-    _impStudUp->setFileTextSize(256);
+    upload->setFileTextSize(256);
     
     // Upload automatically when the user entered a file.
-    _impStudUp->changed().connect( _impStudUp, &WFileUpload::upload );
+    upload->changed().connect( upload, &WFileUpload::upload );
     
     // React to a successful upload.
-    _impStudUp->uploaded().connect(std::bind([=] () {
-        _impStudOut->setText("File upload is finished.");
-        _impStudUp->disable();
-        importStudents(_impStudUp->spoolFileName());
+    upload->uploaded().connect(std::bind([=] () {
+        out->setText("File upload is finished.");
+        upload->disable();
     }));
     
+    if (type == 1) upload->uploaded().connect(std::bind([=] () { this->importSubjects(upload->spoolFileName()); }));
+    else if (type == 2) upload->uploaded().connect(std::bind([=] () { this->importTutors(upload->spoolFileName()); }));
+    else if (type == 3) upload->uploaded().connect(std::bind([=] () { this->importStudents(upload->spoolFileName()); }));
+    
+    
     // React to a file upload problem.
-    _impStudUp->fileTooLarge().connect(std::bind([=] () {
-        _impStudUp->show();
-        _impStudOut->setText("File is too large.");
+    upload->fileTooLarge().connect(std::bind([=] () {
+        upload->show();
+        out->setText("File is too large.");
     }));
+    
 }
 
 int inputGUI::importStudents(string filename) {
     
-  
+    list<string> names = parseCSV(filename);
+    
+    // add these new students
+    for (list<string>::iterator it = names.begin(); it!=names.end(); it++) {
+        *it = Configuration::TrimString(*it);
+        if (*it != "") {
+            // add the GUI object
+            GUIStudent* newstud = addFilledStudent(new Student(0, Configuration::TrimString(*it), NULL, 2, NULL, NULL));
+            //update the Student object witht he contents of the text fields just created
+            newstud->callUpdate();
+        }
+    }
+    
+    return 0;
+}
+
+int inputGUI::importTutors(string filename) {
+    
+    list<string> names = parseCSV(filename);
+    
+    // add these new tutors
+    for (list<string>::iterator it = names.begin(); it!=names.end(); it++) {
+        *it = Configuration::TrimString(*it);
+        if (*it != "") {
+            // add the GUI object
+            map<Subject*, float> empty;
+            GUITutor* newtut = addFilledTutor(new Tutor(0, *it, empty, NULL));
+            //update the Student object witht he contents of the text fields just created
+            newtut->callUpdate();
+        }
+    }
+    
+    return 0;
+}
+
+int inputGUI::importSubjects(string filename) {
+    
+    list<string> names = parseCSV(filename);
+    
+    // add these new subjects
+    for (list<string>::iterator it = names.begin(); it!=names.end(); it++) {
+        *it = Configuration::TrimString(*it);
+        if (*it != "") {
+            // add the GUI object
+            GUISubject* newsubj = addFilledSubject(new Subject(0, *it));
+            //update the Student object witht he contents of the text fields just created
+            newsubj->callUpdate();
+        }
+    }
+    
+    return 0;
+}
+
+list<string> inputGUI::parseCSV(string filename) {
+    
     ifstream in(filename.c_str());
-    if (!in.is_open()) return 1;
+    if (!in.is_open()) return NULL;
     
     typedef boost::tokenizer< boost::escaped_list_separator<char> > Tokenizer;
     
@@ -586,19 +677,8 @@ int inputGUI::importStudents(string filename) {
         
     }
     
+    return names;
     
-    // add these new students
-    for (list<string>::iterator it = names.begin(); it!=names.end(); it++) {
-        *it = Configuration::TrimString(*it);
-        if (*it != "") {
-            // add the GUI object
-            GUIStudent* newstud = addFilledStudent(new Student(0, Configuration::TrimString(*it), NULL, 2, NULL, NULL));
-            //update the Student object witht he contents of the text fields just created
-            newstud->callUpdate();
-        }
-    }
-    
-    return 0;
 }
 
 void GUITutor::callUpdate() {
