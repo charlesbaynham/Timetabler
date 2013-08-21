@@ -84,9 +84,26 @@ public:
         hash_map<int, Tutor*>::iterator it = _tutors.find(ID);
         return it != _tutors.end() ? (*it).second : NULL; // If the ID exists in the map, iterate to it and return it
     }
+    inline Tutor* getTutor(string name) {
+        // If the name exists in the map, iterate to it and return it
+        for (hash_map<int, Tutor*>::iterator it = _tutors.begin(); it!=_tutors.end(); it++) {
+            if ( ((*it).second)->getName() == name) return (*it).second;
+        }
+        
+        return NULL;
+    }
     inline Subject* getSubject(int ID) {
         hash_map<int, Subject*>::iterator it = _subjects.find(ID);
         return it != _subjects.end() ? (*it).second : NULL; // If the ID exists in the map, iterate to it and return it
+    }
+    inline Subject* getSubject(string name) {
+        
+        // If the name exists in the map, iterate to it and return it
+        for (hash_map<int, Subject*>::iterator it = _subjects.begin(); it!=_subjects.end(); it++) {
+            if ( ((*it).second)->getName() == name) return (*it).second;
+        }
+        
+        return NULL;
     }
     
     //Return the whole list of student pointers:

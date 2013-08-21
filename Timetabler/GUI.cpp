@@ -121,7 +121,7 @@ void TimetablerWebApplication::refreshStats() {
 #endif
     if (state & GaAlgorithmState::GAS_STOPPED ) {// the algorithm has found a solution / met its criteria
         _timer->stop();
-        _bestFitness->setText( "Non-optimal solution found after " + to_string(generation) + " gens:\nFitness "+to_string(100*bestFitness)+"%" );
+        _bestFitness->setText( "Non-optimal solution found after " + to_string(generation) + " gens: Fitness "+to_string(100*bestFitness)+"%" );
         _stopButton->setText("Try harder");
         
         if (optimal) {

@@ -81,6 +81,14 @@ class inputGUI : public WObject {
     // parse a CSV for a list of names
     list<string> parseCSV(string filename);
     
+    // parse a CSV for a list of Tutors
+    list<Tutor*> parseCSVTutor(string filename);
+    
+    // parse a CSV for a list of Students
+    list<Student*> parseCSVStudent(string filename);
+
+    
+    
     //    void addTutor();
     //    void removeTutor(int ID);
     //
@@ -129,7 +137,8 @@ public:
     vector<Subject*> getSubjectIndex() { return _subjectIndex; }
     
     // process all the input data and use it to fill out Configuration and start the solution
-    void submit();
+    void submit(bool noSolve);
+    void submit() { submit(false); }
     
     
 //    // Set the menu to the arg and add the rendered Tutor, Student and Subject tabs

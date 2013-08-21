@@ -24,6 +24,7 @@ GUITutor::GUITutor(inputGUI* parent, Tutor* tutor) :
 {    
     if (tutor != NULL) {
         _ID = tutor->getID();
+        _nextID++;
         _tutor = tutor;
     }
     else {
@@ -576,15 +577,17 @@ void inputGUI::setupUpload(WPushButton* button, WFileUpload* upload, WProgressBa
 
 int inputGUI::importStudents(string filename) {
     
-    list<string> names = parseCSV(filename);
+    submit(true);
+    
+//    list<string> names = parseCSV(filename);
+    list<Student*> students = parseCSVStudent(filename);
     
     // add these new students
-    for (list<string>::iterator it = names.begin(); it!=names.end(); it++) {
-        *it = Configuration::TrimString(*it);
-        if (*it != "") {
+    for (list<Student*>::iterator it = students.begin(); it!=students.end(); it++) {
+        if (*it != NULL) {
             // add the GUI object
-            GUIStudent* newstud = addFilledStudent(new Student(0, Configuration::TrimString(*it), NULL, 2, NULL, NULL));
-            //update the Student object witht he contents of the text fields just created
+            GUIStudent* newstud = addFilledStudent(*it);
+            //update the Student object with the contents of the student just created
             newstud->callUpdate();
         }
     }
@@ -594,16 +597,19 @@ int inputGUI::importStudents(string filename) {
 
 int inputGUI::importTutors(string filename) {
     
-    list<string> names = parseCSV(filename);
+    submit(true);
+    
+//    list<string> names = parseCSV(filename);
+    list<Tutor*> tutors = parseCSVTutor(filename);
+    
     
     // add these new tutors
-    for (list<string>::iterator it = names.begin(); it!=names.end(); it++) {
-        *it = Configuration::TrimString(*it);
-        if (*it != "") {
+    for (list<Tutor*>::iterator it = tutors.begin(); it!=tutors.end(); it++) {
+
+        if (*it != NULL) {
             // add the GUI object
-            map<Subject*, float> empty;
-            GUITutor* newtut = addFilledTutor(new Tutor(0, *it, empty, NULL));
-            //update the Student object witht he contents of the text fields just created
+            GUITutor* newtut = addFilledTutor(*it);
+            //update the Student object with the contents of the tutor just added
             newtut->callUpdate();
         }
     }
@@ -612,6 +618,8 @@ int inputGUI::importTutors(string filename) {
 }
 
 int inputGUI::importSubjects(string filename) {
+
+    submit(true);
     
     list<string> names = parseCSV(filename);
     
@@ -657,7 +665,219 @@ list<string> inputGUI::parseCSV(string filename) {
     }
     
     return names;
+}
+
+list<Tutor*> inputGUI::parseCSVTutor(string filename) {
     
+    ifstream in(filename.c_str());
+    if (!in.is_open()) return NULL;
+    
+    typedef boost::tokenizer< boost::escaped_list_separator<char> > Tokenizer;
+    
+    // setup the CSV parsing: use '/' for escape, ';' or TAB for seperators and ' or " for quotation marks
+    boost::escaped_list_separator<char> sep("\\", ";\t", "\"\'");
+    
+    // for lists
+    boost::escaped_list_separator<char> sepComma("\\", ",", "\"\'");
+    
+    vector< string > vec;
+    list<Tutor*> tutors;
+    string line;
+    
+    while (getline(in,line))
+    {
+        Tutor* n;
+        
+        Tokenizer tok(line, sep);
+        
+        //         get the tutor object, formatted as:
+        //         Name ; Subject1,prof1, subject2, prof2... ; Unavailable t1, t2, t3
+        //        eg
+        //         Charles ; Physics,100,Maths,75,"Fluid Mechanics",75 ; 0,1,2,3
+        
+        Tokenizer::iterator it = tok.begin();
+        
+        string name;
+        string subjectsStr;
+        string timesStr;
+        list<int> times;
+        
+        map<Subject*, float> empty;
+        if (it != tok.end()) {
+            name = *it;
+            n = new Tutor(0, Configuration::TrimString(name), empty, NULL);
+            
+            
+            if (++it != tok.end()) {
+                subjectsStr = *it;
+                subjectsStr = Configuration::TrimString(subjectsStr);
+                
+                
+                if (++it != tok.end()) {
+                    timesStr = *it;
+                    timesStr = Configuration::TrimString(timesStr);
+                }
+            }
+        }
+        
+        
+        //Split up the subjects:
+        Tokenizer tokSub(subjectsStr, sepComma);
+        string subName;
+        
+        for (Tokenizer::iterator itSub = tokSub.begin(); itSub!=tokSub.end(); itSub++) {
+            if (subName == "") {
+                subName = *itSub;
+                subName = Configuration::TrimString(subName);
+            }
+            else {
+                string profStr = (*itSub);
+                float prof = boost::lexical_cast<int>(Configuration::TrimString( profStr) );
+                Subject* subject = Configuration::getInstance().getSubject(subName);
+                if (subject!=NULL) {
+                    n->addSubject(subject, prof/100);
+#ifdef DEBUG
+                    cout << "Adding subject " << subject->getName() << ", prof " << prof << "%" << endl;
+#endif
+                }
+                subName = "";
+            }
+        }
+        
+        //Split up the times:
+        Tokenizer tokTime(timesStr, sepComma);
+        
+        for (Tokenizer::iterator itTime = tokTime.begin(); itTime!=tokTime.end(); itTime++) {
+            string time = *itTime;
+            time = Configuration::TrimString(time);
+            
+#ifdef DEBUG
+            cout << "Adding notTime " << boost::lexical_cast<int>(time) << endl;
+#endif
+            
+            n->addNotTime( boost::lexical_cast<int>(time) );
+            
+        }
+        
+        tutors.push_back(n);
+        
+    }
+    
+    return tutors;
+}
+
+list<Student*> inputGUI::parseCSVStudent(string filename) {
+    
+    ifstream in(filename.c_str());
+    if (!in.is_open()) return NULL;
+    
+    typedef boost::tokenizer< boost::escaped_list_separator<char> > Tokenizer;
+    
+    // setup the CSV parsing: use '/' for escape, ';' or TAB for seperators and ' or " for quotation marks
+    boost::escaped_list_separator<char> sep("\\", ";\t", "\"\'");
+    
+    // for lists
+    boost::escaped_list_separator<char> sepComma("\\", ",", "\"\'");
+    
+    vector< string > vec;
+    list<Student*> students;
+    string line;
+    
+    while (getline(in,line))
+    {
+        Student* n;
+        
+        Tokenizer tok(line, sep);
+        
+        //         get the student object, formatted as:
+        //         Name ; Subject ; Num Interviews ; Unavailable t1, t2, t3 ; prevtut1, prevtut2, prevtut3...
+        //        eg
+        //         Charles ; Physics ; 4 ; ; "Jack Fraser"
+        
+        Tokenizer::iterator it = tok.begin();
+        
+        string name;
+        string subjectStr;
+        string numIntStr;
+        string timesStr;
+        string prevStr;
+        Subject* subject;
+        list<int> times;
+        int numInterviews=0;
+        
+        map<Subject*, float> empty;
+        if (it != tok.end()) { // import the name
+            name = *it;
+            name = Configuration::TrimString(name);
+            
+            if (++it != tok.end()) { // import the subject
+                subjectStr = *it;
+                subjectStr = Configuration::TrimString(subjectStr);
+                
+                subject = Configuration::getInstance().getSubject(subjectStr);
+                
+                if (++it != tok.end()) { // get numInterviews
+                    numIntStr = *it;
+                    numIntStr = Configuration::TrimString(numIntStr);
+                    numInterviews = boost::lexical_cast<int>(numIntStr);
+                    
+                    if (++it != tok.end()) { // get NotTimes
+                        timesStr = *it;
+                        timesStr = Configuration::TrimString(timesStr);
+                    
+                        if (++it != tok.end()) { // get prevTutors
+                            prevStr = *it;
+                            prevStr = Configuration::TrimString(prevStr);
+                        }
+                    }
+                }
+            }
+        }
+        
+        // skip if essential info not provided
+        if ( name == "" || subject == NULL || numInterviews == 0 )
+            break;
+        
+        // else, initialise the new student
+        n = new Student(0, name, subject, numInterviews, NULL, NULL);
+        
+        //Split up the tutors and add them:
+        Tokenizer tokSub(prevStr, sepComma);
+        
+        for (Tokenizer::iterator itTut = tokSub.begin(); itTut!=tokSub.end(); itTut++) {
+            
+            string tutName = *itTut;
+            tutName = Configuration::TrimString(tutName);
+        
+            Tutor* tutor = Configuration::getInstance().getTutor(tutName);
+            if (tutor!=NULL) {
+                n->addPrevTutor(tutor);
+#ifdef DEBUG
+                cout << "Adding tutor " << tutor->getName() << endl;
+#endif
+            }
+        }
+        
+        //Split up the times and add them:
+        Tokenizer tokTime(timesStr, sepComma);
+        
+        for (Tokenizer::iterator itTime = tokTime.begin(); itTime!=tokTime.end(); itTime++) {
+            string time = *itTime;
+            time = Configuration::TrimString(time);
+            
+#ifdef DEBUG
+            cout << "Adding notTime " << boost::lexical_cast<int>(time) << endl;
+#endif
+            
+            n->addNotTime( boost::lexical_cast<int>(time) );
+            
+        }
+        
+        students.push_back(n);
+        
+    }
+    
+    return students;
 }
 
 void GUITutor::callUpdate() {
@@ -827,11 +1047,12 @@ void inputGUI::resetIDs() {
 }
 
 
-void inputGUI::submit() {
+void inputGUI::submit(bool noSolve) {
     
     // If we have at least one tutor and at least one subject
-    if ( !_subjectIndex.empty() && !_tutorIndex.empty() ) {
-        _submitLabel->setText("Submitting...");
+    if ( (!_subjectIndex.empty() && !_tutorIndex.empty()) || noSolve ) {
+
+        if (!noSolve) _submitLabel->setText("Submitting...");
         
         // declare containers
         hash_map<int, Tutor*> tutors;
@@ -864,6 +1085,7 @@ void inputGUI::submit() {
 #ifdef DEBUG
             static hash_map<int, bool> test;
             if (it==_tutors.begin()) test.clear();
+            cout << "Tutor : " << tutor->getName() << " (ID = " << id << ")\n";
             if (test[id]==true) {
                 printf("Tutor repeat ID found\n\n\n\n");
                 exit(-1);
@@ -903,8 +1125,10 @@ void inputGUI::submit() {
 #endif
         
         // Redirect to the output page
-        TimetablerWebApplication* app = dynamic_cast<TimetablerWebApplication*>( WApplication::instance() );
-        app->pageReady();
+        if (!noSolve) {
+            TimetablerWebApplication* app = dynamic_cast<TimetablerWebApplication*>( WApplication::instance() );
+            app->pageReady();
+        }
         
     } else {
         _submitLabel->setText("You must have at least one tutor and subject!");
