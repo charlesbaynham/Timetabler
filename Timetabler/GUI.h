@@ -89,6 +89,9 @@ public:
     void buildTable(finishedTT* timetable, bool tutors);
     // Refresh table
     void refreshStats();
+
+    // Build the table in pdf format and redirect to it
+    void buildTablePDF(finishedTT* timetable, bool tutors);
     
     void startSolve();
     

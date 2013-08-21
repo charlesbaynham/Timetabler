@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56244B3217C53CD90050D44D /* pdfOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56244B3017C53CD90050D44D /* pdfOutput.cpp */; };
+		56244B6617C5463D0050D44D /* libhpdfs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56244B6517C5463D0050D44D /* libhpdfs.a */; };
 		56551F3C178C43CE005D5348 /* inputGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56551F3A178C43CE005D5348 /* inputGUI.cpp */; };
 		5665F23917839336005C55D8 /* libGeneticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */; };
 		567E96D317A3CD8F00CDAD4E /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567E96D017A3CD8F00CDAD4E /* libboost_filesystem.a */; };
@@ -45,6 +47,30 @@
 		56F72DFB17817E8300D849AD /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56F72DF917817E8300D849AD /* output.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		56244B5E17C5450B0050D44D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 56E2E4D1177A10A400CB720C;
+			remoteInfo = GeneticLibrary;
+		};
+		56244B6017C5450B0050D44D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 56EB66E817A45B3800AB3ADF /* Wt-3.3.0.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 560E438117A446890007EEF1;
+			remoteInfo = "Wt-3.3.0";
+		};
+		56244B6217C5450B0050D44D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 56244B5817C544F70050D44D /* libharu.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 56244B5017C544190050D44D;
+			remoteInfo = libharu;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		56A9A75F1779B4A900C70EE3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -58,6 +84,44 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		56244B3017C53CD90050D44D /* pdfOutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pdfOutput.cpp; sourceTree = "<group>"; };
+		56244B3117C53CD90050D44D /* pdfOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pdfOutput.h; sourceTree = "<group>"; };
+		56244B5817C544F70050D44D /* libharu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libharu.xcodeproj; path = ../../libharu/libharu/libharu.xcodeproj; sourceTree = "<group>"; };
+		56244B6517C5463D0050D44D /* libhpdfs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhpdfs.a; path = ../../libharu/build/src/libhpdfs.a; sourceTree = "<group>"; };
+		56244B6717C546640050D44D /* hpdf_3dmeasure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_3dmeasure.h; path = ../../libharu/include/hpdf_3dmeasure.h; sourceTree = "<group>"; };
+		56244B6817C546640050D44D /* hpdf_annotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_annotation.h; path = ../../libharu/include/hpdf_annotation.h; sourceTree = "<group>"; };
+		56244B6917C546640050D44D /* hpdf_catalog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_catalog.h; path = ../../libharu/include/hpdf_catalog.h; sourceTree = "<group>"; };
+		56244B6A17C546640050D44D /* hpdf_conf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_conf.h; path = ../../libharu/include/hpdf_conf.h; sourceTree = "<group>"; };
+		56244B6B17C546640050D44D /* hpdf_config.h.cmake */ = {isa = PBXFileReference; lastKnownFileType = text; name = hpdf_config.h.cmake; path = ../../libharu/include/hpdf_config.h.cmake; sourceTree = "<group>"; };
+		56244B6C17C546640050D44D /* hpdf_consts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_consts.h; path = ../../libharu/include/hpdf_consts.h; sourceTree = "<group>"; };
+		56244B6D17C546640050D44D /* hpdf_destination.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_destination.h; path = ../../libharu/include/hpdf_destination.h; sourceTree = "<group>"; };
+		56244B6E17C546640050D44D /* hpdf_doc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_doc.h; path = ../../libharu/include/hpdf_doc.h; sourceTree = "<group>"; };
+		56244B6F17C546640050D44D /* hpdf_encoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_encoder.h; path = ../../libharu/include/hpdf_encoder.h; sourceTree = "<group>"; };
+		56244B7017C546640050D44D /* hpdf_encrypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_encrypt.h; path = ../../libharu/include/hpdf_encrypt.h; sourceTree = "<group>"; };
+		56244B7117C546640050D44D /* hpdf_encryptdict.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_encryptdict.h; path = ../../libharu/include/hpdf_encryptdict.h; sourceTree = "<group>"; };
+		56244B7217C546640050D44D /* hpdf_error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_error.h; path = ../../libharu/include/hpdf_error.h; sourceTree = "<group>"; };
+		56244B7317C546640050D44D /* hpdf_exdata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_exdata.h; path = ../../libharu/include/hpdf_exdata.h; sourceTree = "<group>"; };
+		56244B7417C546640050D44D /* hpdf_ext_gstate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_ext_gstate.h; path = ../../libharu/include/hpdf_ext_gstate.h; sourceTree = "<group>"; };
+		56244B7517C546640050D44D /* hpdf_font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_font.h; path = ../../libharu/include/hpdf_font.h; sourceTree = "<group>"; };
+		56244B7617C546640050D44D /* hpdf_fontdef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_fontdef.h; path = ../../libharu/include/hpdf_fontdef.h; sourceTree = "<group>"; };
+		56244B7717C546640050D44D /* hpdf_gstate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_gstate.h; path = ../../libharu/include/hpdf_gstate.h; sourceTree = "<group>"; };
+		56244B7817C546640050D44D /* hpdf_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_image.h; path = ../../libharu/include/hpdf_image.h; sourceTree = "<group>"; };
+		56244B7917C546640050D44D /* hpdf_info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_info.h; path = ../../libharu/include/hpdf_info.h; sourceTree = "<group>"; };
+		56244B7A17C546640050D44D /* hpdf_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_list.h; path = ../../libharu/include/hpdf_list.h; sourceTree = "<group>"; };
+		56244B7B17C546640050D44D /* hpdf_mmgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_mmgr.h; path = ../../libharu/include/hpdf_mmgr.h; sourceTree = "<group>"; };
+		56244B7C17C546640050D44D /* hpdf_namedict.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_namedict.h; path = ../../libharu/include/hpdf_namedict.h; sourceTree = "<group>"; };
+		56244B7D17C546640050D44D /* hpdf_objects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_objects.h; path = ../../libharu/include/hpdf_objects.h; sourceTree = "<group>"; };
+		56244B7E17C546640050D44D /* hpdf_outline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_outline.h; path = ../../libharu/include/hpdf_outline.h; sourceTree = "<group>"; };
+		56244B7F17C546640050D44D /* hpdf_page_label.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_page_label.h; path = ../../libharu/include/hpdf_page_label.h; sourceTree = "<group>"; };
+		56244B8017C546640050D44D /* hpdf_pages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_pages.h; path = ../../libharu/include/hpdf_pages.h; sourceTree = "<group>"; };
+		56244B8117C546640050D44D /* hpdf_pdfa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_pdfa.h; path = ../../libharu/include/hpdf_pdfa.h; sourceTree = "<group>"; };
+		56244B8217C546640050D44D /* hpdf_streams.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_streams.h; path = ../../libharu/include/hpdf_streams.h; sourceTree = "<group>"; };
+		56244B8317C546640050D44D /* hpdf_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_types.h; path = ../../libharu/include/hpdf_types.h; sourceTree = "<group>"; };
+		56244B8417C546640050D44D /* hpdf_u3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_u3d.h; path = ../../libharu/include/hpdf_u3d.h; sourceTree = "<group>"; };
+		56244B8517C546640050D44D /* hpdf_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_utils.h; path = ../../libharu/include/hpdf_utils.h; sourceTree = "<group>"; };
+		56244B8617C546640050D44D /* hpdf_version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_version.h; path = ../../libharu/include/hpdf_version.h; sourceTree = "<group>"; };
+		56244B8717C546640050D44D /* hpdf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf.h; path = ../../libharu/include/hpdf.h; sourceTree = "<group>"; };
+		56244B8817C546980050D44D /* hpdf_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_config.h; path = ../../libharu/build/include/hpdf_config.h; sourceTree = "<group>"; };
 		56551F3A178C43CE005D5348 /* inputGUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = inputGUI.cpp; sourceTree = "<group>"; };
 		56551F3B178C43CE005D5348 /* inputGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inputGUI.h; sourceTree = "<group>"; };
 		567E96D017A3CD8F00CDAD4E /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = "/usr/local/lib/boost-static/libboost_filesystem.a"; sourceTree = "<absolute>"; };
@@ -195,12 +259,63 @@
 				5665F23917839336005C55D8 /* libGeneticLibrary.a in Frameworks */,
 				56EB66E517A45B1B00AB3ADF /* libwthttp.35.dylib in Frameworks */,
 				56EB66E717A45B2A00AB3ADF /* libwt.35.dylib in Frameworks */,
+				56244B6617C5463D0050D44D /* libhpdfs.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		56244B5917C544F70050D44D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		56244B6417C5461E0050D44D /* HARU */ = {
+			isa = PBXGroup;
+			children = (
+				56244B8817C546980050D44D /* hpdf_config.h */,
+				56244B6717C546640050D44D /* hpdf_3dmeasure.h */,
+				56244B6817C546640050D44D /* hpdf_annotation.h */,
+				56244B6917C546640050D44D /* hpdf_catalog.h */,
+				56244B6A17C546640050D44D /* hpdf_conf.h */,
+				56244B6B17C546640050D44D /* hpdf_config.h.cmake */,
+				56244B6C17C546640050D44D /* hpdf_consts.h */,
+				56244B6D17C546640050D44D /* hpdf_destination.h */,
+				56244B6E17C546640050D44D /* hpdf_doc.h */,
+				56244B6F17C546640050D44D /* hpdf_encoder.h */,
+				56244B7017C546640050D44D /* hpdf_encrypt.h */,
+				56244B7117C546640050D44D /* hpdf_encryptdict.h */,
+				56244B7217C546640050D44D /* hpdf_error.h */,
+				56244B7317C546640050D44D /* hpdf_exdata.h */,
+				56244B7417C546640050D44D /* hpdf_ext_gstate.h */,
+				56244B7517C546640050D44D /* hpdf_font.h */,
+				56244B7617C546640050D44D /* hpdf_fontdef.h */,
+				56244B7717C546640050D44D /* hpdf_gstate.h */,
+				56244B7817C546640050D44D /* hpdf_image.h */,
+				56244B7917C546640050D44D /* hpdf_info.h */,
+				56244B7A17C546640050D44D /* hpdf_list.h */,
+				56244B7B17C546640050D44D /* hpdf_mmgr.h */,
+				56244B7C17C546640050D44D /* hpdf_namedict.h */,
+				56244B7D17C546640050D44D /* hpdf_objects.h */,
+				56244B7E17C546640050D44D /* hpdf_outline.h */,
+				56244B7F17C546640050D44D /* hpdf_page_label.h */,
+				56244B8017C546640050D44D /* hpdf_pages.h */,
+				56244B8117C546640050D44D /* hpdf_pdfa.h */,
+				56244B8217C546640050D44D /* hpdf_streams.h */,
+				56244B8317C546640050D44D /* hpdf_types.h */,
+				56244B8417C546640050D44D /* hpdf_u3d.h */,
+				56244B8517C546640050D44D /* hpdf_utils.h */,
+				56244B8617C546640050D44D /* hpdf_version.h */,
+				56244B8717C546640050D44D /* hpdf.h */,
+				56244B6517C5463D0050D44D /* libhpdfs.a */,
+			);
+			name = HARU;
+			path = "../../Genetic-Algorithms-Library/GeneticLibrary";
+			sourceTree = "<group>";
+		};
 		5665F23617838F11005C55D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +326,8 @@
 		56A9A7581779B4A900C70EE3 = {
 			isa = PBXGroup;
 			children = (
+				56244B6417C5461E0050D44D /* HARU */,
+				56244B5817C544F70050D44D /* libharu.xcodeproj */,
 				56EB66E817A45B3800AB3ADF /* Wt-3.3.0.xcodeproj */,
 				567E96D017A3CD8F00CDAD4E /* libboost_filesystem.a */,
 				567E96D117A3CD8F00CDAD4E /* libboost_signals.a */,
@@ -238,6 +355,8 @@
 				56A9A7641779B4A900C70EE3 /* main.cpp */,
 				56CE097117831E8800D75072 /* GUI.cpp */,
 				56CE097217831E8800D75072 /* GUI.h */,
+				56244B3017C53CD90050D44D /* pdfOutput.cpp */,
+				56244B3117C53CD90050D44D /* pdfOutput.h */,
 				56F72DF917817E8300D849AD /* output.cpp */,
 				56F72DFA17817E8300D849AD /* output.h */,
 				56DF1004177B770A005F1B6A /* TimetablerInst.cpp */,
@@ -474,6 +593,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				56244B5F17C5450B0050D44D /* PBXTargetDependency */,
+				56244B6117C5450B0050D44D /* PBXTargetDependency */,
+				56244B6317C5450B0050D44D /* PBXTargetDependency */,
 			);
 			name = Timetabler;
 			productName = Timetabler;
@@ -503,6 +625,10 @@
 				{
 					ProductGroup = 5665F23617838F11005C55D8 /* Products */;
 					ProjectRef = 56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */;
+				},
+				{
+					ProductGroup = 56244B5917C544F70050D44D /* Products */;
+					ProjectRef = 56244B5817C544F70050D44D /* libharu.xcodeproj */;
 				},
 				{
 					ProductGroup = 56EB66E917A45B3800AB3ADF /* Products */;
@@ -551,10 +677,29 @@
 				56F72DFB17817E8300D849AD /* output.cpp in Sources */,
 				56CE097317831E8800D75072 /* GUI.cpp in Sources */,
 				56551F3C178C43CE005D5348 /* inputGUI.cpp in Sources */,
+				56244B3217C53CD90050D44D /* pdfOutput.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		56244B5F17C5450B0050D44D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GeneticLibrary;
+			targetProxy = 56244B5E17C5450B0050D44D /* PBXContainerItemProxy */;
+		};
+		56244B6117C5450B0050D44D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Wt-3.3.0";
+			targetProxy = 56244B6017C5450B0050D44D /* PBXContainerItemProxy */;
+		};
+		56244B6317C5450B0050D44D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libharu;
+			targetProxy = 56244B6217C5450B0050D44D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		56A9A7681779B4A900C70EE3 /* Debug */ = {
@@ -633,6 +778,7 @@
 					"/usr/local/lib/boost-static",
 					"\"$(SRCROOT)/../../Wt-3.3.0/build/src/http\"",
 					"\"$(SRCROOT)/../../Wt-3.3.0/build/src\"",
+					"\"$(SRCROOT)/../../libharu/build/src\"",
 				);
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -653,6 +799,7 @@
 					"/usr/local/lib/boost-static",
 					"\"$(SRCROOT)/../../Wt-3.3.0/build/src/http\"",
 					"\"$(SRCROOT)/../../Wt-3.3.0/build/src\"",
+					"\"$(SRCROOT)/../../libharu/build/src\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
@@ -702,6 +849,7 @@
 					"/usr/local/lib/boost-static",
 					"\"$(SRCROOT)/../../Wt-3.3.0/build/src/http\"",
 					"\"$(SRCROOT)/../../Wt-3.3.0/build/src\"",
+					"\"$(SRCROOT)/../../libharu/build/src\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";

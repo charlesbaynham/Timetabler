@@ -411,6 +411,12 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
     }    
 }
 
+void TimetablerWebApplication::buildTablePDF(finishedTT *timetable, bool tutors) {
+    
+    ;
+    
+}
+
 void TimetablerWebApplication::toggleState() {
 
     bool started;
