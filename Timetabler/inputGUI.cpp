@@ -421,7 +421,7 @@ inputGUI::inputGUI(WContainerWidget* parent) :
         useOther->uploaded().connect( boost::bind<void> ( [=](){
             useOther->disable();
             this->usePrevious(useOther->spoolFileName());
-            boost::filesystem::copy_file(useOther->spoolFileName(), filename, boost::filesystem::copy_option::overwrite_if_exists);
+            //boost::filesystem::copy_file(useOther->spoolFileName(), filename, boost::filesystem::copy_option::overwrite_if_exists);
             parent->removeWidget(topbox);
         }));
         useOther->changed().connect( boost::bind<void> ( [=]() { useOther->upload(); }));

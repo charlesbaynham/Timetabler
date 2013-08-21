@@ -122,11 +122,11 @@ TimetablerInst::TimetablerInst()
     
 	// make parameters for genetic algorithms
 	// algorithm will use two workers
-#ifdef DEBUG
-    GaMultithreadingAlgorithmParams algorithmParams( 1 );
-#else
+//#ifdef DEBUG
+//    GaMultithreadingAlgorithmParams algorithmParams( 1 );
+//#else
     GaMultithreadingAlgorithmParams algorithmParams( 2 );
-#endif
+//#endif
     
 	// make incremental algorithm with periously defined population and parameters
 	_algorithm = new GaIncrementalAlgorithm( _population, algorithmParams );
@@ -135,10 +135,11 @@ TimetablerInst::TimetablerInst()
 	// stop when best chromosome reaches fitness value of 1
 	
 //    Fitness of 1: deprec
-    GaFitnessCriteriaParams criteriaParams( 1, GFC_MORE_THEN_EQUALS_TO, GSV_BEST_FITNESS );
+//    GaFitnessCriteriaParams criteriaParams( 1, GFC_MORE_THEN_EQUALS_TO, GSV_BEST_FITNESS );
 
-//    Keep trying until the fitness doesn't improve for 50000 generations (~20s)
-    GaFitnessProgressCriteriaParams fitnessParams(0.00001, true, GFC_LESS_THEN_EQUALS_TO, GaStatValueType::GSV_BEST_FITNESS, 50000);
+//    Keep trying until the fitness doesn't improve for 50000 generations
+//    GaFitnessProgressCriteriaParams fitnessParams(0.00001, true, GFC_LESS_THEN_EQUALS_TO, GaStatValueType::GSV_BEST_FITNESS, 50000);
+    GaFitnessProgressCriteriaParams fitnessParams(0.00001, true, GFC_LESS_THEN_EQUALS_TO, GaStatValueType::GSV_BEST_FITNESS, 5);
     
 	// sets algorithm's stop criteria (based on fitness improvement) and its parameters
 //	_algorithm->SetStopCriteria( GaStopCriteriaCatalogue::Instance().GetEntryData( "GaFitnessCriteria" ), &criteriaParams );

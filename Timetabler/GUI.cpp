@@ -119,12 +119,18 @@ void TimetablerWebApplication::refreshStats() {
 #if DEBUG
     cerr << "The state is " << state << endl;
 #endif
-    if (state & GaAlgorithmState::GAS_STOPPED ) {
+    if (state & GaAlgorithmState::GAS_STOPPED ) {// the algorithm has found a solution / met its criteria
         _timer->stop();
         _bestFitness->setText( "Non-optimal solution found : Fitness "+to_string(100*bestFitness)+"%" );
-        if (optimal)
+        _stopButton->setText("Try harder");
+        // increase target of algorithm
+        //edit debug
+        //
+        
+        if (optimal) {
             _bestFitness->setText( "Optimal solution found in "+to_string(generation)+" generations!" );
-        _stopButton->setText("Resume");
+        }
+
         
 #if DEBUG
         cerr<<"Stopping timer on algorithm completion and saving config" << endl;
@@ -248,7 +254,7 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         WPushButton *setTutor=new WPushButton("Tutor mode");
         WPushButton *setStudent=new WPushButton("Student mode");
         _saveConfig = new WPushButton("Save configuration");
-        _stopButton = new WPushButton("Stop");
+        _stopButton = new WPushButton("Pause");
         _download = new WPushButton("Download timetable");
         
         setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
@@ -410,7 +416,7 @@ void TimetablerWebApplication::toggleState() {
 #endif
         _download->disable();
         _saveConfig->disable();
-        _stopButton->setText("Stop");
+        _stopButton->setText("Pause");
     }
 
 }
