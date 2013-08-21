@@ -405,6 +405,8 @@ inputGUI::inputGUI(WContainerWidget* parent) :
     _studentTab(new WContainerWidget()),
     _submitTab(new WContainerWidget())
 {
+//    if
+    
     string filename = "out.ttcfg";
     // If previous config file is detected, ask user if they want to use it
     if (boost::filesystem::exists(filename) ) {

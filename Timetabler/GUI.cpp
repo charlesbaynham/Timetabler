@@ -33,7 +33,6 @@ void TimetablerWebApplication::handlePathChange()
     }
     else if(path == "/") pageInput();
     else if( boost::starts_with(path, "/input") ) app->setInternalPath("/", true); // redirect to input page if using old input path
-//    else if( path == "/solution.csv" ) ;
     else app->setInternalPath("/", true); // Redirect to main page if page not found
     
     
@@ -48,10 +47,6 @@ void TimetablerWebApplication::startSolve() {
     _timer->setInterval(500);
     _timer->timeout().connect(this, &TimetablerWebApplication::refreshStats );
     
-    
-//    _greeting->setText("Solving...");
-//    _button->setHidden(true);
-    _timer->start();
     
     ////  Start the algorithm:
     
@@ -78,6 +73,10 @@ void TimetablerWebApplication::startSolve() {
     
     // Solve!
     TimetablerInst::getInstance()->getAlgorithm()->StartSolving(false);
+    
+    // Start the refresh timer
+    _timer->start();
+    
     
 }
 
@@ -150,7 +149,7 @@ void TimetablerWebApplication::refreshStats() {
 
 
 TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
-: Wt::WApplication(env), _bestFitness(new WText("")), _filename("out.ttcfg")
+: Wt::WApplication(env), _filename("out.ttcfg")
 {
     this->enableInternalPaths();
     this->setInternalPathDefaultValid(false);
@@ -176,12 +175,19 @@ void TimetablerWebApplication::pageInput() {
     // set to the correct path in case called from another function and the path is currently wrong
     this->setInternalPath("/");
     
+    // wipe any existing configuration and stop any existing algorithms
+    TimetablerInst::getInstance()->getAlgorithm()->StopSolving();
+    // Stop the timer if it has been created
+    
+    if (_timer && _timer->isActive()) {
+        _timer->stop();
+        this->processEvents();
+    }
+    Configuration::getInstance().clear();
+    _tableBuilt = false;
+    
     //wipe display
     root()->clear();
-    
-    // wipe any existing configuration and stop any existing algorithms
-    Configuration::getInstance().clear();
-    TimetablerInst::getInstance()->getAlgorithm()->StopSolving();
     
     //reset the inputGUI id counters
     inputGUI::resetIDs();
@@ -214,6 +220,8 @@ void TimetablerWebApplication::pageReady() {
     
     // set to the correct path in case called from another function and the path is currently wrong
     this->setInternalPath("/output");
+    
+    _bestFitness = new WText("");
     
     TimetablerWebApplication::startSolve();
     
