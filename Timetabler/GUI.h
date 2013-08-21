@@ -66,6 +66,7 @@ private:
     WPushButton *_button;
     WPushButton *_stopButton;
     WPushButton *_download;
+    WPushButton *_saveConfig;
     WText* _greeting;
     WTimer* _timer;
     WText* _status;

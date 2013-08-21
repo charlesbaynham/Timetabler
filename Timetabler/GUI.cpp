@@ -138,6 +138,7 @@ void TimetablerWebApplication::refreshStats() {
         
         // enable download
         _download->enable();
+        _saveConfig->enable();
     }
 
 }
@@ -246,7 +247,7 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
 
         WPushButton *setTutor=new WPushButton("Tutor mode");
         WPushButton *setStudent=new WPushButton("Student mode");
-        WPushButton *saveConfig=new WPushButton("Save configuration");
+        _saveConfig = new WPushButton("Save configuration");
         _stopButton = new WPushButton("Stop");
         _download = new WPushButton("Download timetable");
         
@@ -264,7 +265,9 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
 //            this->setInternalPath("/" + filename);
 //            this->setInternalPath(path);
 //        }));
-        saveConfig->setLink("/"+_filename);
+        // The above section is commented because out.ttcfg is now generated every time the algorithm stops
+        _saveConfig->setLink("/"+_filename);
+        _saveConfig->disable();
         
         _stopButton->clicked().connect( this, &TimetablerWebApplication::toggleState );
         
@@ -274,12 +277,13 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         if ( TimetablerInst::getInstance()->getAlgorithm()->GetState() & GAS_STOPPED ) {
             _download->enable();
             _stopButton->setText("Resume");
+            _saveConfig->enable();
         }
         
         buttons->addWidget(_bestFitness);
         buttons->addWidget(setTutor);
         buttons->addWidget(setStudent);
-        buttons->addWidget(saveConfig);
+        buttons->addWidget(_saveConfig);
         buttons->addWidget(_stopButton);
         buttons->addWidget(_download);
         
@@ -396,6 +400,7 @@ void TimetablerWebApplication::toggleState() {
 #endif
         _timer->stop();
         _download->enable();
+        _saveConfig->enable();
         _stopButton->setText("Resume");
     } else {
         TimetablerInst::getInstance()->getAlgorithm()->StartSolving(true);
@@ -404,6 +409,7 @@ void TimetablerWebApplication::toggleState() {
         cerr << "Resuming. State is now " << TimetablerInst::getInstance()->getAlgorithm()->GetState() << endl;
 #endif
         _download->disable();
+        _saveConfig->disable();
         _stopButton->setText("Stop");
     }
 
