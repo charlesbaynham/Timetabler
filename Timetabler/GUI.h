@@ -74,6 +74,8 @@ private:
     bool _tutors=false;
     void handlePathChange();
     
+    string _filename; // output file
+    
     inputGUI* _inputGUI;
 
 public:

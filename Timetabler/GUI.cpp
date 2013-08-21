@@ -125,17 +125,26 @@ void TimetablerWebApplication::refreshStats() {
         if (optimal)
             _bestFitness->setText( "Optimal solution found in "+to_string(generation)+" generations!" );
         _stopButton->setText("Resume");
-        _download->enable();
+        
 #if DEBUG
-        cerr<<"Stopping timer on algorithm completion" << endl;
+        cerr<<"Stopping timer on algorithm completion and saving config" << endl;
 #endif
+        
+        // save config and best chromosome to the output file
+        GaChromosomePtr result;
+        Configuration::getInstance().saveConfig(_filename.c_str());
+        TimetablerInst::getInstance()->getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
+        ( outputSolution::getInstance() )( _filename , *result, true );
+        
+        // enable download
+        _download->enable();
     }
 
 }
 
 
 TimetablerWebApplication::TimetablerWebApplication(const Wt::WEnvironment& env)
-: Wt::WApplication(env), _bestFitness(new WText(""))
+: Wt::WApplication(env), _bestFitness(new WText("")), _filename("out.ttcfg")
 {
     this->enableInternalPaths();
     this->setInternalPathDefaultValid(false);
@@ -244,20 +253,18 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         setTutor->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, true) );
         setStudent->clicked().connect( boost::bind(&TimetablerWebApplication::buildTable, this, timetable, false) );
         
-        
-        string filename = "out.ttcfg";
         // save config and best chromosome to the output file
-        saveConfig->clicked().connect( std::bind( [this, filename] () {
-            GaChromosomePtr result;
-            Configuration::getInstance().saveConfig(filename.c_str());
-            TimetablerInst::getInstance()->getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
-            ( outputSolution::getInstance() )( filename , *result, true );
-            
+//        saveConfig->clicked().connect( std::bind( [this, filename] () {
+//            GaChromosomePtr result;
+//            Configuration::getInstance().saveConfig(filename.c_str());
+//            TimetablerInst::getInstance()->getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
+//            ( outputSolution::getInstance() )( filename , *result, true );
+        
 //            string path = this->internalPath();
 //            this->setInternalPath("/" + filename);
 //            this->setInternalPath(path);
-        }));
-        saveConfig->setLink("/"+filename);
+//        }));
+        saveConfig->setLink("/"+_filename);
         
         _stopButton->clicked().connect( this, &TimetablerWebApplication::toggleState );
         

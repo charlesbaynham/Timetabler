@@ -8,10 +8,10 @@
 
 #include "Subject.h"
 
-int Subject::_maxID = 1;
+int Subject::_nextID = 1;
 
 Subject::Subject(int ID, const string& name) :
     _ID(ID), _name(name) {
-        if (ID==0) _ID = _maxID++;
-        else if (ID >= _maxID) ID+1;
+        if (ID==0) _ID = _nextID++;
+        else if (ID >= _nextID) _nextID = ID+1;
 }
