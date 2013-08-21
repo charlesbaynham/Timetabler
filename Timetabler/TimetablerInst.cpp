@@ -138,8 +138,8 @@ TimetablerInst::TimetablerInst()
 //    GaFitnessCriteriaParams criteriaParams( 1, GFC_MORE_THEN_EQUALS_TO, GSV_BEST_FITNESS );
 
 //    Keep trying until the fitness doesn't improve for 50000 generations
-//    GaFitnessProgressCriteriaParams fitnessParams(0.00001, true, GFC_LESS_THEN_EQUALS_TO, GaStatValueType::GSV_BEST_FITNESS, 50000);
-    GaFitnessProgressCriteriaParams fitnessParams(0.00001, true, GFC_LESS_THEN_EQUALS_TO, GaStatValueType::GSV_BEST_FITNESS, 5);
+    GaFitnessProgressCriteriaParams fitnessParams(0.00001, true, GFC_LESS_THEN_EQUALS_TO, GaStatValueType::GSV_BEST_FITNESS, 50000);
+//    GaFitnessProgressCriteriaParams fitnessParams(0.00001, true, GFC_LESS_THEN_EQUALS_TO, GaStatValueType::GSV_BEST_FITNESS, 500);
     
 	// sets algorithm's stop criteria (based on fitness improvement) and its parameters
 //	_algorithm->SetStopCriteria( GaStopCriteriaCatalogue::Instance().GetEntryData( "GaFitnessCriteria" ), &criteriaParams );

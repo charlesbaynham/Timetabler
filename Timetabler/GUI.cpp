@@ -121,14 +121,13 @@ void TimetablerWebApplication::refreshStats() {
 #endif
     if (state & GaAlgorithmState::GAS_STOPPED ) {// the algorithm has found a solution / met its criteria
         _timer->stop();
-        _bestFitness->setText( "Non-optimal solution found : Fitness "+to_string(100*bestFitness)+"%" );
+        _bestFitness->setText( "Non-optimal solution found after " + to_string(generation) + " gens:\nFitness "+to_string(100*bestFitness)+"%" );
         _stopButton->setText("Try harder");
-        // increase target of algorithm
-        //edit debug
-        //
         
         if (optimal) {
             _bestFitness->setText( "Optimal solution found in "+to_string(generation)+" generations!" );
+            _stopButton->setText( "Resume" );
+            _stopButton->disable();
         }
 
         
@@ -284,6 +283,17 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
             _download->enable();
             _stopButton->setText("Resume");
             _saveConfig->enable();
+            
+            // check if optimal solution already found:
+            GaChromosomePtr result;
+            GaAlgorithm* algorithm = TimetablerInst::getInstance()->getAlgorithm();
+            // store best chromosone in result
+            algorithm->GetPopulation(0).GetBestChromosomes(&result, 0, 1);
+            
+            float bestFitness = (*result).GetFitness();
+            
+            if ( abs(1.0f - bestFitness) <= 0.00001 )
+                _stopButton->disable();
         }
         
         buttons->addWidget(_bestFitness);
