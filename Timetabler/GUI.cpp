@@ -212,6 +212,18 @@ void TimetablerWebApplication::pageInput() {
 
 }
 
+#include "pdfOutput.h"
+void TimetablerWebApplication::pagePDF() {
+    Wt::WContainerWidget *container = new Wt::WContainerWidget();
+    
+    Wt::WText *text = new Wt::WText(Wt::WString::tr("report.example"), container);
+    text->setStyleClass("reset");
+    
+    Wt::WPushButton *button = new Wt::WPushButton("Create pdf", container);
+    
+    Wt::WResource *pdf = new ReportResource(container);
+    button->setLink(pdf);
+}
 
 void TimetablerWebApplication::pageReady() {
     

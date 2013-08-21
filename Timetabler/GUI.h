@@ -84,6 +84,8 @@ public:
     void pageReady();
     // Set up the configuration
     void pageInput();
+    // output the PDF
+    void pagePDF();
     
     // Build the output timetable using <timetable> as the info, from the point of view of tutors or students according to <bool tutors>
     void buildTable(finishedTT* timetable, bool tutors);

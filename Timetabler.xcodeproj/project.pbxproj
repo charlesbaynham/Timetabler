@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		56244B3217C53CD90050D44D /* pdfOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56244B3017C53CD90050D44D /* pdfOutput.cpp */; };
-		56244B6617C5463D0050D44D /* libhpdfs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56244B6517C5463D0050D44D /* libhpdfs.a */; };
+		56244BCD17C559420050D44D /* libwthttp.3.3.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56244BC917C5591A0050D44D /* libwthttp.3.3.0.dylib */; };
+		56244BCE17C559450050D44D /* libwt.3.3.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 56244BCA17C5591A0050D44D /* libwt.3.3.0.dylib */; };
+		56244BCF17C55CBD0050D44D /* libhpdfs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56244B6517C5463D0050D44D /* libhpdfs.a */; };
+		56244BD117C55D610050D44D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56244BD017C55D610050D44D /* libz.dylib */; };
 		56551F3C178C43CE005D5348 /* inputGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56551F3A178C43CE005D5348 /* inputGUI.cpp */; };
 		5665F23917839336005C55D8 /* libGeneticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E2E4E8177A1BF900CB720C /* libGeneticLibrary.a */; };
 		567E96D317A3CD8F00CDAD4E /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567E96D017A3CD8F00CDAD4E /* libboost_filesystem.a */; };
@@ -48,21 +51,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		56244B5E17C5450B0050D44D /* PBXContainerItemProxy */ = {
+		56244BC317C54AE70050D44D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 56E2E4D1177A10A400CB720C;
 			remoteInfo = GeneticLibrary;
 		};
-		56244B6017C5450B0050D44D /* PBXContainerItemProxy */ = {
+		56244BC517C54AE70050D44D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 56EB66E817A45B3800AB3ADF /* Wt-3.3.0.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 560E438117A446890007EEF1;
 			remoteInfo = "Wt-3.3.0";
 		};
-		56244B6217C5450B0050D44D /* PBXContainerItemProxy */ = {
+		56244BC717C54AE70050D44D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 56244B5817C544F70050D44D /* libharu.xcodeproj */;
 			proxyType = 1;
@@ -78,6 +81,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				56244BCD17C559420050D44D /* libwthttp.3.3.0.dylib in CopyFiles */,
+				56244BCE17C559450050D44D /* libwt.3.3.0.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +127,9 @@
 		56244B8617C546640050D44D /* hpdf_version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_version.h; path = ../../libharu/include/hpdf_version.h; sourceTree = "<group>"; };
 		56244B8717C546640050D44D /* hpdf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf.h; path = ../../libharu/include/hpdf.h; sourceTree = "<group>"; };
 		56244B8817C546980050D44D /* hpdf_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hpdf_config.h; path = ../../libharu/build/include/hpdf_config.h; sourceTree = "<group>"; };
+		56244BC917C5591A0050D44D /* libwthttp.3.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwthttp.3.3.0.dylib; path = /usr/local/lib/libwthttp.3.3.0.dylib; sourceTree = "<absolute>"; };
+		56244BCA17C5591A0050D44D /* libwt.3.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwt.3.3.0.dylib; path = /usr/local/lib/libwt.3.3.0.dylib; sourceTree = "<absolute>"; };
+		56244BD017C55D610050D44D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		56551F3A178C43CE005D5348 /* inputGUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = inputGUI.cpp; sourceTree = "<group>"; };
 		56551F3B178C43CE005D5348 /* inputGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inputGUI.h; sourceTree = "<group>"; };
 		567E96D017A3CD8F00CDAD4E /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = "/usr/local/lib/boost-static/libboost_filesystem.a"; sourceTree = "<absolute>"; };
@@ -253,13 +261,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56244BD117C55D610050D44D /* libz.dylib in Frameworks */,
+				56244BCF17C55CBD0050D44D /* libhpdfs.a in Frameworks */,
 				567E96D317A3CD8F00CDAD4E /* libboost_filesystem.a in Frameworks */,
+				56EB66E717A45B2A00AB3ADF /* libwt.35.dylib in Frameworks */,
+				56EB66E517A45B1B00AB3ADF /* libwthttp.35.dylib in Frameworks */,
 				567E96D417A3CD8F00CDAD4E /* libboost_signals.a in Frameworks */,
 				567E96D517A3CD8F00CDAD4E /* libboost_system.a in Frameworks */,
 				5665F23917839336005C55D8 /* libGeneticLibrary.a in Frameworks */,
-				56EB66E517A45B1B00AB3ADF /* libwthttp.35.dylib in Frameworks */,
-				56EB66E717A45B2A00AB3ADF /* libwt.35.dylib in Frameworks */,
-				56244B6617C5463D0050D44D /* libhpdfs.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +335,9 @@
 		56A9A7581779B4A900C70EE3 = {
 			isa = PBXGroup;
 			children = (
+				56244BD017C55D610050D44D /* libz.dylib */,
+				56244BC917C5591A0050D44D /* libwthttp.3.3.0.dylib */,
+				56244BCA17C5591A0050D44D /* libwt.3.3.0.dylib */,
 				56244B6417C5461E0050D44D /* HARU */,
 				56244B5817C544F70050D44D /* libharu.xcodeproj */,
 				56EB66E817A45B3800AB3ADF /* Wt-3.3.0.xcodeproj */,
@@ -587,15 +599,15 @@
 			buildConfigurationList = 56A9A76A1779B4A900C70EE3 /* Build configuration list for PBXNativeTarget "Timetabler" */;
 			buildPhases = (
 				56A9A75D1779B4A900C70EE3 /* Sources */,
-				56A9A75E1779B4A900C70EE3 /* Frameworks */,
 				56A9A75F1779B4A900C70EE3 /* CopyFiles */,
+				56A9A75E1779B4A900C70EE3 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				56244B5F17C5450B0050D44D /* PBXTargetDependency */,
-				56244B6117C5450B0050D44D /* PBXTargetDependency */,
-				56244B6317C5450B0050D44D /* PBXTargetDependency */,
+				56244BC417C54AE70050D44D /* PBXTargetDependency */,
+				56244BC617C54AE70050D44D /* PBXTargetDependency */,
+				56244BC817C54AE70050D44D /* PBXTargetDependency */,
 			);
 			name = Timetabler;
 			productName = Timetabler;
@@ -684,20 +696,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		56244B5F17C5450B0050D44D /* PBXTargetDependency */ = {
+		56244BC417C54AE70050D44D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GeneticLibrary;
-			targetProxy = 56244B5E17C5450B0050D44D /* PBXContainerItemProxy */;
+			targetProxy = 56244BC317C54AE70050D44D /* PBXContainerItemProxy */;
 		};
-		56244B6117C5450B0050D44D /* PBXTargetDependency */ = {
+		56244BC617C54AE70050D44D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Wt-3.3.0";
-			targetProxy = 56244B6017C5450B0050D44D /* PBXContainerItemProxy */;
+			targetProxy = 56244BC517C54AE70050D44D /* PBXContainerItemProxy */;
 		};
-		56244B6317C5450B0050D44D /* PBXTargetDependency */ = {
+		56244BC817C54AE70050D44D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = libharu;
-			targetProxy = 56244B6217C5450B0050D44D /* PBXContainerItemProxy */;
+			targetProxy = 56244BC717C54AE70050D44D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
