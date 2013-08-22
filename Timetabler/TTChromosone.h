@@ -56,6 +56,9 @@ class Chromosone : public GaMultiValueChromosome<list<Student*> > {
     hash_map<Student*, int> _lookup;
     hash_map<Student*, int> _backupLookup;
     
+    // map holding whether the essential criteria have been met for a student (updated when fitness is calculated)
+    map<Student*, bool> _essentialMet;
+    
 public:
     
     Chromosone(GaChromosomeDomainBlock<list<Student*> >* configBlock);
@@ -87,7 +90,7 @@ class TTFitness : public GaFitnessOperation
 {
 public:
     
-	virtual float GACALL operator ()(const GaChromosome* chromosome) const;
+	virtual float GACALL operator ()(GaChromosome* chromosome) const;
     
 	virtual GaParameters* GACALL MakeParameters() const { return NULL; }
     

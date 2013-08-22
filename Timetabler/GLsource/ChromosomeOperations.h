@@ -104,7 +104,7 @@ namespace Chromosome
 		/// <summary>This operator calculates fitness value of the chromosome.</summary>
 		/// <param name="chromosome">raw pointer to mutating chromosome.</param>
 		/// <returns>Method returns calculated fitness value of the chromosome.</returns>
-		virtual float GACALL operator ()(const GaChromosome* chromosome) const=0;
+		virtual float GACALL operator ()(GaChromosome* chromosome) const=0;
 
 	};// END CLASS DEFINITION GaFitnessOperation
 

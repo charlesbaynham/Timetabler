@@ -231,7 +231,7 @@ void TTMutation::operator ()(GaChromosome* parent) const
             
             //update hashmap:
             chromo->_lookup[theStudent] = newSlot;
-            //chromo->_lookup = lookup;
+            
         }
     } else {
         
@@ -290,8 +290,8 @@ void TTMutation::operator ()(GaChromosome* parent) const
     
 }
 
-float TTFitness::operator()(const GaChromosome* chromosome) const{
-    const Chromosone* chromo = dynamic_cast<const Chromosone*>(chromosome);
+float TTFitness::operator()(GaChromosome* chromosome) const{
+    Chromosone* chromo = dynamic_cast<Chromosone*>(chromosome);
     
     float score = 0;
     
@@ -301,10 +301,14 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
     float maxscore = 6.1 * numStudents;
     
     // loop over all students
-    for (hash_map<Student*,int>::const_iterator it = chromo->_lookup.begin(); it!=chromo->_lookup.end(); it++ ) {
+    for (hash_map<Student*,int>::iterator it = chromo->_lookup.begin(); it!=chromo->_lookup.end(); it++ ) {
+        
+        // meets essential reqs?
+        bool essential = true;
         
         //is there overlapping?
         if ( !(chromo->_values[(*it).second].size()>1) ) score+=1.5;
+        else essential = false;
             // Overlapping is particularly bad, so should merit a higher penalty than other lacking major requirements, eg not teaching the subject
         
         //Does the tutor teach the subject? (And how well?)
@@ -317,6 +321,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
         
         //check subject:
         map<Subject*, float> tutSubjs = tutor->getSubjects();
+        bool foundTutor = false;
         for (map<Subject*, float>::iterator itTut = tutSubjs.begin(); itTut != tutSubjs.end(); itTut++)
         {
             Subject* studentSubject = (*it).first->getSubject();
@@ -324,9 +329,11 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             {
                 // If the tutor teaches the subject, increment the score by the tutor's proficiency in this subject
                 score += (*itTut).second;
+                foundTutor=true;
                 break;
             }
         }
+        if (!foundTutor) essential=false;
         
         //can the tutor do the time?
         bool canDoTut = true;
@@ -336,6 +343,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             if ( *itTut == (*it).second )
             {
                 canDoTut = false;
+                essential=false;
                 break;
             }
         }
@@ -350,6 +358,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             if ( *itStu == time )
             {
                 canDoStu = false;
+                essential=false;
                 break;
             }
         }
@@ -368,8 +377,7 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             }
         }
         if (engagements==1) score++; // If we only found them once (ie in the slot we were considering) then score
-        
-        
+        else essential=false;        
         
         
         // Are all the other appointments of this student in the same group?
@@ -401,6 +409,8 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             }
         }
         score += samegroup * 0.5/6.0;
+        if (samegroup != (*it).first->getNoInterviews() - 1 ) essential = false;
+        
 //         this score is so small because we must consider what happens when a student's / tutor's notTime conflicts with the grouping:
 //             if we have four students grouped in the slots that the student can't do, we require that moving one student out of the group is profitable
 //             the gain is +1 (since we're no longer breaching a notTime
@@ -438,6 +448,11 @@ float TTFitness::operator()(const GaChromosome* chromosome) const{
             }
         }
         if (!seenPrev) score+=0.1;
+        
+        
+        
+        // mark whether the essential criteria were met or not:
+        chromo->_essentialMet[(*it).first] = essential;
         
     }
     
