@@ -30,8 +30,8 @@ public:
     inline string getTutorName() { return _tutor->getName(); }
     inline Tutor* getTutor() { return _tutor; }
     
-    inline int getStudentID(int time) { return _students[time]->getID(); }
-    inline string getStudentName(int time) { return _students[time]->getName(); }
+    inline int getStudentID(int time) { return _students[time] != NULL ? _students[time]->getID() : -1; }
+    inline string getStudentName(int time) { return _students[time] != NULL ? _students[time]->getName() : "-"; }
     inline Student* getStudent(int time) { return _students[time]; }
     
     inline tutorTT_tutor(Tutor* tutor) : _tutor(tutor){}
@@ -67,8 +67,8 @@ public:
     inline string getStudentName() { return _student->getName(); }
     inline Student* getStudent() { return _student; }
     
-    inline int getTutorID(int time) { return _tutors[time]->getID(); }
-    inline string getTutorName(int time) { return _tutors[time]->getName(); }
+    inline int getTutorID(int time) { return _tutors[time] != NULL ? _tutors[time]->getID() : -1; }
+    inline string getTutorName(int time) { return _tutors[time] != NULL ? _tutors[time]->getName() : "-"; }
     inline Tutor* getTutor(int time) { return _tutors[time]; }
     
     inline studentTT_student(Student* student) : _student(student) {}
@@ -81,7 +81,7 @@ typedef map<int, studentTT_student* > studentTTList;
 class studentTT {
     studentTTList _students;
 public:
-//    inline studentTTList getTT() { return _students; }
+    inline studentTTList getTT() { return _students; }
     
     //return which student the tutor has at time
     Tutor* getStudentApt(int studentBaseID, int time);

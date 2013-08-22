@@ -50,30 +50,6 @@
 		56F72DFB17817E8300D849AD /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56F72DF917817E8300D849AD /* output.cpp */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		56244BC317C54AE70050D44D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 56E2E4E9177A1BF900CB720C /* GeneticLibrary.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 56E2E4D1177A10A400CB720C;
-			remoteInfo = GeneticLibrary;
-		};
-		56244BC517C54AE70050D44D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 56EB66E817A45B3800AB3ADF /* Wt-3.3.0.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 560E438117A446890007EEF1;
-			remoteInfo = "Wt-3.3.0";
-		};
-		56244BC717C54AE70050D44D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 56244B5817C544F70050D44D /* libharu.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 56244B5017C544190050D44D;
-			remoteInfo = libharu;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		56A9A75F1779B4A900C70EE3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -89,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		561D142317C571DA0066FCAB /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		56244B3017C53CD90050D44D /* pdfOutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pdfOutput.cpp; sourceTree = "<group>"; };
 		56244B3117C53CD90050D44D /* pdfOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pdfOutput.h; sourceTree = "<group>"; };
 		56244B5817C544F70050D44D /* libharu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libharu.xcodeproj; path = ../../libharu/libharu/libharu.xcodeproj; sourceTree = "<group>"; };
@@ -369,6 +346,7 @@
 				56CE097217831E8800D75072 /* GUI.h */,
 				56244B3017C53CD90050D44D /* pdfOutput.cpp */,
 				56244B3117C53CD90050D44D /* pdfOutput.h */,
+				561D142317C571DA0066FCAB /* constants.h */,
 				56F72DF917817E8300D849AD /* output.cpp */,
 				56F72DFA17817E8300D849AD /* output.h */,
 				56DF1004177B770A005F1B6A /* TimetablerInst.cpp */,
@@ -605,9 +583,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				56244BC417C54AE70050D44D /* PBXTargetDependency */,
-				56244BC617C54AE70050D44D /* PBXTargetDependency */,
-				56244BC817C54AE70050D44D /* PBXTargetDependency */,
 			);
 			name = Timetabler;
 			productName = Timetabler;
@@ -694,24 +669,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		56244BC417C54AE70050D44D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GeneticLibrary;
-			targetProxy = 56244BC317C54AE70050D44D /* PBXContainerItemProxy */;
-		};
-		56244BC617C54AE70050D44D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Wt-3.3.0";
-			targetProxy = 56244BC517C54AE70050D44D /* PBXContainerItemProxy */;
-		};
-		56244BC817C54AE70050D44D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libharu;
-			targetProxy = 56244BC717C54AE70050D44D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		56A9A7681779B4A900C70EE3 /* Debug */ = {

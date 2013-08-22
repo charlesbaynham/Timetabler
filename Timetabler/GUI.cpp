@@ -33,6 +33,7 @@ void TimetablerWebApplication::handlePathChange()
     }
     else if(path == "/") pageInput();
     else if( boost::starts_with(path, "/input") ) app->setInternalPath("/", true); // redirect to input page if using old input path
+    else if(path == "/pdftest") pagePDF();
     else app->setInternalPath("/", true); // Redirect to main page if page not found
     
     
@@ -118,7 +119,7 @@ void TimetablerWebApplication::refreshStats() {
 #if DEBUG
     cerr << "The state is " << state << endl;
 #endif
-    if (state & GaAlgorithmState::GAS_STOPPED ) {// the algorithm has found a solution / met its criteria
+    if (state & GaAlgorithmState::GAS_STOPPED ) { // the algorithm has found a solution / met its criteria
         _timer->stop();
         _bestFitness->setText( "Non-optimal solution found after " + to_string(generation) + " gens: Fitness "+to_string(100*bestFitness)+"%" );
         _stopButton->setText("Try harder");
@@ -139,6 +140,11 @@ void TimetablerWebApplication::refreshStats() {
         Configuration::getInstance().saveConfig(_filename.c_str());
         TimetablerInst::getInstance()->getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
         ( outputSolution::getInstance() )( _filename , *result, true );
+        
+        // generate pdf and link to download button
+        finishedTT theTimetable(result.GetRawPtr());
+        Wt::WResource *pdf = new ReportResource(theTimetable);
+        _download->setLink(pdf);
         
         // enable download
         _download->enable();
@@ -177,12 +183,12 @@ void TimetablerWebApplication::pageInput() {
     
     // wipe any existing configuration and stop any existing algorithms
     TimetablerInst::getInstance()->getAlgorithm()->StopSolving();
-    // Stop the timer if it has been created
     
-    if (_timer && _timer->isActive()) {
-        _timer->stop();
-        this->processEvents();
-    }
+    // Stop the timer if it has been created
+//    if (_timer && _timer->isActive()) {
+//        _timer->stop();
+//        this->processEvents();
+//    }
     Configuration::getInstance().clear();
     _tableBuilt = false;
     
@@ -194,35 +200,11 @@ void TimetablerWebApplication::pageInput() {
     
     //reset the instance if present
     TimetablerInst::getInstance()->reset();
-    
-    
-//    if (!_inputGUI) {
-    
-        _inputGUI = new inputGUI(root());
-                
-        this->processEvents();
-    
 
+    _inputGUI = new inputGUI(root());
+            
+    this->processEvents();
     
-//    }
-//    else {
-//        root()->clear();
-//        _inputGUI->redraw(root());
-//    }
-
-}
-
-#include "pdfOutput.h"
-void TimetablerWebApplication::pagePDF() {
-    Wt::WContainerWidget *container = new Wt::WContainerWidget();
-    
-    Wt::WText *text = new Wt::WText(Wt::WString::tr("report.example"), container);
-    text->setStyleClass("reset");
-    
-    Wt::WPushButton *button = new Wt::WPushButton("Create pdf", container);
-    
-    Wt::WResource *pdf = new ReportResource(container);
-    button->setLink(pdf);
 }
 
 void TimetablerWebApplication::pageReady() {
@@ -238,6 +220,33 @@ void TimetablerWebApplication::pageReady() {
     TimetablerWebApplication::startSolve();
     
 }
+
+
+void TimetablerWebApplication::pagePDF() {
+
+    root()->clear();
+    
+    Wt::WContainerWidget *container = new Wt::WContainerWidget(root());
+    
+    Wt::WText *text = new Wt::WText("Test pdf: ", container);
+    text->setStyleClass("reset");
+    
+    Wt::WPushButton *button = new Wt::WPushButton("Create pdf", container);
+    
+//  store best chromosone in result
+    GaChromosomePtr result;
+    TimetablerInst::getInstance()->getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1);
+
+//    build timetable from chromosome
+    finishedTT theTimetable(result.GetRawPtr());
+    
+//    create and link to pdf
+    Wt::WResource *pdf = new ReportResource(theTimetable, container);
+    button->setLink(pdf);
+    
+}
+
+
 
 void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
 {
@@ -296,7 +305,8 @@ void TimetablerWebApplication::buildTable(finishedTT* timetable, bool tutors)
         
         _stopButton->clicked().connect( this, &TimetablerWebApplication::toggleState );
         
-        _download->setLink("/solution.csv");
+//        _download->setLink("/solution.csv");
+//        _download->clicked().connect( this, &TimetablerWebApplication::pagePDF );
         _download->disable();
         
         if ( TimetablerInst::getInstance()->getAlgorithm()->GetState() & GAS_STOPPED ) {
@@ -441,6 +451,18 @@ void TimetablerWebApplication::toggleState() {
         cerr << "Stopping. State is now " << TimetablerInst::getInstance()->getAlgorithm()->GetState() << endl;
 #endif
         _timer->stop();
+        
+        // save config and best chromosome to the output file
+        GaChromosomePtr result;
+        Configuration::getInstance().saveConfig(_filename.c_str());
+        TimetablerInst::getInstance()->getAlgorithm()->GetPopulation(0).GetBestChromosomes(&result, 0, 1); // store best chromosone in result
+        ( outputSolution::getInstance() )( _filename , *result, true );
+        
+        // generate pdf and link to download button
+        finishedTT theTimetable(result.GetRawPtr());
+        Wt::WResource *pdf = new ReportResource(theTimetable);
+        _download->setLink(pdf);
+        
         _download->enable();
         _saveConfig->enable();
         _stopButton->setText("Resume");

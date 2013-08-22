@@ -28,7 +28,12 @@
 #include <Wt/WAnchor>
 
 #include "output.h"
+#include "TTChromosone.h"
 #include "TimetablerInst.h"
+#include "pdfOutput.h"
+
+#include <hpdf.h>
+
 
 using namespace std;
 

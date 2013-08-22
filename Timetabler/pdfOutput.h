@@ -17,6 +17,9 @@
 #include <Wt/Render/WPdfRenderer>
 #include <Wt/WApplication>
 
+#include "constants.h"
+#include "output.h"
+
 #include "hpdf.h"
 
 namespace {
@@ -30,48 +33,17 @@ namespace {
 class ReportResource : public Wt::WResource
 {
 public:
-    ReportResource(Wt::WObject *parent = 0)
-	: Wt::WResource(parent)
-    {
-        suggestFileName("report.pdf");
-    }
+    ReportResource(finishedTT timetable, Wt::WObject *parent = 0);
     
     virtual void handleRequest(const Wt::Http::Request& request,
-                               Wt::Http::Response& response)
-    {
-        response.setMimeType("application/pdf");
-        
-        HPDF_Doc pdf = HPDF_New(error_handler, 0);
-        
-        // Note: UTF-8 encoding (for TrueType fonts) is only available since libharu 2.3.0 !
-        HPDF_UseUTFEncodings(pdf);
-        
-        renderReport(pdf);
-        
-        HPDF_SaveToStream(pdf);
-        unsigned int size = HPDF_GetStreamSize(pdf);
-        HPDF_BYTE *buf = new HPDF_BYTE[size];
-        HPDF_ReadFromStream (pdf, buf, &size);
-        HPDF_Free(pdf);
-        response.out().write((char*)buf, size);
-        delete[] buf;
-    }
+                               Wt::Http::Response& response);
     
 private:
-    void renderReport(HPDF_Doc pdf) {
-        renderPdf(Wt::WString::tr("report.example"), pdf);
-    }
+    void renderReport(HPDF_Doc pdf);
     
-    void renderPdf(const Wt::WString& html, HPDF_Doc pdf)
-    {
-        HPDF_Page page = HPDF_AddPage(pdf);
-        HPDF_Page_SetSize(page, HPDF_PAGE_SIZE_A4, HPDF_PAGE_PORTRAIT);
-        
-        Wt::Render::WPdfRenderer renderer(pdf, page);
-        renderer.setMargin(2.54);
-        renderer.setDpi(96);
-        renderer.render(html);
-    }
+    void renderPdf(const Wt::WString& html, HPDF_Doc pdf);
+    
+    finishedTT _timetable;
 };
 
 #endif /* defined(__Timetabler__pdfOutput__) */

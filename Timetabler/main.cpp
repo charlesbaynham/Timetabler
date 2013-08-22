@@ -22,9 +22,6 @@ using namespace Algorithm::SimpleAlgorithms;
 #include <Wt/WApplication>
 #include "GUI.h"
 
-#include "pdfOutput.cpp"
-
-
 int main(int argc, char **argv)
 {
     

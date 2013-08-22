@@ -26,11 +26,6 @@
 
 #include <boost/tokenizer.hpp>
 
-#define PROFICIENCY_NONE 0
-#define PROFICIENCY_SOME 0.33
-#define PROFICIENCY_PROFICIENT 0.66
-#define PROFICIENCY_EXPERT 1.0
-
 using namespace std;
 using namespace Wt;
 
